@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcxjfw256ynb5"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_i4sev"]
+[ext_resource type="PackedScene" uid="uid://cokqr3cv3dqo6" path="res://source/character.tscn" id="2_tbu6l"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_i4sev")
+
+[node name="EnemyCharacter" parent="." groups=["Character", "Enemy"] instance=ExtResource("2_tbu6l")]
+max_health = 50.0
+defense_power = 0.0
+speed = 5.0
+cha_name = "史莱姆"
+
+[node name="PlayerCharacter" parent="." groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
+max_health = 120.0
+attack_power = 20.0
+speed = 10.0
+cha_name = "勇者"
+
+[node name="EnemyCharacter2" parent="." groups=["Character", "Enemy"] instance=ExtResource("2_tbu6l")]
+max_health = 30.0
+attack_power = 15.0
+speed = 5.0
+cha_name = "软泥怪"
