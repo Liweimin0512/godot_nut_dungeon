@@ -1,25 +1,55 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcxjfw256ynb5"]
+[gd_scene load_steps=6 format=3 uid="uid://dcxjfw256ynb5"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_i4sev"]
 [ext_resource type="PackedScene" uid="uid://cokqr3cv3dqo6" path="res://source/character.tscn" id="2_tbu6l"]
+[ext_resource type="Resource" uid="uid://dusj10wryboti" path="res://source/character/enemy/goblin.tres" id="3_hrltu"]
+[ext_resource type="Resource" uid="uid://cnxi3o3qyig58" path="res://source/character/enemy/troll.tres" id="4_1cujy"]
+[ext_resource type="Resource" uid="uid://4obtwqc0eawy" path="res://source/character/flame_mage.tres" id="4_8mnob"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_i4sev")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -292.0
+offset_right = 486.0
+grow_vertical = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="EnemyCharacter" parent="." groups=["Character", "Enemy"] instance=ExtResource("2_tbu6l")]
-max_health = 50.0
-defense_power = 0.0
-speed = 5.0
-cha_name = "史莱姆"
+position = Vector2(640, 256)
+character_model = ExtResource("3_hrltu")
 
 [node name="PlayerCharacter" parent="." groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
-max_health = 120.0
-attack_power = 20.0
-speed = 10.0
-cha_name = "勇者"
+position = Vector2(311, 164)
+character_model = ExtResource("4_8mnob")
 
 [node name="EnemyCharacter2" parent="." groups=["Character", "Enemy"] instance=ExtResource("2_tbu6l")]
-max_health = 30.0
-attack_power = 15.0
-speed = 5.0
-cha_name = "软泥怪"
+position = Vector2(638, 65)
+character_model = ExtResource("4_1cujy")

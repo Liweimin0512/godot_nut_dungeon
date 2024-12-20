@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=2 format=3 uid="uid://4obtwqc0eawy"]
+
+[ext_resource type="Script" path="res://source/character/character_model.gd" id="1_jj07w"]
+
+[resource]
+script = ExtResource("1_jj07w")
+character_name = &"火焰法师"
+max_health = 100.0
+attack_power = 15.0
+defense_power = 5.0
+speed = 10.0

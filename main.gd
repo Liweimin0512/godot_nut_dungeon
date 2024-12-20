@@ -1,74 +1,41 @@
 extends Node2D
 
-@export var max_turn_count: int = 99
-var _combat_characters : Array[Character]
-var _turn_count : int = 0
+@onready var rich_text_label: RichTextLabel = %RichTextLabel
 
 func _ready() -> void:
-	_combat_start()
-	await MessageSystem.process_messages()
-	
-## 战斗开始
-func _combat_start() -> void:
-	print("战斗开始！")
-	MessageSystem.push_message(MessageCombatStart.new(
+	CombatSystem.combat_started.connect(
 		func() -> void:
-			await get_tree().create_timer(0.2).timeout
-			print("客户端接收到战斗开始！")
-	))
-	for cha in get_tree().get_nodes_in_group("Character"):
-		_combat_characters.append(cha as Character)
-	for character in _combat_characters:
-		character.combat_start()
-	_turn_start()
-
-## 回合开始
-func _turn_start() -> void:
-	_turn_count += 1
-	print(_turn_count, "回合开始===================")
-	_combat_characters.shuffle()
-	_combat_characters.sort_custom(
-		func(a: Character, b: Character) -> bool:
-			return a.speed > b.speed
+			rich_text_label.text += "战斗开始\n"
 	)
-	MessageSystem.push_message(MessageTurnStart.new(_turn_count,
-		func(turn: int) -> void:
-			await get_tree().create_timer(0.2).timeout
-			print("第{0}回合开始！".format([turn]))
-	))
-	for character in _combat_characters:
-		if not is_instance_valid(character): continue
-		if not character.is_alive: continue
-		character.turn_start()
-	_turn_end()
-
-## 回合结束
-func _turn_end() -> void:
-	if get_tree().get_node_count_in_group("Enemy") <= 0:
-		_combat_finish()
-	elif get_tree().get_node_count_in_group("Player") <= 0:
-		_combat_defeat()
-	else:
-		if _turn_count >= max_turn_count:
-			print("回合数耗尽")
-			_combat_defeat()
-		for character in _combat_characters:
-			character.turn_end()
-		print("回合结束===================")
-		MessageSystem.push_message(MessageTurnEnd.new(
-			func() -> void:
-				print("客户端回合结束！")
-		))
-		_turn_start()
-		
-## 战斗胜利
-func _combat_finish() -> void:
-	for cha in _combat_characters:
-		cha.combat_end()
-	print("===== 战斗胜利 =====, 回合数： ", _turn_count)
-
-## 战斗失败
-func _combat_defeat() -> void:
-	for cha in _combat_characters:
-		cha.combat_end()
-	print("===== 战斗失败 =====, 回合数： ", _turn_count)
+	CombatSystem.turn_started.connect(
+		func(turn_count: int) -> void:
+			rich_text_label.text += "{0}回合开始\n".format([
+				turn_count,
+			])
+	)
+	CombatSystem.turn_ended.connect(
+		func() -> void:
+			rich_text_label.text += "回合结束\n"
+	)
+	CombatSystem.combat_finished.connect(
+		func() -> void:
+			rich_text_label.text += "战斗胜利\n"
+	)
+	CombatSystem.combat_defeated.connect(
+		func() -> void:
+			rich_text_label.text += "战斗失败\n"
+	)
+	for combat in CombatSystem.combats:
+		combat.hited.connect(
+			func(target: CombatComponent) -> void:
+				rich_text_label.text += "{0} 攻击 {1}\n".format([
+					combat.owner, target.owner
+				])
+		)
+		combat.hurted.connect(
+			func(damage: int) -> void:
+				rich_text_label.text += "{0} 受到{1}点伤害！\n".format([
+					combat.owner, damage
+				])
+		)
+	CombatSystem.combat_start()

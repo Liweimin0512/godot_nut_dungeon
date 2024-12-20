@@ -17,7 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-MessageSystem="*res://source/message_system.gd"
+CombatSystem="*res://source/combat_system.gd"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [global_group]
 

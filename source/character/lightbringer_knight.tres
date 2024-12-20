@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=2 format=3 uid="uid://ycrrabgaqhj0"]
+
+[ext_resource type="Script" path="res://source/character/character_model.gd" id="1_m72hi"]
+
+[resource]
+script = ExtResource("1_m72hi")
+character_name = &"光明骑士"
+max_health = 100.0
+attack_power = 10.0
+defense_power = 5.0
+speed = 1.0
