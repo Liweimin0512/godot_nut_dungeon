@@ -6,10 +6,16 @@ var _turn_count : int = 0
 
 func _ready() -> void:
 	_combat_start()
-
+	await MessageSystem.process_messages()
+	
 ## 战斗开始
 func _combat_start() -> void:
 	print("战斗开始！")
+	MessageSystem.push_message(MessageCombatStart.new(
+		func() -> void:
+			await get_tree().create_timer(0.2).timeout
+			print("客户端接收到战斗开始！")
+	))
 	for cha in get_tree().get_nodes_in_group("Character"):
 		_combat_characters.append(cha as Character)
 	for character in _combat_characters:
@@ -25,6 +31,11 @@ func _turn_start() -> void:
 		func(a: Character, b: Character) -> bool:
 			return a.speed > b.speed
 	)
+	MessageSystem.push_message(MessageTurnStart.new(_turn_count,
+		func(turn: int) -> void:
+			await get_tree().create_timer(0.2).timeout
+			print("第{0}回合开始！".format([turn]))
+	))
 	for character in _combat_characters:
 		if not is_instance_valid(character): continue
 		if not character.is_alive: continue
@@ -44,8 +55,12 @@ func _turn_end() -> void:
 		for character in _combat_characters:
 			character.turn_end()
 		print("回合结束===================")
+		MessageSystem.push_message(MessageTurnEnd.new(
+			func() -> void:
+				print("客户端回合结束！")
+		))
 		_turn_start()
-
+		
 ## 战斗胜利
 func _combat_finish() -> void:
 	for cha in _combat_characters:
