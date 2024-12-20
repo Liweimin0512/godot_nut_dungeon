@@ -7,19 +7,32 @@
 script = ExtResource("1_i4sev")
 
 [node name="EnemyCharacter" parent="." groups=["Character", "Enemy"] instance=ExtResource("2_tbu6l")]
+position = Vector2(344, 189)
 max_health = 50.0
 defense_power = 0.0
 speed = 5.0
 cha_name = "史莱姆"
 
 [node name="PlayerCharacter" parent="." groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
+position = Vector2(129, 120)
 max_health = 120.0
 attack_power = 20.0
 speed = 10.0
 cha_name = "勇者"
 
 [node name="EnemyCharacter2" parent="." groups=["Character", "Enemy"] instance=ExtResource("2_tbu6l")]
+position = Vector2(342, 67)
 max_health = 30.0
 attack_power = 15.0
 speed = 5.0
 cha_name = "软泥怪"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -271.0
+offset_right = 504.0
+grow_vertical = 0
