@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://main.gd" id="1_i4sev"]
 [ext_resource type="PackedScene" uid="uid://cokqr3cv3dqo6" path="res://source/character.tscn" id="2_tbu6l"]
-[ext_resource type="Resource" uid="uid://dusj10wryboti" path="res://source/character/enemy/goblin.tres" id="3_hrltu"]
-[ext_resource type="Resource" uid="uid://cnxi3o3qyig58" path="res://source/character/enemy/troll.tres" id="4_1cujy"]
-[ext_resource type="Resource" uid="uid://4obtwqc0eawy" path="res://source/character/flame_mage.tres" id="4_8mnob"]
+[ext_resource type="Resource" uid="uid://dusj10wryboti" path="res://data_models/character/enemy/goblin.tres" id="3_hrltu"]
+[ext_resource type="Resource" uid="uid://cnxi3o3qyig58" path="res://data_models/character/enemy/troll.tres" id="4_1cujy"]
+[ext_resource type="Resource" uid="uid://4obtwqc0eawy" path="res://data_models/character/flame_mage.tres" id="4_8mnob"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_i4sev")

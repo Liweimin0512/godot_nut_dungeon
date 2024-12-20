@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" path="res://source/character.gd" id="1_qu267"]
-[ext_resource type="Script" path="res://source/combat_component.gd" id="2_ghtna"]
+[ext_resource type="Script" path="res://source/combat_system/combat_component.gd" id="2_ghtna"]
 
 [sub_resource type="Animation" id="Animation_hue2c"]
 length = 0.001
