@@ -1,38 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cokqr3cv3dqo6"]
+[gd_scene load_steps=8 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" path="res://source/character.gd" id="1_qu267"]
-
-[sub_resource type="Animation" id="Animation_cndte"]
-resource_name = "hit"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/LabelAction:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-
-[sub_resource type="Animation" id="Animation_p0q65"]
-resource_name = "hurt"
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Color(1, 1, 1, 1), Color(1, 0.176471, 0.180392, 1), Color(1, 1, 1, 1), Color(1, 0.176471, 0.180392, 1), Color(1, 1, 1, 1), Color(1, 0.176471, 0.180392, 1)]
-}
+[ext_resource type="Script" path="res://source/combat_component.gd" id="2_ghtna"]
 
 [sub_resource type="Animation" id="Animation_hue2c"]
 length = 0.001
@@ -101,6 +70,38 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_cndte"]
+resource_name = "hit"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/LabelAction:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_p0q65"]
+resource_name = "hurt"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 1), Color(1, 0.176471, 0.180392, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ix0fv"]
 _data = {
 "RESET": SubResource("Animation_hue2c"),
@@ -111,9 +112,15 @@ _data = {
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_qu267")
+max_health = null
+_current_health = null
+attack_power = null
+defense_power = null
+speed = null
+cha_name = null
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(128, 128)
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -148,3 +155,6 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_ix0fv")
 }
+
+[node name="CombatComponent" type="Node" parent="."]
+script = ExtResource("2_ghtna")

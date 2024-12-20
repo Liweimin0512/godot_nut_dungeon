@@ -15,6 +15,10 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+CombatSystem="*res://source/combat_system.gd"
+
 [display]
 
 window/stretch/mode="viewport"
