@@ -112,12 +112,6 @@ _data = {
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_qu267")
-max_health = null
-_current_health = null
-attack_power = null
-defense_power = null
-speed = null
-cha_name = null
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(128, 128)
@@ -158,3 +152,8 @@ libraries = {
 
 [node name="CombatComponent" type="Node" parent="."]
 script = ExtResource("2_ghtna")
+
+[connection signal="current_health_changed" from="CombatComponent" to="." method="_on_combat_component_current_health_changed"]
+[connection signal="died" from="CombatComponent" to="." method="_on_combat_component_died"]
+[connection signal="hited" from="CombatComponent" to="." method="_on_combat_component_hited"]
+[connection signal="hurted" from="CombatComponent" to="." method="_on_combat_component_hurted"]
