@@ -1,22 +1,20 @@
-extends Node2D
-class_name Character
-
-## 战斗角色
+extends Node
+class_name CombatComponent
 
 @export var max_health : float = 100
-@export_storage var _current_health : float = 100
+@export_storage var current_health : float = 100:
+	set(value):
+		current_health = value
+		#progress_bar.value = current_health
+		#label_health.text = "{0}/{1}".format([current_health,max_health ])
+		current_health_changed.emit()
 @export var attack_power : float = 10.0
 @export var defense_power : float = 5
 @export var speed : float = 1
 
-# 角色的名称
-@export var cha_name : String = ""
-var is_alive : bool :
-	get:
-		return _current_health > 0
-
-func _ready() -> void:
-	_current_health = max_health
+signal hited(target: Character)
+signal hurted(damage: int)
+signal current_health_changed(value: float)
 
 ## 战斗开始
 func combat_start() -> void:
@@ -26,7 +24,8 @@ func combat_start() -> void:
 func turn_start() -> void:
 	print(self, "====== 回合开始")
 	var target := _get_target()
-	hit(target)
+	await get_tree().create_timer(0.5).timeout
+	await hit(target)
 
 ## 回合结束
 func turn_end() -> void:
@@ -39,12 +38,16 @@ func combat_end() -> void:
 ## 攻击
 func hit(target: Character) -> void:
 	if not target: return
+	hited.emit(target)
+	await get_tree().create_timer(0.5).timeout
+	if not target: return
 	print(self, " 攻击： ", target)
-	var damage := attack_power - target.defense_power
-	target.hurt(damage)
+	var damage : int = attack_power - target.defense_power
+	await target.hurt(damage)
 
 ## 受击
 func hurt(damage: int) -> void:
+	hurted.emit(damage)
 	print(self, " 受到伤害： ", damage)
 	_current_health -= damage
 	_current_health = max(_current_health, 0)
@@ -54,6 +57,9 @@ func hurt(damage: int) -> void:
 ## 死亡
 func _die() -> void:
 	print("角色死亡：", self)
+	animation_player.play("die")
+	if not is_inside_tree(): return
+	await get_tree().create_timer(1).timeout
 	get_parent().remove_child(self)
 	queue_free()
 
@@ -71,13 +77,3 @@ func _get_target() -> Character:
 		var players := tree.get_nodes_in_group("Player")
 		target = players.pick_random()
 	return target
-
-func _to_string() -> String:
-	#return "name : {cha_name} speed : {speed} health : {health} attack : {attack} defense : {defense}".format({
-		#"cha_name": cha_name,
-		#"speed": speed,
-		#"health": _current_health,
-		#"attack": attack_power,
-		#"defense": defense_power,
-	#})
-	return cha_name
