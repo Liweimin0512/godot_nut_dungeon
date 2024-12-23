@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_jj07w")
 character_name = &"火焰法师"
+camp = 1
 max_health = 100.0
 attack_power = 15.0
 defense_power = 5.0

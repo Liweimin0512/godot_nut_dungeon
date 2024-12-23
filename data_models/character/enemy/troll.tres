@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_yvr0l")
 character_name = &"巨魔"
+camp = 2
 max_health = 50.0
 attack_power = 10.0
 defense_power = 5.0

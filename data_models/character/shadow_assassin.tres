@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_fvorw")
 character_name = &"暗影刺客"
+camp = 1
 max_health = 100.0
 attack_power = 10.0
 defense_power = 5.0

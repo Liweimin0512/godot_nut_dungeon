@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_qi5g2")
 character_name = &"哥布林"
+camp = 2
 max_health = 30.0
 attack_power = 10.0
 defense_power = 5.0

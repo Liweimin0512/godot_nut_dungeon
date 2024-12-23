@@ -16,12 +16,14 @@ class_name Character
 var cha_name : String = ""
 
 func _ready() -> void:
-	cha_name = character_model.character_name
-	combat_component.max_health = character_model.max_health
-	combat_component.attack_power = character_model.attack_power
-	combat_component.defense_power = character_model.defense_power
-	combat_component.speed = character_model.speed
-	combat_component.current_health = combat_component.max_health
+	if character_model:
+		cha_name = character_model.character_name
+		combat_component.camp = character_model.camp
+		combat_component.max_health = character_model.max_health
+		combat_component.attack_power = character_model.attack_power
+		combat_component.defense_power = character_model.defense_power
+		combat_component.speed = character_model.speed
+		combat_component.current_health = combat_component.max_health
 	label_name.text = cha_name
 	progress_bar.max_value = combat_component.max_health
 	progress_bar.value = combat_component.current_health
@@ -43,16 +45,16 @@ func _on_combat_component_current_health_changed(value: float) -> void:
 func _on_combat_component_died() -> void:
 	animation_player.play("die")
 	await animation_player.animation_finished
-	if is_inside_tree():
-		get_parent().remove_child(self)
-		queue_free()
 
 func _on_combat_component_hited(target: CombatComponent) -> void:
 	label_action.text = "攻击{0}".format([target.owner])
 	animation_player.play("hit")
 
-func _on_combat_component_hurted(damage: int) -> void:
+func _on_combat_component_hurted(_damage: int) -> void:
 	animation_player.play("hurt")
+
+func _on_area_2d_mouse_entered() -> void:
+	print("_on_area_2d_mouse_entered：", self.name)
 
 func _to_string() -> String:
 	return cha_name
