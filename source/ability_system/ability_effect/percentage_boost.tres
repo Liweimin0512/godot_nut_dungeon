@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PercentageBoostEffect" load_steps=2 format=3 uid="uid://dyu0jcoh4ayty"]
+
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/percentage_boost.gd" id="1_y6mpw"]
+
+[resource]
+script = ExtResource("1_y6mpw")
+boost_percentage = 0.1
+attribute = &""
+effect_type = &"percentage_boost"
+target_type = &"self"

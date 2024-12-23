@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HealthResource" load_steps=2 format=3 uid="uid://da37387apih3n"]
+
+[ext_resource type="Script" path="res://source/ability_system/ability_resource/health_resource.gd" id="1_g80um"]
+
+[resource]
+script = ExtResource("1_g80um")
+ability_resource_name = &"生命值"
+current_value = 0
+max_value = 0
+attribute_name = &"max_health"

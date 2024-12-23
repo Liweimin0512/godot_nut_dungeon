@@ -1,48 +1,45 @@
 extends Node
 class_name CombatComponent
 
-## 最大生命值
-@export var max_health : float = 100
-## 当前生命值
-@export_storage var current_health : float = 100:
-	set(value):
-		current_health = value
-		current_health_changed.emit(current_health)
-## 攻击力
-@export var attack_power : float = 10.0
-## 防御力
-@export var defense_power : float = 5
-## 出手速度
-@export var speed : float = 1
+## 战斗组件，管理战斗流程相关内容
+
+## 依赖于技能系统组件
+@onready var ability_component: AbilityComponent = %AbilityComponent
 ## 所属阵营
 @export var camp : CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.NONE
 ## 是否为存货单位
 var is_alive : bool :
 	get:
-		return current_health > 0
+		return ability_component.current_health > 0
+## 行动速度
+var speed : float :
+	get:
+		return ability_component.speed
 ## 当前战斗，为空则表示不是在战斗状态
 var _current_combat: Combat
 
-signal hited(target: Character)
+signal hited(target: CombatComponent)
 signal hurted(damage: int)
-signal current_health_changed(value: float)
 signal died
 signal combat_started
 signal combat_ended
 
-func _ready() -> void:
-	current_health = max_health
+## 组件初始化
+func initialization() -> void:
+	pass
 
 ## 战斗开始
 func combat_start(combat: Combat) -> void:
 	print(self, "战斗开始！")
 	_current_combat = combat
+	ability_component.on_combat_start()
 	combat_started.emit()
 
 ## 回合开始
 func turn_start() -> void:
 	if not _current_combat: return
 	print(self, "====== 回合开始")
+	ability_component.on_turn_start()
 	var target := _current_combat.get_random_enemy(self)
 	if _current_combat.is_real_time:
 		await get_tree().create_timer(0.5).timeout
@@ -53,35 +50,40 @@ func turn_start() -> void:
 func turn_end() -> void:
 	if not _current_combat: return
 	print(self, "====== 回合结束")
+	ability_component.on_turn_end()
 
 ## 战斗结束
 func combat_end() -> void:
-	print(self, " 战斗结束", "剩余血量: ", current_health)
+	print(self, " 战斗结束", "剩余血量: ", ability_component.current_health)
 	_current_combat = null
+	ability_component.on_combat_end()
 	combat_ended.emit()
 
 ## 攻击
 func hit(target: CombatComponent) -> void:
 	if not target: return
-	hited.emit(target)
 	if _current_combat.is_real_time:
 		await get_tree().create_timer(0.5).timeout
 	if not target: return
+	ability_component.on_hit()
+	hited.emit(target)
 	print(self, " 攻击： ", target)
-	var damage : float = attack_power - target.defense_power
+	var damage : float = ability_component.attack_power - target.ability_component.defense_power
 	await target.hurt(damage)
 
 ## 受击
 func hurt(damage: float) -> void:
+	ability_component.on_hurt()
 	hurted.emit(damage)
 	print(self, " 受到伤害： ", damage)
-	current_health -= damage
-	current_health = max(current_health, 0)
-	if current_health <= 0:
+	ability_component.current_health -= damage
+	ability_component.current_health = max(ability_component.current_health, 0)
+	if ability_component.current_health <= 0:
 		_die()
 
 ## 死亡
 func _die() -> void:
+	ability_component.on_die()
 	print("角色死亡：", self)
 	died.emit()
 

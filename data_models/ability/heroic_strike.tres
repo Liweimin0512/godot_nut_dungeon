@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=5 format=3 uid="uid://dkk2ibiqesm12"]
+
+[ext_resource type="Script" path="res://source/ability_system/ability_effect.gd" id="1_0eb48"]
+[ext_resource type="Script" path="res://source/ability_system/ability.gd" id="1_4st2x"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="2_nj0jx"]
+
+[sub_resource type="Resource" id="Resource_uxbp4"]
+script = ExtResource("2_nj0jx")
+damage_multiplier = 1.2
+effect_type = &"deal_damage"
+target_type = &"enemy"
+
+[resource]
+script = ExtResource("1_4st2x")
+ability_name = &"英勇打击"
+ability_description = "对单个敌人进行强力打击"
+cost_resource_name = &"怒气"
+cost_resource_value = 15
+cooldown = 1
+cast_time = 0.0
+target_type = "enemy"
+effects = Array[ExtResource("1_0eb48")]([SubResource("Resource_uxbp4")])
+is_auto_cast = false
+level = 1
+is_show = true
+sound_effect = &""
+animation = &""

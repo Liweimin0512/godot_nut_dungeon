@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RageOnBeginHitEffect" load_steps=2 format=3 uid="uid://crheovefj3h6f"]
+
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/rage_on_begin_hit.gd" id="1_vj4ts"]
+
+[resource]
+script = ExtResource("1_vj4ts")
+rage_chance = 0.3
+rage_amount = 5
+effect_type = &"rage_on_being_hit"
+target_type = &"self"

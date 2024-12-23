@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cokqr3cv3dqo6"]
+[gd_scene load_steps=10 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" path="res://source/character.gd" id="1_qu267"]
 [ext_resource type="Script" path="res://source/combat_system/combat_component.gd" id="2_ghtna"]
+[ext_resource type="Script" path="res://source/ability_system/ability_component.gd" id="3_6a5vl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnpp6"]
 size = Vector2(151, 154)
@@ -162,8 +163,11 @@ libraries = {
 [node name="CombatComponent" type="Node" parent="."]
 script = ExtResource("2_ghtna")
 
+[node name="AbilityComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_6a5vl")
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="current_health_changed" from="CombatComponent" to="." method="_on_combat_component_current_health_changed"]
 [connection signal="died" from="CombatComponent" to="." method="_on_combat_component_died"]
 [connection signal="hited" from="CombatComponent" to="." method="_on_combat_component_hited"]
 [connection signal="hurted" from="CombatComponent" to="." method="_on_combat_component_hurted"]

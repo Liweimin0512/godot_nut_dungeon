@@ -11,35 +11,47 @@ class_name Character
 @onready var label_health: Label = %LabelHealth
 @onready var label_action: Label = %LabelAction
 @onready var combat_component: CombatComponent = $CombatComponent
+@onready var ability_component: AbilityComponent = %AbilityComponent
 
 # 角色的名称
 var cha_name : String = ""
 
 func _ready() -> void:
 	if character_model:
+		character_model = character_model.duplicate()
 		cha_name = character_model.character_name
-		combat_component.camp = character_model.camp
-		combat_component.max_health = character_model.max_health
-		combat_component.attack_power = character_model.attack_power
-		combat_component.defense_power = character_model.defense_power
-		combat_component.speed = character_model.speed
-		combat_component.current_health = combat_component.max_health
+		_initialization_ability_component()
+		_initialization_combat_component()
 	label_name.text = cha_name
-	progress_bar.max_value = combat_component.max_health
-	progress_bar.value = combat_component.current_health
+	progress_bar.max_value = ability_component.max_health
+	progress_bar.value = ability_component.current_health
 	label_health.text = "{0}/{1}".format([
-		combat_component.current_health,
-		combat_component.max_health 
+		ability_component.current_health,
+		ability_component.max_health 
 		])
+
+func _initialization_ability_component() -> void:
+	ability_component.max_health = character_model.max_health
+	ability_component.attack_power = character_model.attack_power
+	ability_component.defense_power = character_model.defense_power
+	ability_component.speed = character_model.speed
+	#ability_component.current_health = ability_component.max_health
+	#ability_component.abilities = character_model.abilities
+	ability_component.ability_resources = character_model.ability_resources
+	ability_component.initialization()
+
+func _initialization_combat_component() -> void:
+	combat_component.camp = character_model.camp
+	combat_component.initialization()
 
 func _on_combat_component_current_health_changed(value: float) -> void:
 	if not progress_bar: progress_bar = $MarginContainer/ProgressBar
 	if not combat_component: combat_component = $CombatComponent
-	progress_bar.value = combat_component.current_health
+	progress_bar.value = ability_component.current_health
 	if not label_health : label_health = %LabelHealth
 	label_health.text = "{0}/{1}".format([
-		combat_component.current_health,
-		combat_component.max_health 
+		ability_component.current_health,
+		ability_component.max_health 
 		])
 
 func _on_combat_component_died() -> void:

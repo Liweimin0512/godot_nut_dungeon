@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=5 format=3 uid="uid://djxtouuveyace"]
+
+[ext_resource type="Script" path="res://source/ability_system/ability_effect.gd" id="1_pfkyu"]
+[ext_resource type="Script" path="res://source/ability_system/ability.gd" id="2_3y0h6"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="2_v1xnt"]
+
+[sub_resource type="Resource" id="Resource_sxvwn"]
+script = ExtResource("2_v1xnt")
+damage_multiplier = 1.0
+effect_type = &"deal_damage"
+target_type = &"enemy"
+
+[resource]
+script = ExtResource("2_3y0h6")
+ability_name = &"普攻"
+ability_description = "一次普通攻击"
+cost_resource_name = &""
+cost_resource_value = 0
+cooldown = 0
+cast_time = 0.0
+target_type = "enemy"
+effects = Array[ExtResource("1_pfkyu")]([SubResource("Resource_sxvwn")])
+is_auto_cast = false
+level = 1
+is_show = false
+sound_effect = &""
+animation = &""

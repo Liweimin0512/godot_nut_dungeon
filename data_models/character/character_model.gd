@@ -15,3 +15,8 @@ class_name CharacterModel
 @export var defense_power : float = 5
 ## 出手速度
 @export var speed : float = 1
+
+## 技能集合
+@export var abilities : Array[Ability]
+## 技能消耗集合
+@export var ability_resources : Array[AbilityResource]

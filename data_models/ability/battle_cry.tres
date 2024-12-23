@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=6 format=3 uid="uid://beqppdym756qn"]
+
+[ext_resource type="Script" path="res://source/ability_system/ability_effect.gd" id="1_uvjij"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/percentage_boost.gd" id="2_0y7ek"]
+[ext_resource type="Script" path="res://source/ability_system/ability.gd" id="2_mx4xx"]
+
+[sub_resource type="Resource" id="Resource_i5fyr"]
+script = ExtResource("2_0y7ek")
+boost_percentage = 0.1
+attribute = &"attack_power"
+effect_type = &"percentage_boost"
+target_type = &""
+
+[sub_resource type="Resource" id="Resource_8w4s5"]
+script = ExtResource("2_0y7ek")
+boost_percentage = 0.1
+attribute = &"defense_power"
+effect_type = &"percentage_boost"
+target_type = &""
+
+[resource]
+script = ExtResource("2_mx4xx")
+ability_name = &"战吼"
+ability_description = "发出怒吼，激励自己和周围的盟友。"
+cost_resource_name = &"怒气"
+cost_resource_value = 25
+cooldown = 3
+cast_time = 0.0
+target_type = "ally"
+effects = Array[ExtResource("1_uvjij")]([SubResource("Resource_i5fyr"), SubResource("Resource_8w4s5")])
+is_auto_cast = false
+level = 1
+is_show = true
+sound_effect = &""
+animation = &""
