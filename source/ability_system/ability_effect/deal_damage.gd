@@ -8,6 +8,6 @@ func _init() -> void:
 	target_type = "enemy"
 	effect_type = "deal_damage"
 
-func apply_effect(character):
+func apply_effect(context: Dictionary):
 	var damage = character.attack * damage_multiplier
 	character.take_damage(damage)

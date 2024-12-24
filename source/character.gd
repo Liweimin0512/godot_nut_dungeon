@@ -38,7 +38,7 @@ func _initialization_ability_component() -> void:
 	#ability_component.current_health = ability_component.max_health
 	#ability_component.abilities = character_model.abilities
 	ability_component.ability_resources = character_model.ability_resources
-	ability_component.initialization()
+	ability_component.initialization(combat_component)
 
 func _initialization_combat_component() -> void:
 	combat_component.camp = character_model.camp

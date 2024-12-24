@@ -10,7 +10,18 @@ func _init() -> void:
 	effect_type = "counter_attack"
 	target_type = "enemy"
 
-func apply_effect(character):
-	if randf() < counter_chance:
-		var damage = character.attack * damage_multiplier
-		character.attack_target(damage)
+func apply_effect(context: Dictionary):
+	if randf() > counter_chance: return
+	var caster : Node = context.caster
+	var target : Node = context.source # 伤害来源作为目标
+	var ability_component : AbilityComponent = caster.get("ability_component")
+	if ability_component:
+		var damage = ability_component.attack * damage_multiplier
+		if caster.has_method("hit"):
+			caster.hit(target, damage)
+		else:
+			assert(false)
+
+func on_hurt(context: Dictionary) -> void:
+	_context.merge(context, true	)
+	apply_effect(_context)

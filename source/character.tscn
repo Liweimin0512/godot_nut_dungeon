@@ -162,10 +162,18 @@ libraries = {
 
 [node name="CombatComponent" type="Node" parent="."]
 script = ExtResource("2_ghtna")
+camp = null
 
 [node name="AbilityComponent" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_6a5vl")
+max_health = null
+current_health = null
+attack_power = null
+defense_power = null
+speed = null
+ability_resources = null
+abilities = null
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="died" from="CombatComponent" to="." method="_on_combat_component_died"]

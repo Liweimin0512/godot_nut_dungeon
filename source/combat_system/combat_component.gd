@@ -31,20 +31,25 @@ func initialization() -> void:
 ## 战斗开始
 func combat_start(combat: Combat) -> void:
 	print(self, "战斗开始！")
-	_current_combat = combat
+	_current_combat = combat	
 	ability_component.on_combat_start()
+	_update_ability_component_context()
 	combat_started.emit()
 
 ## 回合开始
 func turn_start() -> void:
-	if not _current_combat: return
 	print(self, "====== 回合开始")
+	if not _current_combat: 
+		print(self, "当前非战斗状态！")
+		return
 	ability_component.on_turn_start()
-	var target := _current_combat.get_random_enemy(self)
-	if _current_combat.is_real_time:
-		await get_tree().create_timer(0.5).timeout
-	if not target: return
-	await hit(target)
+	var ability: Ability = ability_component.get_available_abilities().pick_random()
+	await ability_component.try_cast_ability(ability)
+	#var target := _current_combat.get_random_enemy(self)
+	#if _current_combat.is_real_time:
+		#await get_tree().create_timer(0.5).timeout
+	#if not target: return
+	#await hit(target)
 
 ## 回合结束
 func turn_end() -> void:
@@ -69,11 +74,11 @@ func hit(target: CombatComponent) -> void:
 	hited.emit(target)
 	print(self, " 攻击： ", target)
 	var damage : float = ability_component.attack_power - target.ability_component.defense_power
-	await target.hurt(damage)
+	await target.hurt(self, damage)
 
 ## 受击
-func hurt(damage: float) -> void:
-	ability_component.on_hurt()
+func hurt(damage_source: CombatComponent, damage: float) -> void:
+	ability_component.on_hurt(damage_source, damage)
 	hurted.emit(damage)
 	print(self, " 受到伤害： ", damage)
 	ability_component.current_health -= damage
@@ -91,6 +96,22 @@ func _die() -> void:
 func _get_random_enemy() -> CombatComponent:
 	assert(_current_combat, "当前战斗不存在！不是战斗状态么？")
 	return _current_combat.get_random_enemy(self)
+
+## 更新技能组件上下文信息
+func _update_ability_component_context() -> void:
+	if _current_combat:
+		ability_component.enemies = _current_combat.get_all_enemies(self)
+		ability_component.allies = _current_combat.get_all_allies(self)
+		#ability_component.enemies = _current_combat.get_all_enemies(self).map(
+			#func(value: CombatComponent) -> AbilityComponent:
+				#return value.ability_component
+		#)
+		#ability_component.allies = _current_combat.get_all_allies(self).map(
+			#func(value: CombatComponent) -> AbilityComponent:
+				#return value.ability_component
+		#)
+	else:
+		ability_component.enemies.clear()
 
 func _to_string() -> String:
 	return owner.to_string()

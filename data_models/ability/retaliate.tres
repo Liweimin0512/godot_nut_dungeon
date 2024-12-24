@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://source/ability_system/ability_effect.gd" id="1_qf0ux"]
 [ext_resource type="Script" path="res://source/ability_system/ability.gd" id="2_ak3um"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/counter_attack.gd" id="2_aysm4"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/counter_attack.gd" id="2_qeuuc"]
 
 [sub_resource type="Resource" id="Resource_wma4j"]
-script = ExtResource("2_aysm4")
+script = ExtResource("2_qeuuc")
 counter_chance = 0.3
 damage_multiplier = 0.6
 effect_type = &"counter_attack"

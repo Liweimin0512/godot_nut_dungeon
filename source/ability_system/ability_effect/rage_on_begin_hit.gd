@@ -10,6 +10,6 @@ func _init() -> void:
 	effect_type = "rage_on_being_hit"
 	target_type = "self"
 
-func apply_effect(character):
+func apply_effect(context: Dictionary):
 	if randf() < rage_chance:
 		character.gain_rage(rage_amount)

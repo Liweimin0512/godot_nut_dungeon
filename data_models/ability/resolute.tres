@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Ability" load_steps=5 format=3 uid="uid://bsraf1kid81uk"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability_effect.gd" id="1_foxpy"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/rage_on_begin_hit.gd" id="2_co3hy"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/rage_on_begin_hit.gd" id="2_4knft"]
 [ext_resource type="Script" path="res://source/ability_system/ability.gd" id="2_mnj2n"]
 
 [sub_resource type="Resource" id="Resource_yc8rc"]
-script = ExtResource("2_co3hy")
+script = ExtResource("2_4knft")
 rage_chance = 0.3
 rage_amount = 5
 effect_type = &"rage_on_being_hit"

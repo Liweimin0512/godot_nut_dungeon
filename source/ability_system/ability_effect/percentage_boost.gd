@@ -10,7 +10,7 @@ func _init() -> void:
 	effect_type = "percentage_boost"
 	target_type = "self"
 
-func apply_effect(character):
+func apply_effect(context: Dictionary):
 	var boost_amount = character.get_attribute(attribute) * boost_percentage
 	if attribute == "attack":
 		character.attack += boost_amount

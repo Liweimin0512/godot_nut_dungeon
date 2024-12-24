@@ -60,6 +60,22 @@ func get_random_enemy(cha: CombatComponent) -> CombatComponent:
 		target = player_combats.pick_random()
 	return target
 
+## 获取所有敌人
+func get_all_enemies(cha: CombatComponent) -> Array[CombatComponent]:
+	if cha.camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAY:
+		return enemy_combats
+	elif cha.camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
+		return player_combats
+	return []
+
+## 获取所有盟友
+func get_all_allies(cha: CombatComponent) -> Array[CombatComponent]:
+	if cha.camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAY:
+		return player_combats
+	elif cha.camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
+		return enemy_combats
+	return []
+
 ## 手动开始战斗
 func start_combat() -> void:
 	_combat_start()
