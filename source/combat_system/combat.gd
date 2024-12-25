@@ -101,7 +101,7 @@ func _combat_start() -> void:
 					_combat_finish()
 		)
 		combat.combat_start(self)
-	_turn_start()
+	await _turn_start()
 
 ## 回合开始
 func _turn_start() -> void:
@@ -123,7 +123,7 @@ func _turn_start() -> void:
 			await combat.turn_start()
 		else:
 			combat.turn_start()
-	_turn_end()
+	await _turn_end()
 
 ## 回合结束
 func _turn_end() -> void:
@@ -136,7 +136,7 @@ func _turn_end() -> void:
 		combat.turn_end()
 	print("回合结束===================")
 	turn_ended.emit()
-	_turn_start()
+	await _turn_start()
 
 ## 战斗胜利
 func _combat_finish() -> void:

@@ -4,12 +4,13 @@
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/rage_on_begin_hit.gd" id="2_4knft"]
 [ext_resource type="Script" path="res://source/ability_system/ability.gd" id="2_mnj2n"]
 
-[sub_resource type="Resource" id="Resource_yc8rc"]
+[sub_resource type="Resource" id="Resource_dka1f"]
 script = ExtResource("2_4knft")
 rage_chance = 0.3
 rage_amount = 5
 effect_type = &"rage_on_being_hit"
 target_type = &"self"
+target_amount = 1
 
 [resource]
 script = ExtResource("2_mnj2n")
@@ -18,11 +19,14 @@ ability_description = "在受到攻击时，有一定几率获得额外的怒气
 cost_resource_name = &""
 cost_resource_value = 0
 cooldown = 0
+current_cooldown = 0
 cast_time = 0.0
-target_type = "self"
-effects = Array[ExtResource("1_foxpy")]([SubResource("Resource_yc8rc")])
+effects = Array[ExtResource("1_foxpy")]([SubResource("Resource_dka1f")])
 is_auto_cast = true
 level = 1
 is_show = true
 sound_effect = &""
 animation = &""
+is_available = false
+is_cooldown = false
+has_enough_resources = false

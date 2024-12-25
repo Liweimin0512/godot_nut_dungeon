@@ -9,19 +9,24 @@ class_name AbilityEffect
 @export var target_type: StringName
 ## 目标数量
 @export var target_amount: int = 1
+## 技能描述
+var description : String: get = _description_getter
 ## 技能上下文
 var _context : Dictionary
+
+## 应用技能效果后触发
+signal applied
 
 ## 初始化效果类
 func initialization(context: Dictionary) -> void:
 	_context = context
 
 ## 应用效果的基础方法，由子类实现具体的逻辑
-func apply_effect(context: Dictionary):
-	pass
+func apply_effect(context: Dictionary = {}) -> void:
+	applied.emit()
 
 ## 获取目标
-func _get_targets() -> Array[Node]:
+func _get_targets() -> Array:
 	var targets := []  # 使用 := 进行类型推断和变量初始化
 	var target_pool := []  # 统一的数组来存储目标池
 	# 根据目标类型确定目标池
@@ -71,3 +76,6 @@ func on_die() -> void:
 	pass
 
 #endregion
+
+func _description_getter() -> String:
+	return ""

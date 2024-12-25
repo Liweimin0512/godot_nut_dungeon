@@ -9,6 +9,10 @@ class_name Ability
 @export var cost_resource_name: StringName = ""
 ## 消耗资源值
 @export var cost_resource_value: int = 0
+## 目标类型，如self, ally, enemy
+@export var target_type: StringName
+## 目标数量
+@export var target_amount: int = 1
 ## 冷却时间（回合数）
 @export var cooldown: int
 ## 当前冷却时间
@@ -51,27 +55,42 @@ class_name Ability
 ## 技能上下文
 var _context : Dictionary = {}
 
+signal cast_finished
+
 ## ability_component的initialization
-func initialization(caster : Node, context: Dictionary) -> void:
+func initialization(context: Dictionary) -> void:
 	_context = context
-	_context["caster"] = caster
 	for effect : AbilityEffect in effects:
 		effect.initialization(_context)
+		effect.applied.connect(
+			func() -> void:
+				cast_finished.emit()
+				print("技能效果触发", self)
+		)
 
 ## 释放
-func cast() -> void:
+func cast(targets : Array) -> void:
 	if has_enough_resources:
 		var caster : Node = _context.caster
-		caster.consume_resources(cost_resource_name, cost_resource_value)
-		apply_effects()
+		var ability_component: AbilityComponent = caster.ability_component
+		ability_component.consume_resources(cost_resource_name, cost_resource_value)
+		var context : Dictionary = {} if targets.is_empty() else {
+			"targets" : targets
+		}
+		print("ability: {0}释放技能：{1}".format([caster, self]))
+		_apply_effects(context)
 		current_cooldown = cooldown
 	else:
 		print("Not enough resources to cast this ability.")
 
+## 更新技能上下文
+func update_context(context: Dictionary) -> void:
+	_context.merge(context, true	)
+
 ## 应用效果
-func apply_effects():
+func _apply_effects(context : Dictionary = {}) -> void:
 	for effect : AbilityEffect in effects:
-		effect.apply_effect(_context)
+		effect.apply_effect(context)
 
 #region 技能触发时机回调
 
@@ -114,3 +133,6 @@ func on_die() -> void:
 		effect.on_die()
 
 #endregion
+
+func _to_string() -> String:
+	return ability_name

@@ -20,27 +20,28 @@ class_name AbilityComponent
 @export var ability_resources : Array[AbilityResource]
 ## 当前单位所拥有的全部技能
 @export var abilities : Array[Ability]
-## 技能组件所有者，这里是CombatComponent
-var caster : Node
-## 所有盟友
-var allies : Array
-## 所有敌人
-var enemies : Array
+## 技能执行上下文
+var context : Dictionary :
+	set(value):
+		context = value
+		for ability in abilities:
+			ability.update_context(context)
 
 signal current_health_changed(value: float)
-
+signal cast_finished(ability: Ability)
 
 ## 组件初始化
 func initialization(caster: Node) -> void:
-	self.caster = caster
+	context["caster"] = caster
 	current_health = max_health
 	for res : AbilityResource in ability_resources:
 		res.initialization(self)
 	for ability in abilities:
-		ability.initialization(caster, {
-			"allies": allies,
-			"enemies": enemies
-		})
+		ability.initialization(context)
+		ability.cast_finished.connect(
+			func() -> void:
+				cast_finished.emit(ability)
+		)
 
 ## 获取属性值
 func get_attribute_value(atr_name : StringName) -> float:
@@ -50,6 +51,7 @@ func get_attribute_value(atr_name : StringName) -> float:
 
 ## 检查资源是否足够消耗
 func has_enough_resources(res_name: StringName, cost: int) -> bool:
+	if res_name.is_empty(): return true
 	return get_resource_value(res_name) >= cost
 
 ## 获取资源数量
@@ -76,13 +78,14 @@ func consume_resources(res_name: StringName, cost: int) -> void:
 
 ## 获取可用技能
 func get_available_abilities() -> Array[Ability]:
-	return abilities.filter(
+	var available_abilities : Array[Ability] = abilities.filter(
 		func(ability: Ability) -> bool:
 			return ability.is_available
 	)
+	return available_abilities
 
 ## 尝试释放技能
-func try_cast_ability(ability: Ability) -> void:
+func try_cast_ability(ability: Ability, targets : Array) -> void:
 	if not ability.has_enough_resources:
 		print("消耗不足，无法释放技能！")
 		return
@@ -90,7 +93,7 @@ func try_cast_ability(ability: Ability) -> void:
 		print("技能正在冷却！")
 		return
 	await get_tree().create_timer(0.5).timeout
-	ability.cast()
+	ability.cast(targets)
 
 #region 触发时机回调函数
 

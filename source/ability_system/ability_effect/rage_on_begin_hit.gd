@@ -9,7 +9,24 @@ class_name RageOnBeginHitEffect
 func _init() -> void:
 	effect_type = "rage_on_being_hit"
 	target_type = "self"
+	target_amount = 1
 
-func apply_effect(context: Dictionary):
-	if randf() < rage_chance:
-		character.gain_rage(rage_amount)
+func apply_effect(context: Dictionary = {}) -> void:
+	if randf() > rage_chance: return
+	var caster : Node = _context.caster
+	var ability_component : AbilityComponent = caster.ability_component
+	var rage_resource : AbilityResource = ability_component.get_resource("怒气")
+	rage_resource.restore(rage_amount)
+	print("受到{0}攻击，触发{1}，获得{2}点怒气".format([
+		_context.source, description, rage_amount
+	]))
+	super()
+
+func on_hurt(context : Dictionary) -> void:
+	_context.merge(context, true	)
+	apply_effect()
+
+func _description_getter() -> String:
+	return "受到攻击时有{0}%的几率获得{1}点怒气".format([
+		rage_chance * 100, rage_amount
+		])

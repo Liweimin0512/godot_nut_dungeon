@@ -1,9 +1,38 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=5 format=3 uid="uid://dusj10wryboti"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=8 format=3 uid="uid://dusj10wryboti"]
 
 [ext_resource type="Script" path="res://data_models/character/character_model.gd" id="1_qi5g2"]
 [ext_resource type="Script" path="res://source/ability_system/ability.gd" id="1_yh5ev"]
-[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://data_models/ability/attack.tres" id="2_2nwny"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect.gd" id="2_7msuq"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource.gd" id="3_1gw7f"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="3_v7xbk"]
+
+[sub_resource type="Resource" id="Resource_ipxfb"]
+script = ExtResource("3_v7xbk")
+damage_multiplier = 1.0
+effect_type = &"deal_damage"
+target_type = &"enemy"
+target_amount = 1
+
+[sub_resource type="Resource" id="Resource_hpqsf"]
+script = ExtResource("1_yh5ev")
+ability_name = &"普攻"
+ability_description = "一次普通攻击"
+cost_resource_name = &""
+cost_resource_value = 0
+target_type = &"enemy"
+target_amount = 1
+cooldown = 0
+current_cooldown = 0
+cast_time = 0.0
+effects = Array[ExtResource("2_7msuq")]([SubResource("Resource_ipxfb")])
+is_auto_cast = false
+level = 1
+is_show = false
+sound_effect = &""
+animation = &""
+is_available = false
+is_cooldown = false
+has_enough_resources = false
 
 [resource]
 script = ExtResource("1_qi5g2")
@@ -13,5 +42,5 @@ max_health = 30.0
 attack_power = 10.0
 defense_power = 5.0
 speed = 5.0
-abilities = Array[ExtResource("1_yh5ev")]([ExtResource("2_2nwny")])
+abilities = Array[ExtResource("1_yh5ev")]([SubResource("Resource_hpqsf")])
 ability_resources = Array[ExtResource("3_1gw7f")]([])

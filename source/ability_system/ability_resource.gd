@@ -36,6 +36,26 @@ func initialization(ability_component: AbilityComponent) -> void:
 			max_value = atr_value
 			current_value = max_value
 
+## 消耗
+func consume(amount: int) -> bool:
+	if current_value >= amount:
+		current_value -= amount
+		print("技能资源消耗：{0} 消耗 {1} 点，当前值： {2} / {3} ".format([
+			ability_resource_name, amount, current_value, max_value
+		]))
+		return true
+	return false
+	
+## 恢复
+func restore(amount: int) -> void:
+	current_value += amount
+	current_value = min(current_value, max_value)
+	print("技能资源恢复：{0} 恢复 {1} 点，当前值： {2} / {3}".format([
+		ability_resource_name, amount, current_value, max_value
+	]))
+
+#region 触发时机回调函数
+
 ## 战斗开始
 func on_combat_start() -> void:
 	pass
@@ -64,14 +84,4 @@ func on_hurt() -> void:
 func on_die() -> void:
 	pass
 
-## 消耗
-func consume(amount: int) -> bool:
-	if current_value >= amount:
-		current_value -= amount
-		return true
-	return false
-	
-## 恢复
-func restore(amount: int) -> void:
-	current_value += amount
-	current_value = min(current_value, max_value)
+#endregion

@@ -36,23 +36,13 @@ func _initialization_ability_component() -> void:
 	ability_component.defense_power = character_model.defense_power
 	ability_component.speed = character_model.speed
 	#ability_component.current_health = ability_component.max_health
-	#ability_component.abilities = character_model.abilities
-	ability_component.ability_resources = character_model.ability_resources
+	ability_component.abilities = character_model.abilities.duplicate(true)
+	ability_component.ability_resources = character_model.ability_resources.duplicate(true)
 	ability_component.initialization(combat_component)
 
 func _initialization_combat_component() -> void:
 	combat_component.camp = character_model.camp
 	combat_component.initialization()
-
-func _on_combat_component_current_health_changed(value: float) -> void:
-	if not progress_bar: progress_bar = $MarginContainer/ProgressBar
-	if not combat_component: combat_component = $CombatComponent
-	progress_bar.value = ability_component.current_health
-	if not label_health : label_health = %LabelHealth
-	label_health.text = "{0}/{1}".format([
-		ability_component.current_health,
-		ability_component.max_health 
-		])
 
 func _on_combat_component_died() -> void:
 	animation_player.play("die")
@@ -67,6 +57,16 @@ func _on_combat_component_hurted(_damage: int) -> void:
 
 func _on_area_2d_mouse_entered() -> void:
 	print("_on_area_2d_mouse_entered：", self.name)
+
+func _on_ability_component_current_health_changed(value: float) -> void:
+	if not progress_bar: progress_bar = $MarginContainer/ProgressBar
+	if not combat_component: combat_component = $CombatComponent
+	progress_bar.value = ability_component.current_health
+	if not label_health : label_health = %LabelHealth
+	label_health.text = "{0}/{1}".format([
+		ability_component.current_health,
+		ability_component.max_health 
+		])
 
 func _to_string() -> String:
 	return cha_name

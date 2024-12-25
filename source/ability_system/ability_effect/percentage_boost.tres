@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_y6mpw")
 boost_percentage = 0.1
-attribute = &""
+attribute = &"defense_power"
 effect_type = &"percentage_boost"
-target_type = &"self"
+target_type = &"ally"
+target_amount = 5
