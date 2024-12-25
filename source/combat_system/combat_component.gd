@@ -106,7 +106,7 @@ func _get_random_enemy() -> CombatComponent:
 
 ## 更新技能组件上下文信息
 func _update_ability_component_context() -> void:
-	var context : Dictionary
+	var context : Dictionary = ability_component.context
 	if _current_combat:
 		context["enemies"] = _current_combat.get_all_enemies(self)
 		context["allies"] = _current_combat.get_all_allies(self)

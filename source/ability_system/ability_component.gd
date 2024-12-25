@@ -24,8 +24,8 @@ class_name AbilityComponent
 var context : Dictionary :
 	set(value):
 		context = value
-		for ability in abilities:
-			ability.update_context(context)
+		for effect in _get_all_effects():
+			effect.update_context(context)
 
 signal current_health_changed(value: float)
 signal cast_finished(ability: Ability)
@@ -80,20 +80,39 @@ func consume_resources(res_name: StringName, cost: int) -> void:
 func get_available_abilities() -> Array[Ability]:
 	var available_abilities : Array[Ability] = abilities.filter(
 		func(ability: Ability) -> bool:
-			return ability.is_available
+			return _is_ability_available(ability)
 	)
 	return available_abilities
 
 ## 尝试释放技能
 func try_cast_ability(ability: Ability, targets : Array) -> void:
-	if not ability.has_enough_resources:
+	if not has_enough_resources(ability.cost_resource_name, ability.cost_resource_value):
 		print("消耗不足，无法释放技能！")
 		return
 	if ability.is_cooldown:
 		print("技能正在冷却！")
 		return
 	await get_tree().create_timer(0.5).timeout
-	ability.cast(targets)
+	var caster : Node = context.caster
+	consume_resources(ability.cost_resource_name, ability.cost_resource_value)
+	var context : Dictionary = {} if targets.is_empty() else {
+		"targets" : targets
+	}
+	print("ability: {0}释放技能：{1}".format([caster, ability]))
+	for effect : AbilityEffect in ability.effects:
+		effect.apply_effect(context)
+	ability.current_cooldown = ability.cooldown
+
+## 判断技能是否可用
+func _is_ability_available(ability: Ability) -> bool:
+	## 这个方法用来筛选哪些可用的主动技能
+	return not ability.is_cooldown and not ability.is_auto_cast and has_enough_resources(ability.cost_resource_name, ability.cost_resource_value)
+
+## 更新技能冷却计时，在回合开始前
+func _update_ability_cooldown() -> void:
+	for ability : Ability in abilities:
+		if ability.is_cooldown:
+			ability.current_cooldown -= 1
 
 #region 触发时机回调函数
 
@@ -101,43 +120,51 @@ func try_cast_ability(ability: Ability, targets : Array) -> void:
 func on_combat_start() -> void:
 	for res : AbilityResource in ability_resources:
 		res.on_combat_start()
-	for ability in abilities:
-		ability.on_combat_start()
+	for effect in _get_all_effects():
+		if effect.has_method("on_combat_start"):
+			effect.on_combat_start()
 
 ## 战斗结束
 func on_combat_end() -> void:
 	for res : AbilityResource in ability_resources:
 		res.on_combat_end()
-	for ability in abilities:
-		ability.on_combat_end()
+	for effect in _get_all_effects():
+		if effect.has_method("on_combat_end"):
+			effect.on_combat_end()
 
 ## 回合开始
 func on_turn_start() -> void:
+	# 回合开始时更新技能的冷却计时
+	_update_ability_cooldown()
 	for res : AbilityResource in ability_resources:
 		res.on_turn_start()
-	for ability in abilities:
-		ability.on_turn_start()
+	for effect in _get_all_effects():
+		if effect.has_method("on_turn_start"):
+			effect.on_turn_start()
 
 ## 回合结束
 func on_turn_end() -> void:
 	for res : AbilityResource in ability_resources:
 		res.on_turn_end()
-	for ability in abilities:
-		ability.on_turn_end()
+	for effect in _get_all_effects():
+		if effect.has_method("on_turn_end"):
+			effect.on_turn_end()
 
 ## 造成伤害
 func on_hit() -> void:
 	for res : AbilityResource in ability_resources:
 		res.on_hit()
-	for ability in abilities:
-		ability.on_hit()
+	for effect in _get_all_effects():
+		if effect.has_method("on_hit"):
+			effect.on_hit()
 
 ## 受到伤害
 func on_hurt(source: Node, damage: float) -> void:
 	for res : AbilityResource in ability_resources:
 		res.on_hurt()
-	for ability in abilities:
-		ability.on_hurt({
+	for effect in _get_all_effects():
+		if effect.has_method("on_hurt"):
+			effect.on_hurt({
 			"source": source,
 			"damage": damage
 		})
@@ -146,6 +173,13 @@ func on_hurt(source: Node, damage: float) -> void:
 func on_die() -> void:
 	for res : AbilityResource in ability_resources:
 		res.on_die()
-	for ability in abilities:
-		ability.on_die()
+	for effect in _get_all_effects():
+		if effect.has_method("on_die"):
+			effect.on_die()
 #endregion
+
+func _get_all_effects() -> Array[AbilityEffect]:
+	var effects : Array[AbilityEffect]
+	for ability in abilities:
+		effects += ability.effects
+	return effects

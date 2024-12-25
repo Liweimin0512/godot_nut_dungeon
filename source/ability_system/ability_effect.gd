@@ -1,7 +1,7 @@
 extends Resource
 class_name AbilityEffect
 
-## 技能效果
+## 技能效果，一个技能可能包括不只一个效果，且这些效果还可以包含其他效果。形成树状结构
 
 ## 效果类型，用于区分不同效果 
 @export var effect_type: StringName
@@ -9,7 +9,9 @@ class_name AbilityEffect
 @export var target_type: StringName
 ## 目标数量
 @export var target_amount: int = 1
-## 技能描述
+## 后置效果
+@export var effects: Array[AbilityEffect]
+## 技能效果描述
 var description : String: get = _description_getter
 ## 技能上下文
 var _context : Dictionary
@@ -23,7 +25,14 @@ func initialization(context: Dictionary) -> void:
 
 ## 应用效果的基础方法，由子类实现具体的逻辑
 func apply_effect(context: Dictionary = {}) -> void:
+	# 父类的这个方法应该在子类方法执行之后调用
+	for effect in effects:
+		effect.apply_effect(context)
 	applied.emit()
+
+## 更新技能上下文
+func update_context(context) -> void:
+	_context.merge(context, true	)
 
 ## 获取目标
 func _get_targets() -> Array:
@@ -44,38 +53,6 @@ func _get_targets() -> Array:
 		targets.append(target)
 		target_pool.erase(target)  # 从目标池中移除已选目标
 	return targets
-
-#region 触发时机回调函数
-
-## 战斗开始
-func on_combat_start() -> void:
-	pass
-
-## 战斗结束
-func on_combat_end() -> void:
-	pass
-
-## 回合开始
-func on_turn_start() -> void:
-	pass
-
-## 回合结束
-func on_turn_end() -> void:
-	pass
-
-## 造成伤害
-func on_hit() -> void:
-	pass
-
-## 受到伤害
-func on_hurt(context: Dictionary) -> void:
-	pass
-
-## 死亡
-func on_die() -> void:
-	pass
-
-#endregion
 
 func _description_getter() -> String:
 	return ""
