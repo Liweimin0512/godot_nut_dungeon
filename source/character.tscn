@@ -171,4 +171,4 @@ script = ExtResource("3_6a5vl")
 [connection signal="died" from="CombatComponent" to="." method="_on_combat_component_died"]
 [connection signal="hited" from="CombatComponent" to="." method="_on_combat_component_hited"]
 [connection signal="hurted" from="CombatComponent" to="." method="_on_combat_component_hurted"]
-[connection signal="current_health_changed" from="AbilityComponent" to="." method="_on_ability_component_current_health_changed"]
+[connection signal="resource_changed" from="AbilityComponent" to="." method="_on_ability_component_resource_changed"]

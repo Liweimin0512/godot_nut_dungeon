@@ -13,7 +13,8 @@ func apply_effect(context: Dictionary = {}) -> void:
 	_context.merge(context, true)
 	var caster : Node = _context.caster
 	var ability_component : AbilityComponent = caster.get("ability_component")
-	var damage = ability_component.attack_power  * damage_multiplier
+	var attack : float = ability_component.get_attribute_value("攻击力")
+	var damage = attack * damage_multiplier
 	var targets : Array = _context.get("targets")
 	for target in targets:
 		if caster.has_method("hit"):

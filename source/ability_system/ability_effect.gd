@@ -2,6 +2,7 @@ extends Resource
 class_name AbilityEffect
 
 ## 技能效果，一个技能可能包括不只一个效果，且这些效果还可以包含其他效果。形成树状结构
+## 技能是瞬时的，持续一段时间的技能效果需要包装成buff
 
 ## 效果类型，用于区分不同效果 
 @export var effect_type: StringName
@@ -23,7 +24,7 @@ signal applied
 func initialization(context: Dictionary) -> void:
 	_context = context
 
-## 应用效果的基础方法，由子类实现具体的逻辑
+## 应用效果
 func apply_effect(context: Dictionary = {}) -> void:
 	# 父类的这个方法应该在子类方法执行之后调用
 	for effect in effects:

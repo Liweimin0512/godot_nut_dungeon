@@ -1,32 +1,36 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=24 format=3 uid="uid://pnl45yj5lq7s"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=31 format=3 uid="uid://pnl45yj5lq7s"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability.gd" id="1_iw5hp"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect.gd" id="2_4ibga"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource.gd" id="2_dcqla"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/percentage_boost.gd" id="3_hohjj"]
+[ext_resource type="Script" path="res://source/ability_system/ability_attribute_modifier.gd" id="3_ewls7"]
 [ext_resource type="Script" path="res://data_models/character/character_model.gd" id="3_smf2k"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource/health_resource.gd" id="3_w14c0"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/attribute_modifier.gd" id="4_7xltr"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource/rage_resource.gd" id="4_mney7"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="4_p82i8"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/rage_on_begin_hit.gd" id="5_qoe43"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/counter_attack.gd" id="6_03xy8"]
+[ext_resource type="Script" path="res://source/ability_system/ability_attribute.gd" id="7_5u5vv"]
 
-[sub_resource type="Resource" id="Resource_3q85n"]
-script = ExtResource("3_hohjj")
-boost_percentage = 0.1
-attribute = &"attack_power"
-effect_type = &"percentage_boost"
-target_type = &"ally"
-target_amount = 5
-effects = Array[ExtResource("2_4ibga")]([])
+[sub_resource type="Resource" id="Resource_6eyw1"]
+script = ExtResource("3_ewls7")
+attribute_name = &"攻击力"
+modify_type = 2
+value = 0.1
 
-[sub_resource type="Resource" id="Resource_dsb4r"]
-script = ExtResource("3_hohjj")
-boost_percentage = 0.1
-attribute = &"defense_power"
-effect_type = &"percentage_boost"
+[sub_resource type="Resource" id="Resource_b0tgl"]
+script = ExtResource("3_ewls7")
+attribute_name = &"防御力"
+modify_type = 2
+value = 0.1
+
+[sub_resource type="Resource" id="Resource_215l6"]
+script = ExtResource("4_7xltr")
+modifiers = Array[ExtResource("3_ewls7")]([SubResource("Resource_6eyw1"), SubResource("Resource_b0tgl")])
+effect_type = &"attribute_modifier"
 target_type = &"ally"
-target_amount = 5
+target_amount = 10
 effects = Array[ExtResource("2_4ibga")]([])
 
 [sub_resource type="Resource" id="Resource_byx0n"]
@@ -40,7 +44,7 @@ target_amount = 1
 cooldown = 3
 current_cooldown = 0
 cast_time = 0.0
-effects = Array[ExtResource("2_4ibga")]([SubResource("Resource_3q85n"), SubResource("Resource_dsb4r")])
+effects = Array[ExtResource("2_4ibga")]([SubResource("Resource_215l6")])
 is_auto_cast = false
 level = 1
 is_show = true
@@ -103,7 +107,7 @@ animation = &""
 [sub_resource type="Resource" id="Resource_wma4j"]
 script = ExtResource("6_03xy8")
 counter_chance = 0.3
-damage_multiplier = 0.6
+damage_multiplier = 1.0
 effect_type = &"counter_attack"
 target_type = &"enemy"
 target_amount = 1
@@ -153,6 +157,26 @@ is_show = false
 sound_effect = &""
 animation = &""
 
+[sub_resource type="Resource" id="Resource_e1joa"]
+script = ExtResource("7_5u5vv")
+attribute_name = &"攻击力"
+_base_value = 10.0
+
+[sub_resource type="Resource" id="Resource_gc0bh"]
+script = ExtResource("7_5u5vv")
+attribute_name = &"防御力"
+_base_value = 5.0
+
+[sub_resource type="Resource" id="Resource_g7ipd"]
+script = ExtResource("7_5u5vv")
+attribute_name = &"生命值"
+_base_value = 100.0
+
+[sub_resource type="Resource" id="Resource_4anai"]
+script = ExtResource("7_5u5vv")
+attribute_name = &"速度"
+_base_value = 10.0
+
 [sub_resource type="Resource" id="Resource_21vdc"]
 script = ExtResource("4_mney7")
 regain_hited = 10
@@ -162,20 +186,17 @@ current_value = 0
 max_value = 100
 attribute_name = &""
 
-[sub_resource type="Resource" id="Resource_mdp67"]
+[sub_resource type="Resource" id="Resource_b6emj"]
 script = ExtResource("3_w14c0")
 ability_resource_name = &"生命值"
 current_value = 0
 max_value = 0
-attribute_name = &"max_health"
+attribute_name = &"生命值"
 
 [resource]
 script = ExtResource("3_smf2k")
 character_name = &"战士"
 camp = 1
-max_health = 100.0
-attack_power = 10.0
-defense_power = 5.0
-speed = 10.0
+ability_attributes = Array[ExtResource("7_5u5vv")]([SubResource("Resource_e1joa"), SubResource("Resource_gc0bh"), SubResource("Resource_g7ipd"), SubResource("Resource_4anai")])
 abilities = Array[ExtResource("1_iw5hp")]([SubResource("Resource_byx0n"), SubResource("Resource_psbht"), SubResource("Resource_6u5pe"), SubResource("Resource_8holi"), SubResource("Resource_nw6mo")])
-ability_resources = Array[ExtResource("2_dcqla")]([SubResource("Resource_21vdc"), SubResource("Resource_mdp67")])
+ability_resources = Array[ExtResource("2_dcqla")]([SubResource("Resource_21vdc"), SubResource("Resource_b6emj")])

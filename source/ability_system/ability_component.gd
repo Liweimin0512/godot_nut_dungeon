@@ -3,19 +3,10 @@ class_name AbilityComponent
 
 ## 技能组件
 
-## 最大生命值
-@export var max_health : float = 100
-## 当前生命值
-@export_storage var current_health : float = 100:
-	set(value):
-		current_health = value
-		current_health_changed.emit(current_health)
-## 攻击力
-@export var attack_power : float = 10.0
-## 防御力
-@export var defense_power : float = 5
-## 出手速度
-@export var speed : float = 1
+## 技能属性集
+@export var ability_attributes : Array[AbilityAttribute]
+## 技能属性修改器集
+@export_storage var attribute_modifiers : Array[AbilityAttributeModifier]
 ## 当前单位所有的技能消耗资源
 @export var ability_resources : Array[AbilityResource]
 ## 当前单位所拥有的全部技能
@@ -27,15 +18,19 @@ var context : Dictionary :
 		for effect in _get_all_effects():
 			effect.update_context(context)
 
-signal current_health_changed(value: float)
+signal attribute_changed(atr_name: StringName, value: float)
+signal resource_changed(res_name: StringName, value: float)
 signal cast_finished(ability: Ability)
 
 ## 组件初始化
 func initialization(caster: Node) -> void:
 	context["caster"] = caster
-	current_health = max_health
 	for res : AbilityResource in ability_resources:
 		res.initialization(self)
+		res.current_value_changed.connect(
+			func(value: int) -> void:
+				resource_changed.emit(res.ability_resource_name, value)
+		)
 	for ability in abilities:
 		ability.initialization(context)
 		ability.cast_finished.connect(
@@ -43,10 +38,44 @@ func initialization(caster: Node) -> void:
 				cast_finished.emit(ability)
 		)
 
+#region 技能属性相关
 ## 获取属性值
 func get_attribute_value(atr_name : StringName) -> float:
-	return get(atr_name)
+	var atr := get_attribute(atr_name)
+	if atr:
+		return atr.attribute_value
+	assert(false, "找不到需要的属性："+ atr_name)
+	return -1
 
+## 获取属性
+func get_attribute(atr_name: StringName) -> AbilityAttribute:
+	for atr : AbilityAttribute in ability_attributes:
+		if atr.attribute_name == atr_name:
+			return atr
+	return null
+
+## 增加属性修改器
+func apply_attribute_modifier(modifier: AbilityAttributeModifier):
+	var attribute: AbilityAttribute = get_attribute(modifier.attribute_name)
+	assert(attribute, "无效的属性：" + attribute.to_string())
+	attribute_modifiers.append(modifier)
+	modifier.apply(attribute)
+	attribute_changed.emit(modifier.attribute_name, get_attribute_value(modifier.attribute_name))
+	
+## 移除属性修改器
+func remove_attribute_modifier(modifier: AbilityAttributeModifier):
+	var attribute: AbilityAttribute = get_attribute(modifier.attribute_name)
+	assert(attribute, "无效的属性：" + attribute.to_string())
+	attribute_modifiers.erase(modifier)
+	modifier.remove(attribute)
+	attribute_changed.emit(modifier.attribute_name, get_attribute_value(modifier.attribute_name))
+
+## 获取属性的所有修改器
+func get_attribute_modifiers(attribute_name: StringName) -> Array[AbilityAttributeModifier]:
+	var attribute_modifiers: Array[AbilityAttributeModifier]
+	return attribute_modifiers
+
+#endregion
 #region 消耗资源相关
 
 ## 检查资源是否足够消耗
@@ -69,10 +98,11 @@ func get_resource(res_name: StringName) -> AbilityResource:
 	return null
 
 ## 消耗资源
-func consume_resources(res_name: StringName, cost: int) -> void:
+func consume_resources(res_name: StringName, cost: int) -> bool:
 	var res := get_resource(res_name)
 	if res:
-		res.consume(cost)
+		return res.consume(cost)
+	return false
 
 #endregion
 
@@ -113,6 +143,12 @@ func _update_ability_cooldown() -> void:
 	for ability : Ability in abilities:
 		if ability.is_cooldown:
 			ability.current_cooldown -= 1
+
+func _get_all_effects() -> Array[AbilityEffect]:
+	var effects : Array[AbilityEffect]
+	for ability in abilities:
+		effects += ability.effects
+	return effects
 
 #region 触发时机回调函数
 
@@ -177,9 +213,3 @@ func on_die() -> void:
 		if effect.has_method("on_die"):
 			effect.on_die()
 #endregion
-
-func _get_all_effects() -> Array[AbilityEffect]:
-	var effects : Array[AbilityEffect]
-	for ability in abilities:
-		effects += ability.effects
-	return effects

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AbilityAttribute" load_steps=2 format=3 uid="uid://cs514if4psmfj"]
+
+[ext_resource type="Script" path="res://source/ability_system/ability_attribute.gd" id="1_34pm5"]
+
+[resource]
+script = ExtResource("1_34pm5")
+attribute_name = &"速度"
+_base_value = 0.0

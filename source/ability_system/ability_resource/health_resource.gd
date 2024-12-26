@@ -7,3 +7,10 @@ class_name HealthResource
 func _init() -> void:
 	ability_resource_name = "生命值"
 	attribute_name = "max_health"
+
+## 消耗
+func consume(amount: int) -> bool:
+	var ok := super(amount)
+	if not ok:
+		current_value = 0
+	return ok

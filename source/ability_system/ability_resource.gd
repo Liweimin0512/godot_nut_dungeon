@@ -26,7 +26,7 @@ var is_full : bool:
 		return current_value == max_value
 
 ## 当前值改变时发射
-signal current_value_changed
+signal current_value_changed(value : int)
 
 ## ability_component的initialization
 func initialization(ability_component: AbilityComponent) -> void:

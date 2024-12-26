@@ -19,26 +19,22 @@ var _value_modify : float
 var _percentage_modify: float
 ## 绝对值修改值
 var _absolute_modify : float
-## 属性调节器
-var _modifiers: Array[AbilityAttributeModifier]
 
-## 增加修改器
-func add_modifier(modifier: AbilityAttributeModifier):
-	assert(modifier.attribute_name == attribute_name, "属性名不一致无法添加修改器！")
-	_modifiers.append(modifier)
-	_update_modifiers()
+func _init(atr_name : StringName = "", base: float = 0) -> void:
+	attribute_name = atr_name
+	_base_value = base
 
-## 移除修改器
-func remove_modifier(modifier: AbilityAttributeModifier):
-	_modifiers.erase(modifier)
-	_update_modifiers()
+func _to_string() -> String:
+	return "{attribute_name} : {attribute_value}".format({
+		"attribute_name": attribute_name,
+		"attribute_value": attribute_value
+	})
 
-## 更新修改器
-func _update_modifiers() -> void:
-	for modifier in _modifiers:
-		if modifier.modify_type == AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE.VALUE:
-			_value_modify += modifier.value
-		elif modifier.modify_type == AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE.PERCENTAGE:
-			_percentage_modify += modifier.value
-		elif modifier.modify_type == AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE.ABSOLUTE:
-			_absolute_modify += modifier.value
+func modify(modify_type: AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE, value: float) -> void:
+	match modify_type:
+		AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE.VALUE:
+			_value_modify += value
+		AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE.PERCENTAGE:
+			_percentage_modify += value
+		AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE.ABSOLUTE:
+			_absolute_modify = value

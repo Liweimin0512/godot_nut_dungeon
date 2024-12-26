@@ -7,14 +7,14 @@ class_name CombatComponent
 @onready var ability_component: AbilityComponent = %AbilityComponent
 ## 所属阵营
 @export var camp : CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.NONE
-## 是否为存货单位
+## 是否为存活单位
 var is_alive : bool :
 	get:
-		return ability_component.current_health > 0
+		return ability_component.get_resource_value("生命值") > 0
 ## 行动速度
 var speed : float :
 	get:
-		return ability_component.speed
+		return ability_component.get_attribute_value("速度")
 ## 当前战斗，为空则表示不是在战斗状态
 var _current_combat: Combat
 ## 战斗组件所属角色，为了测试时候看着方便
@@ -62,7 +62,7 @@ func turn_end() -> void:
 
 ## 战斗结束
 func combat_end() -> void:
-	print(self, " 战斗结束", "剩余血量: ", ability_component.current_health)
+	print(self, " 战斗结束", "剩余血量: ", ability_component.get_resource_value("生命值"))
 	_current_combat = null
 	ability_component.on_combat_end()
 	combat_ended.emit()
@@ -70,27 +70,26 @@ func combat_end() -> void:
 ## 攻击
 func hit(target: CombatComponent, attack: float) -> void:
 	if not target: return
-	#if _current_combat.is_real_time:
-		#await get_tree().create_timer(0.5).timeout
-	#if not target: return
 	ability_component.on_hit()
 	hited.emit(target)
-	var damage : float = attack - target.ability_component.defense_power
+	var defense = target.ability_component.get_attribute_value("防御力")
+	var damage : float = attack - defense
 	print("combat_component: {0} 攻击： {1}, 攻击力{2}， 防御力{3}，实际造成伤害{4}".format([
-		self, target, attack, target.ability_component.defense_power, damage
+		self, target, attack, defense, damage
 	]))
 	await target.hurt(self, damage)
 
 ## 受击
 func hurt(damage_source: CombatComponent, damage: float) -> void:
 	ability_component.on_hurt(damage_source, damage)
-	ability_component.current_health -= damage
-	ability_component.current_health = max(ability_component.current_health, 0)
-	hurted.emit(damage)
 	print("combat_component: {0} 受到来自 {1} 的伤害 {2}， 当前生命值{3}/{4}".format([
-		self, damage_source, damage, ability_component.current_health, ability_component.max_health
+		self, damage_source, damage, 
+		ability_component.get_resource_value("生命值"), 
+		ability_component.get_attribute_value("生命值")
 	]))
-	if ability_component.current_health <= 0:
+	var ok := ability_component.consume_resources("生命值", damage)
+	hurted.emit(damage)
+	if not ok:
 		_die()
 
 ## 死亡

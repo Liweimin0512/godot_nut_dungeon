@@ -10,6 +10,7 @@ damage_multiplier = 1.0
 effect_type = &"deal_damage"
 target_type = &"enemy"
 target_amount = 1
+effects = Array[ExtResource("1_pfkyu")]([])
 
 [resource]
 script = ExtResource("2_3y0h6")
@@ -28,6 +29,3 @@ level = 1
 is_show = false
 sound_effect = &""
 animation = &""
-is_available = false
-is_cooldown = false
-has_enough_resources = false

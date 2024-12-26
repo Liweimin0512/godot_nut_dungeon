@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AbilityAttribute" load_steps=2 format=3 uid="uid://x6vifhgsm7y7"]
+
+[ext_resource type="Script" path="res://source/ability_system/ability_attribute.gd" id="1_roqyk"]
+
+[resource]
+script = ExtResource("1_roqyk")
+attribute_name = &"生命值"
+_base_value = 0.0

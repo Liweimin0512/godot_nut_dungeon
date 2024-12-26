@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=8 format=3 uid="uid://cnxi3o3qyig58"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=15 format=3 uid="uid://cnxi3o3qyig58"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability.gd" id="1_m1spd"]
 [ext_resource type="Script" path="res://data_models/character/character_model.gd" id="1_yvr0l"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect.gd" id="2_djdc0"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource.gd" id="3_ficeh"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="3_qb23y"]
+[ext_resource type="Script" path="res://source/ability_system/ability_attribute.gd" id="4_475qg"]
+[ext_resource type="Script" path="res://source/ability_system/ability_resource/health_resource.gd" id="6_t8wea"]
 
 [sub_resource type="Resource" id="Resource_ipxfb"]
 script = ExtResource("3_qb23y")
@@ -32,13 +34,37 @@ is_show = false
 sound_effect = &""
 animation = &""
 
+[sub_resource type="Resource" id="Resource_quh7s"]
+script = ExtResource("4_475qg")
+attribute_name = &"攻击力"
+_base_value = 15.0
+
+[sub_resource type="Resource" id="Resource_higu1"]
+script = ExtResource("4_475qg")
+attribute_name = &"防御力"
+_base_value = 0.0
+
+[sub_resource type="Resource" id="Resource_82qv2"]
+script = ExtResource("4_475qg")
+attribute_name = &"生命值"
+_base_value = 30.0
+
+[sub_resource type="Resource" id="Resource_8qv2x"]
+script = ExtResource("4_475qg")
+attribute_name = &"速度"
+_base_value = 5.0
+
+[sub_resource type="Resource" id="Resource_631b3"]
+script = ExtResource("6_t8wea")
+ability_resource_name = &"生命值"
+current_value = 0
+max_value = 0
+attribute_name = &"生命值"
+
 [resource]
 script = ExtResource("1_yvr0l")
 character_name = &"巨魔"
 camp = 2
-max_health = 50.0
-attack_power = 10.0
-defense_power = 5.0
-speed = 5.0
+ability_attributes = Array[ExtResource("4_475qg")]([SubResource("Resource_quh7s"), SubResource("Resource_higu1"), SubResource("Resource_82qv2"), SubResource("Resource_8qv2x")])
 abilities = Array[ExtResource("1_m1spd")]([SubResource("Resource_yiy27")])
-ability_resources = Array[ExtResource("3_ficeh")]([])
+ability_resources = Array[ExtResource("3_ficeh")]([SubResource("Resource_631b3")])
