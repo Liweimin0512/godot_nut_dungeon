@@ -6,7 +6,7 @@ class_name DealDamageEffect
 
 func _init() -> void:
 	target_type = "enemy"
-	effect_type = "deal_damage"
+	#effect_type = "deal_damage"
 	target_amount = 1
 
 func apply_effect(context: Dictionary = {}) -> void:

@@ -7,7 +7,7 @@ class_name RageOnBeginHitEffect
 @export var rage_amount: int = 5  # 获得的怒气值
 
 func _init() -> void:
-	effect_type = "rage_on_being_hit"
+	#effect_type = "rage_on_being_hit"
 	target_type = "self"
 	target_amount = 1
 

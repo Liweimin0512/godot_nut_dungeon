@@ -10,3 +10,10 @@ enum ATTRIBUTE_MODIFIER_TYPE{
 	PERCENTAGE,	## 百分比
 	ABSOLUTE		## 绝对值
 }
+
+## BUFF类型
+enum BUFF_TYPE{
+	NONE,
+	DURATION,	## 持续型
+	VALUE,		## 数值型
+}

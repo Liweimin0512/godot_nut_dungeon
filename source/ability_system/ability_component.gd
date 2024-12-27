@@ -11,6 +11,8 @@ class_name AbilityComponent
 @export var ability_resources : Array[AbilityResource]
 ## 当前单位所拥有的全部技能
 @export var abilities : Array[Ability]
+## BUFF集
+@export var buffs : Array[AbilityBuff]
 ## 技能执行上下文
 var context : Dictionary :
 	set(value):
@@ -76,6 +78,7 @@ func get_attribute_modifiers(attribute_name: StringName) -> Array[AbilityAttribu
 	return attribute_modifiers
 
 #endregion
+
 #region 消耗资源相关
 
 ## 检查资源是否足够消耗
@@ -106,6 +109,7 @@ func consume_resources(res_name: StringName, cost: int) -> bool:
 
 #endregion
 
+#region 技能相关
 ## 获取可用技能
 func get_available_abilities() -> Array[Ability]:
 	var available_abilities : Array[Ability] = abilities.filter(
@@ -148,7 +152,39 @@ func _get_all_effects() -> Array[AbilityEffect]:
 	var effects : Array[AbilityEffect]
 	for ability in abilities:
 		effects += ability.effects
+	for buff in buffs:
+		effects += buff.effects
 	return effects
+#endregion
+
+#region BUFF相关
+
+func apply_buff(buff: AbilityBuff) -> void:
+	var _buff := get_buff(buff.buff_name)
+	if _buff:
+		remove_buff(_buff)
+		if _buff.buff_type == AbilityDefinition.BUFF_TYPE.DURATION or _buff.can_stack:
+			buff.value += _buff.value
+	buffs.append(buff)
+	var _context := context.duplicate()
+	_context["source"] = buff
+	for effect in buff.effects:
+		effect.apply_effect(_context)
+	print("应用BUFF：", buff)
+
+func remove_buff(buff: AbilityBuff) -> void:
+	buffs.erase(buff)
+	for effect in buff.effects:
+		effect.remove_effect(context)
+	print("移除BUFF：", buff)
+
+func get_buff(buff_name : StringName) -> AbilityBuff:
+	for buff in buffs:
+		if buff.buff_name == buff_name:
+			return buff
+	return null
+
+#endregion
 
 #region 触发时机回调函数
 
@@ -167,6 +203,8 @@ func on_combat_end() -> void:
 	for effect in _get_all_effects():
 		if effect.has_method("on_combat_end"):
 			effect.on_combat_end()
+	for buff in buffs:
+		remove_buff(buff)
 
 ## 回合开始
 func on_turn_start() -> void:
@@ -177,6 +215,14 @@ func on_turn_start() -> void:
 	for effect in _get_all_effects():
 		if effect.has_method("on_turn_start"):
 			effect.on_turn_start()
+	for buff in buffs:
+		if buff.buff_type == AbilityDefinition.BUFF_TYPE.VALUE:
+			if not buff.is_permanent: remove_buff(buff)
+		elif buff.buff_type == AbilityDefinition.BUFF_TYPE.DURATION:
+			if not buff.is_permanent:
+				buff.value -= 1
+				if buff.value <= 0:
+					remove_buff(buff)
 
 ## 回合结束
 func on_turn_end() -> void:

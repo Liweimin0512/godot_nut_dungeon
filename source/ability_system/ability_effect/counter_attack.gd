@@ -6,7 +6,7 @@ class_name CounterAttackEffect
 @export var counter_chance: float = 0.3  # 反击的概率
 
 func _init() -> void:
-	effect_type = "counter_attack"
+	#effect_type = "counter_attack"
 	target_type = "enemy"
 
 func on_hurt(context: Dictionary) -> void:

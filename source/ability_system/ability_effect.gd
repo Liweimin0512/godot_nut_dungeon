@@ -5,7 +5,7 @@ class_name AbilityEffect
 ## 技能是瞬时的，持续一段时间的技能效果需要包装成buff
 
 ## 效果类型，用于区分不同效果 
-@export var effect_type: StringName
+#@export var effect_type: StringName
 ## 目标类型，如self, ally, enemy
 @export var target_type: StringName
 ## 目标数量
@@ -19,6 +19,8 @@ var _context : Dictionary
 
 ## 应用技能效果后触发
 signal applied
+## 移除技能效果后触发
+signal removed
 
 ## 初始化效果类
 func initialization(context: Dictionary) -> void:
@@ -30,6 +32,12 @@ func apply_effect(context: Dictionary = {}) -> void:
 	for effect in effects:
 		effect.apply_effect(context)
 	applied.emit()
+
+## 移除效果
+func remove_effect(context: Dictionary = {}) -> void:
+	for effect in effects:
+		effect.remove_effect(context)
+	removed.emit()
 
 ## 更新技能上下文
 func update_context(context) -> void:

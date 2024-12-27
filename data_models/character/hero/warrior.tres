@@ -1,34 +1,21 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=31 format=3 uid="uid://pnl45yj5lq7s"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=29 format=3 uid="uid://pnl45yj5lq7s"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability.gd" id="1_iw5hp"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect.gd" id="2_4ibga"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource.gd" id="2_dcqla"]
-[ext_resource type="Script" path="res://source/ability_system/ability_attribute_modifier.gd" id="3_ewls7"]
+[ext_resource type="Resource" uid="uid://cd7qfemfd5dhe" path="res://data_models/ability/ability_buff/battle_cry.tres" id="3_beymr"]
 [ext_resource type="Script" path="res://data_models/character/character_model.gd" id="3_smf2k"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource/health_resource.gd" id="3_w14c0"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/attribute_modifier.gd" id="4_7xltr"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/apply_buff.gd" id="4_ktaga"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource/rage_resource.gd" id="4_mney7"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="4_p82i8"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/rage_on_begin_hit.gd" id="5_qoe43"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/counter_attack.gd" id="6_03xy8"]
 [ext_resource type="Script" path="res://source/ability_system/ability_attribute.gd" id="7_5u5vv"]
 
-[sub_resource type="Resource" id="Resource_6eyw1"]
-script = ExtResource("3_ewls7")
-attribute_name = &"攻击力"
-modify_type = 2
-value = 0.1
-
-[sub_resource type="Resource" id="Resource_b0tgl"]
-script = ExtResource("3_ewls7")
-attribute_name = &"防御力"
-modify_type = 2
-value = 0.1
-
-[sub_resource type="Resource" id="Resource_215l6"]
-script = ExtResource("4_7xltr")
-modifiers = Array[ExtResource("3_ewls7")]([SubResource("Resource_6eyw1"), SubResource("Resource_b0tgl")])
-effect_type = &"attribute_modifier"
+[sub_resource type="Resource" id="Resource_oiaj0"]
+script = ExtResource("4_ktaga")
+buff = ExtResource("3_beymr")
 target_type = &"ally"
 target_amount = 10
 effects = Array[ExtResource("2_4ibga")]([])
@@ -38,13 +25,13 @@ script = ExtResource("1_iw5hp")
 ability_name = &"战吼"
 ability_description = "发出怒吼，激励自己和周围的盟友。"
 cost_resource_name = &"怒气"
-cost_resource_value = 25
+cost_resource_value = 10
 target_type = &""
 target_amount = 1
 cooldown = 3
 current_cooldown = 0
 cast_time = 0.0
-effects = Array[ExtResource("2_4ibga")]([SubResource("Resource_215l6")])
+effects = Array[ExtResource("2_4ibga")]([SubResource("Resource_oiaj0")])
 is_auto_cast = false
 level = 1
 is_show = true
@@ -54,7 +41,6 @@ animation = &""
 [sub_resource type="Resource" id="Resource_bpy7w"]
 script = ExtResource("4_p82i8")
 damage_multiplier = 1.5
-effect_type = &"deal_damage"
 target_type = &"enemy"
 target_amount = 1
 effects = Array[ExtResource("2_4ibga")]([])
@@ -81,7 +67,6 @@ animation = &""
 script = ExtResource("5_qoe43")
 rage_chance = 0.3
 rage_amount = 5
-effect_type = &"rage_on_being_hit"
 target_type = &"self"
 target_amount = 1
 effects = Array[ExtResource("2_4ibga")]([])
@@ -108,7 +93,6 @@ animation = &""
 script = ExtResource("6_03xy8")
 counter_chance = 0.3
 damage_multiplier = 1.0
-effect_type = &"counter_attack"
 target_type = &"enemy"
 target_amount = 1
 effects = Array[ExtResource("2_4ibga")]([])
@@ -134,7 +118,6 @@ animation = &""
 [sub_resource type="Resource" id="Resource_ipxfb"]
 script = ExtResource("4_p82i8")
 damage_multiplier = 1.0
-effect_type = &"deal_damage"
 target_type = &"enemy"
 target_amount = 1
 effects = Array[ExtResource("2_4ibga")]([])
