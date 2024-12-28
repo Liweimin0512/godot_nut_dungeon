@@ -15,7 +15,7 @@ func _init() -> void:
 	max_value = 100
 	ability_resource_name = "怒气值"
 
-func initialization(ability_component: AbilityComponent) -> void:
+func initialization(ability_component: AbilityComponent, context : Dictionary = {}) -> void:
 	super(ability_component)
 	current_value = 0
 

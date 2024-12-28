@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="AbilityAttribute" load_steps=2 format=3 uid="uid://dq1dyg35g0n41"]
-
-[ext_resource type="Script" path="res://source/ability_system/ability_attribute.gd" id="1_bfsty"]
-
-[resource]
-script = ExtResource("1_bfsty")
-attribute_name = &"攻击力"
-_base_value = 0.0

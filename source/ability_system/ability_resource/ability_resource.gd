@@ -29,7 +29,7 @@ var is_full : bool:
 signal current_value_changed(value : int)
 
 ## ability_component的initialization
-func initialization(ability_component: AbilityComponent) -> void:
+func initialization(ability_component: AbilityComponent, context: Dictionary = {}) -> void:
 	if not attribute_name.is_empty():
 		var atr_value : int = ability_component.get_attribute_value(attribute_name)
 		if atr_value:
@@ -53,35 +53,3 @@ func restore(amount: int) -> void:
 	print("技能资源恢复：{0} 恢复 {1} 点，当前值： {2} / {3}".format([
 		ability_resource_name, amount, current_value, max_value
 	]))
-
-#region 触发时机回调函数
-
-## 战斗开始
-func on_combat_start() -> void:
-	pass
-
-## 战斗结束
-func on_combat_end() -> void:
-	pass
-
-## 回合开始
-func on_turn_start() -> void:
-	pass
-
-## 回合结束
-func on_turn_end() -> void:
-	pass
-
-## 造成伤害
-func on_hit() -> void:
-	pass
-
-## 受到伤害
-func on_hurt() -> void:
-	pass
-
-## 死亡
-func on_die() -> void:
-	pass
-
-#endregion

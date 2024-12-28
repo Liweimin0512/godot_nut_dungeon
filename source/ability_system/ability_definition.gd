@@ -18,18 +18,6 @@ enum BUFF_TYPE{
 	VALUE,		## 数值型
 }
 
-## 技能触发时机
-enum TRIGGER_TYPE{
-	NONE,
-	CAST,			## 技能释放
-	ATTACK,			## 攻击
-	DEATH,			## 死亡
-	TURN_START,		## 回合开始
-	TURN_END,		## 回合结束
-	COMBAT_START,	## 战斗开始
-	COMBAT_END,		## 战斗结束
-}
-
 ## 技能目标类型
 enum TARGET_TYPE{
 	NONE,

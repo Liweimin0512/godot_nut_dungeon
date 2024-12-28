@@ -1,14 +1,48 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=5 format=3 uid="uid://cnxi3o3qyig58"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=12 format=3 uid="uid://cnxi3o3qyig58"]
 
-[ext_resource type="Script" path="res://source/ability_system/ability.gd" id="1_nevx7"]
+[ext_resource type="Script" path="res://source/ability_system/ability/ability.gd" id="1_r4hlq"]
 [ext_resource type="Script" path="res://data_models/character/character_model.gd" id="1_yvr0l"]
-[ext_resource type="Script" path="res://source/ability_system/ability_attribute.gd" id="2_d4n2d"]
-[ext_resource type="Script" path="res://source/ability_system/ability_resource.gd" id="3_818jt"]
+[ext_resource type="Script" path="res://source/ability_system/ability_attribute/ability_attribute.gd" id="2_8nv5s"]
+[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://data_models/ability/skill_ability/attack.tres" id="2_nth42"]
+[ext_resource type="Script" path="res://source/ability_system/ability_resource/ability_resource.gd" id="3_2ltb5"]
+[ext_resource type="Script" path="res://source/ability_system/ability_resource/health_resource.gd" id="4_edw1v"]
+
+[sub_resource type="Resource" id="Resource_jvqq5"]
+resource_local_to_scene = true
+script = ExtResource("2_8nv5s")
+attribute_name = &"生命值"
+_base_value = 100.0
+
+[sub_resource type="Resource" id="Resource_yxhrg"]
+resource_local_to_scene = true
+script = ExtResource("2_8nv5s")
+attribute_name = &"攻击力"
+_base_value = 10.0
+
+[sub_resource type="Resource" id="Resource_hvkvg"]
+resource_local_to_scene = true
+script = ExtResource("2_8nv5s")
+attribute_name = &"防御力"
+_base_value = 5.0
+
+[sub_resource type="Resource" id="Resource_uqj3l"]
+resource_local_to_scene = true
+script = ExtResource("2_8nv5s")
+attribute_name = &"速度"
+_base_value = 10.0
+
+[sub_resource type="Resource" id="Resource_hm8qq"]
+resource_local_to_scene = true
+script = ExtResource("4_edw1v")
+ability_resource_name = &"生命值"
+current_value = 0
+max_value = 50
+attribute_name = &"生命值"
 
 [resource]
 script = ExtResource("1_yvr0l")
 character_name = &"巨魔"
 camp = 2
-ability_attributes = Array[ExtResource("2_d4n2d")]([])
-abilities = Array[ExtResource("1_nevx7")]([])
-ability_resources = Array[ExtResource("3_818jt")]([])
+ability_attributes = Array[ExtResource("2_8nv5s")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l")])
+abilities = Array[ExtResource("1_r4hlq")]([ExtResource("2_nth42")])
+ability_resources = Array[ExtResource("3_2ltb5")]([SubResource("Resource_hm8qq")])

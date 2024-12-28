@@ -48,8 +48,11 @@ func turn_start() -> void:
 	if not _current_combat: 
 		print(self, "当前非战斗状态！")
 		return
+	# 回合开始时更新技能的冷却计时
+	ability_component.update_ability_cooldown()
+	ability_component.update_buffs()
+	ability_component.handle_game_event("on_turn_start")
 	turn_started.emit()
-	ability_component.on_turn_start()
 	var ability: Ability = ability_component.get_available_abilities().pick_random()
 	var targets := _get_ability_targets(ability)
 	print("combat_component: {0} 尝试释放技能{1}".format([
@@ -61,31 +64,41 @@ func turn_start() -> void:
 func turn_end() -> void:
 	if not _current_combat: return
 	print(self, "====== 回合结束")
-	ability_component.on_turn_end()
-	turn_ended
+	ability_component.handle_game_event("on_turn_end")
+	turn_ended.emit()
 
 ## 战斗结束
 func combat_end() -> void:
 	print(self, " 战斗结束", "剩余血量: ", ability_component.get_resource_value("生命值"))
 	_current_combat = null
-	ability_component.on_combat_end()
+	ability_component.handle_game_event("on_combat_end")
+	for buff in ability_component.get_buffs():
+		ability_component.remove_ability(buff)
 	combat_ended.emit()
 
 ## 攻击
 func hit(target: CombatComponent, attack: float) -> void:
 	if not target: return
-	ability_component.on_hit()
-	hited.emit(target)
 	var defense = target.ability_component.get_attribute_value("防御力")
 	var damage : float = attack - defense
 	print("combat_component: {0} 攻击： {1}, 攻击力{2}， 防御力{3}，实际造成伤害{4}".format([
 		self, target, attack, defense, damage
 	]))
+	ability_component.handle_game_event("on_hit", {
+		"targets" : [target],
+		"attack" : attack,
+		"defense" : defense,
+		"damage" : damage
+		})
+	hited.emit(target)
 	await target.hurt(self, damage)
 
 ## 受击
 func hurt(damage_source: CombatComponent, damage: float) -> void:
-	ability_component.on_hurt(damage_source, damage)
+	ability_component.handle_game_event("on_hurt", {
+		"source" : damage_source,
+		"damage" : damage
+	})
 	print("combat_component: {0} 受到来自 {1} 的伤害 {2}， 当前生命值{3}/{4}".format([
 		self, damage_source, damage, 
 		ability_component.get_resource_value("生命值"), 
@@ -98,7 +111,7 @@ func hurt(damage_source: CombatComponent, damage: float) -> void:
 
 ## 死亡
 func _die() -> void:
-	ability_component.on_die()
+	ability_component.handle_game_event("on_die")
 	print("角色死亡：", self)
 	died.emit()
 

@@ -1,38 +1,14 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=9 format=3 uid="uid://cjsaqwsdrqkcy"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=5 format=3 uid="uid://cjsaqwsdrqkcy"]
 
 [ext_resource type="Script" path="res://data_models/character/character_model.gd" id="1_fvorw"]
-[ext_resource type="Script" path="res://source/ability_system/ability.gd" id="1_slgfj"]
-[ext_resource type="Script" path="res://source/ability_system/ability_attribute.gd" id="2_io16c"]
-[ext_resource type="Script" path="res://source/ability_system/ability_resource.gd" id="3_ph5mr"]
-
-[sub_resource type="Resource" id="Resource_e1joa"]
-script = ExtResource("2_io16c")
-attribute_name = &"攻击力"
-_base_value = 15.0
-
-[sub_resource type="Resource" id="Resource_gc0bh"]
-script = ExtResource("2_io16c")
-attribute_name = &"防御力"
-_base_value = 0.0
-
-[sub_resource type="Resource" id="Resource_g7ipd"]
-script = ExtResource("2_io16c")
-attribute_name = &"生命值"
-_base_value = 50.0
-
-[sub_resource type="Resource" id="Resource_4anai"]
-script = ExtResource("2_io16c")
-attribute_name = &"速度"
-_base_value = 5.0
+[ext_resource type="Script" path="res://source/ability_system/core/ability.gd" id="1_g04w8"]
+[ext_resource type="Script" path="res://source/ability_system/core/ability_attribute.gd" id="2_b12oj"]
+[ext_resource type="Script" path="res://source/ability_system/core/ability_resource.gd" id="3_oe0px"]
 
 [resource]
 script = ExtResource("1_fvorw")
 character_name = &"暗影刺客"
 camp = 1
-max_health = 100.0
-attack_power = 10.0
-defense_power = 5.0
-speed = 1.0
-ability_attributes = Array[ExtResource("2_io16c")]([SubResource("Resource_e1joa"), SubResource("Resource_gc0bh"), SubResource("Resource_g7ipd"), SubResource("Resource_4anai")])
-abilities = Array[ExtResource("1_slgfj")]([])
-ability_resources = Array[ExtResource("3_ph5mr")]([])
+ability_attributes = Array[ExtResource("2_b12oj")]([])
+abilities = Array[ExtResource("1_g04w8")]([])
+ability_resources = Array[ExtResource("3_oe0px")]([])

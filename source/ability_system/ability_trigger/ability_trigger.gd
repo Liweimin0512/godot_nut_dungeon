@@ -4,7 +4,7 @@ class_name AbilityTrigger
 ## 技能触发器，用于触发技能效果
 
 ## 技能触发器类型
-@export var trigger_type : AbilityDefinition.TRIGGER_TYPE
+@export var trigger_type : StringName
 
 ## 技能触发条件集合
 @export var trigger_conditions : Array[AbilityTriggerCondition]

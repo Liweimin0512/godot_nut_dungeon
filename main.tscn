@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcxjfw256ynb5"]
+[gd_scene load_steps=4 format=3 uid="uid://dcxjfw256ynb5"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_i4sev"]
 [ext_resource type="PackedScene" uid="uid://cokqr3cv3dqo6" path="res://source/character.tscn" id="2_tbu6l"]
-[ext_resource type="Script" path="res://source/character.gd" id="3_7q1xi"]
 [ext_resource type="Resource" uid="uid://pnl45yj5lq7s" path="res://data_models/character/hero/warrior.tres" id="3_26w5s"]
 
 [node name="Main" type="Node2D"]
@@ -41,9 +40,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlayerCharacter" type="Node2D" parent="." groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
+[node name="PlayerCharacter" parent="." groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
 position = Vector2(311, 164)
-script = ExtResource("3_7q1xi")
 character_model = ExtResource("3_26w5s")
 
 [node name="EnemyMarkers" type="Node2D" parent="."]

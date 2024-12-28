@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="RageResource" load_steps=2 format=3 uid="uid://5w42pjacqx6j"]
 
-[ext_resource type="Script" path="res://source/ability_system/ability_resource/rage_resource.gd" id="1_8a2km"]
+[ext_resource type="Script" path="res://source/ability_system/ability_resource/rage_resource.gd" id="1_3lxjs"]
 
 [resource]
-script = ExtResource("1_8a2km")
+resource_local_to_scene = true
+script = ExtResource("1_3lxjs")
 regain_hited = 10
 regain_hurted = 5
 ability_resource_name = &"怒气"

@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="SkillAbility" load_steps=10 format=3 uid="uid://6mxwf4314lcl"]
+
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_qf0ux"]
+[ext_resource type="Script" path="res://source/ability_system/ability/skill_ability.gd" id="2_ak3um"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/counter_attack.gd" id="2_qeuuc"]
+[ext_resource type="Script" path="res://source/ability_system/ability_trigger/ability_trigger.gd" id="4_7xum3"]
+[ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_ugqet"]
+[ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_chance.gd" id="6_isi10"]
+
+[sub_resource type="Resource" id="Resource_wma4j"]
+script = ExtResource("2_qeuuc")
+counter_chance = 0.3
+damage_multiplier = 0.6
+target_type = &"enemy"
+target_amount = 1
+effects = Array[ExtResource("1_qf0ux")]([])
+
+[sub_resource type="Resource" id="Resource_o4lqm"]
+script = ExtResource("6_isi10")
+chance = 0.3
+
+[sub_resource type="Resource" id="Resource_v8vdp"]
+script = ExtResource("4_7xum3")
+trigger_type = &"on_hurt"
+trigger_conditions = Array[ExtResource("5_ugqet")]([SubResource("Resource_o4lqm")])
+
+[resource]
+script = ExtResource("2_ak3um")
+target_type = &""
+target_amount = 1
+cost_resource_name = &""
+cost_resource_value = 0
+is_auto_cast = true
+cooldown = 0
+current_cooldown = 0
+cast_time = 0.0
+is_show = true
+sound_effect = &""
+animation = &""
+ability_name = &"反击"
+ability_description = "在受到普通攻击时有机会进行反击"
+trigger = SubResource("Resource_v8vdp")
+level = 1
+effects = Array[ExtResource("1_qf0ux")]([SubResource("Resource_wma4j")])

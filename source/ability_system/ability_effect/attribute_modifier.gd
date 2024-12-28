@@ -11,7 +11,7 @@ func apply_effect(context: Dictionary = {}) -> void:
 	var targets : Array = _get_targets()
 	_context["targets"] = targets
 	var _s = _context.get("source")
-	if _s and _s is AbilityBuff:
+	if _s and _s is BuffAbility:
 		modify_multiplier = _s.value
 	for target in targets:
 		var ability_component: AbilityComponent = target.ability_component
