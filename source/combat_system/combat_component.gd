@@ -27,6 +27,8 @@ signal hurted(damage: int)
 signal died
 signal combat_started
 signal combat_ended
+signal turn_started
+signal turn_ended
 
 ## 组件初始化
 func initialization() -> void:
@@ -46,19 +48,21 @@ func turn_start() -> void:
 	if not _current_combat: 
 		print(self, "当前非战斗状态！")
 		return
+	turn_started.emit()
 	ability_component.on_turn_start()
 	var ability: Ability = ability_component.get_available_abilities().pick_random()
 	var targets := _get_ability_targets(ability)
 	print("combat_component: {0} 尝试释放技能{1}".format([
 		self, ability
 	]))
-	await ability_component.try_cast_ability(ability, targets)
+	await ability_component.try_cast_ability(ability, {"targets" : targets})
 
 ## 回合结束
 func turn_end() -> void:
 	if not _current_combat: return
 	print(self, "====== 回合结束")
 	ability_component.on_turn_end()
+	turn_ended
 
 ## 战斗结束
 func combat_end() -> void:

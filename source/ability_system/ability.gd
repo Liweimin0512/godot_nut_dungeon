@@ -23,6 +23,8 @@ class_name Ability
 @export var effects: Array[AbilityEffect]
 ## 技能是否在满足条件时自动施放
 @export var is_auto_cast: bool
+# 技能触发器，自动释放技能必须配置触发器
+@export var trigger: AbilityTrigger
 ## 技能的等级，影响技能的效果
 @export var level: int = 1
 ## 技能是否显示在UI中

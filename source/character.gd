@@ -40,17 +40,6 @@ func _initialization_combat_component() -> void:
 	combat_component.camp = character_model.camp
 	combat_component.initialization()
 
-func _on_combat_component_died() -> void:
-	animation_player.play("die")
-	await animation_player.animation_finished
-
-func _on_combat_component_hited(target: CombatComponent) -> void:
-	label_action.text = "攻击{0}".format([target.owner])
-	animation_player.play("hit")
-
-func _on_combat_component_hurted(_damage: int) -> void:
-	animation_player.play("hurt")
-
 func _on_area_2d_mouse_entered() -> void:
 	print("_on_area_2d_mouse_entered：", self.name)
 
@@ -64,6 +53,17 @@ func _on_ability_component_resource_changed(res_name: StringName, value: float) 
 			ability_component.get_resource_value("生命值"),
 			ability_component.get_attribute_value("生命值")
 			])
+
+func _on_combat_component_died() -> void:
+	animation_player.play("die")
+	await animation_player.animation_finished
+
+func _on_combat_component_hited(target: CombatComponent) -> void:
+	label_action.text = "攻击{0}".format([target.owner])
+	animation_player.play("hit")
+
+func _on_combat_component_hurted(_damage: int) -> void:
+	animation_player.play("hurt")
 
 func _to_string() -> String:
 	return cha_name

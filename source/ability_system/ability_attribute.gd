@@ -19,17 +19,17 @@ var _value_modify : float
 var _percentage_modify: float
 ## 绝对值修改值
 var _absolute_modify : float
+## 属性修改器列表
+var _modifiers: Array[AbilityAttributeModifier] = []
 
 func _init(atr_name : StringName = "", base: float = 0) -> void:
 	attribute_name = atr_name
 	_base_value = base
+	_value_modify = 0
+	_percentage_modify = 0
+	_absolute_modify = 0
 
-func _to_string() -> String:
-	return "{attribute_name} : {attribute_value}".format({
-		"attribute_name": attribute_name,
-		"attribute_value": attribute_value
-	})
-
+## 修改属性
 func modify(modify_type: AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE, value: float) -> void:
 	match modify_type:
 		AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE.VALUE:
@@ -38,3 +38,23 @@ func modify(modify_type: AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE, value: float
 			_percentage_modify += value
 		AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE.ABSOLUTE:
 			_absolute_modify = value
+
+## 添加修改器
+func add_modifier(modifier: AbilityAttributeModifier) -> void:
+	_modifiers.append(modifier)
+	modify(modifier.modifier_type, modifier.value)
+
+## 移除修改器
+func remove_modifier(modifier: AbilityAttributeModifier) -> void:
+	_modifiers.erase(modifier)
+	modify(modifier.modifier_type, -modifier.value)
+
+## 获取所有修改器
+func get_modifiers() -> Array[AbilityAttributeModifier]:
+	return _modifiers
+
+func _to_string() -> String:
+	return "{attribute_name} : {attribute_value}".format({
+		"attribute_name": attribute_name,
+		"attribute_value": attribute_value
+	})

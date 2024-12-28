@@ -5,8 +5,6 @@ class_name AbilityComponent
 
 ## 技能属性集
 @export var ability_attributes : Array[AbilityAttribute]
-## 技能属性修改器集
-@export_storage var attribute_modifiers : Array[AbilityAttributeModifier]
 ## 当前单位所有的技能消耗资源
 @export var ability_resources : Array[AbilityResource]
 ## 当前单位所拥有的全部技能
@@ -60,22 +58,22 @@ func get_attribute(atr_name: StringName) -> AbilityAttribute:
 func apply_attribute_modifier(modifier: AbilityAttributeModifier):
 	var attribute: AbilityAttribute = get_attribute(modifier.attribute_name)
 	assert(attribute, "无效的属性：" + attribute.to_string())
-	attribute_modifiers.append(modifier)
-	modifier.apply(attribute)
+	attribute.add_modifier(modifier)
 	attribute_changed.emit(modifier.attribute_name, get_attribute_value(modifier.attribute_name))
 	
 ## 移除属性修改器
 func remove_attribute_modifier(modifier: AbilityAttributeModifier):
 	var attribute: AbilityAttribute = get_attribute(modifier.attribute_name)
 	assert(attribute, "无效的属性：" + attribute.to_string())
-	attribute_modifiers.erase(modifier)
-	modifier.remove(attribute)
+	attribute.remove_modifier(modifier)
 	attribute_changed.emit(modifier.attribute_name, get_attribute_value(modifier.attribute_name))
 
 ## 获取属性的所有修改器
 func get_attribute_modifiers(attribute_name: StringName) -> Array[AbilityAttributeModifier]:
-	var attribute_modifiers: Array[AbilityAttributeModifier]
-	return attribute_modifiers
+	var attribute := get_attribute(attribute_name)
+	if attribute:
+		return attribute.get_modifiers()
+	return []
 
 #endregion
 
