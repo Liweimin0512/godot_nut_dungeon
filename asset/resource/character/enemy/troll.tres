@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterModel" load_steps=17 format=3 uid="uid://cnxi3o3qyig58"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability/ability.gd" id="1_r4hlq"]
-[ext_resource type="Script" path="res://data_models/character/character_model.gd" id="1_yvr0l"]
+[ext_resource type="Script" path="res://asset/resource/character/character_model.gd" id="1_yvr0l"]
 [ext_resource type="Script" path="res://source/ability_system/ability_attribute/ability_attribute.gd" id="2_8nv5s"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="2_hj7nt"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="3_2iy4h"]

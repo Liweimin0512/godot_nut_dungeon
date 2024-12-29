@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="BuffAbility" load_steps=11 format=3 uid="uid://ba2s8ue7kw4l3"]
+
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_7e5u7"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_jp2hd"]
+[ext_resource type="Script" path="res://source/ability_system/ability/buff_ability.gd" id="2_vdfqp"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/modify_resource.gd" id="3_5bel5"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/modify_damage.gd" id="4_leyau"]
+[ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger.gd" id="5_15ni4"]
+[ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="6_x7xu1"]
+
+[sub_resource type="Resource" id="Resource_cyv0p"]
+script = ExtResource("3_5bel5")
+ability_resource_name = &"魔法值"
+ability_resource_amount = 10
+modify_type = "value"
+target_type = &"self"
+target_amount = 1
+effect_modifiers = Array[ExtResource("2_jp2hd")]([])
+post_effects = Array[ExtResource("1_7e5u7")]([])
+
+[sub_resource type="Resource" id="Resource_5bpu7"]
+script = ExtResource("4_leyau")
+modify_type = "percentage"
+modify_value = -0.2
+target_type = &"self"
+target_amount = 1
+effect_modifiers = Array[ExtResource("2_jp2hd")]([])
+post_effects = Array[ExtResource("1_7e5u7")]([])
+
+[sub_resource type="Resource" id="Resource_7fjmn"]
+script = ExtResource("5_15ni4")
+trigger_type = &"on_hurt"
+trigger_conditions = Array[ExtResource("6_x7xu1")]([])
+
+[resource]
+script = ExtResource("2_vdfqp")
+buff_type = 1
+is_permanent = false
+value = 2
+can_stack = true
+ability_name = &"魔法盾"
+ability_description = "魔法盾吸收伤害并恢复魔法值"
+trigger = SubResource("Resource_7fjmn")
+level = 1
+effects = Array[ExtResource("1_7e5u7")]([SubResource("Resource_cyv0p"), SubResource("Resource_5bpu7")])

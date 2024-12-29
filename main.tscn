@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://main.gd" id="1_i4sev"]
 [ext_resource type="PackedScene" uid="uid://cokqr3cv3dqo6" path="res://source/character.tscn" id="2_tbu6l"]
-[ext_resource type="Resource" uid="uid://pnl45yj5lq7s" path="res://data_models/character/hero/warrior.tres" id="3_26w5s"]
+[ext_resource type="Resource" uid="uid://pnl45yj5lq7s" path="res://asset/resource/character/hero/warrior.tres" id="3_26w5s"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_i4sev")

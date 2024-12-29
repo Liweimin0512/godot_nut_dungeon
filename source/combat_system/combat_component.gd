@@ -80,11 +80,11 @@ func action() -> void:
 
 ## 行动前
 func _pre_action() -> void:
-	pass
+	ability_component.handle_game_event("on_pre_action")
 
 ## 行动后
 func _post_action() -> void:
-	pass
+	ability_component.handle_game_event("on_post_action")
 
 ## 回合结束
 func turn_end() -> void:

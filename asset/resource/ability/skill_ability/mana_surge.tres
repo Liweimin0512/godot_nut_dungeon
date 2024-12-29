@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="SkillAbility" load_steps=6 format=3 uid="uid://civj478kyuck0"]
+
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_c4d63"]
+[ext_resource type="Script" path="res://source/ability_system/ability/skill_ability.gd" id="2_46nh5"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_kffhg"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/modify_resource.gd" id="3_t8ify"]
+
+[sub_resource type="Resource" id="Resource_2kti2"]
+script = ExtResource("3_t8ify")
+ability_resource_name = &"魔法值"
+ability_resource_amount = 5
+modify_type = ""
+target_type = &"self"
+target_amount = 1
+effect_modifiers = Array[ExtResource("2_kffhg")]([])
+post_effects = Array[ExtResource("1_c4d63")]([])
+
+[resource]
+script = ExtResource("2_46nh5")
+target_type = &""
+target_amount = 1
+cost_resource_name = &""
+cost_resource_value = 0
+is_auto_cast = false
+cooldown = 0
+current_cooldown = 0
+cast_time = 0.0
+is_show = true
+sound_effect = &""
+animation = &""
+ability_name = &"法力涌现"
+ability_description = "在成功施放一个伤害技能后，有一定概率触发，恢复大量魔法值。"
+level = 1
+effects = Array[ExtResource("1_c4d63")]([SubResource("Resource_2kti2")])
