@@ -60,19 +60,22 @@ func action() -> void:
 	_pre_action()
 	print("combat_component: {0} 行动".format([self]))
 	var ability: Ability = ability_component.get_available_abilities().pick_random()
-	var targets := _get_ability_targets(ability)
-	print("combat_component: {0} 尝试释放技能{1}".format([
-		self, ability
-	]))
-	var ability_context := {
-		"caster" : self,
-		"enemies" : _current_combat.get_all_enemies(self),
-		"allies" : _current_combat.get_all_allies(self),
-		"targets" : targets
-	}
-	var ok := await ability_component.try_cast_ability(ability, ability_context)
-	if not ok:
-		print("combat_component: {0} 释放技能失败".format([self]))
+	if not ability:
+		print("combat_component: 无可用技能，跳过{0}的回合".format([self]))
+	else:
+		var targets := _get_ability_targets(ability)
+		print("combat_component: {0} 尝试释放技能{1}".format([
+			self, ability
+		]))
+		var ability_context : Dictionary = {
+			"caster" : self,
+			"enemies" : _current_combat.get_all_enemies(self),
+			"allies" : _current_combat.get_all_allies(self),
+			"targets" : targets
+		}
+		var ok := await ability_component.try_cast_ability(ability, ability_context)
+		if not ok:
+			print("combat_component: {0} 释放技能失败".format([self]))
 	_post_action()
 
 ## 行动前
@@ -111,7 +114,8 @@ func hit(target: CombatComponent, attack: float) -> void:
 		"targets" : [target],
 		"attack" : attack,
 		"defense" : defense,
-		"damage" : damage
+		"damage" : damage,
+		"caster" : self
 		})
 	hited.emit(target)
 	target.hurt(self, damage)
@@ -119,8 +123,9 @@ func hit(target: CombatComponent, attack: float) -> void:
 ## 受击
 func hurt(damage_source: CombatComponent, damage: float) -> void:
 	ability_component.handle_game_event("on_hurt", {
-		"source" : damage_source,
-		"damage" : damage
+		"targets" : [damage_source], # 受到伤害时，伤害来源就是目标
+		"damage" : damage,
+		"caster" : self
 	})
 	print("combat_component: {0} 受到来自 {1} 的伤害 {2}， 当前生命值{3}/{4}".format([
 		self, damage_source, damage, 

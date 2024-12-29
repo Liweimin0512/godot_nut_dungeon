@@ -1,9 +1,21 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=3 format=3 uid="uid://djxtouuveyace"]
+[gd_resource type="Resource" script_class="SkillAbility" load_steps=6 format=3 uid="uid://djxtouuveyace"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_arydq"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_3jn5w"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="2_ilajx"]
 [ext_resource type="Script" path="res://source/ability_system/ability/skill_ability.gd" id="2_m7n11"]
 
+[sub_resource type="Resource" id="Resource_t0jin"]
+resource_local_to_scene = true
+script = ExtResource("2_ilajx")
+damage_multiplier = 1.0
+target_type = &""
+target_amount = 1
+effect_modifiers = Array[ExtResource("2_3jn5w")]([])
+post_effects = Array[ExtResource("1_arydq")]([])
+
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_m7n11")
 target_type = &"enemy"
 target_amount = 1
@@ -19,4 +31,4 @@ animation = &""
 ability_name = &"普通攻击"
 ability_description = "一次普通攻击，对幼小的心灵造成多么大的伤害！"
 level = 1
-effects = Array[ExtResource("1_arydq")]([])
+effects = Array[ExtResource("1_arydq")]([SubResource("Resource_t0jin")])

@@ -7,10 +7,8 @@ class_name AttributeModifierEffect
 @export_storage var modify_multiplier: int = 1
 
 func apply_effect(context: Dictionary = {}) -> void:
-	_context.merge(context, true)
-	var targets : Array = _get_targets()
-	_context["targets"] = targets
-	var _s = _context.get("source")
+	var targets : Array = _get_targets(context)
+	var _s = context.get("source")
 	if _s and _s is BuffAbility:
 		modify_multiplier = _s.value
 	for target in targets:
@@ -19,13 +17,11 @@ func apply_effect(context: Dictionary = {}) -> void:
 			modifier.value *= modify_multiplier
 			ability_component.apply_attribute_modifier(modifier)
 			print("对目标应用属性修改器：{0}".format([modifier]))
-	super(_context)
+	super(context)
 
 ## 移除效果
 func remove_effect(context: Dictionary = {}) -> void:
-	if not context.is_empty():
-		_context.merge(context, true)
-	var targets : Array = _get_targets()
+	var targets : Array = _get_targets(context)
 	for target in targets:
 		var ability_component: AbilityComponent = target.ability_component
 		for modifier : AbilityAttributeModifier in modifiers:

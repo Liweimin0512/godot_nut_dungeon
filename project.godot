@@ -23,6 +23,10 @@ CombatSystem="*res://source/combat_system/combat_system.gd"
 
 window/stretch/mode="viewport"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/resource_table_editor/plugin.cfg")
+
 [global_group]
 
 Enemy=""

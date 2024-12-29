@@ -22,7 +22,6 @@ signal cast_finished
 func initialization(ability_component: AbilityComponent, context: Dictionary) -> void:
 	_ability_component = ability_component
 	for effect in effects:
-		effect.update_context(context)
 		effect.applied.connect(
 			func() -> void:
 				cast_finished.emit()

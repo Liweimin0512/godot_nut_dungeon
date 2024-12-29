@@ -1,50 +1,16 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=12 format=3 uid="uid://beqppdym756qn"]
+[gd_resource type="Resource" script_class="SkillAbility" load_steps=6 format=3 uid="uid://beqppdym756qn"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_uvjij"]
-[ext_resource type="Script" path="res://source/ability_system/ability/buff_ability.gd" id="2_hvrgv"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_0sh4o"]
 [ext_resource type="Script" path="res://source/ability_system/ability/skill_ability.gd" id="2_mx4xx"]
-[ext_resource type="Script" path="res://source/ability_system/ability_attribute/ability_attribute_modifier.gd" id="2_n6xqj"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/attribute_modifier.gd" id="3_3pg0d"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/apply_ability.gd" id="3_drh0i"]
-
-[sub_resource type="Resource" id="Resource_avbik"]
-script = ExtResource("2_n6xqj")
-attribute_name = &"攻击力"
-modify_type = 2
-value = 0.1
-
-[sub_resource type="Resource" id="Resource_k0apk"]
-script = ExtResource("2_n6xqj")
-attribute_name = &"防御力"
-modify_type = 2
-value = 0.1
-
-[sub_resource type="Resource" id="Resource_lw3x3"]
-script = ExtResource("3_3pg0d")
-modifiers = Array[ExtResource("2_n6xqj")]([SubResource("Resource_avbik"), SubResource("Resource_k0apk")])
-modify_multiplier = 1
-target_type = &""
-target_amount = 1
-effects = Array[ExtResource("1_uvjij")]([])
-
-[sub_resource type="Resource" id="Resource_cutd2"]
-resource_local_to_scene = true
-script = ExtResource("2_hvrgv")
-buff_type = 2
-is_permanent = true
-value = 1
-can_stack = true
-ability_name = &"战吼"
-ability_description = "被战士激励，攻击力和防御力都得到提升！"
-level = 1
-effects = Array[ExtResource("1_uvjij")]([SubResource("Resource_lw3x3")])
 
 [sub_resource type="Resource" id="Resource_k44m4"]
 script = ExtResource("3_drh0i")
-buff = SubResource("Resource_cutd2")
 target_type = &""
 target_amount = 1
-effects = Array[ExtResource("1_uvjij")]([])
+effect_modifiers = Array[ExtResource("2_0sh4o")]([])
+post_effects = Array[ExtResource("1_uvjij")]([])
 
 [resource]
 script = ExtResource("2_mx4xx")

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=5 format=3 uid="uid://dkk2ibiqesm12"]
+[gd_resource type="Resource" script_class="SkillAbility" load_steps=6 format=3 uid="uid://dkk2ibiqesm12"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_0eb48"]
 [ext_resource type="Script" path="res://source/ability_system/ability/skill_ability.gd" id="1_4st2x"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_1vbag"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="2_nwb3w"]
 
 [sub_resource type="Resource" id="Resource_bpy7w"]
@@ -9,13 +10,14 @@ script = ExtResource("2_nwb3w")
 damage_multiplier = 1.5
 target_type = &"enemy"
 target_amount = 1
-effects = Array[ExtResource("1_0eb48")]([])
+effect_modifiers = Array[ExtResource("2_1vbag")]([])
+post_effects = Array[ExtResource("1_0eb48")]([])
 
 [resource]
 script = ExtResource("1_4st2x")
 target_type = &"enemy"
 target_amount = 1
-cost_resource_name = &"怒气"
+cost_resource_name = &"怒气值"
 cost_resource_value = 15
 is_auto_cast = false
 cooldown = 1

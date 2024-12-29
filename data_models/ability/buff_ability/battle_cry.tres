@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="BuffAbility" load_steps=8 format=3 uid="uid://cd7qfemfd5dhe"]
+[gd_resource type="Resource" script_class="BuffAbility" load_steps=9 format=3 uid="uid://cd7qfemfd5dhe"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_05nbl"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_8ktlk"]
 [ext_resource type="Script" path="res://source/ability_system/ability_attribute/ability_attribute_modifier.gd" id="2_015hf"]
 [ext_resource type="Script" path="res://source/ability_system/ability/buff_ability.gd" id="2_pgkp3"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/attribute_modifier.gd" id="3_v2i17"]
@@ -23,7 +24,8 @@ modifiers = Array[ExtResource("2_015hf")]([SubResource("Resource_avbik"), SubRes
 modify_multiplier = 1
 target_type = &""
 target_amount = 1
-effects = Array[ExtResource("1_05nbl")]([])
+effect_modifiers = Array[ExtResource("2_8ktlk")]([])
+post_effects = Array[ExtResource("1_05nbl")]([])
 
 [resource]
 resource_local_to_scene = true

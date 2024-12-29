@@ -1,11 +1,42 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=12 format=3 uid="uid://dusj10wryboti"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=17 format=3 uid="uid://dusj10wryboti"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability/ability.gd" id="1_ckwfc"]
 [ext_resource type="Script" path="res://data_models/character/character_model.gd" id="1_qi5g2"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="2_3ht30"]
 [ext_resource type="Script" path="res://source/ability_system/ability_attribute/ability_attribute.gd" id="2_gfiar"]
-[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://data_models/ability/skill_ability/attack.tres" id="2_rdmsw"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="3_itvyi"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource/ability_resource.gd" id="3_yxnkf"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource/health_resource.gd" id="4_hfljm"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="4_sm2rg"]
+[ext_resource type="Script" path="res://source/ability_system/ability/skill_ability.gd" id="5_ss7sx"]
+
+[sub_resource type="Resource" id="Resource_t0jin"]
+resource_local_to_scene = true
+script = ExtResource("4_sm2rg")
+damage_multiplier = 1.0
+target_type = &""
+target_amount = 1
+effect_modifiers = Array[ExtResource("3_itvyi")]([])
+post_effects = Array[ExtResource("2_3ht30")]([])
+
+[sub_resource type="Resource" id="Resource_jrqsr"]
+resource_local_to_scene = true
+script = ExtResource("5_ss7sx")
+target_type = &"enemy"
+target_amount = 1
+cost_resource_name = &""
+cost_resource_value = 0
+is_auto_cast = false
+cooldown = 0
+current_cooldown = 0
+cast_time = 0.0
+is_show = true
+sound_effect = &""
+animation = &""
+ability_name = &"普通攻击"
+ability_description = "一次普通攻击，对幼小的心灵造成多么大的伤害！"
+level = 1
+effects = Array[ExtResource("2_3ht30")]([SubResource("Resource_t0jin")])
 
 [sub_resource type="Resource" id="Resource_jvqq5"]
 resource_local_to_scene = true
@@ -29,7 +60,7 @@ _base_value = 5.0
 resource_local_to_scene = true
 script = ExtResource("2_gfiar")
 attribute_name = &"速度"
-_base_value = 10.0
+_base_value = 5.0
 
 [sub_resource type="Resource" id="Resource_2k26t"]
 resource_local_to_scene = true
@@ -44,5 +75,5 @@ script = ExtResource("1_qi5g2")
 character_name = &"哥布林"
 camp = 2
 ability_attributes = Array[ExtResource("2_gfiar")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l")])
-abilities = Array[ExtResource("1_ckwfc")]([ExtResource("2_rdmsw")])
+abilities = Array[ExtResource("1_ckwfc")]([SubResource("Resource_jrqsr")])
 ability_resources = Array[ExtResource("3_yxnkf")]([SubResource("Resource_2k26t")])

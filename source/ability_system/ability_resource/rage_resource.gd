@@ -11,16 +11,13 @@ class_name RageResource
 ## 受到伤害时恢复的值
 @export var regain_hurted: int = 5
 
-func _init() -> void:
-	max_value = 100
-	ability_resource_name = "怒气值"
-
-func initialization(ability_component: AbilityComponent, context : Dictionary = {}) -> void:
+func initialization(ability_component: AbilityComponent) -> void:
 	super(ability_component)
 	current_value = 0
+	ability_resource_name = "怒气值"
 
-func on_hit() -> void:
+func on_hit(_context: Dictionary) -> void:
 	restore(regain_hited)
 
-func on_hurt() -> void:
+func on_hurt(_context: Dictionary) -> void:
 	restore(regain_hurted)

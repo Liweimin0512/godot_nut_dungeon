@@ -28,13 +28,13 @@ func apply_effect(context: Dictionary = {}) -> void:
 	applied.emit()
 
 ## 移除效果
-func remove_effect(context: Dictionary = {}) -> void:
+func remove_effect(context: Dictionary) -> void:
 	for effect in post_effects:
 		effect.remove_effect(context)
 	removed.emit()
 
 ## 获取目标
-func _get_targets(context: Dictionary = {}) -> Array:
+func _get_targets(context: Dictionary) -> Array:
 	var targets := []  # 使用 := 进行类型推断和变量初始化
 	var target_pool := []  # 统一的数组来存储目标池
 	# 根据目标类型确定目标池

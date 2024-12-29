@@ -1,7 +1,7 @@
 extends Node
 class_name AbilityComponent
 
-## 技能组件
+## 技能组件，管理技能属性，技能资源，技能（BUFF、SKILL）等
 
 ## 技能属性集
 @export var _ability_attributes : Dictionary
@@ -23,12 +23,12 @@ func initialization(
 		ability_resource_set : Array[AbilityResource] = [],
 		ability_set : Array[Ability] = []) -> void:
 	for attribute : AbilityAttribute in attribute_set:
+		# attribute.initialization(self)
 		if not _ability_attributes.has(attribute.attribute_name):
 			_ability_attributes[attribute.attribute_name] = attribute
-		# attribute.initialization(self)
 	for res : AbilityResource in ability_resource_set:
-		_ability_resources[res.ability_resource_name] = res
 		res.initialization(self)
+		_ability_resources[res.ability_resource_name] = res
 		res.current_value_changed.connect(
 			func(value: int) -> void:
 				resource_changed.emit(res.ability_resource_name, value)
@@ -39,6 +39,7 @@ func initialization(
 			func() -> void:
 				ability_cast_finished.emit(ability)
 		)
+	print("ability_component: {0} 初始化".format([owner.to_string()]))
 
 #region 技能属性相关
 
@@ -109,10 +110,10 @@ func consume_resources(res_name: StringName, cost: int) -> bool:
 	return false
 
 ## 触发资源回调
-func _handle_resource_callback(callback_name: StringName, callbakc_params : Array) -> void:
+func _handle_resource_callback(callback_name: StringName, context : Dictionary) -> void:
 	for res : AbilityResource in _ability_resources.values():
 		if res.has_method(callback_name):
-			res.callv(callback_name, callbakc_params)
+			res.call(callback_name, context)
 
 #endregion
 
@@ -120,65 +121,71 @@ func _handle_resource_callback(callback_name: StringName, callbakc_params : Arra
 
 ## 获取可用主动技能
 func get_available_abilities() -> Array[Ability]:
-	var available_abilities : Array[Ability] = _abilities.values().filter(
-		func(ability: Ability) -> bool:
-			return _is_ability_available(ability)
-	)
+	var available_abilities : Array[Ability] = []
+	for ability in _abilities.values():
+		if ability is SkillAbility and _is_ability_available(ability):
+			available_abilities.append(ability as SkillAbility)
 	return available_abilities
 
 ## 尝试释放技能
-func try_cast_ability(ability: Ability, context:Dictionary = {}) -> bool:
+func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
+	var caster : Node = context.caster
+	print("ability_component: {0}尝试释放技能：{1}".format([caster, ability]))
 	if not has_enough_resources(ability.cost_resource_name, ability.cost_resource_value):
 		print("消耗不足，无法释放技能！")
 		return false
 	if ability.is_cooldown:
 		print("技能正在冷却！")
 		return false
-	await get_tree().create_timer(0.5).timeout
-	var caster : Node = context.caster
+	if ability is SkillAbility and ability.cast_time > 0:
+		await get_tree().create_timer(ability.cast_time).timeout
 	consume_resources(ability.cost_resource_name, ability.cost_resource_value)
-	print("ability: {0}释放技能：{1}".format([caster, ability]))
 	for effect : AbilityEffect in ability.effects:
 		effect.apply_effect(context)
 	ability.current_cooldown = ability.cooldown
+	print("ability: {0}释放技能：{1}".format([caster, ability]))
 	return true
 
 ## 更新技能冷却计时，在回合开始前
 func update_ability_cooldown() -> void:
-	for ability : Ability in _abilities:
+	for ability : Ability in _abilities.values():
 		if not ability is SkillAbility: continue
 		if ability.is_cooldown:
 			ability.current_cooldown -= 1
 
 ## 应用技能
-func apply_ability(ability: Ability, ability_context: Dictionary = {}) -> void:
+func apply_ability(ability: Ability, ability_context: Dictionary) -> void:
 	ability.initialization(self, ability_context)
+	var ability_name : StringName = ability.ability_name
 	if ability is SkillAbility:
 		if ability.is_auto_cast and ability.trigger == null:
-			try_cast_ability(ability)
+			try_cast_ability(ability, ability_context)
 	elif ability is BuffAbility:
-		var _buff := get_buff_ability(ability.buff_name)
+		var _buff := get_buff_ability(ability.ability_name)
 		if _buff:
 			remove_ability(_buff)
 			if _buff.buff_type == AbilityDefinition.BUFF_TYPE.DURATION or _buff.can_stack:
 				ability.value += _buff.value
 		ability_context["source"] = ability
+		ability_name = "buff:" + ability_name
 		print("应用BUFF：", ability)
-	for effect in ability.effects:
-		effect.apply_effect(ability_context)
-	_abilities[ability.ability_name] = ability
+		for effect in ability.effects:
+			effect.apply_effect(ability_context)
+	_abilities[ability_name] = ability
 
 ## 移除技能
 func remove_ability(ability: Ability, ability_context: Dictionary = {}) -> void:
-	_abilities.erase(ability.ability_name)
 	for effect in ability.effects:
 		effect.remove_effect(ability_context)
+	var key : StringName = _abilities.find_key(ability)
+	if key: _abilities.erase(key)
 	print("移除Ability：", ability)
 
 ## 获取BUFF技能
 func get_buff_ability(buff_name : StringName) -> BuffAbility:
+	var ability_name : StringName = "buff:" + buff_name
 	for ability in _abilities.values():
-		if ability is BuffAbility and ability.ability_name	 == buff_name:
+		if ability is BuffAbility and ability.ability_name == ability_name:
 			return ability
 	return null
 
@@ -190,8 +197,12 @@ func get_skill_ability(skill_name : StringName) -> SkillAbility:
 	return null
 
 ## 获取所有BUFF技能
-func get_buffs() -> Array[Ability]:
-	return _abilities.values().filter(func(ability: Ability) -> bool:return ability is BuffAbility)
+func get_buffs() -> Array[BuffAbility]:
+	var buffs: Array[BuffAbility] = []
+	for ability in _abilities.values():
+		if ability is BuffAbility:
+			buffs.append(ability as BuffAbility)
+	return buffs
 
 ## 更新BUFF状态
 func update_buffs() -> void:
@@ -206,6 +217,7 @@ func update_buffs() -> void:
 
 ## 判断技能是否可用
 func _is_ability_available(ability: Ability) -> bool:
+	if not ability is SkillAbility: return false
 	## 这个方法用来筛选哪些可用的主动技能
 	return not ability.is_cooldown and not ability.is_auto_cast and has_enough_resources(ability.cost_resource_name, ability.cost_resource_value)
 
@@ -213,8 +225,8 @@ func _is_ability_available(ability: Ability) -> bool:
 
 ## 处理游戏事件
 func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -> void:
-	_handle_resource_callback(event_name, event_context.values())
+	_handle_resource_callback(event_name, event_context)
 	for ability in _abilities.values():
 		if ability.trigger and ability.trigger.trigger_type == event_name:
 			if ability.trigger.check(event_context):
-				try_cast_ability(ability)
+				await try_cast_ability(ability, event_context)
