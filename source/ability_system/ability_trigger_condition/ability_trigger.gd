@@ -11,7 +11,7 @@ class_name AbilityTrigger
 
 ## 检查触发条件
 func check(context: Dictionary) -> bool:
-    for condition : AbilityTriggerCondition in trigger_conditions:
-        if not condition.check(context):
-            return false
-    return true
+	for condition : AbilityTriggerCondition in trigger_conditions:
+		if not condition.check(context):
+			return false
+	return true

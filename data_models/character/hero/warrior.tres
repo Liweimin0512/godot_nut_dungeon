@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=33 format=3 uid="uid://pnl45yj5lq7s"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=27 format=3 uid="uid://pnl45yj5lq7s"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability/ability.gd" id="1_mukx0"]
 [ext_resource type="Script" path="res://source/ability_system/ability_attribute/ability_attribute.gd" id="2_2pnrl"]
@@ -6,12 +6,9 @@
 [ext_resource type="Script" path="res://data_models/character/character_model.gd" id="3_smf2k"]
 [ext_resource type="Script" path="res://source/ability_system/ability/skill_ability.gd" id="3_uvp6y"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource/ability_resource.gd" id="3_xp3cv"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="4_2ggib"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/modify_resource.gd" id="5_rjx8t"]
-[ext_resource type="Script" path="res://source/ability_system/ability_trigger/ability_trigger.gd" id="6_l55re"]
+[ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger.gd" id="4_on13w"]
 [ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="7_1gjac"]
 [ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_chance.gd" id="8_n6a1i"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/counter_attack.gd" id="9_0ldfb"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource/health_resource.gd" id="12_0ykgn"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource/rage_resource.gd" id="13_4uwnu"]
 
@@ -51,13 +48,6 @@ ability_description = "发出怒吼，激励自己和周围的盟友。"
 level = 1
 effects = Array[ExtResource("2_cwbkj")]([])
 
-[sub_resource type="Resource" id="Resource_bpy7w"]
-script = ExtResource("4_2ggib")
-damage_multiplier = 1.5
-target_type = &"enemy"
-target_amount = 1
-effects = Array[ExtResource("2_cwbkj")]([])
-
 [sub_resource type="Resource" id="Resource_o2d38"]
 script = ExtResource("3_uvp6y")
 target_type = &"enemy"
@@ -74,14 +64,6 @@ animation = &""
 ability_name = &"英勇打击"
 ability_description = "对单个敌人进行强力打击"
 level = 1
-effects = Array[ExtResource("2_cwbkj")]([SubResource("Resource_bpy7w")])
-
-[sub_resource type="Resource" id="Resource_dka1f"]
-script = ExtResource("5_rjx8t")
-rage_chance = 0.3
-rage_amount = 5
-target_type = &"self"
-target_amount = 1
 effects = Array[ExtResource("2_cwbkj")]([])
 
 [sub_resource type="Resource" id="Resource_dgabu"]
@@ -89,7 +71,7 @@ script = ExtResource("8_n6a1i")
 chance = 0.3
 
 [sub_resource type="Resource" id="Resource_82u64"]
-script = ExtResource("6_l55re")
+script = ExtResource("4_on13w")
 trigger_type = &"on_hurt"
 trigger_conditions = Array[ExtResource("7_1gjac")]([SubResource("Resource_dgabu")])
 
@@ -110,14 +92,6 @@ ability_name = &"不屈"
 ability_description = "在受到攻击时，有一定几率获得额外的怒气"
 trigger = SubResource("Resource_82u64")
 level = 1
-effects = Array[ExtResource("2_cwbkj")]([SubResource("Resource_dka1f")])
-
-[sub_resource type="Resource" id="Resource_wma4j"]
-script = ExtResource("9_0ldfb")
-counter_chance = 0.3
-damage_multiplier = 0.6
-target_type = &"enemy"
-target_amount = 1
 effects = Array[ExtResource("2_cwbkj")]([])
 
 [sub_resource type="Resource" id="Resource_o4lqm"]
@@ -125,7 +99,7 @@ script = ExtResource("8_n6a1i")
 chance = 0.3
 
 [sub_resource type="Resource" id="Resource_skg8d"]
-script = ExtResource("6_l55re")
+script = ExtResource("4_on13w")
 trigger_type = &"on_hurt"
 trigger_conditions = Array[ExtResource("7_1gjac")]([SubResource("Resource_o4lqm")])
 
@@ -146,7 +120,7 @@ ability_name = &"反击"
 ability_description = "在受到普通攻击时有机会进行反击"
 trigger = SubResource("Resource_skg8d")
 level = 1
-effects = Array[ExtResource("2_cwbkj")]([SubResource("Resource_wma4j")])
+effects = Array[ExtResource("2_cwbkj")]([])
 
 [sub_resource type="Resource" id="Resource_jvqq5"]
 resource_local_to_scene = true

@@ -14,11 +14,11 @@ var attribute_value: float:
 ## 属性基础值
 @export var _base_value: float  # 基础值
 ## 数值修改值
-var _value_modify : float
+var _value_modify : float = 0
 ## 百分比修改值
-var _percentage_modify: float
+var _percentage_modify: float = 0
 ## 绝对值修改值
-var _absolute_modify : float
+var _absolute_modify : float = 0
 ## 属性修改器列表
 var _modifiers: Array[AbilityAttributeModifier] = []
 

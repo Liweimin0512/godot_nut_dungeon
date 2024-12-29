@@ -20,8 +20,12 @@ func _ready() -> void:
 	if character_model:
 		character_model = character_model.duplicate()
 		cha_name = character_model.character_name
-		_initialization_ability_component()
-		_initialization_combat_component()
+		ability_component.initialization(
+			character_model.ability_attributes,
+			character_model.ability_resources,
+			character_model.abilities
+		)
+		combat_component.initialization(character_model.camp)
 	label_name.text = cha_name
 	progress_bar.max_value = ability_component.get_attribute_value("生命值")
 	progress_bar.value = ability_component.get_resource_value("生命值")
@@ -29,16 +33,6 @@ func _ready() -> void:
 		ability_component.get_resource_value("生命值"),
 		ability_component.get_attribute_value("生命值")
 		])
-
-func _initialization_ability_component() -> void:
-	ability_component.ability_attributes = character_model.ability_attributes
-	ability_component.ability_resources = character_model.ability_resources.duplicate(true)
-	ability_component.abilities = character_model.abilities.duplicate(true)
-	ability_component.initialization(combat_component)
-
-func _initialization_combat_component() -> void:
-	combat_component.camp = character_model.camp
-	combat_component.initialization()
 
 func _on_area_2d_mouse_entered() -> void:
 	print("_on_area_2d_mouse_entered：", self.name)

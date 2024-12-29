@@ -26,4 +26,3 @@ func create_combat(
 	)
 	_current_combats.append(combat)
 	return combat
-	

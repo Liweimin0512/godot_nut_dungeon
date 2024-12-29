@@ -24,17 +24,23 @@ var is_empty : bool:
 var is_full : bool:
 	get:
 		return current_value == max_value
+## 对应属性
+var _attribute : AbilityAttribute
 
 ## 当前值改变时发射
 signal current_value_changed(value : int)
 
 ## ability_component的initialization
-func initialization(ability_component: AbilityComponent, context: Dictionary = {}) -> void:
+func initialization(ability_component: AbilityComponent) -> void:
 	if not attribute_name.is_empty():
-		var atr_value : int = ability_component.get_attribute_value(attribute_name)
-		if atr_value:
-			max_value = atr_value
-			current_value = max_value
+		_attribute = ability_component.get_attribute(attribute_name)
+		max_value = round(_attribute.attribute_value)
+		current_value = max_value
+		_attribute.attribute_value_changed.connect(
+			func(value: int) -> void:
+				max_value = value
+				current_value = max_value
+		)
 
 ## 消耗
 func consume(amount: int) -> bool:

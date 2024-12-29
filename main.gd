@@ -45,7 +45,7 @@ func _ready() -> void:
 					c_combat.owner, damage
 				])
 		)
-		c_combat.ability_component.cast_finished.connect(
+		c_combat.ability_component.ability_cast_finished.connect(
 			func(ability: Ability) -> void:
 				rich_text_label.text += "{0} 释放 {1} 技能！\n".format([c_combat, ability])
 		)

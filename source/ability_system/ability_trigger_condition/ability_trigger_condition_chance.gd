@@ -6,4 +6,4 @@ class_name AbilityTriggerConditionChance
 @export var chance: float = 1.0
 
 func check(_context: Dictionary) -> bool:
-    return randf() < chance
+	return randf() < chance

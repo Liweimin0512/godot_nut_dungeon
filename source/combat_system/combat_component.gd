@@ -6,7 +6,7 @@ class_name CombatComponent
 ## 依赖于技能系统组件
 @onready var ability_component: AbilityComponent = %AbilityComponent
 ## 所属阵营
-@export var camp : CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.NONE
+@export var combat_camp : CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.NONE
 ## 是否为存活单位
 var is_alive : bool :
 	get:
@@ -18,7 +18,7 @@ var speed : float :
 ## 当前战斗，为空则表示不是在战斗状态
 var _current_combat: Combat
 ## 战斗组件所属角色，为了测试时候看着方便
-var _cha_name : StringName : 
+var _combat_owner_name : StringName : 
 	get:
 		return self.to_string()
 
@@ -31,15 +31,15 @@ signal turn_started
 signal turn_ended
 
 ## 组件初始化
-func initialization() -> void:
-	pass
+func initialization(camp: CombatDefinition.COMBAT_CAMP_TYPE) -> void:
+	combat_camp = camp
+	print("combat_component: {0} 初始化".format([_combat_owner_name]))
 
 ## 战斗开始
 func combat_start(combat: Combat) -> void:
 	print(self, "战斗开始！")
-	_current_combat = combat	
-	ability_component.on_combat_start()
-	_update_ability_component_context()
+	_current_combat = combat
+	ability_component.handle_game_event("on_combat_start")
 	combat_started.emit()
 
 ## 回合开始
@@ -52,13 +52,36 @@ func turn_start() -> void:
 	ability_component.update_ability_cooldown()
 	ability_component.update_buffs()
 	ability_component.handle_game_event("on_turn_start")
+	await action()
 	turn_started.emit()
+
+## 行动
+func action() -> void:
+	_pre_action()
+	print("combat_component: {0} 行动".format([self]))
 	var ability: Ability = ability_component.get_available_abilities().pick_random()
 	var targets := _get_ability_targets(ability)
 	print("combat_component: {0} 尝试释放技能{1}".format([
 		self, ability
 	]))
-	await ability_component.try_cast_ability(ability, {"targets" : targets})
+	var ability_context := {
+		"caster" : self,
+		"enemies" : _current_combat.get_all_enemies(self),
+		"allies" : _current_combat.get_all_allies(self),
+		"targets" : targets
+	}
+	var ok := await ability_component.try_cast_ability(ability, ability_context)
+	if not ok:
+		print("combat_component: {0} 释放技能失败".format([self]))
+	_post_action()
+
+## 行动前
+func _pre_action() -> void:
+	pass
+
+## 行动后
+func _post_action() -> void:
+	pass
 
 ## 回合结束
 func turn_end() -> void:
@@ -91,7 +114,7 @@ func hit(target: CombatComponent, attack: float) -> void:
 		"damage" : damage
 		})
 	hited.emit(target)
-	await target.hurt(self, damage)
+	target.hurt(self, damage)
 
 ## 受击
 func hurt(damage_source: CombatComponent, damage: float) -> void:
@@ -104,7 +127,7 @@ func hurt(damage_source: CombatComponent, damage: float) -> void:
 		ability_component.get_resource_value("生命值"), 
 		ability_component.get_attribute_value("生命值")
 	]))
-	var ok := ability_component.consume_resources("生命值", damage)
+	var ok := ability_component.consume_resources("生命值", round(damage))
 	hurted.emit(damage)
 	if not ok:
 		_die()
@@ -119,16 +142,6 @@ func _die() -> void:
 func _get_random_enemy() -> CombatComponent:
 	assert(_current_combat, "当前战斗不存在！不是战斗状态么？")
 	return _current_combat.get_random_enemy(self)
-
-## 更新技能组件上下文信息
-func _update_ability_component_context() -> void:
-	var context : Dictionary = ability_component.context
-	if _current_combat:
-		context["enemies"] = _current_combat.get_all_enemies(self)
-		context["allies"] = _current_combat.get_all_allies(self)
-	else:
-		context["enemies"] = null
-	ability_component.context = context
 
 ## 获取技能目标
 func _get_ability_targets(ability : Ability) -> Array[CombatComponent]:

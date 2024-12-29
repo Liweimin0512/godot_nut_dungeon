@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_foxpy"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/modify_resource.gd" id="2_4knft"]
 [ext_resource type="Script" path="res://source/ability_system/ability/skill_ability.gd" id="2_mnj2n"]
-[ext_resource type="Script" path="res://source/ability_system/ability_trigger/ability_trigger.gd" id="4_77ecx"]
+[ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger.gd" id="4_77ecx"]
 [ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_occg1"]
 [ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_chance.gd" id="6_jpg1i"]
 
