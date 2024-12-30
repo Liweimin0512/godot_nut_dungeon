@@ -13,5 +13,6 @@ class_name AbilityTrigger
 func check(context: Dictionary) -> bool:
 	for condition : AbilityTriggerCondition in trigger_conditions:
 		if not condition.check(context):
+			print("条件判断不通过！")
 			return false
 	return true

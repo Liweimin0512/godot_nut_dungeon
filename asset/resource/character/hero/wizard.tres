@@ -53,7 +53,7 @@ effects = Array[ExtResource("2_skfyi")]([SubResource("Resource_t0jin")])
 [sub_resource type="Resource" id="Resource_4qnyr"]
 script = ExtResource("6_heddd")
 tag_type = "stun"
-target_type = &"self"
+target_type = &""
 target_amount = 1
 trigger_conditions = Array[ExtResource("12_wgg0k")]([])
 effect_modifiers = Array[ExtResource("3_tj4y4")]([])
@@ -73,7 +73,7 @@ effects = Array[ExtResource("2_skfyi")]([SubResource("Resource_4qnyr")])
 
 [sub_resource type="Resource" id="Resource_tbg57"]
 script = ExtResource("13_1uo3a")
-chance = 0.2
+chance = 0.5
 
 [sub_resource type="Resource" id="Resource_m4a7w"]
 resource_local_to_scene = true
@@ -130,7 +130,7 @@ post_effects = Array[ExtResource("2_skfyi")]([])
 script = ExtResource("4_idqe7")
 damage_multiplier = 0.2
 damage_type = 0
-target_type = &"self"
+target_type = &""
 target_amount = 1
 trigger_conditions = Array[ExtResource("12_wgg0k")]([])
 effect_modifiers = Array[ExtResource("3_tj4y4")]([])
@@ -268,7 +268,7 @@ post_effects = Array[ExtResource("2_skfyi")]([])
 
 [sub_resource type="Resource" id="Resource_f1qh2"]
 script = ExtResource("13_p76ks")
-ability_names = PackedStringArray("火球术", "奥术飞弹")
+ability_names = PackedStringArray("火球术", "魔法飞弹")
 
 [sub_resource type="Resource" id="Resource_hu65j"]
 script = ExtResource("13_1uo3a")

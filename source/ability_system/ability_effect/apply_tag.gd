@@ -22,5 +22,5 @@ func _description_getter() -> String:
 	var _tag_name : String
 	match tag_type:
 		"stun":
-			_tag_name
+			_tag_name = "眩晕"
 	return "对目标释放{0}".format([_tag_name])

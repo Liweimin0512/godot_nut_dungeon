@@ -131,10 +131,10 @@ func get_available_abilities() -> Array[Ability]:
 
 ## 尝试释放技能
 func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
-	var caster : Node = context.caster
-	print("ability_component: {0}尝试释放技能：{1}".format([caster, ability]))
+	#var caster : Node = context.caster
+	print("ability_component: {0}尝试释放技能：{1}".format([self, ability]))
 	ability.cast(context)
-	print("ability: {0}释放技能：{1}".format([caster, ability]))
+	print("ability: {0}释放技能：{1}".format([self, ability]))
 	return true
 
 ## 更新技能冷却计时，在回合开始前
@@ -180,6 +180,7 @@ func get_buffs() -> Array[BuffAbility]:
 
 ## 更新BUFF状态
 func update_buffs() -> void:
+	print("更新{0} BUFF状态".format([self]))
 	for buff in get_buffs():
 		if buff.buff_type == AbilityDefinition.BUFF_TYPE.VALUE:
 			if not buff.is_permanent: remove_ability(buff)
@@ -188,6 +189,7 @@ func update_buffs() -> void:
 				buff.value -= 1
 				if buff.value <= 0:
 					remove_ability(buff)
+		print("更新buff {0} 的状态，完成！ 当前层数{1}".format([buff, buff.value]))
 
 ## 判断技能是否可用
 func _is_ability_available(ability: Ability) -> bool:
@@ -199,13 +201,18 @@ func _is_ability_available(ability: Ability) -> bool:
 
 ## 处理游戏事件
 func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -> void:
+	print("接收到游戏事件：{0}，事件上下文{1}".format([event_name, event_context]))
 	_handle_resource_callback(event_name, event_context)
 	for ability in _abilities.values():
 		if ability.trigger and ability.trigger.trigger_type == event_name:
 			if ability.trigger.check(event_context):
+				print("处理游戏事件：{0}，事件上下文{1}，触发技能{2}".format([event_name, event_context, ability]))
 				await try_cast_ability(ability, event_context)
 
 ## 应用伤害
 func apply_damage(damage: AbilityDamage) -> void:
 	var health : AbilityResource = get_resource("生命值")
 	health.consume(round(damage.damage_value))
+
+func _to_string() -> String:
+	return owner.to_string()

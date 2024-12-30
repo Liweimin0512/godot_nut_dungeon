@@ -42,21 +42,27 @@ func combat_start(combat: Combat) -> void:
 	ability_component.handle_game_event("on_combat_start")
 	combat_started.emit()
 
+## 回合开始前
+func pre_turn_start() -> void:
+	ability_component.update_ability_cooldown()
+	ability_component.update_buffs()
+
 ## 回合开始
 func turn_start() -> void:
 	print(self, "====== 回合开始")
 	if not _current_combat: 
 		print(self, "当前非战斗状态！")
 		return
+	turn_started.emit()
 	# 回合开始时更新技能的冷却计时
-	ability_component.update_ability_cooldown()
-	ability_component.update_buffs()
 	ability_component.handle_game_event("on_turn_start")
 	await action()
-	turn_started.emit()
 
 ## 行动
 func action() -> void:
+	if is_in_group("stun"):
+		print(self, "当前处于眩晕状态，无法动！跳过本回合！")
+		return
 	print("combat_component: {0} 行动".format([self]))
 	var ability: Ability = ability_component.get_available_abilities().pick_random()
 	if not ability:
@@ -91,7 +97,7 @@ func _post_action(ability_context: Dictionary) -> void:
 func turn_end() -> void:
 	if not _current_combat: return
 	print(self, "====== 回合结束")
-	ability_component.handle_game_event("on_turn_end", _get_ability_context())
+	ability_component.handle_game_event("on_turn_end", {})
 	turn_ended.emit()
 
 ## 战斗结束
@@ -107,7 +113,7 @@ func combat_end() -> void:
 func hit(target: CombatComponent, damage: AbilityDamage) -> void:
 	if not target: return
 	print("combat_component: {0} 攻击： {1}, damage info:{2}".format([
-		self, target, damage
+		self, target, damage.damage_value
 	]))
 	ability_component.handle_game_event("on_pre_hit", {"damage" : damage})
 	target.hurt(self, damage)
@@ -121,8 +127,8 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 		"damage": damage, "caster": self
 	}
 	ability_component.handle_game_event("on_pre_hurt", ability_context)
-	print("combat_component: {0} 受到来自 {1} 的伤害 {2}， 当前生命值{3}/{4}".format([
-		self, damage_source, damage, 
+	print("combat_component: {0} 受到来自 {1} 的伤害 {2} 点， 当前生命值{3}/{4}".format([
+		self, damage_source, damage.damage_value, 
 		ability_component.get_resource_value("生命值"), 
 		ability_component.get_attribute_value("生命值")
 	]))

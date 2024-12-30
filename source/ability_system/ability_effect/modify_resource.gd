@@ -21,12 +21,12 @@ func _apply(context: Dictionary = {}) -> void:
 		ability_resource.restore(_amount)
 	else:
 		ability_resource.consume(_amount)
-	print("受到攻击，触发{0}，获得{1}点{2}".format([
-		description, ability_resource_amount, ability_resource_name
-	]))
 	super(context)
 
 func _description_getter() -> String:
-	return "获得{0}点{1}".format([
-		ability_resource_amount, ability_resource_name
-		])
+	if modify_type == "value":
+		return "获得{0}点{1}".format([
+			ability_resource_amount, ability_resource_name
+			])
+	else:
+		return "获得{0}% {1}".format([ability_resource_amount * 100, ability_resource_name])

@@ -107,7 +107,7 @@ func _combat_start() -> void:
 func _turn_start() -> void:
 	if is_stop: return
 	_turn_count += 1
-	print(_turn_count, "回合开始===================")
+	print(_turn_count, "========回合开始===================")
 	turn_started.emit(_turn_count)
 	var cs := combats.duplicate()
 	cs.shuffle()
@@ -116,6 +116,8 @@ func _turn_start() -> void:
 			if not a or not b: return false
 			return a.speed > b.speed
 	)
+	for combat in cs:
+		combat.pre_turn_start()
 	for combat in cs:
 		if not is_instance_valid(combat): continue
 		if not combat.is_alive: continue
