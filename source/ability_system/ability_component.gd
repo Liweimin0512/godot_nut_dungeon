@@ -7,7 +7,7 @@ class_name AbilityComponent
 @export var _ability_attributes : Dictionary
 ## 当前单位所有的技能消耗资源，同名资源是单例
 @export var _ability_resources : Dictionary
-## 当前单位所拥有的全部技能(包括BUFF)
+## 当前单位所拥有的全部技能（包括BUFF）
 @export var _abilities : Dictionary
 
 ## 属性变化时发出
@@ -34,6 +34,7 @@ func initialization(
 				resource_changed.emit(res.ability_resource_name, value)
 		)
 	for ability in ability_set:
+		ability.apply(self, {})
 		_abilities[ability.ability_name] = ability
 		ability.cast_finished.connect(
 			func() -> void:
@@ -55,7 +56,8 @@ func get_attribute_value(atr_name : StringName) -> float:
 	var attribute := get_attribute(atr_name)
 	if attribute:
 		return attribute.attribute_value
-	assert(false, "找不到需要的属性："+ atr_name)
+	#assert(false, "找不到需要的属性："+ atr_name)
+	push_error("找不到需要的属性：" + atr_name)
 	return -1
 
 ## 增加属性修改器
@@ -131,52 +133,24 @@ func get_available_abilities() -> Array[Ability]:
 func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
 	var caster : Node = context.caster
 	print("ability_component: {0}尝试释放技能：{1}".format([caster, ability]))
-	if not has_enough_resources(ability.cost_resource_name, ability.cost_resource_value):
-		print("消耗不足，无法释放技能！")
-		return false
-	if ability.is_cooldown:
-		print("技能正在冷却！")
-		return false
-	if ability is SkillAbility and ability.cast_time > 0:
-		await get_tree().create_timer(ability.cast_time).timeout
-	consume_resources(ability.cost_resource_name, ability.cost_resource_value)
-	for effect : AbilityEffect in ability.effects:
-		effect.apply_effect(context)
-	ability.current_cooldown = ability.cooldown
+	ability.cast(context)
 	print("ability: {0}释放技能：{1}".format([caster, ability]))
 	return true
 
 ## 更新技能冷却计时，在回合开始前
 func update_ability_cooldown() -> void:
 	for ability : Ability in _abilities.values():
-		if not ability is SkillAbility: continue
-		if ability.is_cooldown:
-			ability.current_cooldown -= 1
+		if ability is SkillAbility:
+			ability.update_cooldown()
 
 ## 应用技能
 func apply_ability(ability: Ability, ability_context: Dictionary) -> void:
-	ability.initialization(self, ability_context)
-	var ability_name : StringName = ability.ability_name
-	if ability is SkillAbility:
-		if ability.is_auto_cast and ability.trigger == null:
-			try_cast_ability(ability, ability_context)
-	elif ability is BuffAbility:
-		var _buff := get_buff_ability(ability.ability_name)
-		if _buff:
-			remove_ability(_buff)
-			if _buff.buff_type == AbilityDefinition.BUFF_TYPE.DURATION or _buff.can_stack:
-				ability.value += _buff.value
-		ability_context["source"] = ability
-		ability_name = "buff:" + ability_name
-		print("应用BUFF：", ability)
-		for effect in ability.effects:
-			effect.apply_effect(ability_context)
-	_abilities[ability_name] = ability
+	ability.apply(self, ability_context)
+	_abilities[ability.ability_name] = ability
 
 ## 移除技能
 func remove_ability(ability: Ability, ability_context: Dictionary = {}) -> void:
-	for effect in ability.effects:
-		effect.remove_effect(ability_context)
+	ability.remove(ability_context)
 	var key : StringName = _abilities.find_key(ability)
 	if key: _abilities.erase(key)
 	print("移除Ability：", ability)
@@ -230,3 +204,8 @@ func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -
 		if ability.trigger and ability.trigger.trigger_type == event_name:
 			if ability.trigger.check(event_context):
 				await try_cast_ability(ability, event_context)
+
+## 应用伤害
+func apply_damage(damage: AbilityDamage) -> void:
+	var health : AbilityResource = get_resource("生命值")
+	health.consume(round(damage.damage_value))

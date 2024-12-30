@@ -3,8 +3,6 @@ class_name Character
 
 ## 战斗角色
 
-@export var character_model : CharacterModel
-
 @onready var label_name: Label = %LabelName
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var progress_bar: ProgressBar = $MarginContainer/ProgressBar
@@ -12,6 +10,10 @@ class_name Character
 @onready var label_action: Label = %LabelAction
 @onready var combat_component: CombatComponent = $CombatComponent
 @onready var ability_component: AbilityComponent = %AbilityComponent
+
+
+@export var character_model : CharacterModel
+@export var character_camp: CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.PLAYER
 
 # 角色的名称
 var cha_name : String = ""
@@ -25,7 +27,7 @@ func _ready() -> void:
 			character_model.ability_resources,
 			character_model.abilities
 		)
-		combat_component.initialization(character_model.camp)
+		combat_component.initialization(character_camp)
 	label_name.text = cha_name
 	progress_bar.max_value = ability_component.get_attribute_value("生命值")
 	progress_bar.value = ability_component.get_resource_value("生命值")

@@ -10,7 +10,7 @@ class_name ModifyResourceEffect
 ## 资源修改方式
 @export_enum("value", "percentage") var modify_type : String = "value"
 
-func apply_effect(context: Dictionary = {}) -> void:
+func _apply(context: Dictionary = {}) -> void:
 	var caster : Node = context.caster
 	var ability_component : AbilityComponent = caster.ability_component
 	var ability_resource : AbilityResource = ability_component.get_resource(ability_resource_name)
@@ -24,7 +24,7 @@ func apply_effect(context: Dictionary = {}) -> void:
 	print("受到攻击，触发{0}，获得{1}点{2}".format([
 		description, ability_resource_amount, ability_resource_name
 	]))
-	super()
+	super(context)
 
 func _description_getter() -> String:
 	return "获得{0}点{1}".format([

@@ -54,7 +54,7 @@ func _init(
 ## 获取随机敌方单位(的战斗组件）
 func get_random_enemy(cha: CombatComponent) -> CombatComponent:
 	var target : CombatComponent
-	if cha.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAY:
+	if cha.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER:
 		target = enemy_combats.pick_random()
 	elif cha.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
 		target = player_combats.pick_random()
@@ -62,7 +62,7 @@ func get_random_enemy(cha: CombatComponent) -> CombatComponent:
 
 ## 获取所有敌人
 func get_all_enemies(cha: CombatComponent) -> Array[CombatComponent]:
-	if cha.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAY:
+	if cha.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER:
 		return enemy_combats
 	elif cha.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
 		return player_combats
@@ -70,7 +70,7 @@ func get_all_enemies(cha: CombatComponent) -> Array[CombatComponent]:
 
 ## 获取所有盟友
 func get_all_allies(cha: CombatComponent) -> Array[CombatComponent]:
-	if cha.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAY:
+	if cha.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER:
 		return player_combats
 	elif cha.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
 		return enemy_combats
@@ -91,7 +91,7 @@ func _combat_start() -> void:
 	for combat in combats:
 		combat.died.connect(
 			func() -> void:
-				if combat.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAY:
+				if combat.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER:
 					player_combats.erase(combat)
 				elif combat.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
 					enemy_combats.erase(combat)

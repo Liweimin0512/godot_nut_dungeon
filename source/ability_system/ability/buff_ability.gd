@@ -15,5 +15,28 @@ class_name BuffAbility
 ## 是否允许堆叠
 @export var can_stack : bool = false
 
+## 应用技能
+func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
+	var ability_context : Dictionary = context
+	var _buff := ability_component.get_buff_ability(ability_name)
+	if _buff:
+		ability_component.remove_ability(_buff)
+		if _buff.buff_type == AbilityDefinition.BUFF_TYPE.DURATION or _buff.can_stack:
+			value += _buff.value
+	ability_context["source"] = self
+	ability_name = "buff:" + ability_name
+	print("应用BUFF：", self)
+	if not trigger:
+		ability_component.try_cast_ability(self, context)
+	super(ability_component, context)
+
+## 移除技能
+func remove(context: Dictionary = {}) -> void:
+	super(context)
+
+## 执行技能
+func cast(context: Dictionary) -> bool:
+	return super(context)
+
 func _to_string() -> String:
 	return "{0}层数{1}".format([ability_name, value])

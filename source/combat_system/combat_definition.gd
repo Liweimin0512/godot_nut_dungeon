@@ -6,6 +6,6 @@ class_name CombatDefinition
 ## 战斗阵营
 enum COMBAT_CAMP_TYPE{
 	NONE,
-	PLAY,
+	PLAYER,
 	ENEMY,
 }

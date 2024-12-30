@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcxjfw256ynb5"]
+[gd_scene load_steps=5 format=3 uid="uid://dcxjfw256ynb5"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_i4sev"]
+[ext_resource type="Resource" uid="uid://bshhcvu884gan" path="res://asset/resource/combat/combat_test.tres" id="2_p2r0i"]
 [ext_resource type="PackedScene" uid="uid://cokqr3cv3dqo6" path="res://source/character.tscn" id="2_tbu6l"]
-[ext_resource type="Resource" uid="uid://pnl45yj5lq7s" path="res://asset/resource/character/hero/warrior.tres" id="3_26w5s"]
+[ext_resource type="Resource" uid="uid://4obtwqc0eawy" path="res://asset/resource/character/hero/wizard.tres" id="3_3c46g"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_i4sev")
+combat_test = ExtResource("2_p2r0i")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 128
@@ -42,7 +44,7 @@ grow_vertical = 2
 
 [node name="PlayerCharacter" parent="." groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
 position = Vector2(311, 164)
-character_model = ExtResource("3_26w5s")
+character_model = ExtResource("3_3c46g")
 
 [node name="EnemyMarkers" type="Node2D" parent="."]
 

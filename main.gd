@@ -6,9 +6,10 @@ const CHARACTER = preload("res://source/character.tscn")
 @onready var player_character: Character = $PlayerCharacter
 @onready var enemy_markers: Node2D = $EnemyMarkers
 
+@export var combat_test : CombatModel
+
 func _ready() -> void:
-	const TEST_COMBAT = preload("res://data_models/combat/test_combat.tres")
-	var combat : Combat = _create_combat(TEST_COMBAT.duplicate())
+	var combat : Combat = _create_combat(combat_test.duplicate())
 	# 因为combat是自动执行的，所以不会发出这个信号！
 	combat.combat_started.connect(
 		func() -> void:
@@ -49,13 +50,6 @@ func _ready() -> void:
 			func(ability: Ability) -> void:
 				rich_text_label.text += "{0} 释放 {1} 技能！\n".format([c_combat, ability])
 		)
-	#var combat_not_real := CombatSystem.create_combat(
-		#[player_character.combat_component],
-		#enemy_combats,
-		#10,
-		#true	,
-		#false
-	#)
 
 ## 创建战斗
 func _create_combat(combat_model: CombatModel) -> Combat:
@@ -63,6 +57,7 @@ func _create_combat(combat_model: CombatModel) -> Combat:
 	var index := 0
 	for enemy_model in combat_model.enemies:
 		var enemy = _spawn_character(enemy_model)
+		enemy.character_camp = CombatDefinition.COMBAT_CAMP_TYPE.ENEMY
 		enemy_markers.get_child(index).add_child(enemy)
 		# 这一步一定要在添加场景树之后，否则combat_component为空
 		enemy_combats.append(enemy.combat_component)

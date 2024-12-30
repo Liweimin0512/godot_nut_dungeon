@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_8ktlk"]
 [ext_resource type="Script" path="res://source/ability_system/ability_attribute/ability_attribute_modifier.gd" id="2_015hf"]
 [ext_resource type="Script" path="res://source/ability_system/ability/buff_ability.gd" id="2_pgkp3"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/attribute_modifier.gd" id="3_v2i17"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/modify_attribute.gd" id="3_v2i17"]
 
 [sub_resource type="Resource" id="Resource_avbik"]
 script = ExtResource("2_015hf")

@@ -5,9 +5,12 @@ class_name AbilityEffect
 ## 技能是瞬时的，持续一段时间的技能效果需要包装成buff
 
 ## 目标类型，如self, ally, enemy
+## 未指定目标类型则从技能上下文中获取目标
 @export var target_type: StringName
 ## 目标数量
 @export var target_amount: int = 1
+## 效果触发条件
+@export var trigger_conditions: Array[AbilityTriggerCondition]
 ## 技能效果修改器
 @export var effect_modifiers: Array[AbilityEffectModifier]
 ## 后置效果
@@ -21,17 +24,38 @@ signal applied
 signal removed
 
 ## 应用效果
-func apply_effect(context: Dictionary = {}) -> void:
+func apply_effect(context: Dictionary) -> void:
+	if not _check_conditions(context): return
+	var targets : Array = _get_targets(context)
+	for target in targets:
+		var ct : Dictionary = context
+		ct["targets"] = [target]
+		_apply(ct)
+	applied.emit()
+
+func _apply(context: Dictionary) -> void:
 	# 父类的这个方法应该在子类方法执行之后调用
 	for effect in post_effects:
 		effect.apply_effect(context)
-	applied.emit()
 
 ## 移除效果
 func remove_effect(context: Dictionary) -> void:
+	var targets : Array = _get_targets(context)
+	for target in targets:
+		_remove(context)
+	removed.emit()
+
+func _remove(context: Dictionary) -> void:
 	for effect in post_effects:
 		effect.remove_effect(context)
-	removed.emit()
+
+## 判断条件
+func _check_conditions(context: Dictionary) -> bool:
+	for condition in trigger_conditions:
+		var ok := condition.check(context)
+		if not ok:
+			return false
+	return true
 
 ## 获取目标
 func _get_targets(context: Dictionary) -> Array:

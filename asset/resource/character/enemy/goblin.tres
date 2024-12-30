@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=17 format=3 uid="uid://dusj10wryboti"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=20 format=3 uid="uid://dusj10wryboti"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability/ability.gd" id="1_ckwfc"]
 [ext_resource type="Script" path="res://asset/resource/character/character_model.gd" id="1_qi5g2"]
@@ -9,13 +9,16 @@
 [ext_resource type="Script" path="res://source/ability_system/ability_resource/health_resource.gd" id="4_hfljm"]
 [ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="4_sm2rg"]
 [ext_resource type="Script" path="res://source/ability_system/ability/skill_ability.gd" id="5_ss7sx"]
+[ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_ytorr"]
 
 [sub_resource type="Resource" id="Resource_t0jin"]
 resource_local_to_scene = true
 script = ExtResource("4_sm2rg")
 damage_multiplier = 1.0
+damage_type = 0
 target_type = &""
 target_amount = 1
+trigger_conditions = Array[ExtResource("5_ytorr")]([])
 effect_modifiers = Array[ExtResource("3_itvyi")]([])
 post_effects = Array[ExtResource("2_3ht30")]([])
 
@@ -62,6 +65,16 @@ script = ExtResource("2_gfiar")
 attribute_name = &"速度"
 _base_value = 5.0
 
+[sub_resource type="Resource" id="Resource_fosf3"]
+script = ExtResource("2_gfiar")
+attribute_name = &"命中率"
+_base_value = 1.0
+
+[sub_resource type="Resource" id="Resource_g3nwv"]
+script = ExtResource("2_gfiar")
+attribute_name = &"暴击率"
+_base_value = 0.0
+
 [sub_resource type="Resource" id="Resource_2k26t"]
 resource_local_to_scene = true
 script = ExtResource("4_hfljm")
@@ -73,7 +86,6 @@ attribute_name = &"生命值"
 [resource]
 script = ExtResource("1_qi5g2")
 character_name = &"哥布林"
-camp = 2
-ability_attributes = Array[ExtResource("2_gfiar")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l")])
+ability_attributes = Array[ExtResource("2_gfiar")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l"), SubResource("Resource_fosf3"), SubResource("Resource_g3nwv")])
 abilities = Array[ExtResource("1_ckwfc")]([SubResource("Resource_jrqsr")])
 ability_resources = Array[ExtResource("3_yxnkf")]([SubResource("Resource_2k26t")])

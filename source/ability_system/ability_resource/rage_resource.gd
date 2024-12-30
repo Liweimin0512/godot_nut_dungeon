@@ -16,8 +16,10 @@ func initialization(ability_component: AbilityComponent) -> void:
 	current_value = 0
 	ability_resource_name = "怒气值"
 
-func on_hit(_context: Dictionary) -> void:
+## 造成伤害后恢复怒气
+func on_post_hit(_context: Dictionary) -> void:
 	restore(regain_hited)
 
-func on_hurt(_context: Dictionary) -> void:
+## 受到伤害后恢复怒气
+func on_post_hurt(_context: Dictionary) -> void:
 	restore(regain_hurted)

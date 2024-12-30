@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=45 format=3 uid="uid://4obtwqc0eawy"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=55 format=3 uid="uid://4obtwqc0eawy"]
 
 [ext_resource type="Script" path="res://asset/resource/character/character_model.gd" id="1_jj07w"]
 [ext_resource type="Script" path="res://source/ability_system/ability/ability.gd" id="1_tv87s"]
@@ -18,13 +18,16 @@
 [ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger.gd" id="11_erwvb"]
 [ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="12_wgg0k"]
 [ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_chance.gd" id="13_1uo3a"]
+[ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_ability_name.gd" id="13_p76ks"]
 
 [sub_resource type="Resource" id="Resource_t0jin"]
 resource_local_to_scene = true
 script = ExtResource("4_idqe7")
 damage_multiplier = 1.0
+damage_type = 0
 target_type = &""
 target_amount = 1
+trigger_conditions = Array[ExtResource("12_wgg0k")]([])
 effect_modifiers = Array[ExtResource("3_tj4y4")]([])
 post_effects = Array[ExtResource("2_skfyi")]([])
 
@@ -52,6 +55,7 @@ script = ExtResource("6_heddd")
 tag_type = "stun"
 target_type = &"self"
 target_amount = 1
+trigger_conditions = Array[ExtResource("12_wgg0k")]([])
 effect_modifiers = Array[ExtResource("3_tj4y4")]([])
 post_effects = Array[ExtResource("2_skfyi")]([])
 
@@ -67,12 +71,17 @@ ability_description = "目标在眩晕状态下无法进行任何行动"
 level = 1
 effects = Array[ExtResource("2_skfyi")]([SubResource("Resource_4qnyr")])
 
+[sub_resource type="Resource" id="Resource_tbg57"]
+script = ExtResource("13_1uo3a")
+chance = 0.2
+
 [sub_resource type="Resource" id="Resource_m4a7w"]
 resource_local_to_scene = true
 script = ExtResource("8_7ccn3")
 ability = SubResource("Resource_2xnrk")
 target_type = &""
 target_amount = 1
+trigger_conditions = Array[ExtResource("12_wgg0k")]([SubResource("Resource_tbg57")])
 effect_modifiers = Array[ExtResource("3_tj4y4")]([])
 post_effects = Array[ExtResource("2_skfyi")]([])
 
@@ -80,8 +89,10 @@ post_effects = Array[ExtResource("2_skfyi")]([])
 resource_local_to_scene = true
 script = ExtResource("4_idqe7")
 damage_multiplier = 0.8
+damage_type = 0
 target_type = &"enemy"
 target_amount = 3
+trigger_conditions = Array[ExtResource("12_wgg0k")]([])
 effect_modifiers = Array[ExtResource("3_tj4y4")]([])
 post_effects = Array[ExtResource("2_skfyi")]([SubResource("Resource_m4a7w")])
 
@@ -108,15 +119,46 @@ effects = Array[ExtResource("2_skfyi")]([SubResource("Resource_6x5pe")])
 resource_local_to_scene = true
 script = ExtResource("4_idqe7")
 damage_multiplier = 2.0
+damage_type = 0
 target_type = &""
 target_amount = 1
+trigger_conditions = Array[ExtResource("12_wgg0k")]([])
 effect_modifiers = Array[ExtResource("3_tj4y4")]([])
 post_effects = Array[ExtResource("2_skfyi")]([])
 
+[sub_resource type="Resource" id="Resource_bv5bf"]
+script = ExtResource("4_idqe7")
+damage_multiplier = 0.2
+damage_type = 0
+target_type = &"self"
+target_amount = 1
+trigger_conditions = Array[ExtResource("12_wgg0k")]([])
+effect_modifiers = Array[ExtResource("3_tj4y4")]([])
+post_effects = Array[ExtResource("2_skfyi")]([])
+
+[sub_resource type="Resource" id="Resource_mw7ls"]
+script = ExtResource("11_erwvb")
+trigger_type = &"on_turn_end"
+trigger_conditions = Array[ExtResource("12_wgg0k")]([])
+
+[sub_resource type="Resource" id="Resource_kb7eh"]
+script = ExtResource("7_0cw4v")
+buff_type = 1
+is_permanent = false
+value = 2
+can_stack = true
+ability_name = &"点燃"
+ability_description = "每回合结束时，对目标造成额外的20%魔法攻击力的伤害"
+trigger = SubResource("Resource_mw7ls")
+level = 1
+effects = Array[ExtResource("2_skfyi")]([SubResource("Resource_bv5bf")])
+
 [sub_resource type="Resource" id="Resource_k4nyb"]
 script = ExtResource("8_7ccn3")
+ability = SubResource("Resource_kb7eh")
 target_type = &""
 target_amount = 1
+trigger_conditions = Array[ExtResource("12_wgg0k")]([])
 effect_modifiers = Array[ExtResource("3_tj4y4")]([])
 post_effects = Array[ExtResource("2_skfyi")]([])
 
@@ -139,13 +181,18 @@ ability_description = "法师凝聚火元素，释放一个火球对单个敌人
 level = 1
 effects = Array[ExtResource("2_skfyi")]([SubResource("Resource_xthqw"), SubResource("Resource_k4nyb")])
 
+[sub_resource type="Resource" id="Resource_g4doi"]
+script = ExtResource("13_1uo3a")
+chance = 0.2
+
 [sub_resource type="Resource" id="Resource_cyv0p"]
 script = ExtResource("10_x67mq")
 ability_resource_name = &"魔法值"
-ability_resource_amount = 5.0
-modify_type = "value"
+ability_resource_amount = 0.2
+modify_type = "percentage"
 target_type = &"self"
 target_amount = 1
+trigger_conditions = Array[ExtResource("12_wgg0k")]([SubResource("Resource_g4doi")])
 effect_modifiers = Array[ExtResource("3_tj4y4")]([])
 post_effects = Array[ExtResource("2_skfyi")]([])
 
@@ -153,14 +200,17 @@ post_effects = Array[ExtResource("2_skfyi")]([])
 script = ExtResource("10_skte0")
 modify_type = "percentage"
 modify_value = -0.2
+is_critical = false
+is_hit = false
 target_type = &"self"
 target_amount = 1
+trigger_conditions = Array[ExtResource("12_wgg0k")]([])
 effect_modifiers = Array[ExtResource("3_tj4y4")]([])
 post_effects = Array[ExtResource("2_skfyi")]([])
 
 [sub_resource type="Resource" id="Resource_4pr5s"]
 script = ExtResource("11_erwvb")
-trigger_type = &"on_hurt"
+trigger_type = &"on_pre_hurt"
 trigger_conditions = Array[ExtResource("12_wgg0k")]([])
 
 [sub_resource type="Resource" id="Resource_h6rb2"]
@@ -182,6 +232,7 @@ script = ExtResource("8_7ccn3")
 ability = SubResource("Resource_h6rb2")
 target_type = &"self"
 target_amount = 1
+trigger_conditions = Array[ExtResource("12_wgg0k")]([])
 effect_modifiers = Array[ExtResource("3_tj4y4")]([])
 post_effects = Array[ExtResource("2_skfyi")]([])
 
@@ -211,8 +262,13 @@ ability_resource_amount = 0.2
 modify_type = "percentage"
 target_type = &"self"
 target_amount = 1
+trigger_conditions = Array[ExtResource("12_wgg0k")]([])
 effect_modifiers = Array[ExtResource("3_tj4y4")]([])
 post_effects = Array[ExtResource("2_skfyi")]([])
+
+[sub_resource type="Resource" id="Resource_f1qh2"]
+script = ExtResource("13_p76ks")
+ability_names = PackedStringArray("火球术", "奥术飞弹")
 
 [sub_resource type="Resource" id="Resource_hu65j"]
 script = ExtResource("13_1uo3a")
@@ -220,8 +276,8 @@ chance = 0.3
 
 [sub_resource type="Resource" id="Resource_pxpji"]
 script = ExtResource("11_erwvb")
-trigger_type = &"on_action"
-trigger_conditions = Array[ExtResource("12_wgg0k")]([SubResource("Resource_hu65j"), null])
+trigger_type = &"on_post_action"
+trigger_conditions = Array[ExtResource("12_wgg0k")]([SubResource("Resource_f1qh2"), SubResource("Resource_hu65j")])
 
 [sub_resource type="Resource" id="Resource_e4myo"]
 script = ExtResource("5_q0y5y")
@@ -264,7 +320,22 @@ _base_value = 100.0
 resource_local_to_scene = true
 script = ExtResource("2_wjvtx")
 attribute_name = &"速度"
-_base_value = 5.0
+_base_value = 6.0
+
+[sub_resource type="Resource" id="Resource_5h64c"]
+script = ExtResource("2_wjvtx")
+attribute_name = &"魔法值"
+_base_value = 100.0
+
+[sub_resource type="Resource" id="Resource_2gihe"]
+script = ExtResource("2_wjvtx")
+attribute_name = &"命中率"
+_base_value = 1.0
+
+[sub_resource type="Resource" id="Resource_e4jre"]
+script = ExtResource("2_wjvtx")
+attribute_name = &"暴击率"
+_base_value = 0.0
 
 [sub_resource type="Resource" id="Resource_sw5wc"]
 script = ExtResource("4_phrxb")
@@ -283,7 +354,6 @@ attribute_name = &""
 [resource]
 script = ExtResource("1_jj07w")
 character_name = &"法师"
-camp = 1
-ability_attributes = Array[ExtResource("2_wjvtx")]([SubResource("Resource_e1joa"), SubResource("Resource_gc0bh"), SubResource("Resource_g7ipd"), SubResource("Resource_4anai")])
+ability_attributes = Array[ExtResource("2_wjvtx")]([SubResource("Resource_e1joa"), SubResource("Resource_gc0bh"), SubResource("Resource_g7ipd"), SubResource("Resource_4anai"), SubResource("Resource_5h64c"), SubResource("Resource_2gihe"), SubResource("Resource_e4jre")])
 abilities = Array[ExtResource("1_tv87s")]([SubResource("Resource_p0ag0"), SubResource("Resource_sryws"), SubResource("Resource_d8now"), SubResource("Resource_xulmi"), SubResource("Resource_e4myo")])
 ability_resources = Array[ExtResource("3_it5yo")]([SubResource("Resource_sw5wc"), SubResource("Resource_klj23")])

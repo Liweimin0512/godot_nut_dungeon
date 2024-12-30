@@ -2,19 +2,24 @@ extends AbilityEffect
 class_name ModifyDamageEffect
 
 ## 处理伤害，通常只在受到伤害前或造成伤害后有效
+
+## 修改类型
 @export_enum("value", "percentage")
 var modify_type : String = "value"
+## 修改值
 @export var modify_value : float = 0.1
+## 必定暴击
+@export var is_critical : bool = false
+## 必定命中
+@export var is_hit : bool = false
 
-
-func apply_effect(context: Dictionary = {}) -> void:
+func _apply(context: Dictionary = {}) -> void:
 	var targets : Array = _get_targets(context)
 	for target in targets:
-		var damage = context.get("damage")
-		if modify_type == "value":
-			damage.value += modify_value
-		else:
-			damage.value *= (1+ modify_value)
+		var damage : AbilityDamage = context.get("damage")
+		damage.apply_damage_modifier(modify_type, modify_value)
+		damage.is_critical = is_critical
+		damage.is_hit = is_hit
 	super(context)
 
 func _description_getter() -> String:

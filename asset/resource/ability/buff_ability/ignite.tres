@@ -10,8 +10,10 @@
 [sub_resource type="Resource" id="Resource_bv5bf"]
 script = ExtResource("3_4hn2m")
 damage_multiplier = 0.2
+damage_type = 0
 target_type = &"self"
 target_amount = 1
+trigger_conditions = Array[ExtResource("6_aligd")]([])
 effect_modifiers = Array[ExtResource("2_ru7ob")]([])
 post_effects = Array[ExtResource("1_ljvbp")]([])
 

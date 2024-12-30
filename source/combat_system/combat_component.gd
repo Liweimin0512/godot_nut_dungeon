@@ -57,7 +57,6 @@ func turn_start() -> void:
 
 ## 行动
 func action() -> void:
-	_pre_action()
 	print("combat_component: {0} 行动".format([self]))
 	var ability: Ability = ability_component.get_available_abilities().pick_random()
 	if not ability:
@@ -71,26 +70,28 @@ func action() -> void:
 			"caster" : self,
 			"enemies" : _current_combat.get_all_enemies(self),
 			"allies" : _current_combat.get_all_allies(self),
-			"targets" : targets
+			"targets" : targets,
+			"ability" : ability,
 		}
+		_pre_action(ability_context)
 		var ok := await ability_component.try_cast_ability(ability, ability_context)
 		if not ok:
 			print("combat_component: {0} 释放技能失败".format([self]))
-	_post_action()
+		_post_action(ability_context)
 
 ## 行动前
-func _pre_action() -> void:
-	ability_component.handle_game_event("on_pre_action")
+func _pre_action(ability_context: Dictionary) -> void:
+	ability_component.handle_game_event("on_pre_action", ability_context)
 
 ## 行动后
-func _post_action() -> void:
-	ability_component.handle_game_event("on_post_action")
+func _post_action(ability_context: Dictionary) -> void:
+	ability_component.handle_game_event("on_post_action", ability_context)
 
 ## 回合结束
 func turn_end() -> void:
 	if not _current_combat: return
 	print(self, "====== 回合结束")
-	ability_component.handle_game_event("on_turn_end")
+	ability_component.handle_game_event("on_turn_end", _get_ability_context())
 	turn_ended.emit()
 
 ## 战斗结束
@@ -103,38 +104,32 @@ func combat_end() -> void:
 	combat_ended.emit()
 
 ## 攻击
-func hit(target: CombatComponent, attack: float) -> void:
+func hit(target: CombatComponent, damage: AbilityDamage) -> void:
 	if not target: return
-	var defense = target.ability_component.get_attribute_value("防御力")
-	var damage : float = attack - defense
-	print("combat_component: {0} 攻击： {1}, 攻击力{2}， 防御力{3}，实际造成伤害{4}".format([
-		self, target, attack, defense, damage
+	print("combat_component: {0} 攻击： {1}, damage info:{2}".format([
+		self, target, damage
 	]))
-	ability_component.handle_game_event("on_hit", {
-		"targets" : [target],
-		"attack" : attack,
-		"defense" : defense,
-		"damage" : damage,
-		"caster" : self
-		})
-	hited.emit(target)
+	ability_component.handle_game_event("on_pre_hit", {"damage" : damage})
 	target.hurt(self, damage)
+	hited.emit(target)
+	ability_component.handle_game_event("on_post_hit", {"damage" : damage})
 
 ## 受击
-func hurt(damage_source: CombatComponent, damage: float) -> void:
-	ability_component.handle_game_event("on_hurt", {
-		"targets" : [damage_source], # 受到伤害时，伤害来源就是目标
-		"damage" : damage,
-		"caster" : self
-	})
+func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
+	if not damage_source: return
+	var ability_context : Dictionary = {
+		"damage": damage, "caster": self
+	}
+	ability_component.handle_game_event("on_pre_hurt", ability_context)
 	print("combat_component: {0} 受到来自 {1} 的伤害 {2}， 当前生命值{3}/{4}".format([
 		self, damage_source, damage, 
 		ability_component.get_resource_value("生命值"), 
 		ability_component.get_attribute_value("生命值")
 	]))
-	var ok := ability_component.consume_resources("生命值", round(damage))
-	hurted.emit(damage)
-	if not ok:
+	ability_component.apply_damage(damage)
+	ability_component.handle_game_event("on_post_hurt", ability_context)
+	var health_value : float = ability_component.get_resource_value("生命值")
+	if health_value <= 0:
 		_die()
 
 ## 死亡
@@ -169,6 +164,10 @@ func _get_ability_targets(ability : Ability) -> Array[CombatComponent]:
 		targets.append(target)
 		target_pool.erase(target)  # 从目标池中移除已选目标
 	return targets
+
+## 获取技能上下文
+func _get_ability_context() -> Dictionary:
+	return {"caster" : self}
 
 func _to_string() -> String:
 	return owner.to_string()

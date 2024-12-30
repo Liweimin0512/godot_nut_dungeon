@@ -29,3 +29,32 @@ class_name SkillAbility
 var is_cooldown: bool:
 	get:
 		return current_cooldown > 0
+
+## 应用技能
+func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
+	if is_auto_cast and trigger == null:
+		ability_component.try_cast_ability(self, context)
+	super(ability_component, context)
+
+## 移除技能
+func remove(context: Dictionary = {}) -> void:
+	super(context)
+
+## 执行技能
+func cast(context: Dictionary) -> bool:
+	if not _ability_component.has_enough_resources(cost_resource_name, cost_resource_value):
+		print("消耗不足，无法释放技能！")
+		return false
+	if is_cooldown:
+		print("技能正在冷却！")
+		return false
+	if cast_time > 0:
+		await _ability_component.get_tree().create_timer(cast_time).timeout
+	_ability_component.consume_resources(cost_resource_name, cost_resource_value)
+	current_cooldown = cooldown
+	return super(context)
+
+## 更新冷却时间
+func update_cooldown() -> void:
+	if is_cooldown:
+		current_cooldown -= 1

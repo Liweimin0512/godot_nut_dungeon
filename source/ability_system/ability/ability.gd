@@ -15,18 +15,33 @@ class_name Ability
 @export var effects: Array[AbilityEffect]
 ## 所属技能组件
 var _ability_component: AbilityComponent
+## 技能上下文
+var _context : Dictionary
 
 signal cast_finished
 
-## 技能初始化
-func initialization(ability_component: AbilityComponent, context: Dictionary) -> void:
+## 应用技能
+func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
 	_ability_component = ability_component
+	_context = context
 	for effect in effects:
 		effect.applied.connect(
 			func() -> void:
 				cast_finished.emit()
 				print("技能{0}效果触发:{1}".format([self, effect.description]))
 		)
+
+## 执行技能
+func cast(context: Dictionary) -> bool:
+	for effect : AbilityEffect in effects:
+		effect.apply_effect(context)
+	return true
+
+## 移除技能
+func remove(context: Dictionary = {}) -> void:
+	_context.merge(context, true)
+	for effect in effects:
+		effect.remove_effect(_context)
 
 func _to_string() -> String:
 	return ability_name

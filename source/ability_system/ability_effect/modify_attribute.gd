@@ -1,12 +1,12 @@
 extends AbilityEffect
-class_name AttributeModifierEffect
+class_name ModifyAttribute
 
 ## 属性修改器的技能效果包装
 
 @export var modifiers : Array[AbilityAttributeModifier]
 @export_storage var modify_multiplier: int = 1
 
-func apply_effect(context: Dictionary = {}) -> void:
+func _apply(context: Dictionary = {}) -> void:
 	var targets : Array = _get_targets(context)
 	var _s = context.get("source")
 	if _s and _s is BuffAbility:
@@ -20,7 +20,7 @@ func apply_effect(context: Dictionary = {}) -> void:
 	super(context)
 
 ## 移除效果
-func remove_effect(context: Dictionary = {}) -> void:
+func _remove(context: Dictionary = {}) -> void:
 	var targets : Array = _get_targets(context)
 	for target in targets:
 		var ability_component: AbilityComponent = target.ability_component
