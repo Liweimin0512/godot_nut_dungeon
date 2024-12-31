@@ -13,6 +13,7 @@ combat_test = ExtResource("2_p2r0i")
 layer = 128
 
 [node name="Control" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,16 +44,20 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PlayerCharacter" parent="." groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
-position = Vector2(311, 164)
+position = Vector2(128, 112)
 character_model = ExtResource("3_3c46g")
 
 [node name="EnemyMarkers" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="EnemyMarkers"]
-position = Vector2(725, 115)
+position = Vector2(320, 88)
 
 [node name="Marker2D2" type="Marker2D" parent="EnemyMarkers"]
-position = Vector2(725, 275)
+position = Vector2(320, 160)
 
 [node name="Marker2D3" type="Marker2D" parent="EnemyMarkers"]
-position = Vector2(725, 415)
+position = Vector2(320, 256)
+
+[node name="MarkerAction" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(224, 128)

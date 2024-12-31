@@ -69,6 +69,7 @@ func _create_combat(combat_model: CombatModel) -> Combat:
 		combat_model.max_turn_count,
 		combat_model.is_auto,
 		combat_model.is_real_time
+		#%MarkerAction,
 	)
 	if combat.is_auto:
 		rich_text_label.text += "战斗开始\n"

@@ -6,9 +6,9 @@ class_name AbilityEffectModifier
 @export var condition : AbilityTriggerCondition
 
 ## 应用
-func apply(context: Dictionary = {}) -> void:
+func apply(_context: Dictionary = {}) -> void:
 	pass
 
 ## 移除
-func remove(context: Dictionary = {}) -> void:
+func remove(_context: Dictionary = {}) -> void:
 	pass
