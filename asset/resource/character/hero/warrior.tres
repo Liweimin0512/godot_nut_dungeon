@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=47 format=3 uid="uid://pnl45yj5lq7s"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=48 format=3 uid="uid://pnl45yj5lq7s"]
 
 [ext_resource type="Script" path="res://source/ability_system/ability/ability.gd" id="1_mukx0"]
 [ext_resource type="Script" path="res://source/ability_system/ability_attribute/ability_attribute.gd" id="2_2pnrl"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://source/ability_system/ability_resource/health_resource.gd" id="12_0ykgn"]
 [ext_resource type="Script" path="res://source/ability_system/ability_resource/rage_resource.gd" id="13_4uwnu"]
 [ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_ability_name.gd" id="14_i0fa0"]
+[ext_resource type="AnimationLibrary" uid="uid://gr6mh723tnyc" path="res://asset/resource/animation/animation_library_warrior.res" id="19_vn20i"]
 
 [sub_resource type="Resource" id="Resource_t0jin"]
 resource_local_to_scene = true
@@ -281,3 +282,5 @@ character_name = &"战士"
 ability_attributes = Array[ExtResource("2_2pnrl")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l"), SubResource("Resource_w4m7k"), SubResource("Resource_1sug7")])
 abilities = Array[ExtResource("1_mukx0")]([SubResource("Resource_jrqsr"), SubResource("Resource_v7ljs"), SubResource("Resource_o2d38"), SubResource("Resource_ijb8k"), SubResource("Resource_f0xqp")])
 ability_resources = Array[ExtResource("3_xp3cv")]([SubResource("Resource_bgern"), SubResource("Resource_5uifr")])
+animation_library = ExtResource("19_vn20i")
+sprite_position = Vector2(5, -57)

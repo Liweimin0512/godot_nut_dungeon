@@ -28,6 +28,9 @@ func _ready() -> void:
 			character_model.abilities
 		)
 		combat_component.initialization(character_camp)
+		animation_player.remove_animation_library("")
+		animation_player.add_animation_library("", character_model.animation_library)
+		$Sprite2D.position = character_model.sprite_position
 	label_name.text = cha_name
 	progress_bar.max_value = ability_component.get_attribute_value("生命值")
 	progress_bar.value = ability_component.get_resource_value("生命值")
@@ -35,6 +38,8 @@ func _ready() -> void:
 		ability_component.get_resource_value("生命值"),
 		ability_component.get_attribute_value("生命值")
 		])
+	if character_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
+		$Sprite2D.flip_h = true
 
 func _on_area_2d_mouse_entered() -> void:
 	print("_on_area_2d_mouse_entered：", self.name)

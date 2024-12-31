@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=55 format=3 uid="uid://4obtwqc0eawy"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=56 format=3 uid="uid://4obtwqc0eawy"]
 
 [ext_resource type="Script" path="res://asset/resource/character/character_model.gd" id="1_jj07w"]
 [ext_resource type="Script" path="res://source/ability_system/ability/ability.gd" id="1_tv87s"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="12_wgg0k"]
 [ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_chance.gd" id="13_1uo3a"]
 [ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_ability_name.gd" id="13_p76ks"]
+[ext_resource type="AnimationLibrary" uid="uid://cjkmf7tw7ssh8" path="res://asset/resource/animation/animation_library_wizard.res" id="19_ei547"]
 
 [sub_resource type="Resource" id="Resource_t0jin"]
 resource_local_to_scene = true
@@ -357,3 +358,5 @@ character_name = &"法师"
 ability_attributes = Array[ExtResource("2_wjvtx")]([SubResource("Resource_e1joa"), SubResource("Resource_gc0bh"), SubResource("Resource_g7ipd"), SubResource("Resource_4anai"), SubResource("Resource_5h64c"), SubResource("Resource_2gihe"), SubResource("Resource_e4jre")])
 abilities = Array[ExtResource("1_tv87s")]([SubResource("Resource_p0ag0"), SubResource("Resource_sryws"), SubResource("Resource_d8now"), SubResource("Resource_xulmi"), SubResource("Resource_e4myo")])
 ability_resources = Array[ExtResource("3_it5yo")]([SubResource("Resource_sw5wc"), SubResource("Resource_klj23")])
+animation_library = ExtResource("19_ei547")
+sprite_position = Vector2(10, -46)

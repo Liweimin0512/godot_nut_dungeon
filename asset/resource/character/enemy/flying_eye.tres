@@ -1,0 +1,94 @@
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=21 format=3 uid="uid://catw463xukx6o"]
+
+[ext_resource type="Script" path="res://source/ability_system/ability/ability.gd" id="1_wfywn"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="2_dj242"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="3_xxgqk"]
+[ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="4_aw5yt"]
+[ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_amy1b"]
+[ext_resource type="Script" path="res://source/ability_system/ability/skill_ability.gd" id="6_wtl27"]
+[ext_resource type="Script" path="res://source/ability_system/ability_attribute/ability_attribute.gd" id="7_hurpf"]
+[ext_resource type="Script" path="res://source/ability_system/ability_resource/ability_resource.gd" id="8_moms6"]
+[ext_resource type="Script" path="res://source/ability_system/ability_resource/health_resource.gd" id="9_xi3hv"]
+[ext_resource type="Script" path="res://asset/resource/character/character_model.gd" id="10_fuogr"]
+[ext_resource type="AnimationLibrary" uid="uid://2n54xto66wk1" path="res://asset/resource/animation/animation_library_flying_eye.res" id="10_oxq6y"]
+
+[sub_resource type="Resource" id="Resource_t0jin"]
+resource_local_to_scene = true
+script = ExtResource("4_aw5yt")
+damage_multiplier = 1.0
+damage_type = 0
+target_type = &""
+target_amount = 1
+trigger_conditions = Array[ExtResource("5_amy1b")]([])
+effect_modifiers = Array[ExtResource("3_xxgqk")]([])
+post_effects = Array[ExtResource("2_dj242")]([])
+
+[sub_resource type="Resource" id="Resource_jrqsr"]
+resource_local_to_scene = true
+script = ExtResource("6_wtl27")
+target_type = &"enemy"
+target_amount = 1
+cost_resource_name = &""
+cost_resource_value = 0
+is_auto_cast = false
+cooldown = 0
+current_cooldown = 0
+cast_time = 0.0
+is_show = true
+sound_effect = &""
+animation = &""
+ability_name = &"普通攻击"
+ability_description = "一次普通攻击，对幼小的心灵造成多么大的伤害！"
+level = 1
+effects = Array[ExtResource("2_dj242")]([SubResource("Resource_t0jin")])
+
+[sub_resource type="Resource" id="Resource_jvqq5"]
+resource_local_to_scene = true
+script = ExtResource("7_hurpf")
+attribute_name = &"生命值"
+_base_value = 100.0
+
+[sub_resource type="Resource" id="Resource_yxhrg"]
+resource_local_to_scene = true
+script = ExtResource("7_hurpf")
+attribute_name = &"攻击力"
+_base_value = 10.0
+
+[sub_resource type="Resource" id="Resource_hvkvg"]
+resource_local_to_scene = true
+script = ExtResource("7_hurpf")
+attribute_name = &"防御力"
+_base_value = 5.0
+
+[sub_resource type="Resource" id="Resource_uqj3l"]
+resource_local_to_scene = true
+script = ExtResource("7_hurpf")
+attribute_name = &"速度"
+_base_value = 5.0
+
+[sub_resource type="Resource" id="Resource_fosf3"]
+script = ExtResource("7_hurpf")
+attribute_name = &"命中率"
+_base_value = 1.0
+
+[sub_resource type="Resource" id="Resource_g3nwv"]
+script = ExtResource("7_hurpf")
+attribute_name = &"暴击率"
+_base_value = 0.0
+
+[sub_resource type="Resource" id="Resource_2k26t"]
+resource_local_to_scene = true
+script = ExtResource("9_xi3hv")
+ability_resource_name = &"生命值"
+current_value = 0
+max_value = 30
+attribute_name = &"生命值"
+
+[resource]
+script = ExtResource("10_fuogr")
+character_name = &"眼魔"
+ability_attributes = Array[ExtResource("7_hurpf")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l"), SubResource("Resource_fosf3"), SubResource("Resource_g3nwv")])
+abilities = Array[ExtResource("1_wfywn")]([SubResource("Resource_jrqsr")])
+ability_resources = Array[ExtResource("8_moms6")]([SubResource("Resource_2k26t")])
+animation_library = ExtResource("10_oxq6y")
+sprite_position = Vector2(-1, -27)

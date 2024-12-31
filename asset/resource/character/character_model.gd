@@ -11,3 +11,7 @@ class_name CharacterModel
 @export var abilities : Array[Ability]
 ## 技能消耗集合
 @export var ability_resources : Array[AbilityResource]
+## 动画库
+@export var animation_library : AnimationLibrary
+## 精灵位置
+@export var sprite_position : Vector2

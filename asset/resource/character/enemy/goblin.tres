@@ -89,3 +89,4 @@ character_name = &"哥布林"
 ability_attributes = Array[ExtResource("2_gfiar")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l"), SubResource("Resource_fosf3"), SubResource("Resource_g3nwv")])
 abilities = Array[ExtResource("1_ckwfc")]([SubResource("Resource_jrqsr")])
 ability_resources = Array[ExtResource("3_yxnkf")]([SubResource("Resource_2k26t")])
+sprite_position = Vector2(1, -26)
