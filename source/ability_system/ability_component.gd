@@ -14,6 +14,8 @@ class_name AbilityComponent
 signal attribute_changed(atr_name: StringName, value: float)
 ## 资源变化时发出
 signal resource_changed(res_name: StringName, value: float)
+## 技能释放前发出
+signal pre_cast(ability: Ability)
 ## 技能释放时发出
 signal ability_cast_finished(ability: Ability)
 
@@ -133,7 +135,8 @@ func get_available_abilities() -> Array[Ability]:
 func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
 	#var caster : Node = context.caster
 	print("ability_component: {0}尝试释放技能：{1}".format([self, ability]))
-	ability.cast(context)
+	pre_cast.emit(ability)
+	await ability.cast(context)
 	print("ability: {0}释放技能：{1}".format([self, ability]))
 	return true
 

@@ -17,6 +17,8 @@ class_name AbilityEffect
 @export var post_effects: Array[AbilityEffect]
 ## 技能效果描述
 var description : String: get = _description_getter
+## 释放子弹
+@export var _bullet_scene : PackedScene
 
 ## 应用技能效果后触发
 signal applied
@@ -30,6 +32,9 @@ func apply_effect(context: Dictionary) -> void:
 	for target in targets:
 		var ct : Dictionary = context
 		ct["targets"] = [target]
+		var bullet := _create_bullect(context.get("caster").owner, target.owner)
+		if bullet and bullet.cast_time + bullet.wait_time > 0:
+			await target.get_tree().create_timer(bullet.cast_time + bullet.wait_time).timeout
 		_apply(ct)
 	applied.emit()
 
@@ -48,6 +53,14 @@ func remove_effect(context: Dictionary) -> void:
 func _remove(context: Dictionary) -> void:
 	for effect in post_effects:
 		effect.remove_effect(context)
+
+## 创建子弹
+func _create_bullect(caster : Node2D, target: Node2D) -> Bullet:
+	if not _bullet_scene: return null
+	var bullet : Bullet = _bullet_scene.instantiate()
+	bullet.target_point = target.global_position
+	caster.add_child(bullet)
+	return bullet
 
 ## 判断条件
 func _check_conditions(context: Dictionary) -> bool:

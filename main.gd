@@ -5,6 +5,7 @@ const CHARACTER = preload("res://source/character.tscn")
 @onready var rich_text_label: RichTextLabel = %RichTextLabel
 @onready var player_character: Character = $PlayerCharacter
 @onready var enemy_markers: Node2D = $EnemyMarkers
+@onready var marker_action: Marker2D = %MarkerAction
 
 @export var combat_test : CombatModel
 
@@ -68,8 +69,8 @@ func _create_combat(combat_model: CombatModel) -> Combat:
 		enemy_combats,
 		combat_model.max_turn_count,
 		combat_model.is_auto,
-		combat_model.is_real_time
-		#%MarkerAction,
+		combat_model.is_real_time,
+		%MarkerAction,
 	)
 	if combat.is_auto:
 		rich_text_label.text += "战斗开始\n"

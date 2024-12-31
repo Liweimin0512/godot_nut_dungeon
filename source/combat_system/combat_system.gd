@@ -11,14 +11,16 @@ func create_combat(
 		enemies : Array[CombatComponent],
 		max_turn_count: int = 99,
 		is_auto := true,
-		is_real_time := true
+		is_real_time := true,
+		marker_action : Marker2D = null,
 	) -> Combat:
 	var combat : Combat = Combat.new(
 		players,
 		enemies,
 		max_turn_count,
 		is_auto,
-		is_real_time
+		is_real_time,
+		marker_action
 	)
 	combat.combat_ended.connect(
 		func() -> void:

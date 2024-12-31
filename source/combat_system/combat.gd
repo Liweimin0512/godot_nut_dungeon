@@ -9,6 +9,8 @@ class_name Combat
 @export var is_auto : bool = true
 ## 是否为实时战斗
 @export var is_real_time: bool = true
+## 开始时间
+@export var start_time: float = 0.5
 
 ## 当前回合计数
 var _turn_count : int = 0
@@ -22,6 +24,8 @@ var player_combats : Array[CombatComponent]
 var enemy_combats: Array[CombatComponent]
 ## 战斗是否停止
 var is_stop := false
+## 行动位置
+var action_marker : Marker2D
 
 ## 战斗开始，自动开始的战斗不会发射此信号
 signal combat_started
@@ -42,12 +46,14 @@ func _init(
 		p_max_turn_count: int = 99,
 		p_is_auto : bool = true,
 		p_is_real_time: bool = true,
+		marker_action : Marker2D = null,
 		) -> void:
 	player_combats = players
 	enemy_combats = enemies
 	max_turn_count = p_max_turn_count
 	is_auto = p_is_auto
 	is_real_time = p_is_real_time
+	action_marker = marker_action
 	if is_auto:
 		_combat_start()
 
@@ -86,6 +92,7 @@ func stop() -> void:
 
 ## 战斗开始
 func _combat_start() -> void:
+	await CombatSystem.get_tree().create_timer(start_time).timeout
 	print("战斗开始！")
 	combat_started.emit()
 	for combat in combats:

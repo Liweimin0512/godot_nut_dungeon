@@ -35,7 +35,7 @@ func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
 func cast(context: Dictionary) -> bool:
 	_context.merge(context, true)
 	for effect : AbilityEffect in effects:
-		effect.apply_effect(_context)
+		await effect.apply_effect(_context)
 	return true
 
 ## 移除技能

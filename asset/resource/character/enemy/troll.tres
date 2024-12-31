@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="CharacterModel" load_steps=20 format=3 uid="uid://cnxi3o3qyig58"]
 
-[ext_resource type="Script" path="res://source/ability_system/ability/ability.gd" id="1_r4hlq"]
-[ext_resource type="Script" path="res://asset/resource/character/character_model.gd" id="1_yvr0l"]
-[ext_resource type="Script" path="res://source/ability_system/ability_attribute/ability_attribute.gd" id="2_8nv5s"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="2_hj7nt"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="3_2iy4h"]
-[ext_resource type="Script" path="res://source/ability_system/ability_resource/ability_resource.gd" id="3_2ltb5"]
-[ext_resource type="Script" path="res://source/ability_system/ability_resource/health_resource.gd" id="4_edw1v"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/deal_damage.gd" id="4_u5csj"]
-[ext_resource type="Script" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_hn2er"]
-[ext_resource type="Script" path="res://source/ability_system/ability/skill_ability.gd" id="5_ljx8s"]
+[ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://source/ability_system/ability/ability.gd" id="1_r4hlq"]
+[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://asset/resource/character/character_model.gd" id="1_yvr0l"]
+[ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://source/ability_system/ability_attribute/ability_attribute.gd" id="2_8nv5s"]
+[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="2_hj7nt"]
+[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="3_2iy4h"]
+[ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://source/ability_system/ability_resource/ability_resource.gd" id="3_2ltb5"]
+[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://source/ability_system/ability_resource/health_resource.gd" id="4_edw1v"]
+[ext_resource type="Script" uid="uid://dhuwnhvd04eqj" path="res://source/ability_system/ability_effect/deal_damage.gd" id="4_u5csj"]
+[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_hn2er"]
+[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://source/ability_system/ability/skill_ability.gd" id="5_ljx8s"]
 
 [sub_resource type="Resource" id="Resource_t0jin"]
 resource_local_to_scene = true
@@ -25,8 +25,8 @@ post_effects = Array[ExtResource("2_hj7nt")]([])
 [sub_resource type="Resource" id="Resource_jrqsr"]
 resource_local_to_scene = true
 script = ExtResource("5_ljx8s")
+cast_count = 1
 target_type = &"enemy"
-target_amount = 1
 cost_resource_name = &""
 cost_resource_value = 0
 is_auto_cast = false
@@ -36,6 +36,7 @@ cast_time = 0.0
 is_show = true
 sound_effect = &""
 animation = &""
+casting_position = 0
 ability_name = &"普通攻击"
 ability_description = "一次普通攻击，对幼小的心灵造成多么大的伤害！"
 level = 1
@@ -89,3 +90,4 @@ character_name = &"巨魔"
 ability_attributes = Array[ExtResource("2_8nv5s")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l"), SubResource("Resource_hdd1h"), SubResource("Resource_e1y5w")])
 abilities = Array[ExtResource("1_r4hlq")]([SubResource("Resource_jrqsr")])
 ability_resources = Array[ExtResource("3_2ltb5")]([SubResource("Resource_hm8qq")])
+sprite_position = Vector2(0, 0)

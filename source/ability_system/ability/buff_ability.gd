@@ -36,7 +36,7 @@ func remove(context: Dictionary = {}) -> void:
 
 ## 执行技能
 func cast(context: Dictionary) -> bool:
-	return super(context)
+	return await super(context)
 
 func _to_string() -> String:
 	return "{0}层数{1}".format([ability_name, value])
