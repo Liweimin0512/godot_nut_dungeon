@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=9 format=3 uid="uid://c4s7gbk66xo5y"]
+[gd_resource type="Resource" script_class="SkillAbility" load_steps=10 format=3 uid="uid://c4s7gbk66xo5y"]
 
 [ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_1p2kw"]
 [ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_1ue4e"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dhuwnhvd04eqj" path="res://source/ability_system/ability_effect/deal_damage.gd" id="3_oxfjt"]
 [ext_resource type="Script" uid="uid://b0cmyrktakacv" path="res://source/ability_system/ability_effect/apply_ability.gd" id="4_hupoy"]
 [ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="4_iwf14"]
+[ext_resource type="Resource" uid="uid://r6bnasc2r03p" path="res://asset/resource/ability/buff_ability/ignite.tres" id="5_s27qq"]
 
 [sub_resource type="Resource" id="Resource_xthqw"]
 resource_local_to_scene = true
@@ -20,6 +21,7 @@ post_effects = Array[ExtResource("1_1p2kw")]([])
 
 [sub_resource type="Resource" id="Resource_k4nyb"]
 script = ExtResource("4_hupoy")
+ability = ExtResource("5_s27qq")
 target_type = &""
 target_amount = 1
 trigger_conditions = Array[ExtResource("4_iwf14")]([])

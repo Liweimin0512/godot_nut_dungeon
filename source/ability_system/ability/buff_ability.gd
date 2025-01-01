@@ -11,9 +11,14 @@ class_name BuffAbility
 ## 是否永久, 永久指持续到战斗结束
 @export var is_permanent: bool = false
 ## buff值，含义取决于BUFF类型，数值型代表层数，持续型代表持续时间
-@export var value: int
+@export var value: int:
+	set(v):
+		value = v
+		value_changed.emit(value)
 ## 是否允许堆叠
 @export var can_stack : bool = false
+
+signal value_changed(value: int)
 
 ## 应用技能
 func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
