@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://uc3pasu1ybw6"]
+
+[ext_resource type="PackedScene" uid="uid://fkcpemhbqhv8" path="res://source/bullet.tscn" id="1_jur3u"]
+[ext_resource type="SpriteFrames" uid="uid://cahryn3qt4xds" path="res://asset/resource/sprite_frames/arcane_missiles.tres" id="2_qg33g"]
+
+[node name="BulletArcaneMissiles" instance=ExtResource("1_jur3u")]
+sprite_frames = ExtResource("2_qg33g")
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = ExtResource("2_qg33g")
+frame = 11
+frame_progress = 1.0

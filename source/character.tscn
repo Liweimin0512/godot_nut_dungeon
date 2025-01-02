@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cokqr3cv3dqo6"]
+[gd_scene load_steps=8 format=3 uid="uid://cokqr3cv3dqo6"]
 
-[ext_resource type="Script" path="res://source/character.gd" id="1_qu267"]
-[ext_resource type="Script" path="res://source/combat_system/combat_component.gd" id="2_ghtna"]
-[ext_resource type="Script" path="res://source/ability_system/ability_component.gd" id="3_6a5vl"]
+[ext_resource type="Script" uid="uid://fiui5aclg2tx" path="res://source/character.gd" id="1_qu267"]
+[ext_resource type="Script" uid="uid://dbexhgs82b3dp" path="res://source/combat_system/combat_component.gd" id="2_ghtna"]
+[ext_resource type="Script" uid="uid://ptdxyqtjcko2" path="res://source/ability_system/ability_component.gd" id="3_6a5vl"]
 [ext_resource type="Texture2D" uid="uid://d2444c4t2hu45" path="res://asset/texture/character/warrior/Idle.png" id="4_hx8tt"]
-[ext_resource type="AnimationLibrary" uid="uid://cjkmf7tw7ssh8" path="res://asset/resource/animation/animation_library_wizard.res" id="5_bj5aw"]
+[ext_resource type="AnimationLibrary" uid="uid://2n54xto66wk1" path="res://asset/resource/animation/animation_library_flying_eye.res" id="5_t4yvb"]
+[ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://source/widget/w_status.tscn" id="6_cj4oh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnpp6"]
 size = Vector2(151, 154)
@@ -14,8 +15,15 @@ script = ExtResource("1_qu267")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(10, -46)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_hx8tt")
 hframes = 6
+
+[node name="W_Status" parent="." instance=ExtResource("6_cj4oh")]
+offset_left = -37.0
+offset_top = 6.0
+offset_right = 43.0
+offset_bottom = 34.0
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
@@ -24,55 +32,38 @@ visible = false
 position = Vector2(65.5, 67)
 shape = SubResource("RectangleShape2D_gnpp6")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-visible = false
-custom_minimum_size = Vector2(128, 128)
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Panel" type="Panel" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="LabelName" type="Label" parent="MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="LabelAction" type="Label" parent="MarginContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer"]
-layout_mode = 2
-show_percentage = false
-
-[node name="LabelHealth" type="Label" parent="MarginContainer/ProgressBar"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "99/99"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="CombatComponent" type="Node" parent="."]
 script = ExtResource("2_ghtna")
+action_time = 0.3
 
 [node name="AbilityComponent" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_6a5vl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
-"": ExtResource("5_bj5aw")
+&"": ExtResource("5_t4yvb")
 }
 autoplay = "idle"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+offset_left = -26.0
+offset_top = -103.0
+offset_right = 38.0
+offset_bottom = -63.0
+
+[node name="LabelAbility" type="Label" parent="MarginContainer2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "技能名称"
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="died" from="CombatComponent" to="." method="_on_combat_component_died"]
 [connection signal="hited" from="CombatComponent" to="." method="_on_combat_component_hited"]
 [connection signal="hurted" from="CombatComponent" to="." method="_on_combat_component_hurted"]
+[connection signal="pre_cast" from="AbilityComponent" to="." method="_on_ability_component_pre_cast"]
 [connection signal="resource_changed" from="AbilityComponent" to="." method="_on_ability_component_resource_changed"]

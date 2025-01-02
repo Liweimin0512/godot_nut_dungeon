@@ -82,20 +82,25 @@ func action() -> void:
 			"targets" : targets,
 			"ability" : ability,
 		}
-		_pre_action(ability_context)
+		await _pre_action(ability_context)
 		var ok := await ability_component.try_cast_ability(ability, ability_context)
 		if not ok:
 			print("combat_component: {0} 释放技能失败".format([self]))
-		#await get_tree().create_timer(action_time).timeout
-		_post_action(ability_context)
+		await _post_action(ability_context)
 
 ## 行动前
 func _pre_action(ability_context: Dictionary) -> void:
 	ability_component.handle_game_event("on_pre_action", ability_context)
+	var ability : Ability = ability_context.get("ability")
+	_move_to_action(ability_context)
+	await get_tree().create_timer(action_time).timeout
 
 ## 行动后
 func _post_action(ability_context: Dictionary) -> void:
 	ability_component.handle_game_event("on_post_action", ability_context)
+	var ability : Ability = ability_context.get("ability")
+	_move_from_action()
+	await get_tree().create_timer(action_time).timeout
 
 ## 回合结束
 func turn_end() -> void:
@@ -141,6 +146,7 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 	var health_value : float = ability_component.get_resource_value("生命值")
 	if health_value <= 0:
 		_die()
+	hurted.emit(damage.damage_value)
 
 ## 死亡
 func _die() -> void:
@@ -159,6 +165,7 @@ func _get_ability_targets(ability : Ability) -> Array[CombatComponent]:
 	# 现阶段可以简化处理，直接获取随机目标
 	var targets : Array[CombatComponent] = []  # 使用 := 进行类型推断和变量初始化
 	var target_pool := []  # 统一的数组来存储目标池
+	if ability.target_type.is_empty(): return []
 	# 根据目标类型确定目标池
 	if ability.target_type == "self":
 		return [self]
@@ -166,14 +173,43 @@ func _get_ability_targets(ability : Ability) -> Array[CombatComponent]:
 		target_pool = _current_combat.get_all_allies(self).duplicate()
 	elif ability.target_type == "enemy":
 		target_pool = _current_combat.get_all_enemies(self).duplicate()
-	# 从目标池中随机选择目标
-	for i in range(ability.target_amount):
-		if target_pool.is_empty():
-			break  # 如果目标池为空，退出循环
-		var target : Node = target_pool.pick_random()
-		targets.append(target)
-		target_pool.erase(target)  # 从目标池中移除已选目标
+	var target : Node = target_pool.pick_random()
+	targets.append(target)
+	#target_pool.erase(target)  # 从目标池中移除已选目标
 	return targets
+
+## 移动到行动位置
+func _move_to_action(ability_context: Dictionary) -> void:
+	if not _current_combat or not _current_combat.action_marker : return
+	if not has_meta("global_position"): set_meta("global_position", owner.global_position)
+	var target_point := _get_action_point(ability_context)
+	create_tween().tween_property(owner, "global_position", target_point, action_time)
+	
+## 移动回原位置
+func _move_from_action() -> void:
+	var point : Vector2 = get_meta("global_position")
+	create_tween().tween_property(owner, "global_position", point, action_time)
+
+## 获取行动位置
+func _get_action_point(ability_context: Dictionary) -> Vector2:
+	var point : Vector2
+	if ability_context.get("targets").is_empty(): 
+		point = _current_combat.action_marker.position
+	else:
+		var ability: SkillAbility = ability_context.get("ability")
+		var target: Node2D = ability_context.get("targets")[0].owner
+		match ability.casting_position:
+			AbilityDefinition.CASTING_POSITION.MELEE:
+				point = target.global_position + (Vector2(-50, 0) if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else Vector2(50, 0))
+			AbilityDefinition.CASTING_POSITION.BEHINDENEMY:
+				point = target.global_position + (Vector2(50, 0) if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else Vector2(-50, 0))
+			_:
+				point = _current_combat.action_marker.position
+	return point
+
+## 播放动画
+func play_action_animation(animation_name : StringName) -> void:
+	%AnimationPlayer.play(animation_name)
 
 ## 获取技能上下文
 func _get_ability_context() -> Dictionary:

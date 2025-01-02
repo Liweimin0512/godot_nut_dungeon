@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="CombatModel" load_steps=4 format=3 uid="uid://bshhcvu884gan"]
+[gd_resource type="Resource" script_class="CombatModel" load_steps=6 format=3 uid="uid://bshhcvu884gan"]
 
 [ext_resource type="Script" uid="uid://h32tcvh6t4tc" path="res://asset/resource/character/character_model.gd" id="1_hckfi"]
-[ext_resource type="Resource" uid="uid://catw463xukx6o" path="res://asset/resource/character/enemy/flying_eye.tres" id="2_fahrs"]
+[ext_resource type="Resource" uid="uid://cqc630jp2v4jy" path="res://asset/resource/character/enemy/flying_eye.tres" id="2_fahrs"]
 [ext_resource type="Script" uid="uid://dkcw1f5e3f233" path="res://asset/resource/combat/combat_model.gd" id="2_jdrd6"]
+[ext_resource type="Resource" uid="uid://dusj10wryboti" path="res://asset/resource/character/enemy/goblin.tres" id="3_1th36"]
+[ext_resource type="Resource" uid="uid://cudg3bsvfej7w" path="res://asset/resource/character/enemy/mushroom.tres" id="4_a5ja3"]
 
 [resource]
 script = ExtResource("2_jdrd6")
 max_turn_count = 99
-enemies = Array[ExtResource("1_hckfi")]([ExtResource("2_fahrs")])
+enemies = Array[ExtResource("1_hckfi")]([ExtResource("2_fahrs"), ExtResource("3_1th36"), ExtResource("4_a5ja3")])
 is_auto = true
 is_real_time = true

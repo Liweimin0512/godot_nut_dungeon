@@ -1,30 +1,36 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=6 format=3 uid="uid://beqppdym756qn"]
+[gd_resource type="Resource" script_class="SkillAbility" load_steps=8 format=3 uid="uid://beqppdym756qn"]
 
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_uvjij"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_0sh4o"]
-[ext_resource type="Script" path="res://source/ability_system/ability/skill_ability.gd" id="2_mx4xx"]
-[ext_resource type="Script" path="res://source/ability_system/ability_effect/apply_ability.gd" id="3_drh0i"]
+[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_uvjij"]
+[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_0sh4o"]
+[ext_resource type="Resource" uid="uid://cd7qfemfd5dhe" path="res://asset/resource/ability/buff_ability/battle_cry.tres" id="2_ft7rk"]
+[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://source/ability_system/ability/skill_ability.gd" id="2_mx4xx"]
+[ext_resource type="Script" uid="uid://b0cmyrktakacv" path="res://source/ability_system/ability_effect/apply_ability.gd" id="3_drh0i"]
+[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_bo1em"]
 
 [sub_resource type="Resource" id="Resource_k44m4"]
 script = ExtResource("3_drh0i")
+ability = ExtResource("2_ft7rk")
 target_type = &""
 target_amount = 1
+trigger_conditions = Array[ExtResource("5_bo1em")]([])
 effect_modifiers = Array[ExtResource("2_0sh4o")]([])
 post_effects = Array[ExtResource("1_uvjij")]([])
 
 [resource]
 script = ExtResource("2_mx4xx")
+cast_count = 1
 target_type = &"ally"
-target_amount = 10
 cost_resource_name = &"怒气"
 cost_resource_value = 25
 is_auto_cast = false
 cooldown = 3
 current_cooldown = 0
-cast_time = 0.0
+pre_cast_time = 0.4
+post_cast_time = 0.4
 is_show = true
 sound_effect = &""
 animation = &""
+casting_position = 0
 ability_name = &"战吼"
 ability_description = "发出怒吼，激励自己和周围的盟友。"
 level = 1

@@ -14,8 +14,14 @@ class_name AbilityResource
 @export var max_value: int:
 	set(value):
 		max_value = value
+		max_value_changed.emit(current_value, max_value)
 ## 所对应的属性名称
 @export var attribute_name : StringName
+## 属性颜色，显示在进度条上
+@export var resource_color : Color = Color.RED
+## 属性进度条高度
+@export var size_y : int = 10
+
 ## 是否为空的
 var is_empty : bool:
 	get:
@@ -29,6 +35,8 @@ var _attribute : AbilityAttribute
 
 ## 当前值改变时发射
 signal current_value_changed(value : int)
+## 最大值改变时发射
+signal max_value_changed(value: int, max_value: int)
 
 ## ability_component的initialization
 func initialization(ability_component: AbilityComponent) -> void:

@@ -14,8 +14,14 @@ class_name AbilityComponent
 signal attribute_changed(atr_name: StringName, value: float)
 ## 资源变化时发出
 signal resource_changed(res_name: StringName, value: float)
+## 技能释放前发出
+signal pre_cast(ability: Ability)
 ## 技能释放时发出
 signal ability_cast_finished(ability: Ability)
+## 技能应用触发
+signal ability_applied(ability: Ability)
+## 技能移除触发
+signal ability_removed(ability: Ability)
 
 ## 组件初始化
 func initialization(
@@ -111,6 +117,13 @@ func consume_resources(res_name: StringName, cost: int) -> bool:
 		return res.consume(cost)
 	return false
 
+## 获取所有资源
+func get_resources() -> Array[AbilityResource]:
+	var _resources : Array[AbilityResource]
+	for res : AbilityResource in _ability_resources.values():
+		_resources.append(res)
+	return _resources
+
 ## 触发资源回调
 func _handle_resource_callback(callback_name: StringName, context : Dictionary) -> void:
 	for res : AbilityResource in _ability_resources.values():
@@ -133,7 +146,8 @@ func get_available_abilities() -> Array[Ability]:
 func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
 	#var caster : Node = context.caster
 	print("ability_component: {0}尝试释放技能：{1}".format([self, ability]))
-	ability.cast(context)
+	pre_cast.emit(ability)
+	await ability.cast(context)
 	print("ability: {0}释放技能：{1}".format([self, ability]))
 	return true
 
@@ -147,6 +161,7 @@ func update_ability_cooldown() -> void:
 func apply_ability(ability: Ability, ability_context: Dictionary) -> void:
 	ability.apply(self, ability_context)
 	_abilities[ability.ability_name] = ability
+	ability_applied.emit(ability)
 
 ## 移除技能
 func remove_ability(ability: Ability, ability_context: Dictionary = {}) -> void:
@@ -154,6 +169,7 @@ func remove_ability(ability: Ability, ability_context: Dictionary = {}) -> void:
 	var key : StringName = _abilities.find_key(ability)
 	if key: _abilities.erase(key)
 	print("移除Ability：", ability)
+	ability_removed.emit(ability)
 
 ## 获取BUFF技能
 func get_buff_ability(buff_name : StringName) -> BuffAbility:

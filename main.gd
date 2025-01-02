@@ -5,6 +5,7 @@ const CHARACTER = preload("res://source/character.tscn")
 @onready var rich_text_label: RichTextLabel = %RichTextLabel
 @onready var player_character: Character = $PlayerCharacter
 @onready var enemy_markers: Node2D = $EnemyMarkers
+@onready var marker_action: Marker2D = %MarkerAction
 
 @export var combat_test : CombatModel
 
@@ -62,14 +63,17 @@ func _create_combat(combat_model: CombatModel) -> Combat:
 		# 这一步一定要在添加场景树之后，否则combat_component为空
 		enemy_combats.append(enemy.combat_component)
 		index += 1
+	var player_combats: Array[CombatComponent]
+	for player : Character in get_tree().get_nodes_in_group("Player"):
+		player_combats.append(player.combat_component)
 	## 假设我们在开始时创建一场战斗，并将其作为当前存在的唯一战斗
 	var combat : Combat = CombatSystem.create_combat(
-		[player_character.combat_component],
+		player_combats,
 		enemy_combats,
 		combat_model.max_turn_count,
 		combat_model.is_auto,
-		combat_model.is_real_time
-		#%MarkerAction,
+		combat_model.is_real_time,
+		%MarkerAction,
 	)
 	if combat.is_auto:
 		rich_text_label.text += "战斗开始\n"
