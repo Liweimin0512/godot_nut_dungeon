@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://cokqr3cv3dqo6"]
 
-[ext_resource type="Script" uid="uid://fiui5aclg2tx" path="res://source/character.gd" id="1_qu267"]
-[ext_resource type="Script" uid="uid://dbexhgs82b3dp" path="res://source/combat_system/combat_component.gd" id="2_ghtna"]
-[ext_resource type="Script" uid="uid://ptdxyqtjcko2" path="res://source/ability_system/ability_component.gd" id="3_6a5vl"]
-[ext_resource type="Texture2D" uid="uid://d2444c4t2hu45" path="res://asset/texture/character/warrior/Idle.png" id="4_hx8tt"]
-[ext_resource type="AnimationLibrary" uid="uid://2n54xto66wk1" path="res://asset/resource/animation/animation_library_flying_eye.res" id="5_t4yvb"]
+[ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://source/character.gd" id="1_qu267"]
+[ext_resource type="Texture2D" uid="uid://chw4fofu6gtjx" path="res://asset/texture/character/hero/water_priestess/death.png" id="2_cj4oh"]
+[ext_resource type="Script" uid="uid://y1mgjyqenlv7" path="res://source/combat_system/combat_component.gd" id="2_ghtna"]
+[ext_resource type="Script" uid="uid://n67wyu14blxx" path="res://source/ability_system/ability_component.gd" id="3_6a5vl"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://source/widget/w_status.tscn" id="6_cj4oh"]
+[ext_resource type="AnimationLibrary" uid="uid://bp770obkpa13y" path="res://asset/resource/animation/animation_library_assassin.res" id="6_g8e5i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnpp6"]
 size = Vector2(151, 154)
@@ -14,10 +14,11 @@ size = Vector2(151, 154)
 script = ExtResource("1_qu267")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(10, -46)
+position = Vector2(9.53674e-07, -48)
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("4_hx8tt")
-hframes = 6
+texture = ExtResource("2_cj4oh")
+hframes = 14
+frame = 5
 
 [node name="W_Status" parent="." instance=ExtResource("6_cj4oh")]
 offset_left = -37.0
@@ -43,7 +44,7 @@ script = ExtResource("3_6a5vl")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-&"": ExtResource("5_t4yvb")
+&"": ExtResource("6_g8e5i")
 }
 autoplay = "idle"
 
