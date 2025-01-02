@@ -21,6 +21,8 @@ var _current_combat: Combat
 var _combat_owner_name : StringName : 
 	get:
 		return self.to_string()
+## 行动耗时
+@export var action_time : float = 0.5
 
 signal hited(target: CombatComponent)
 signal hurted(damage: int)
@@ -68,6 +70,7 @@ func action() -> void:
 	if not ability:
 		print("combat_component: 无可用技能，跳过{0}的回合".format([self]))
 	else:
+		#await get_tree().create_timer(action_time).timeout
 		var targets := _get_ability_targets(ability)
 		print("combat_component: {0} 尝试释放技能{1}".format([
 			self, ability
@@ -83,6 +86,7 @@ func action() -> void:
 		var ok := await ability_component.try_cast_ability(ability, ability_context)
 		if not ok:
 			print("combat_component: {0} 释放技能失败".format([self]))
+		#await get_tree().create_timer(action_time).timeout
 		_post_action(ability_context)
 
 ## 行动前
