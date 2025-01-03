@@ -1,30 +1,16 @@
-[gd_resource type="Resource" script_class="BuffAbility" load_steps=8 format=3 uid="uid://bnribbjurhd1f"]
+[gd_resource type="Resource" script_class="TurnBasedBuffAbility" load_steps=3 format=3 uid="uid://bnribbjurhd1f"]
 
-[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_3bjyb"]
-[ext_resource type="Script" uid="uid://c1olb7jgy5d6c" path="res://addons/godot_gameplay_ability_system/source/ability/buff_ability.gd" id="2_mhmho"]
-[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_modifier.gd" id="2_rt1j0"]
-[ext_resource type="Script" uid="uid://do4wvq55lt22v" path="res://addons/godot_gameplay_ability_system/source/ability_effect/apply_tag.gd" id="3_u77ju"]
-[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger_condition.gd" id="4_7rshb"]
-[ext_resource type="Texture2D" uid="uid://bwpjhtc383kf5" path="res://asset/texture/icon/Debuffs/stunned.png" id="5_coj5v"]
-
-[sub_resource type="Resource" id="Resource_4qnyr"]
-script = ExtResource("3_u77ju")
-tag_type = "stun"
-target_type = &"self"
-target_amount = 1
-trigger_conditions = Array[ExtResource("4_7rshb")]([])
-effect_modifiers = Array[ExtResource("2_rt1j0")]([])
-post_effects = Array[ExtResource("1_3bjyb")]([])
+[ext_resource type="Script" path="res://addons/godot_gameplay_ability_system/source/ability_effect/ability_effect.gd" id="1_juct3"]
+[ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://source/combat_system/ability/turn_based_buff_ability.gd" id="2_sii1e"]
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("2_mhmho")
+script = ExtResource("2_sii1e")
 buff_type = 1
 is_permanent = false
 value = 2
 can_stack = true
 ability_name = &"眩晕"
 ability_description = "目标在眩晕状态下无法进行任何行动"
-icon = ExtResource("5_coj5v")
 level = 1
-effects = Array[ExtResource("1_3bjyb")]([SubResource("Resource_4qnyr")])
+effects = Array[ExtResource("1_juct3")]([])

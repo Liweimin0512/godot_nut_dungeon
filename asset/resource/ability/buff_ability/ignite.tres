@@ -1,37 +1,15 @@
-[gd_resource type="Resource" script_class="BuffAbility" load_steps=10 format=3 uid="uid://r6bnasc2r03p"]
+[gd_resource type="Resource" script_class="TurnBasedBuffAbility" load_steps=3 format=3 uid="uid://r6bnasc2r03p"]
 
-[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_ljvbp"]
-[ext_resource type="Script" uid="uid://c1olb7jgy5d6c" path="res://addons/godot_gameplay_ability_system/source/ability/buff_ability.gd" id="2_n42rh"]
-[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_modifier.gd" id="2_ru7ob"]
-[ext_resource type="Script" uid="uid://dhuwnhvd04eqj" path="res://addons/godot_gameplay_ability_system/source/ability_effect/deal_damage.gd" id="3_4hn2m"]
-[ext_resource type="Texture2D" uid="uid://dkigaplwdmk5n" path="res://asset/texture/icon/Debuffs/on_fire_(burning).png" id="5_g5io6"]
-[ext_resource type="Script" uid="uid://crhc3v50y064u" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger.gd" id="5_joxuf"]
-[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger_condition.gd" id="6_aligd"]
-
-[sub_resource type="Resource" id="Resource_bv5bf"]
-script = ExtResource("3_4hn2m")
-damage_multiplier = 0.2
-damage_type = 0
-target_type = &""
-target_amount = 1
-trigger_conditions = Array[ExtResource("6_aligd")]([])
-effect_modifiers = Array[ExtResource("2_ru7ob")]([])
-post_effects = Array[ExtResource("1_ljvbp")]([])
-
-[sub_resource type="Resource" id="Resource_c87po"]
-script = ExtResource("5_joxuf")
-trigger_type = &"on_turn_end"
-trigger_conditions = Array[ExtResource("6_aligd")]([])
+[ext_resource type="Script" path="res://addons/godot_gameplay_ability_system/source/ability_effect/ability_effect.gd" id="1_83gda"]
+[ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://source/combat_system/ability/turn_based_buff_ability.gd" id="2_qjskh"]
 
 [resource]
-script = ExtResource("2_n42rh")
-buff_type = 1
+script = ExtResource("2_qjskh")
+buff_type = 0
 is_permanent = false
-value = 2
-can_stack = true
-ability_name = &"点燃"
-ability_description = "每回合结束时，对目标造成额外的20%魔法攻击力的伤害"
-icon = ExtResource("5_g5io6")
-trigger = SubResource("Resource_c87po")
+value = 0
+can_stack = false
+ability_name = &""
+ability_description = ""
 level = 1
-effects = Array[ExtResource("1_ljvbp")]([SubResource("Resource_bv5bf")])
+effects = Array[ExtResource("1_83gda")]([])

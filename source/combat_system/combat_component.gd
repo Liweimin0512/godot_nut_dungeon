@@ -48,8 +48,9 @@ func combat_start(combat: Combat) -> void:
 
 ## 回合开始前
 func pre_turn_start() -> void:
-	ability_component.update_ability_cooldown()
-	ability_component.update_buffs()
+	# ability_component.update_ability_cooldown()
+	# ability_component.update_buffs()
+	ability_component.handle_game_event("on_pre_turn_start")
 
 ## 回合开始
 func turn_start() -> void:
@@ -68,7 +69,7 @@ func action() -> void:
 		print(self, "当前处于眩晕状态，无法动！跳过本回合！")
 		return
 	print("combat_component: {0} 行动".format([self]))
-	var ability: Ability = ability_component.get_available_abilities().pick_random()
+	var ability: Ability = _get_available_abilities().pick_random()
 	if not ability:
 		print("combat_component: 无可用技能，跳过{0}的回合".format([self]))
 	else:
@@ -216,6 +217,20 @@ func play_action_animation(animation_name : StringName) -> void:
 ## 获取技能上下文
 func _get_ability_context() -> Dictionary:
 	return {"caster" : self}
+
+## 获取可用主动技能
+func _get_available_abilities() -> Array[Ability]:
+	var available_abilities : Array[Ability] = []
+	for ability in ability_component.get_abilities():
+		if ability is SkillAbility and _is_ability_available(ability):
+			available_abilities.append(ability as SkillAbility)
+	return available_abilities
+
+## 判断技能是否可用
+func _is_ability_available(ability: Ability) -> bool:
+	if not ability is SkillAbility: return false
+	## 这个方法用来筛选哪些可用的主动技能
+	return not ability.is_cooldown and not ability.is_auto_cast and ability_component.has_enough_resources(ability.cost_resource_name, ability.cost_resource_value)
 
 func _to_string() -> String:
 	return owner.to_string()

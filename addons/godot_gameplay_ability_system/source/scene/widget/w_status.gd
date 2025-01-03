@@ -1,8 +1,8 @@
 extends Node
 class_name W_Status
 
-const W_BUFF = preload("res://source/widget/w_buff.tscn")
-const W_ABILITY_RESOURCE = preload("res://source/widget/w_ability_resource.tscn")
+const W_BUFF = preload("res://addons/godot_gameplay_ability_system/source/scene/widget/w_buff.tscn")
+const W_ABILITY_RESOURCE = preload("res://addons/godot_gameplay_ability_system/source/scene/widget/w_ability_resource.tscn")
 
 @onready var v_box_container: VBoxContainer = %VBoxContainer
 @onready var w_buff_container: MarginContainer = %W_BuffContainer

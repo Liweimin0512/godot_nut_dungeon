@@ -8,7 +8,7 @@ enum ATTRIBUTE_MODIFIER_TYPE{
 	NONE,
 	VALUE,		## 修改值
 	PERCENTAGE,	## 百分比
-	ABSOLUTE		## 绝对值
+	ABSOLUTE	## 绝对值
 }
 
 ## BUFF类型

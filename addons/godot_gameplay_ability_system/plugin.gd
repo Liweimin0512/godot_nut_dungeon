@@ -22,7 +22,6 @@ func _register_custom_types() -> void:
 	add_custom_type("AbilityEffect", "Resource", preload("source/core/ability_effect.gd"), preload("icons/effect.svg"))
 	add_custom_type("AbilityAttribute", "Resource", preload("source/core/ability_attribute.gd"), preload("icons/attribute.svg"))
 
-
 func _unregister_custom_types() -> void:
 	# 移除注册的类型
 	remove_custom_type("AbilityComponent")

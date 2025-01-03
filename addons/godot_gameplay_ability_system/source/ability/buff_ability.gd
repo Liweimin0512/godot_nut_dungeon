@@ -23,13 +23,13 @@ signal value_changed(value: int)
 ## 应用技能
 func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
 	var ability_context : Dictionary = context
-	var _buff := ability_component.get_buff_ability(ability_name)
+	var _buff := ability_component.get_ability(_get_buff_name())
 	if _buff:
 		ability_component.remove_ability(_buff)
 		if _buff.buff_type == AbilityDefinition.BUFF_TYPE.DURATION or _buff.can_stack:
 			value += _buff.value
 	ability_context["source"] = self
-	ability_name = "buff:" + ability_name
+	ability_name = "buff_" + ability_name
 	print("应用BUFF：", self)
 	if not trigger:
 		ability_component.try_cast_ability(self, context)
@@ -42,6 +42,22 @@ func remove(context: Dictionary = {}) -> void:
 ## 执行技能
 func cast(context: Dictionary) -> bool:
 	return await super(context)
+
+## 更新BUFF状态
+func update() -> void:
+	print("更新{0} BUFF状态".format([self]))
+	if buff_type == AbilityDefinition.BUFF_TYPE.VALUE:
+		if not is_permanent: _ability_component.remove_ability(self, _context)
+	elif buff_type == AbilityDefinition.BUFF_TYPE.DURATION:
+		if not is_permanent:
+			value -= 1
+			if value <= 0:
+				_ability_component.remove_ability(self, _context)
+	print("更新buff {0} 的状态，完成！ 当前层数{1}".format([self, value]))
+
+## 获取BUFF名
+func _get_buff_name() -> StringName:
+	return "buff_" + ability_name
 
 func _to_string() -> String:
 	return "{0}层数{1}".format([ability_name, value])

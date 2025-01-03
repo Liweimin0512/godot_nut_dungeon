@@ -138,20 +138,16 @@ func _handle_resource_callback(callback_name: StringName, context : Dictionary) 
 
 #region 技能相关
 
+## 获取技能
+func get_ability(ability_name: StringName) -> Ability:
+	return _abilities.get(ability_name)
+
 ## 获取全部技能
 func get_abilities() -> Array[Ability]:
 	var abilities : Array[Ability] = []
 	for ability : Ability in _abilities.values():
 		abilities.append(ability)
 	return abilities
-
-## 获取可用主动技能
-func get_available_abilities() -> Array[Ability]:
-	var available_abilities : Array[Ability] = []
-	for ability in _abilities.values():
-		if ability is SkillAbility and _is_ability_available(ability):
-			available_abilities.append(ability as SkillAbility)
-	return available_abilities
 
 ## 尝试释放技能
 func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
@@ -161,12 +157,6 @@ func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
 	await ability.cast(context)
 	print("ability: {0}释放技能：{1}".format([self, ability]))
 	return true
-
-## 更新技能冷却计时，在回合开始前
-func update_ability_cooldown() -> void:
-	for ability : Ability in _abilities.values():
-		if ability is SkillAbility:
-			ability.update_cooldown()
 
 ## 应用技能
 func apply_ability(ability: Ability, ability_context: Dictionary) -> void:
@@ -182,48 +172,6 @@ func remove_ability(ability: Ability, ability_context: Dictionary = {}) -> void:
 	print("移除Ability：", ability)
 	ability_removed.emit(ability)
 
-## 获取BUFF技能
-func get_buff_ability(buff_name : StringName) -> BuffAbility:
-	var ability_name : StringName = "buff:" + buff_name
-	for ability in _abilities.values():
-		if ability is BuffAbility and ability.ability_name == ability_name:
-			return ability
-	return null
-
-## 获取SKILL技能
-func get_skill_ability(skill_name : StringName) -> SkillAbility:
-	for ability in _abilities.values():
-		if ability is SkillAbility and ability.ability_name	 == skill_name:
-			return ability
-	return null
-
-## 获取所有BUFF技能
-func get_buffs() -> Array[BuffAbility]:
-	var buffs: Array[BuffAbility] = []
-	for ability in _abilities.values():
-		if ability is BuffAbility:
-			buffs.append(ability as BuffAbility)
-	return buffs
-
-## 更新BUFF状态
-func update_buffs() -> void:
-	print("更新{0} BUFF状态".format([self]))
-	for buff in get_buffs():
-		if buff.buff_type == AbilityDefinition.BUFF_TYPE.VALUE:
-			if not buff.is_permanent: remove_ability(buff)
-		elif buff.buff_type == AbilityDefinition.BUFF_TYPE.DURATION:
-			if not buff.is_permanent:
-				buff.value -= 1
-				if buff.value <= 0:
-					remove_ability(buff)
-		print("更新buff {0} 的状态，完成！ 当前层数{1}".format([buff, buff.value]))
-
-## 判断技能是否可用
-func _is_ability_available(ability: Ability) -> bool:
-	if not ability is SkillAbility: return false
-	## 这个方法用来筛选哪些可用的主动技能
-	return not ability.is_cooldown and not ability.is_auto_cast and has_enough_resources(ability.cost_resource_name, ability.cost_resource_value)
-
 #endregion
 
 ## 处理游戏事件
@@ -235,6 +183,8 @@ func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -
 			if ability.trigger.check(event_context):
 				print("处理游戏事件：{0}，事件上下文{1}，触发技能{2}".format([event_name, event_context, ability]))
 				await try_cast_ability(ability, event_context)
+		if ability.has_method(event_name):
+			ability.call(event_name, event_context)
 
 ## 应用伤害
 func apply_damage(damage: AbilityDamage) -> void:
