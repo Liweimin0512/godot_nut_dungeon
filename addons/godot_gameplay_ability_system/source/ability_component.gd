@@ -4,11 +4,11 @@ class_name AbilityComponent
 ## 技能组件，管理技能属性，技能资源，技能（BUFF、SKILL）等
 
 ## 技能属性集
-@export var _ability_attributes : Dictionary
+@export var _ability_attributes : Dictionary[StringName, AbilityAttribute]
 ## 当前单位所有的技能消耗资源，同名资源是单例
-@export var _ability_resources : Dictionary
+@export var _ability_resources : Dictionary[StringName, AbilityResource]
 ## 当前单位所拥有的全部技能（包括BUFF）
-@export var _abilities : Dictionary
+@export var _abilities : Dictionary[StringName, Ability]
 
 ## 属性变化时发出
 signal attribute_changed(atr_name: StringName, value: float)
@@ -138,9 +138,10 @@ func _handle_resource_callback(callback_name: StringName, context : Dictionary) 
 
 #region 技能相关
 
-## 获取技能
-func get_ability(ability_name: StringName) -> Ability:
-	return _abilities.get(ability_name)
+## 获取相同名称的技能
+func get_same_ability(ability: Ability) -> Ability:
+	var ability_key = ability.get_class() + "_" + ability.ability_name
+	return _abilities.get(ability_key)
 
 ## 获取全部技能
 func get_abilities() -> Array[Ability]:
@@ -149,19 +150,12 @@ func get_abilities() -> Array[Ability]:
 		abilities.append(ability)
 	return abilities
 
-## 尝试释放技能
-func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
-	#var caster : Node = context.caster
-	print("ability_component: {0}尝试释放技能：{1}".format([self, ability]))
-	pre_cast.emit(ability)
-	await ability.cast(context)
-	print("ability: {0}释放技能：{1}".format([self, ability]))
-	return true
-
 ## 应用技能
 func apply_ability(ability: Ability, ability_context: Dictionary) -> void:
 	ability.apply(self, ability_context)
-	_abilities[ability.ability_name] = ability
+	# 使用类型名+技能名作为key,避免不同派生类对象名称重复
+	var ability_key = ability.get_class() + "_" + ability.ability_name
+	_abilities[ability_key] = ability
 	ability_applied.emit(ability)
 
 ## 移除技能
@@ -171,6 +165,15 @@ func remove_ability(ability: Ability, ability_context: Dictionary = {}) -> void:
 	if key: _abilities.erase(key)
 	print("移除Ability：", ability)
 	ability_removed.emit(ability)
+
+## 尝试释放技能
+func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
+	#var caster : Node = context.caster
+	print("ability_component: {0}尝试释放技能：{1}".format([self, ability]))
+	pre_cast.emit(ability)
+	await ability.cast(context)
+	print("ability: {0}释放技能：{1}".format([self, ability]))
+	return true
 
 #endregion
 

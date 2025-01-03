@@ -1,37 +1,11 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=12 format=3 uid="uid://bsraf1kid81uk"]
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=3 format=3 uid="uid://bsraf1kid81uk"]
 
 [ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_foxpy"]
-[ext_resource type="Script" uid="uid://r16ljsfveyt1" path="res://addons/godot_gameplay_ability_system/source/ability_effect/modify_resource.gd" id="2_4knft"]
-[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_modifier.gd" id="2_l5k0w"]
-[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://addons/godot_gameplay_ability_system/source/ability/skill_ability.gd" id="2_mnj2n"]
-[ext_resource type="Script" uid="uid://crhc3v50y064u" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger.gd" id="4_77ecx"]
-[ext_resource type="Texture2D" uid="uid://pahg3p51mxjh" path="res://asset/texture/icon/Spells/poison_dagger.png" id="5_mrsgc"]
-[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger_condition.gd" id="5_occg1"]
-[ext_resource type="Script" uid="uid://bd8jtu1tud483" path="res://addons/godot_gameplay_ability_system/source/ability_trigger_condition/ability_trigger_condition_chance.gd" id="6_jpg1i"]
-
-[sub_resource type="Resource" id="Resource_dka1f"]
-script = ExtResource("2_4knft")
-ability_resource_name = &""
-ability_resource_amount = 5.0
-modify_type = "value"
-target_type = &"self"
-target_amount = 1
-trigger_conditions = Array[ExtResource("5_occg1")]([])
-effect_modifiers = Array[ExtResource("2_l5k0w")]([])
-post_effects = Array[ExtResource("1_foxpy")]([])
-
-[sub_resource type="Resource" id="Resource_dgabu"]
-script = ExtResource("6_jpg1i")
-chance = 0.3
-
-[sub_resource type="Resource" id="Resource_pj7hi"]
-script = ExtResource("4_77ecx")
-trigger_type = &"on_hurt"
-trigger_conditions = Array[ExtResource("5_occg1")]([SubResource("Resource_dgabu")])
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://source/combat_system/ability/turn_based_skill_ability.gd" id="2_flj3d"]
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("2_mnj2n")
+script = ExtResource("2_flj3d")
 cast_count = 1
 target_type = &""
 cost_resource_name = &""
@@ -47,7 +21,5 @@ animation = &""
 casting_position = 0
 ability_name = &"不屈"
 ability_description = "在受到攻击时，有一定几率获得额外的怒气"
-icon = ExtResource("5_mrsgc")
-trigger = SubResource("Resource_pj7hi")
 level = 1
-effects = Array[ExtResource("1_foxpy")]([SubResource("Resource_dka1f")])
+effects = Array[ExtResource("1_foxpy")]([])

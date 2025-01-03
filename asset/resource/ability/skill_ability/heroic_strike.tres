@@ -1,25 +1,11 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=8 format=3 uid="uid://dkk2ibiqesm12"]
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=3 format=3 uid="uid://dkk2ibiqesm12"]
 
 [ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_0eb48"]
-[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://addons/godot_gameplay_ability_system/source/ability/skill_ability.gd" id="1_4st2x"]
-[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_modifier.gd" id="2_1vbag"]
-[ext_resource type="Script" uid="uid://dhuwnhvd04eqj" path="res://addons/godot_gameplay_ability_system/source/ability_effect/deal_damage.gd" id="2_nwb3w"]
-[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger_condition.gd" id="4_4a71q"]
-[ext_resource type="Texture2D" uid="uid://vttfr4yxd48" path="res://asset/texture/icon/Spells/thorn_vine_spell.png" id="5_glywp"]
-
-[sub_resource type="Resource" id="Resource_bpy7w"]
-script = ExtResource("2_nwb3w")
-damage_multiplier = 1.5
-damage_type = 0
-target_type = &"enemy"
-target_amount = 1
-trigger_conditions = Array[ExtResource("4_4a71q")]([])
-effect_modifiers = Array[ExtResource("2_1vbag")]([])
-post_effects = Array[ExtResource("1_0eb48")]([])
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://source/combat_system/ability/turn_based_skill_ability.gd" id="2_b5112"]
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("1_4st2x")
+script = ExtResource("2_b5112")
 cast_count = 1
 target_type = &"enemy"
 cost_resource_name = &"怒气值"
@@ -35,6 +21,5 @@ animation = &""
 casting_position = 0
 ability_name = &"英勇打击"
 ability_description = "对单个敌人进行强力打击"
-icon = ExtResource("5_glywp")
 level = 1
-effects = Array[ExtResource("1_0eb48")]([SubResource("Resource_bpy7w")])
+effects = Array[ExtResource("1_0eb48")]([])

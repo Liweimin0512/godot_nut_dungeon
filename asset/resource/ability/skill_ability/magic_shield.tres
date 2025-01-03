@@ -1,25 +1,11 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=9 format=3 uid="uid://d2qgjd2oasxbi"]
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=3 format=3 uid="uid://d2qgjd2oasxbi"]
 
 [ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_f4yi8"]
-[ext_resource type="Resource" uid="uid://ba2s8ue7kw4l3" path="res://asset/resource/ability/buff_ability/magic_shield.tres" id="2_2gu80"]
-[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://addons/godot_gameplay_ability_system/source/ability/skill_ability.gd" id="2_s1r7w"]
-[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_modifier.gd" id="3_n3rp5"]
-[ext_resource type="Script" uid="uid://b0cmyrktakacv" path="res://addons/godot_gameplay_ability_system/source/ability_effect/apply_ability.gd" id="4_uwudy"]
-[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger_condition.gd" id="5_apehn"]
-[ext_resource type="Texture2D" uid="uid://cchrqywheb8v7" path="res://asset/texture/icon/Spells/fortify_spell.png" id="6_gydau"]
-
-[sub_resource type="Resource" id="Resource_ual1t"]
-script = ExtResource("4_uwudy")
-ability = ExtResource("2_2gu80")
-target_type = &"self"
-target_amount = 1
-trigger_conditions = Array[ExtResource("5_apehn")]([])
-effect_modifiers = Array[ExtResource("3_n3rp5")]([])
-post_effects = Array[ExtResource("1_f4yi8")]([])
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://source/combat_system/ability/turn_based_skill_ability.gd" id="2_ylg8l"]
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("2_s1r7w")
+script = ExtResource("2_ylg8l")
 cast_count = 1
 target_type = &"self"
 cost_resource_name = &"魔法值"
@@ -35,6 +21,5 @@ animation = &""
 casting_position = 0
 ability_name = &"魔法盾"
 ability_description = "激活魔法盾，吸收伤害的同时提高魔法恢复能力"
-icon = ExtResource("6_gydau")
 level = 1
-effects = Array[ExtResource("1_f4yi8")]([SubResource("Resource_ual1t")])
+effects = Array[ExtResource("1_f4yi8")]([])

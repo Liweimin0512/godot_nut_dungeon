@@ -1,26 +1,11 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=8 format=3 uid="uid://civj478kyuck0"]
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=3 format=3 uid="uid://civj478kyuck0"]
 
 [ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_c4d63"]
-[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://addons/godot_gameplay_ability_system/source/ability/skill_ability.gd" id="2_46nh5"]
-[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_modifier.gd" id="2_kffhg"]
-[ext_resource type="Script" uid="uid://r16ljsfveyt1" path="res://addons/godot_gameplay_ability_system/source/ability_effect/modify_resource.gd" id="3_t8ify"]
-[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger_condition.gd" id="4_87rrd"]
-[ext_resource type="Texture2D" uid="uid://dhb0n2d857s5x" path="res://asset/texture/icon/Spells/mana_replenish.png" id="5_dfm82"]
-
-[sub_resource type="Resource" id="Resource_2kti2"]
-script = ExtResource("3_t8ify")
-ability_resource_name = &"魔法值"
-ability_resource_amount = 5.0
-modify_type = ""
-target_type = &"self"
-target_amount = 1
-trigger_conditions = Array[ExtResource("4_87rrd")]([])
-effect_modifiers = Array[ExtResource("2_kffhg")]([])
-post_effects = Array[ExtResource("1_c4d63")]([])
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://source/combat_system/ability/turn_based_skill_ability.gd" id="2_hldlx"]
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("2_46nh5")
+script = ExtResource("2_hldlx")
 cast_count = 1
 target_type = &""
 cost_resource_name = &""
@@ -36,6 +21,5 @@ animation = &""
 casting_position = 0
 ability_name = &"法力涌现"
 ability_description = "在成功施放一个伤害技能后，有一定概率触发，恢复大量魔法值。"
-icon = ExtResource("5_dfm82")
 level = 1
-effects = Array[ExtResource("1_c4d63")]([SubResource("Resource_2kti2")])
+effects = Array[ExtResource("1_c4d63")]([])
