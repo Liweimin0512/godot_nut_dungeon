@@ -6,7 +6,7 @@ class_name Ability
 ## 技能描述
 @export var ability_description: String = ""
 ## 技能在UI中显示的图标
-@export var icon: Texture
+@export var icon: Texture2D
 # 技能触发器，自动释放技能必须配置触发器
 @export var trigger: AbilityTrigger
 ## 技能的等级，影响技能的效果

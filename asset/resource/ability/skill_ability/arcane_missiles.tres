@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=10 format=3 uid="uid://cev8ft8aahhlt"]
+[gd_resource type="Resource" script_class="SkillAbility" load_steps=11 format=3 uid="uid://cev8ft8aahhlt"]
 
 [ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_867w6"]
 [ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://source/ability_system/ability/skill_ability.gd" id="2_mm51c"]
-[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_o4mbh"]
-[ext_resource type="Script" uid="uid://dhuwnhvd04eqj" path="res://source/ability_system/ability_effect/deal_damage.gd" id="3_p653n"]
-[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="4_6bwms"]
-[ext_resource type="Script" uid="uid://b0cmyrktakacv" path="res://source/ability_system/ability_effect/apply_ability.gd" id="5_nj2ik"]
+[ext_resource type="Script" uid="uid://dnuemhw0ftdls" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_o4mbh"]
+[ext_resource type="Script" uid="uid://bm0u02uql6r6x" path="res://source/ability_system/ability_effect/deal_damage.gd" id="3_p653n"]
+[ext_resource type="Script" uid="uid://dddyuodl0x2ve" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="4_6bwms"]
+[ext_resource type="Script" uid="uid://bm45vmnvrcb2a" path="res://source/ability_system/ability_effect/apply_ability.gd" id="5_nj2ik"]
+[ext_resource type="Texture2D" uid="uid://dlr5iiqyitjgh" path="res://asset/texture/icon/Spells/ice_spell.png" id="7_6bwms"]
 [ext_resource type="Resource" uid="uid://bnribbjurhd1f" path="res://asset/resource/ability/buff_ability/stun.tres" id="8_g8wqt"]
 
 [sub_resource type="Resource" id="Resource_m4a7w"]
@@ -30,6 +31,7 @@ effect_modifiers = Array[ExtResource("2_o4mbh")]([])
 post_effects = Array[ExtResource("1_867w6")]([SubResource("Resource_m4a7w")])
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_mm51c")
 cast_count = 1
 target_type = &""
@@ -46,5 +48,6 @@ animation = &""
 casting_position = 0
 ability_name = &"魔法飞弹"
 ability_description = "法师召唤奥术能量，形成多枚飞弹随机攻击多个敌人。"
+icon = ExtResource("7_6bwms")
 level = 1
 effects = Array[ExtResource("1_867w6")]([SubResource("Resource_6x5pe")])

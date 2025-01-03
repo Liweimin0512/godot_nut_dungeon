@@ -50,6 +50,10 @@ func initialization(
 
 #region 技能属性相关
 
+## 是否存在属性
+func has_attribute(atr_name: StringName) -> bool:
+	return _ability_attributes.has(atr_name)
+
 ## 获取属性
 func get_attribute(atr_name: StringName) -> AbilityAttribute:
 	var attribute : AbilityAttribute = _ability_attributes.get(atr_name)
@@ -133,6 +137,13 @@ func _handle_resource_callback(callback_name: StringName, context : Dictionary) 
 #endregion
 
 #region 技能相关
+
+## 获取全部技能
+func get_abilities() -> Array[Ability]:
+	var abilities : Array[Ability] = []
+	for ability : Ability in _abilities.values():
+		abilities.append(ability)
+	return abilities
 
 ## 获取可用主动技能
 func get_available_abilities() -> Array[Ability]:

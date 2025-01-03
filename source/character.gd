@@ -10,15 +10,18 @@ class_name Character
 @onready var w_status: W_Status = $W_Status
 
 @export var character_model : CharacterModel
+## 角色阵营
 @export var character_camp: CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.PLAYER
+## 角色头像
+@export var character_icon : Texture2D
 
 # 角色的名称
-var cha_name : String = ""
+var character_name : String = ""
 
 func _ready() -> void:
 	if character_model:
-		character_model = character_model.duplicate()
-		cha_name = character_model.character_name
+		#character_model = character_model.duplicate()
+		character_name = character_model.character_name
 		ability_component.initialization(
 			character_model.ability_attributes,
 			character_model.ability_resources,
@@ -26,6 +29,7 @@ func _ready() -> void:
 		)
 		combat_component.initialization(character_camp)
 		_animation_player_setup()
+		character_icon = character_model.character_icon
 		$Sprite2D.position = character_model.sprite_position
 	if character_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
 		$Sprite2D.flip_h = true
@@ -40,12 +44,12 @@ func _animation_player_setup() -> void:
 	animation_player.play("idle")
 
 func _to_string() -> String:
-	return cha_name
+	return character_name
 
 func _on_area_2d_mouse_entered() -> void:
 	print("_on_area_2d_mouse_entered：", self.name)
 
-func _on_ability_component_resource_changed(res_name: StringName, value: float) -> void:
+func _on_ability_component_resource_changed(res_name: StringName, _value: float) -> void:
 	if res_name == "生命值":
 		if not combat_component: combat_component = $CombatComponent
 
@@ -53,7 +57,7 @@ func _on_combat_component_died() -> void:
 	animation_player.play("die")
 	await animation_player.animation_finished
 
-func _on_combat_component_hited(target: CombatComponent) -> void:
+func _on_combat_component_hited(_target: CombatComponent) -> void:
 	pass
 
 func _on_combat_component_hurted(_damage: int) -> void:

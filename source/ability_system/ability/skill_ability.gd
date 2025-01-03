@@ -16,7 +16,10 @@ class_name SkillAbility
 ## 冷却时间（回合数）
 @export var cooldown: int
 ## 当前冷却时间
-@export_storage var current_cooldown : int = 0
+@export_storage var current_cooldown : int = 0:
+	set(value):
+		current_cooldown = value
+		cooldown_changed.emit(current_cooldown)
 ## 技能释放时间（秒）
 @export var pre_cast_time: float = 0.4
 ## 技能后摇时间
@@ -33,6 +36,11 @@ class_name SkillAbility
 var is_cooldown: bool:
 	get:
 		return current_cooldown > 0
+
+signal cooldown_changed(value: int) 
+
+func _init() -> void:
+	resource_local_to_scene = true
 
 ## 应用技能
 func apply(ability_component: AbilityComponent, context: Dictionary) -> void:

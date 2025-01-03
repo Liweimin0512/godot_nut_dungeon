@@ -10,7 +10,7 @@ class_name DealDamageEffect
 
 func _apply(context: Dictionary = {}) -> void:
 	var caster : Node = context.caster
-	var ability_component : AbilityComponent = caster.get("ability_component")
+	# var ability_component : AbilityComponent = caster.get("ability_component")
 	var targets : Array = _get_targets(context)
 	for target in targets:
 		var damage : AbilityDamage = AbilityDamage.new(

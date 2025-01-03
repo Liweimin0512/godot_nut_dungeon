@@ -7,6 +7,8 @@ class_name CombatComponent
 @onready var ability_component: AbilityComponent = %AbilityComponent
 ## 所属阵营
 @export var combat_camp : CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.NONE
+## 近身施法位置偏移
+@export var melee_action_offset: Vector2 = Vector2(20, 0)
 ## 是否为存活单位
 var is_alive : bool :
 	get:
@@ -91,14 +93,14 @@ func action() -> void:
 ## 行动前
 func _pre_action(ability_context: Dictionary) -> void:
 	ability_component.handle_game_event("on_pre_action", ability_context)
-	var ability : Ability = ability_context.get("ability")
+	# var ability : Ability = ability_context.get("ability")
 	_move_to_action(ability_context)
 	await get_tree().create_timer(action_time).timeout
 
 ## 行动后
 func _post_action(ability_context: Dictionary) -> void:
 	ability_component.handle_game_event("on_post_action", ability_context)
-	var ability : Ability = ability_context.get("ability")
+	# var ability : Ability = ability_context.get("ability")
 	_move_from_action()
 	await get_tree().create_timer(action_time).timeout
 
@@ -200,9 +202,9 @@ func _get_action_point(ability_context: Dictionary) -> Vector2:
 		var target: Node2D = ability_context.get("targets")[0].owner
 		match ability.casting_position:
 			AbilityDefinition.CASTING_POSITION.MELEE:
-				point = target.global_position + (Vector2(-50, 0) if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else Vector2(50, 0))
+				point = target.global_position + (melee_action_offset * Vector2(-1, 0)) if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else melee_action_offset
 			AbilityDefinition.CASTING_POSITION.BEHINDENEMY:
-				point = target.global_position + (Vector2(50, 0) if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else Vector2(-50, 0))
+				point = target.global_position + melee_action_offset if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else melee_action_offset * Vector2(-1, 0)
 			_:
 				point = _current_combat.action_marker.position
 	return point

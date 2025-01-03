@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=11 format=3 uid="uid://6mxwf4314lcl"]
+[gd_resource type="Resource" script_class="SkillAbility" load_steps=12 format=3 uid="uid://6mxwf4314lcl"]
 
 [ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_qf0ux"]
 [ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://source/ability_system/ability/skill_ability.gd" id="2_ak3um"]
-[ext_resource type="Script" uid="uid://dhuwnhvd04eqj" path="res://source/ability_system/ability_effect/deal_damage.gd" id="2_qeuuc"]
-[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_u8ofm"]
-[ext_resource type="Script" uid="uid://crhc3v50y064u" path="res://source/ability_system/ability_trigger_condition/ability_trigger.gd" id="4_7xum3"]
-[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_ugqet"]
-[ext_resource type="Script" uid="uid://bd8jtu1tud483" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_chance.gd" id="6_isi10"]
+[ext_resource type="Script" uid="uid://bm0u02uql6r6x" path="res://source/ability_system/ability_effect/deal_damage.gd" id="2_qeuuc"]
+[ext_resource type="Script" uid="uid://dnuemhw0ftdls" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_u8ofm"]
+[ext_resource type="Script" uid="uid://cm7wcwlrgykbp" path="res://source/ability_system/ability_trigger_condition/ability_trigger.gd" id="4_7xum3"]
+[ext_resource type="Texture2D" uid="uid://86xdoau81gtp" path="res://asset/texture/icon/Spells/lightning_spell.png" id="5_i2qii"]
+[ext_resource type="Script" uid="uid://dddyuodl0x2ve" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_ugqet"]
+[ext_resource type="Script" uid="uid://bicgaareollhj" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_chance.gd" id="6_isi10"]
 
 [sub_resource type="Resource" id="Resource_wma4j"]
 script = ExtResource("2_qeuuc")
@@ -28,6 +29,7 @@ trigger_type = &"on_post_hurt"
 trigger_conditions = Array[ExtResource("5_ugqet")]([SubResource("Resource_o4lqm")])
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_ak3um")
 cast_count = 1
 target_type = &""
@@ -44,6 +46,7 @@ animation = &""
 casting_position = 0
 ability_name = &"反击"
 ability_description = "在受到普通攻击时有机会进行反击"
+icon = ExtResource("5_i2qii")
 trigger = SubResource("Resource_v8vdp")
 level = 1
 effects = Array[ExtResource("1_qf0ux")]([SubResource("Resource_wma4j")])

@@ -1,189 +1,17 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=45 format=3 uid="uid://4obtwqc0eawy"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=22 format=3 uid="uid://4obtwqc0eawy"]
 
-[ext_resource type="Script" uid="uid://h32tcvh6t4tc" path="res://asset/resource/character/character_model.gd" id="1_jj07w"]
+[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://asset/resource/character/character_model.gd" id="1_jj07w"]
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://source/ability_system/ability/ability.gd" id="1_tv87s"]
 [ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://asset/resource/ability/skill_ability/attack.tres" id="2_do4qx"]
-[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="2_skfyi"]
 [ext_resource type="Script" uid="uid://dgjm0xwgmfidg" path="res://source/ability_system/ability_attribute/ability_attribute.gd" id="2_wjvtx"]
+[ext_resource type="Resource" uid="uid://cev8ft8aahhlt" path="res://asset/resource/ability/skill_ability/arcane_missiles.tres" id="3_4gw7t"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://source/ability_system/ability_resource/ability_resource.gd" id="3_it5yo"]
-[ext_resource type="Script" uid="uid://dnuemhw0ftdls" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="3_tj4y4"]
-[ext_resource type="Script" uid="uid://bm0u02uql6r6x" path="res://source/ability_system/ability_effect/deal_damage.gd" id="4_idqe7"]
+[ext_resource type="Resource" uid="uid://c4s7gbk66xo5y" path="res://asset/resource/ability/skill_ability/fireball.tres" id="4_o260t"]
 [ext_resource type="Script" uid="uid://b3g3ys7sw7kwu" path="res://source/ability_system/ability_resource/health_resource.gd" id="4_phrxb"]
 [ext_resource type="Script" uid="uid://bnw7lwno12yjm" path="res://source/ability_system/ability_resource/mana_resource.gd" id="5_1150c"]
-[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://source/ability_system/ability/skill_ability.gd" id="5_q0y5y"]
-[ext_resource type="Resource" uid="uid://bnribbjurhd1f" path="res://asset/resource/ability/buff_ability/stun.tres" id="6_1srr6"]
-[ext_resource type="Script" uid="uid://bm45vmnvrcb2a" path="res://source/ability_system/ability_effect/apply_ability.gd" id="8_7ccn3"]
-[ext_resource type="Script" uid="uid://w7u511x7ipfa" path="res://source/ability_system/ability_effect/modify_resource.gd" id="10_x67mq"]
-[ext_resource type="Script" uid="uid://cm7wcwlrgykbp" path="res://source/ability_system/ability_trigger_condition/ability_trigger.gd" id="11_erwvb"]
-[ext_resource type="Script" uid="uid://dddyuodl0x2ve" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="12_wgg0k"]
-[ext_resource type="Script" uid="uid://bicgaareollhj" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_chance.gd" id="13_1uo3a"]
-[ext_resource type="Resource" uid="uid://r6bnasc2r03p" path="res://asset/resource/ability/buff_ability/ignite.tres" id="13_ml8nk"]
-[ext_resource type="Script" uid="uid://ix1xfvk8pkmm" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_ability_name.gd" id="13_p76ks"]
-[ext_resource type="Resource" uid="uid://ba2s8ue7kw4l3" path="res://asset/resource/ability/buff_ability/magic_shield.tres" id="14_1srr6"]
+[ext_resource type="Resource" uid="uid://d2qgjd2oasxbi" path="res://asset/resource/ability/skill_ability/magic_shield.tres" id="5_jvdm3"]
+[ext_resource type="Resource" uid="uid://civj478kyuck0" path="res://asset/resource/ability/skill_ability/mana_surge.tres" id="6_v1o5c"]
 [ext_resource type="AnimationLibrary" uid="uid://cjkmf7tw7ssh8" path="res://asset/resource/animation/animation_library_wizard.res" id="19_ei547"]
-
-[sub_resource type="Resource" id="Resource_tbg57"]
-script = ExtResource("13_1uo3a")
-chance = 0.5
-
-[sub_resource type="Resource" id="Resource_m4a7w"]
-resource_local_to_scene = true
-script = ExtResource("8_7ccn3")
-ability = ExtResource("6_1srr6")
-target_type = &""
-target_amount = 1
-trigger_conditions = Array[ExtResource("12_wgg0k")]([SubResource("Resource_tbg57")])
-effect_modifiers = Array[ExtResource("3_tj4y4")]([])
-post_effects = Array[ExtResource("2_skfyi")]([])
-
-[sub_resource type="Resource" id="Resource_6x5pe"]
-resource_local_to_scene = true
-script = ExtResource("4_idqe7")
-damage_multiplier = 0.8
-damage_type = 0
-target_type = &"enemy"
-target_amount = 3
-trigger_conditions = Array[ExtResource("12_wgg0k")]([])
-effect_modifiers = Array[ExtResource("3_tj4y4")]([])
-post_effects = Array[ExtResource("2_skfyi")]([SubResource("Resource_m4a7w")])
-
-[sub_resource type="Resource" id="Resource_sryws"]
-resource_local_to_scene = true
-script = ExtResource("5_q0y5y")
-cast_count = 1
-target_type = &""
-cost_resource_name = &"魔法值"
-cost_resource_value = 40
-is_auto_cast = false
-cooldown = 3
-current_cooldown = 0
-pre_cast_time = 0.4
-post_cast_time = 0.4
-is_show = true
-sound_effect = &""
-animation = &""
-casting_position = 0
-ability_name = &"魔法飞弹"
-ability_description = "法师召唤奥术能量，形成多枚飞弹随机攻击多个敌人。"
-level = 1
-effects = Array[ExtResource("2_skfyi")]([SubResource("Resource_6x5pe")])
-
-[sub_resource type="Resource" id="Resource_xthqw"]
-resource_local_to_scene = true
-script = ExtResource("4_idqe7")
-damage_multiplier = 2.0
-damage_type = 0
-target_type = &""
-target_amount = 1
-trigger_conditions = Array[ExtResource("12_wgg0k")]([])
-effect_modifiers = Array[ExtResource("3_tj4y4")]([])
-post_effects = Array[ExtResource("2_skfyi")]([])
-
-[sub_resource type="Resource" id="Resource_k4nyb"]
-script = ExtResource("8_7ccn3")
-ability = ExtResource("13_ml8nk")
-target_type = &""
-target_amount = 1
-trigger_conditions = Array[ExtResource("12_wgg0k")]([])
-effect_modifiers = Array[ExtResource("3_tj4y4")]([])
-post_effects = Array[ExtResource("2_skfyi")]([])
-
-[sub_resource type="Resource" id="Resource_d8now"]
-resource_local_to_scene = true
-script = ExtResource("5_q0y5y")
-cast_count = 1
-target_type = &"enemy"
-cost_resource_name = &"魔法值"
-cost_resource_value = 30
-is_auto_cast = false
-cooldown = 2
-current_cooldown = 0
-pre_cast_time = 0.4
-post_cast_time = 0.4
-is_show = true
-sound_effect = &""
-animation = &""
-casting_position = 0
-ability_name = &"火球术"
-ability_description = "法师凝聚火元素，释放一个火球对单个敌人造成巨大伤害。"
-level = 1
-effects = Array[ExtResource("2_skfyi")]([SubResource("Resource_xthqw"), SubResource("Resource_k4nyb")])
-
-[sub_resource type="Resource" id="Resource_ual1t"]
-resource_local_to_scene = true
-script = ExtResource("8_7ccn3")
-ability = ExtResource("14_1srr6")
-target_type = &"self"
-target_amount = 1
-trigger_conditions = Array[ExtResource("12_wgg0k")]([])
-effect_modifiers = Array[ExtResource("3_tj4y4")]([])
-post_effects = Array[ExtResource("2_skfyi")]([])
-
-[sub_resource type="Resource" id="Resource_xulmi"]
-resource_local_to_scene = true
-script = ExtResource("5_q0y5y")
-cast_count = 1
-target_type = &"self"
-cost_resource_name = &"魔法值"
-cost_resource_value = 10
-is_auto_cast = false
-cooldown = 4
-current_cooldown = 0
-pre_cast_time = 0.4
-post_cast_time = 0.4
-is_show = true
-sound_effect = &""
-animation = &""
-casting_position = 0
-ability_name = &"魔法盾"
-ability_description = "激活魔法盾，吸收伤害的同时提高魔法恢复能力"
-level = 1
-effects = Array[ExtResource("2_skfyi")]([SubResource("Resource_ual1t")])
-
-[sub_resource type="Resource" id="Resource_2kti2"]
-script = ExtResource("10_x67mq")
-ability_resource_name = &"魔法值"
-ability_resource_amount = 0.2
-modify_type = "percentage"
-target_type = &"self"
-target_amount = 1
-trigger_conditions = Array[ExtResource("12_wgg0k")]([])
-effect_modifiers = Array[ExtResource("3_tj4y4")]([])
-post_effects = Array[ExtResource("2_skfyi")]([])
-
-[sub_resource type="Resource" id="Resource_f1qh2"]
-script = ExtResource("13_p76ks")
-ability_names = PackedStringArray("火球术", "魔法飞弹")
-
-[sub_resource type="Resource" id="Resource_hu65j"]
-script = ExtResource("13_1uo3a")
-chance = 0.3
-
-[sub_resource type="Resource" id="Resource_pxpji"]
-script = ExtResource("11_erwvb")
-trigger_type = &"on_post_action"
-trigger_conditions = Array[ExtResource("12_wgg0k")]([SubResource("Resource_f1qh2"), SubResource("Resource_hu65j")])
-
-[sub_resource type="Resource" id="Resource_e4myo"]
-script = ExtResource("5_q0y5y")
-cast_count = 1
-target_type = &"self"
-cost_resource_name = &""
-cost_resource_value = 0
-is_auto_cast = true
-cooldown = 0
-current_cooldown = 0
-pre_cast_time = 0.4
-post_cast_time = 0.4
-is_show = true
-sound_effect = &""
-animation = &""
-casting_position = 0
-ability_name = &"法力涌现"
-ability_description = "在成功施放一个伤害技能后，有一定概率触发，恢复大量魔法值。"
-trigger = SubResource("Resource_pxpji")
-level = 1
-effects = Array[ExtResource("2_skfyi")]([SubResource("Resource_2kti2")])
 
 [sub_resource type="Resource" id="Resource_e1joa"]
 resource_local_to_scene = true
@@ -247,7 +75,7 @@ resource_local_to_scene = true
 script = ExtResource("1_jj07w")
 character_name = &"法师"
 ability_attributes = Array[ExtResource("2_wjvtx")]([SubResource("Resource_e1joa"), SubResource("Resource_gc0bh"), SubResource("Resource_g7ipd"), SubResource("Resource_4anai"), SubResource("Resource_5h64c"), SubResource("Resource_2gihe"), SubResource("Resource_e4jre")])
-abilities = Array[ExtResource("1_tv87s")]([ExtResource("2_do4qx"), SubResource("Resource_sryws"), SubResource("Resource_d8now"), SubResource("Resource_xulmi"), SubResource("Resource_e4myo")])
+abilities = Array[ExtResource("1_tv87s")]([ExtResource("2_do4qx"), ExtResource("3_4gw7t"), ExtResource("4_o260t"), ExtResource("5_jvdm3"), ExtResource("6_v1o5c")])
 ability_resources = Array[ExtResource("3_it5yo")]([SubResource("Resource_sw5wc"), SubResource("Resource_klj23")])
 animation_library = ExtResource("19_ei547")
-sprite_position = Vector2(10, -46)
+sprite_position = Vector2(10, -64)

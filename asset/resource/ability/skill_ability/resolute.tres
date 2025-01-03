@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=11 format=3 uid="uid://bsraf1kid81uk"]
+[gd_resource type="Resource" script_class="SkillAbility" load_steps=12 format=3 uid="uid://bsraf1kid81uk"]
 
 [ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_foxpy"]
-[ext_resource type="Script" uid="uid://r16ljsfveyt1" path="res://source/ability_system/ability_effect/modify_resource.gd" id="2_4knft"]
-[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_l5k0w"]
+[ext_resource type="Script" uid="uid://w7u511x7ipfa" path="res://source/ability_system/ability_effect/modify_resource.gd" id="2_4knft"]
+[ext_resource type="Script" uid="uid://dnuemhw0ftdls" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_l5k0w"]
 [ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://source/ability_system/ability/skill_ability.gd" id="2_mnj2n"]
-[ext_resource type="Script" uid="uid://crhc3v50y064u" path="res://source/ability_system/ability_trigger_condition/ability_trigger.gd" id="4_77ecx"]
-[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_occg1"]
-[ext_resource type="Script" uid="uid://bd8jtu1tud483" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_chance.gd" id="6_jpg1i"]
+[ext_resource type="Script" uid="uid://cm7wcwlrgykbp" path="res://source/ability_system/ability_trigger_condition/ability_trigger.gd" id="4_77ecx"]
+[ext_resource type="Texture2D" uid="uid://pahg3p51mxjh" path="res://asset/texture/icon/Spells/poison_dagger.png" id="5_mrsgc"]
+[ext_resource type="Script" uid="uid://dddyuodl0x2ve" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_occg1"]
+[ext_resource type="Script" uid="uid://bicgaareollhj" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_chance.gd" id="6_jpg1i"]
 
 [sub_resource type="Resource" id="Resource_dka1f"]
 script = ExtResource("2_4knft")
@@ -46,6 +47,7 @@ animation = &""
 casting_position = 0
 ability_name = &"不屈"
 ability_description = "在受到攻击时，有一定几率获得额外的怒气"
+icon = ExtResource("5_mrsgc")
 trigger = SubResource("Resource_pj7hi")
 level = 1
 effects = Array[ExtResource("1_foxpy")]([SubResource("Resource_dka1f")])

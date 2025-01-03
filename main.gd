@@ -2,54 +2,59 @@ extends Node2D
 
 const CHARACTER = preload("res://source/character.tscn")
 
-@onready var rich_text_label: RichTextLabel = %RichTextLabel
-@onready var player_character: Character = $PlayerCharacter
+# @onready var rich_text_label: RichTextLabel = %RichTextLabel
+# @onready var player_character: Character = $PlayerCharacter
 @onready var enemy_markers: Node2D = $EnemyMarkers
 @onready var marker_action: Marker2D = %MarkerAction
+@onready var game_form: GameForm = $UILayer/GameForm
 
 @export var combat_test : CombatModel
 
 func _ready() -> void:
 	var combat : Combat = _create_combat(combat_test.duplicate())
+	game_form.setup(_get_players())
 	# 因为combat是自动执行的，所以不会发出这个信号！
 	combat.combat_started.connect(
 		func() -> void:
-			rich_text_label.text += "战斗开始\n"
+			# rich_text_label.text += "战斗开始\n"
+			game_form.handle_game_event("game_start")
 	)
 	combat.turn_started.connect(
 		func(turn_count: int) -> void:
-			rich_text_label.text += "{0}回合开始\n".format([
-				turn_count,
-			])
+			# rich_text_label.text += "{0}回合开始\n".format([turn_count,])
+			game_form.handle_game_event("turn_start", {"turn_count": turn_count}
+			)
 	)
 	combat.turn_ended.connect(
 		func() -> void:
-			rich_text_label.text += "回合结束\n"
+			# rich_text_label.text += "回合结束\n"
+			game_form.handle_game_event("turn_end")
 	)
 	combat.combat_finished.connect(
 		func() -> void:
-			rich_text_label.text += "战斗胜利\n"
+			# rich_text_label.text += "战斗胜利\n"
+			game_form.handle_game_event("combat_win")
 	)
 	combat.combat_defeated.connect(
 		func() -> void:
-			rich_text_label.text += "战斗失败\n"
+			# rich_text_label.text += "战斗失败\n"
+			game_form.handle_game_event("combat_defeated")
 	)
 	for c_combat in combat.combats:
 		c_combat.hited.connect(
 			func(target: CombatComponent) -> void:
-				rich_text_label.text += "{0} 攻击 {1}\n".format([
-					c_combat.owner, target.owner
-				])
+				# rich_text_label.text += "{0} 攻击 {1}\n".format([c_combat.owner, target.owner])
+				game_form.handle_game_event("combat_hit", {"owner": c_combat.owner, "target": target.owner})
 		)
 		c_combat.hurted.connect(
 			func(damage: int) -> void:
-				rich_text_label.text += "{0} 受到{1}点伤害！\n".format([
-					c_combat.owner, damage
-				])
+				# rich_text_label.text += "{0} 受到{1}点伤害！\n".format([c_combat.owner, damage])
+				game_form.handle_game_event("combat_hurt", {"owner": c_combat.owner, "damage": damage})
 		)
 		c_combat.ability_component.ability_cast_finished.connect(
 			func(ability: Ability) -> void:
-				rich_text_label.text += "{0} 释放 {1} 技能！\n".format([c_combat, ability])
+				# rich_text_label.text += "{0} 释放 {1} 技能！\n".format([c_combat, ability])
+				game_form.handle_game_event("combat_ability_cast", {"owner": c_combat.owner, "ability": ability})
 		)
 
 ## 创建战斗
@@ -64,7 +69,7 @@ func _create_combat(combat_model: CombatModel) -> Combat:
 		enemy_combats.append(enemy.combat_component)
 		index += 1
 	var player_combats: Array[CombatComponent]
-	for player : Character in get_tree().get_nodes_in_group("Player"):
+	for player : Character in _get_players():
 		player_combats.append(player.combat_component)
 	## 假设我们在开始时创建一场战斗，并将其作为当前存在的唯一战斗
 	var combat : Combat = CombatSystem.create_combat(
@@ -76,7 +81,7 @@ func _create_combat(combat_model: CombatModel) -> Combat:
 		%MarkerAction,
 	)
 	if combat.is_auto:
-		rich_text_label.text += "战斗开始\n"
+		game_form.handle_game_event("game_start")
 	return combat
 
 ## 创建角色
@@ -84,3 +89,10 @@ func _spawn_character(character_model: CharacterModel) -> Character:
 	var character : Character = CHARACTER.instantiate()
 	character.character_model = character_model
 	return character
+
+## 获取玩家角色
+func _get_players() -> Array[Character]:
+	var players: Array[Character]
+	for player in get_tree().get_nodes_in_group("Player"):
+		players.append(player)
+	return players

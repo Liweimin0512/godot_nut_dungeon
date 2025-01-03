@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterModel" load_steps=15 format=3 uid="uid://dusj10wryboti"]
 
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://source/ability_system/ability/ability.gd" id="1_ckwfc"]
-[ext_resource type="Script" uid="uid://h32tcvh6t4tc" path="res://asset/resource/character/character_model.gd" id="1_qi5g2"]
+[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://asset/resource/character/character_model.gd" id="1_qi5g2"]
 [ext_resource type="Script" uid="uid://dgjm0xwgmfidg" path="res://source/ability_system/ability_attribute/ability_attribute.gd" id="2_gfiar"]
 [ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://asset/resource/ability/skill_ability/attack.tres" id="2_oyvis"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://source/ability_system/ability_resource/ability_resource.gd" id="3_yxnkf"]

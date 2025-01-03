@@ -18,9 +18,9 @@ func _apply(context: Dictionary = {}) -> void:
 	if modify_type == "percentage":
 		_amount = ability_component.get_resource_value(ability_resource_name) * _amount
 	if ability_resource_amount > 0:
-		ability_resource.restore(_amount)
+		ability_resource.restore(int(_amount))
 	else:
-		ability_resource.consume(_amount)
+		ability_resource.consume(int(_amount))
 	super(context)
 
 func _description_getter() -> String:

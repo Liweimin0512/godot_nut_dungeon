@@ -23,5 +23,5 @@ func _ready() -> void:
 	get_parent().remove_child(self)
 	queue_free()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	look_at(target_point)

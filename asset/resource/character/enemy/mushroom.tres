@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://source/ability_system/ability_resource/ability_resource.gd" id="8_3j2sv"]
 [ext_resource type="Script" uid="uid://b3g3ys7sw7kwu" path="res://source/ability_system/ability_resource/health_resource.gd" id="9_m6b3c"]
 [ext_resource type="AnimationLibrary" uid="uid://2c4qsitbdtek" path="res://asset/resource/animation/animation_library_mushroom.res" id="10_xs4ak"]
-[ext_resource type="Script" uid="uid://h32tcvh6t4tc" path="res://asset/resource/character/character_model.gd" id="11_lj6li"]
+[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://asset/resource/character/character_model.gd" id="11_lj6li"]
 
 [sub_resource type="Resource" id="Resource_jvqq5"]
 resource_local_to_scene = true

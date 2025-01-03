@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="SkillAbility" load_steps=7 format=3 uid="uid://dkk2ibiqesm12"]
+[gd_resource type="Resource" script_class="SkillAbility" load_steps=8 format=3 uid="uid://dkk2ibiqesm12"]
 
 [ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_0eb48"]
 [ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://source/ability_system/ability/skill_ability.gd" id="1_4st2x"]
-[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_1vbag"]
-[ext_resource type="Script" uid="uid://dhuwnhvd04eqj" path="res://source/ability_system/ability_effect/deal_damage.gd" id="2_nwb3w"]
-[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="4_4a71q"]
+[ext_resource type="Script" uid="uid://dnuemhw0ftdls" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_1vbag"]
+[ext_resource type="Script" uid="uid://bm0u02uql6r6x" path="res://source/ability_system/ability_effect/deal_damage.gd" id="2_nwb3w"]
+[ext_resource type="Script" uid="uid://dddyuodl0x2ve" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="4_4a71q"]
+[ext_resource type="Texture2D" uid="uid://vttfr4yxd48" path="res://asset/texture/icon/Spells/thorn_vine_spell.png" id="5_glywp"]
 
 [sub_resource type="Resource" id="Resource_bpy7w"]
 script = ExtResource("2_nwb3w")
@@ -17,6 +18,7 @@ effect_modifiers = Array[ExtResource("2_1vbag")]([])
 post_effects = Array[ExtResource("1_0eb48")]([])
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_4st2x")
 cast_count = 1
 target_type = &"enemy"
@@ -33,5 +35,6 @@ animation = &""
 casting_position = 0
 ability_name = &"英勇打击"
 ability_description = "对单个敌人进行强力打击"
+icon = ExtResource("5_glywp")
 level = 1
 effects = Array[ExtResource("1_0eb48")]([SubResource("Resource_bpy7w")])

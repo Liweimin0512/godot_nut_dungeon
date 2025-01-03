@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bvuv7l4u3iuif" path="res://source/widget/w_ability_resource.tscn" id="1_n7bnr"]
 
 [node name="W_Status" type="MarginContainer"]
-offset_right = 60.0
+offset_right = 50.0
 offset_bottom = 40.0
 script = ExtResource("1_b15e4")
 
@@ -14,7 +14,7 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="W_AbilityResource" parent="VBoxContainer" instance=ExtResource("1_n7bnr")]
-custom_minimum_size = Vector2(80, 10)
+custom_minimum_size = Vector2(56, 10)
 layout_mode = 2
 
 [node name="W_BuffContainer" type="MarginContainer" parent="VBoxContainer"]

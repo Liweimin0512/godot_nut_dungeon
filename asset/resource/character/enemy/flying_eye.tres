@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dgjm0xwgmfidg" path="res://source/ability_system/ability_attribute/ability_attribute.gd" id="7_hurpf"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://source/ability_system/ability_resource/ability_resource.gd" id="8_moms6"]
 [ext_resource type="Script" uid="uid://b3g3ys7sw7kwu" path="res://source/ability_system/ability_resource/health_resource.gd" id="9_xi3hv"]
-[ext_resource type="Script" uid="uid://h32tcvh6t4tc" path="res://asset/resource/character/character_model.gd" id="10_fuogr"]
+[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://asset/resource/character/character_model.gd" id="10_fuogr"]
 [ext_resource type="AnimationLibrary" uid="uid://2n54xto66wk1" path="res://asset/resource/animation/animation_library_flying_eye.res" id="10_oxq6y"]
 
 [sub_resource type="Resource" id="Resource_jvqq5"]

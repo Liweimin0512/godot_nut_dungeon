@@ -3,14 +3,14 @@
 [ext_resource type="Script" uid="uid://c3djxdb3f0bkh" path="res://main.gd" id="1_i4sev"]
 [ext_resource type="Resource" uid="uid://bshhcvu884gan" path="res://asset/resource/combat/combat_test.tres" id="2_p2r0i"]
 [ext_resource type="PackedScene" uid="uid://cokqr3cv3dqo6" path="res://source/character.tscn" id="2_tbu6l"]
-[ext_resource type="Resource" uid="uid://4obtwqc0eawy" path="res://asset/resource/character/hero/wizard.tres" id="3_3c46g"]
 [ext_resource type="Texture2D" uid="uid://bltisnnddxogx" path="res://asset/texture/background/game_background_1/layers/battleground.png" id="3_kek77"]
 [ext_resource type="Texture2D" uid="uid://bq017wq6c0kk4" path="res://asset/texture/background/game_background_1/layers/back_decor.png" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://ts74dkhjm30l" path="res://asset/texture/background/game_background_1/layers/back_land.png" id="4_4c57u"]
 [ext_resource type="Texture2D" uid="uid://b4u5ewpyjas2f" path="res://asset/texture/background/game_background_1/layers/front_decor.png" id="6_efxa6"]
 [ext_resource type="Texture2D" uid="uid://o0iacojv61wy" path="res://asset/texture/background/game_background_1/layers/ground_decor.png" id="7_dg77c"]
-[ext_resource type="PackedScene" uid="uid://cbbx8idrk5q7h" path="res://source/widget/w_hero_info.tscn" id="8_4c57u"]
-[ext_resource type="Resource" uid="uid://pnl45yj5lq7s" path="res://asset/resource/character/hero/warrior.tres" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://bgj5fmjvlf8j" path="res://source/widget/game_form.tscn" id="8_f6a44"]
+[ext_resource type="Resource" uid="uid://4obtwqc0eawy" path="res://asset/resource/character/hero/wizard.tres" id="10_efxa6"]
+[ext_resource type="Resource" uid="uid://pnl45yj5lq7s" path="res://asset/resource/character/hero/warrior.tres" id="11_dg77c"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_i4sev")
@@ -70,57 +70,7 @@ metadata/_edit_lock_ = true
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 128
 
-[node name="GameForm" type="Control" parent="UILayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1.0
-offset_right = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
-
-[node name="Panel" type="PanelContainer" parent="UILayer/GameForm"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = -90.0
-offset_right = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="UILayer/GameForm/Panel"]
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="W_HeroInfoContainer" type="HBoxContainer" parent="UILayer/GameForm/Panel/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="W_HeroInfo" parent="UILayer/GameForm/Panel/MarginContainer/W_HeroInfoContainer" instance=ExtResource("8_4c57u")]
-layout_mode = 2
-size_flags_horizontal = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UILayer/GameForm"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 344.0
-offset_right = 71.0
-offset_bottom = 216.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="GameForm" parent="UILayer" instance=ExtResource("8_f6a44")]
 
 [node name="PlayerMarkers" type="Node2D" parent="."]
 
@@ -128,13 +78,13 @@ grow_vertical = 2
 position = Vector2(216, 144)
 
 [node name="PlayerCharacter5" parent="PlayerMarkers/Marker2D" groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
-character_model = ExtResource("3_3c46g")
+character_model = ExtResource("10_efxa6")
 
 [node name="Marker2D2" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(180, 168)
 
 [node name="PlayerCharacter2" parent="PlayerMarkers/Marker2D2" groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
-character_model = ExtResource("11_efxa6")
+character_model = ExtResource("11_dg77c")
 
 [node name="Marker2D3" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(132, 144)
