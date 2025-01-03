@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://fkcpemhbqhv8"]
 
-[ext_resource type="Script" uid="uid://dudqw032xfitv" path="res://source/bullet.gd" id="1_mkt2t"]
+[ext_resource type="Script" uid="uid://dudqw032xfitv" path="res://addons/godot_gameplay_ability_system/source/scene/bullet.gd" id="1_mkt2t"]
 
 [node name="Bullet" type="Node2D"]
 scale = Vector2(2, 2)

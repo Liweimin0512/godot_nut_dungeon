@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SkillAbility" load_steps=8 format=3 uid="uid://civj478kyuck0"]
 
-[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_c4d63"]
-[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://source/ability_system/ability/skill_ability.gd" id="2_46nh5"]
-[ext_resource type="Script" uid="uid://dnuemhw0ftdls" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_kffhg"]
-[ext_resource type="Script" uid="uid://w7u511x7ipfa" path="res://source/ability_system/ability_effect/modify_resource.gd" id="3_t8ify"]
-[ext_resource type="Script" uid="uid://dddyuodl0x2ve" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="4_87rrd"]
+[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_c4d63"]
+[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://addons/godot_gameplay_ability_system/source/ability/skill_ability.gd" id="2_46nh5"]
+[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_modifier.gd" id="2_kffhg"]
+[ext_resource type="Script" uid="uid://r16ljsfveyt1" path="res://addons/godot_gameplay_ability_system/source/ability_effect/modify_resource.gd" id="3_t8ify"]
+[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger_condition.gd" id="4_87rrd"]
 [ext_resource type="Texture2D" uid="uid://dhb0n2d857s5x" path="res://asset/texture/icon/Spells/mana_replenish.png" id="5_dfm82"]
 
 [sub_resource type="Resource" id="Resource_2kti2"]

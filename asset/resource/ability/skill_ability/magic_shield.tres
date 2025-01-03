@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SkillAbility" load_steps=9 format=3 uid="uid://d2qgjd2oasxbi"]
 
-[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_f4yi8"]
+[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_f4yi8"]
 [ext_resource type="Resource" uid="uid://ba2s8ue7kw4l3" path="res://asset/resource/ability/buff_ability/magic_shield.tres" id="2_2gu80"]
-[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://source/ability_system/ability/skill_ability.gd" id="2_s1r7w"]
-[ext_resource type="Script" uid="uid://dnuemhw0ftdls" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="3_n3rp5"]
-[ext_resource type="Script" uid="uid://bm45vmnvrcb2a" path="res://source/ability_system/ability_effect/apply_ability.gd" id="4_uwudy"]
-[ext_resource type="Script" uid="uid://dddyuodl0x2ve" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_apehn"]
+[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://addons/godot_gameplay_ability_system/source/ability/skill_ability.gd" id="2_s1r7w"]
+[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_modifier.gd" id="3_n3rp5"]
+[ext_resource type="Script" uid="uid://b0cmyrktakacv" path="res://addons/godot_gameplay_ability_system/source/ability_effect/apply_ability.gd" id="4_uwudy"]
+[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger_condition.gd" id="5_apehn"]
 [ext_resource type="Texture2D" uid="uid://cchrqywheb8v7" path="res://asset/texture/icon/Spells/fortify_spell.png" id="6_gydau"]
 
 [sub_resource type="Resource" id="Resource_ual1t"]

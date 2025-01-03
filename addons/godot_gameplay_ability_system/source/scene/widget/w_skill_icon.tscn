@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://k33y1svd4wnm"]
 
 [ext_resource type="Texture2D" uid="uid://clpo07hgxo3mv" path="res://asset/texture/icon/Spells/fire_spell.png" id="1_16d73"]
-[ext_resource type="Script" uid="uid://yn4hbuekab3q" path="res://source/widget/w_skill_icon.gd" id="1_ly5c8"]
+[ext_resource type="Script" uid="uid://yn4hbuekab3q" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_skill_icon.gd" id="1_ly5c8"]
 
 [node name="W_SkillIcon" type="MarginContainer"]
 custom_minimum_size = Vector2(24, 24)

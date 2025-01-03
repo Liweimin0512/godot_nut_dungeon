@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bvuv7l4u3iuif"]
 
-[ext_resource type="Script" uid="uid://cgfgo4iu683qh" path="res://source/widget/w_ability_resource.gd" id="1_s3kvh"]
+[ext_resource type="Script" uid="uid://cgfgo4iu683qh" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_ability_resource.gd" id="1_s3kvh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28ffd"]
 resource_local_to_scene = true

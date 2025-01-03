@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="BuffAbility" load_steps=11 format=3 uid="uid://cd7qfemfd5dhe"]
 
-[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_05nbl"]
-[ext_resource type="Script" uid="uid://dnuemhw0ftdls" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_8ktlk"]
-[ext_resource type="Script" uid="uid://bm4m6usgjkw3y" path="res://source/ability_system/ability_attribute/ability_attribute_modifier.gd" id="2_015hf"]
-[ext_resource type="Script" uid="uid://c1olb7jgy5d6c" path="res://source/ability_system/ability/buff_ability.gd" id="2_pgkp3"]
-[ext_resource type="Script" uid="uid://btybbskdjf5it" path="res://source/ability_system/ability_effect/modify_attribute.gd" id="3_v2i17"]
-[ext_resource type="Script" uid="uid://dddyuodl0x2ve" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_p04lt"]
+[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_05nbl"]
+[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_modifier.gd" id="2_8ktlk"]
+[ext_resource type="Script" uid="uid://ccf6uwucitfdw" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute_modifier.gd" id="2_015hf"]
+[ext_resource type="Script" uid="uid://c1olb7jgy5d6c" path="res://addons/godot_gameplay_ability_system/source/ability/buff_ability.gd" id="2_pgkp3"]
+[ext_resource type="Script" uid="uid://n1bgwgvxgeh2" path="res://addons/godot_gameplay_ability_system/source/ability_effect/modify_attribute.gd" id="3_v2i17"]
+[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger_condition.gd" id="5_p04lt"]
 [ext_resource type="Texture2D" uid="uid://cdui1ufd2xrc7" path="res://asset/texture/icon/Buffs/enemy_spawn_down.png" id="6_1fln6"]
 
 [sub_resource type="Resource" id="Resource_avbik"]

@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="SkillAbility" load_steps=12 format=3 uid="uid://6mxwf4314lcl"]
 
-[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_qf0ux"]
-[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://source/ability_system/ability/skill_ability.gd" id="2_ak3um"]
-[ext_resource type="Script" uid="uid://bm0u02uql6r6x" path="res://source/ability_system/ability_effect/deal_damage.gd" id="2_qeuuc"]
-[ext_resource type="Script" uid="uid://dnuemhw0ftdls" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_u8ofm"]
-[ext_resource type="Script" uid="uid://cm7wcwlrgykbp" path="res://source/ability_system/ability_trigger_condition/ability_trigger.gd" id="4_7xum3"]
+[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_qf0ux"]
+[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://addons/godot_gameplay_ability_system/source/ability/skill_ability.gd" id="2_ak3um"]
+[ext_resource type="Script" uid="uid://dhuwnhvd04eqj" path="res://addons/godot_gameplay_ability_system/source/ability_effect/deal_damage.gd" id="2_qeuuc"]
+[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_modifier.gd" id="2_u8ofm"]
+[ext_resource type="Script" uid="uid://crhc3v50y064u" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger.gd" id="4_7xum3"]
 [ext_resource type="Texture2D" uid="uid://86xdoau81gtp" path="res://asset/texture/icon/Spells/lightning_spell.png" id="5_i2qii"]
-[ext_resource type="Script" uid="uid://dddyuodl0x2ve" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="5_ugqet"]
-[ext_resource type="Script" uid="uid://bicgaareollhj" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition_chance.gd" id="6_isi10"]
+[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger_condition.gd" id="5_ugqet"]
+[ext_resource type="Script" uid="uid://bd8jtu1tud483" path="res://addons/godot_gameplay_ability_system/source/ability_trigger_condition/ability_trigger_condition_chance.gd" id="6_isi10"]
 
 [sub_resource type="Resource" id="Resource_wma4j"]
 script = ExtResource("2_qeuuc")

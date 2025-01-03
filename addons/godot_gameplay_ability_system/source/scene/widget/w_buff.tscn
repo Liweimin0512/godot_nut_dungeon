@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwi4swyerhcbg"]
 
-[ext_resource type="Script" uid="uid://dhobnt3buvn5n" path="res://source/widget/w_buff.gd" id="1_fd1xj"]
+[ext_resource type="Script" uid="uid://dhobnt3buvn5n" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_buff.gd" id="1_fd1xj"]
 [ext_resource type="Texture2D" uid="uid://dymtptr4legxc" path="res://asset/texture/icon/Buffs/attack_boost.png" id="1_onwca"]
 
 [node name="W_Buff" type="MarginContainer"]

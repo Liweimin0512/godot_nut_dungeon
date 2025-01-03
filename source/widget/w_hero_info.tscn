@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbbx8idrk5q7h"]
 
-[ext_resource type="PackedScene" uid="uid://k33y1svd4wnm" path="res://source/widget/w_skill_icon.tscn" id="1_6odac"]
+[ext_resource type="PackedScene" uid="uid://k33y1svd4wnm" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_skill_icon.tscn" id="1_6odac"]
 [ext_resource type="Script" uid="uid://0plx8hfh70ec" path="res://source/widget/w_hero_info.gd" id="1_t8bix"]
 [ext_resource type="Texture2D" uid="uid://bygyexnnjxflw" path="res://asset/texture/character/hero/leaf_ranger/leaf_ranger.png" id="2_owqm7"]
 

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="SkillAbility" load_steps=11 format=3 uid="uid://cev8ft8aahhlt"]
 
-[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://source/ability_system/ability_effect/ability_effect.gd" id="1_867w6"]
-[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://source/ability_system/ability/skill_ability.gd" id="2_mm51c"]
-[ext_resource type="Script" uid="uid://dnuemhw0ftdls" path="res://source/ability_system/ability_effect_modifier/ability_effect_modifier.gd" id="2_o4mbh"]
-[ext_resource type="Script" uid="uid://bm0u02uql6r6x" path="res://source/ability_system/ability_effect/deal_damage.gd" id="3_p653n"]
-[ext_resource type="Script" uid="uid://dddyuodl0x2ve" path="res://source/ability_system/ability_trigger_condition/ability_trigger_condition.gd" id="4_6bwms"]
-[ext_resource type="Script" uid="uid://bm45vmnvrcb2a" path="res://source/ability_system/ability_effect/apply_ability.gd" id="5_nj2ik"]
+[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_867w6"]
+[ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://addons/godot_gameplay_ability_system/source/ability/skill_ability.gd" id="2_mm51c"]
+[ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_modifier.gd" id="2_o4mbh"]
+[ext_resource type="Script" uid="uid://dhuwnhvd04eqj" path="res://addons/godot_gameplay_ability_system/source/ability_effect/deal_damage.gd" id="3_p653n"]
+[ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger_condition.gd" id="4_6bwms"]
+[ext_resource type="Script" uid="uid://b0cmyrktakacv" path="res://addons/godot_gameplay_ability_system/source/ability_effect/apply_ability.gd" id="5_nj2ik"]
 [ext_resource type="Texture2D" uid="uid://dlr5iiqyitjgh" path="res://asset/texture/icon/Spells/ice_spell.png" id="7_6bwms"]
 [ext_resource type="Resource" uid="uid://bnribbjurhd1f" path="res://asset/resource/ability/buff_ability/stun.tres" id="8_g8wqt"]
 
