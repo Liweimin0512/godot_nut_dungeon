@@ -32,13 +32,13 @@ func _init(atr_name : StringName = "", base: float = 0) -> void:
 	_absolute_modify = 0
 
 ## 修改属性
-func _modify(modify_type: AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE, value: float) -> void:
+func _modify(modify_type: String, value: float) -> void:
 	match modify_type:
-		AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE.VALUE:
+		"value":
 			_value_modify += value
-		AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE.PERCENTAGE:
+		"percentage":
 			_percentage_modify += value
-		AbilityDefinition.ATTRIBUTE_MODIFIER_TYPE.ABSOLUTE:
+		"absolute":
 			_absolute_modify = value
 	attribute_value_changed.emit(attribute_value)
 

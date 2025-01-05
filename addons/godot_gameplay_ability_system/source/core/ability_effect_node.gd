@@ -20,6 +20,9 @@ var is_executed : bool = false
 ## 节点状态改变
 signal state_changed(state: STATUS)
 
+func _init():
+	resource_local_to_scene = true
+
 ## 执行
 func execute(context: Dictionary) -> STATUS:
 	if not enabled: return STATUS.FAILURE

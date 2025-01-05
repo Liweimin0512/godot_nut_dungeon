@@ -22,10 +22,26 @@ signal cast_finished
 func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
 	_ability_component = ability_component
 	_context = context
+	_apply(context)
+
+## 移除技能
+func remove() -> void:
+	effect_tree_root.revoke()
+	_remove()
 
 ## 执行技能
 func cast(context: Dictionary) -> bool:
 	_context.merge(context, true)
+	return await _cast(_context)
+
+func _apply(context: Dictionary) -> void:
+	pass
+
+func _remove() -> void:
+	pass
+
+func _cast(context: Dictionary) -> bool:
+	if not effect_tree_root: return false
 	var result = await effect_tree_root.execute(_context)
 	if result == AbilityEffectNode.STATUS.SUCCESS:
 		GASLogger.info("技能{0}执行成功".format([self]))
@@ -33,10 +49,6 @@ func cast(context: Dictionary) -> bool:
 		return true
 	GASLogger.error("技能{0}执行失败".format([self]))
 	return false
-
-## 移除技能
-func remove() -> void:
-	effect_tree_root.revoke()
 
 func _to_string() -> String:
 	return ability_name

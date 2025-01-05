@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=14 format=3 uid="uid://cqc630jp2v4jy"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=15 format=3 uid="uid://cqc630jp2v4jy"]
 
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="1_wfywn"]
+[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://resources/data/ability/skill_ability/attack.tres" id="2_tlqve"]
 [ext_resource type="AnimationLibrary" uid="uid://2n54xto66wk1" path="res://scenes/character/resources/animation/animation_library_flying_eye.res" id="5_hu6ev"]
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="7_hurpf"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="8_moms6"]
@@ -55,7 +56,7 @@ size_y = 10
 script = ExtResource("10_fuogr")
 character_name = &"眼魔"
 ability_attributes = Array[ExtResource("7_hurpf")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l"), SubResource("Resource_fosf3"), SubResource("Resource_g3nwv")])
-abilities = Array[ExtResource("1_wfywn")]([])
+abilities = Array[ExtResource("1_wfywn")]([ExtResource("2_tlqve")])
 ability_resources = Array[ExtResource("8_moms6")]([SubResource("Resource_2k26t")])
 animation_library = ExtResource("5_hu6ev")
 sprite_position = Vector2(-1, -27)

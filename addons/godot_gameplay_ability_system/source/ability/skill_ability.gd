@@ -20,18 +20,8 @@ class_name SkillAbility
 	set(value):
 		current_cooldown = value
 		cooldown_changed.emit(current_cooldown)
-## 技能释放时间（秒）
-@export var pre_cast_time: float = 0.4
-## 技能后摇时间
-@export var post_cast_time: float = 0.4
 ## 技能是否显示在UI中
 @export var is_show : bool = true
-## 技能释放时播放的音效
-@export var sound_effect: StringName
-## 技能释放时播放的动画
-@export var animation: StringName
-## 技能施法位置
-@export var casting_position : AbilityDefinition.CASTING_POSITION = AbilityDefinition.CASTING_POSITION.NONE
 ## 是否正处在冷却状态
 var is_cooldown: bool:
 	get:
@@ -43,17 +33,12 @@ func _init() -> void:
 	resource_local_to_scene = true
 
 ## 应用技能
-func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
+func _apply(context: Dictionary) -> void:
 	if is_auto_cast:
-		ability_component.try_cast_ability(self, context)
-	super(ability_component, context)
-
-## 移除技能
-func remove() -> void:
-	super()
+		_ability_component.try_cast_ability(self, context)
 
 ## 执行技能
-func cast(context: Dictionary) -> bool:
+func _cast(context: Dictionary) -> bool:
 	if not _ability_component.has_enough_resources(cost_resource_name, cost_resource_value):
 		print("消耗不足，无法释放技能！")
 		return false
@@ -61,18 +46,15 @@ func cast(context: Dictionary) -> bool:
 		print("技能正在冷却！")
 		return false
 	var caster : Node = context.get("caster")
-	if caster and not animation.is_empty():
-		caster.play_action_animation(animation)
-	if pre_cast_time > 0:
-		await _ability_component.get_tree().create_timer(pre_cast_time).timeout
 	_ability_component.consume_resources(cost_resource_name, cost_resource_value)
 	current_cooldown = cooldown
 	var ok := await super(context)
-	if post_cast_time>0:
-		await _ability_component.get_tree().create_timer(post_cast_time).timeout
 	return ok
 
 ## 更新冷却时间
-func update_cooldown() -> void:
+func _update_cooldown() -> void:
 	if is_cooldown:
 		current_cooldown -= 1
+
+func _to_string() -> String:
+	return "{0}冷却{1}".format([ability_name, current_cooldown])

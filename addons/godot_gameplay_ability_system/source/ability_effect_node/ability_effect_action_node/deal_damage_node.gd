@@ -6,11 +6,11 @@ class_name DealDamageEffectNode
 ## 伤害倍数
 @export var damage_multiplier: float = 1.0
 ## 伤害类型
-@export var damage_type: int = AbilityDamage.DamageType.PHYSICAL
+@export var damage_type: AbilityDamage.DAMAGE_TYPE = AbilityDamage.DAMAGE_TYPE.PHYSICAL
 ## 是否为间接伤害
 @export var is_indirect: bool = false
 ## 伤害附带效果
-@export var effect: ResourceNode = null
+@export var effect: AbilityEffectNode = null
 
 func _perform_action(context: Dictionary) -> STATUS:
 	var caster : Node = context.get("caster")

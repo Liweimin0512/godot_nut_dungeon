@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=14 format=3 uid="uid://dusj10wryboti"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=15 format=3 uid="uid://dusj10wryboti"]
 
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="1_ckwfc"]
 [ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="1_qi5g2"]
+[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://resources/data/ability/skill_ability/attack.tres" id="2_1kaq7"]
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="2_gfiar"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="3_yxnkf"]
 [ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_resource/health_resource.gd" id="4_hfljm"]
@@ -56,7 +57,7 @@ resource_local_to_scene = true
 script = ExtResource("1_qi5g2")
 character_name = &"哥布林"
 ability_attributes = Array[ExtResource("2_gfiar")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l"), SubResource("Resource_fosf3"), SubResource("Resource_g3nwv")])
-abilities = Array[ExtResource("1_ckwfc")]([])
+abilities = Array[ExtResource("1_ckwfc")]([ExtResource("2_1kaq7")])
 ability_resources = Array[ExtResource("3_yxnkf")]([SubResource("Resource_2k26t")])
 animation_library = ExtResource("6_po6yb")
 sprite_position = Vector2(1, -26)

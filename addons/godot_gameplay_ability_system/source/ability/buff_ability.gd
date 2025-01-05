@@ -7,7 +7,7 @@ class_name BuffAbility
 ## Buff可以来自技能、物品、环境等多种来源。
 
 ## buff类型
-@export var buff_type: AbilityDefinition.BUFF_TYPE
+@export_enum("duration", "value") var buff_type: int
 ## 是否永久
 @export var is_permanent: bool = false
 ## buff值，含义取决于BUFF类型，数值型代表层数，持续型代表持续时间
@@ -21,32 +21,31 @@ class_name BuffAbility
 signal value_changed(value: int)
 
 ## 应用技能
-func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
+func _apply(context: Dictionary) -> void:
 	var ability_context : Dictionary = context
-	var _buff := ability_component.get_same_ability(self)
+	var _buff := _ability_component.get_same_ability(self)
 	if _buff:
-		ability_component.remove_ability(_buff)
-		if _buff.buff_type == AbilityDefinition.BUFF_TYPE.DURATION or _buff.can_stack:
+		_ability_component.remove_ability(_buff)
+		if _buff.buff_type == 0 or _buff.can_stack:
 			value += _buff.value
 	ability_context["source"] = self
 	GASLogger.info("应用BUFF：{0}".format([self]))
 	cast(context)
-	super(ability_component, context)
 
 ## 移除技能
-func remove() -> void:
+func _remove() -> void:
 	super()
 
 ## 执行技能
-func cast(context: Dictionary) -> bool:
+func _cast(context: Dictionary) -> bool:
 	return await super(context)
 
 ## 更新BUFF状态
-func update() -> void:
+func _update() -> void:
 	print("更新{0} BUFF状态".format([self]))
-	if buff_type == AbilityDefinition.BUFF_TYPE.VALUE:
+	if buff_type == 1:
 		if not is_permanent: _ability_component.remove_ability(self)
-	elif buff_type == AbilityDefinition.BUFF_TYPE.DURATION:
+	elif buff_type == 0:
 		if not is_permanent:
 			value -= 1
 			if value <= 0:

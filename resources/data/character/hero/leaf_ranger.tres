@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=17 format=3 uid="uid://do7opu8hnabrh"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=18 format=3 uid="uid://do7opu8hnabrh"]
 
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="1_tspno"]
+[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://resources/data/ability/skill_ability/attack.tres" id="2_qsrkc"]
 [ext_resource type="Script" uid="uid://3piae0t6qrlr" path="res://addons/godot_gameplay_ability_system/source/ability_resource/enery_resource.gd" id="5_l3oqy"]
 [ext_resource type="AnimationLibrary" uid="uid://b82bxlch76pwa" path="res://scenes/character/resources/animation/animation_library_leaf_ranger.res" id="6_l3oqy"]
 [ext_resource type="Texture2D" uid="uid://bygyexnnjxflw" path="res://asset/texture/character/hero/leaf_ranger/leaf_ranger.png" id="7_rwsjv"]
@@ -70,7 +71,7 @@ script = ExtResource("21_g3itc")
 character_name = &"游侠"
 character_icon = ExtResource("7_rwsjv")
 ability_attributes = Array[ExtResource("15_pnjvj")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l"), SubResource("Resource_w4m7k"), SubResource("Resource_1sug7")])
-abilities = Array[ExtResource("1_tspno")]([])
+abilities = Array[ExtResource("1_tspno")]([ExtResource("2_qsrkc")])
 ability_resources = Array[ExtResource("16_lxccl")]([SubResource("Resource_bgern"), SubResource("Resource_y3120")])
 animation_library = ExtResource("6_l3oqy")
 sprite_position = Vector2(0, -64)

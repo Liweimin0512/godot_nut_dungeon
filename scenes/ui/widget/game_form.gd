@@ -1,7 +1,7 @@
 extends Control
 class_name GameForm
 
-const W_HERO_INFO = preload("res://source/widget/w_hero_info.tscn")
+const W_HERO_INFO = preload("res://scenes/ui/widget/w_hero_info.tscn")
 
 @onready var w_hero_info_container: HBoxContainer = %W_HeroInfoContainer
 @onready var rich_text_label: RichTextLabel = %RichTextLabel

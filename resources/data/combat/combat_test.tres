@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CombatModel" load_steps=4 format=3 uid="uid://bshhcvu884gan"]
 
 [ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="1_hckfi"]
-[ext_resource type="Resource" uid="uid://cqc630jp2v4jy" path="res://resources/data/character/enemy/flying_eye.tres" id="2_fahrs"]
 [ext_resource type="Script" uid="uid://bebfj2ga1x7eh" path="res://scripts/resources/combat_model.gd" id="2_jdrd6"]
+[ext_resource type="Resource" uid="uid://dusj10wryboti" path="res://resources/data/character/enemy/goblin.tres" id="2_xbup4"]
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_jdrd6")
 max_turn_count = 99
-enemies = Array[ExtResource("1_hckfi")]([ExtResource("2_fahrs")])
+enemies = Array[ExtResource("1_hckfi")]([ExtResource("2_xbup4")])
 is_auto = true
 is_real_time = true

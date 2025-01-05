@@ -1,6 +1,6 @@
 extends Node2D
 
-const CHARACTER = preload("res://source/character.tscn")
+const CHARACTER = preload("res://scenes/character/character.tscn")
 
 # @onready var rich_text_label: RichTextLabel = %RichTextLabel
 # @onready var player_character: Character = $PlayerCharacter

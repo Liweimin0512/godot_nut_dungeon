@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="TurnBasedBuffAbility" load_steps=3 format=3 uid="uid://r6bnasc2r03p"]
+[gd_resource type="Resource" script_class="TurnBasedBuffAbility" load_steps=3 format=3 uid="uid://dhcd1db3vsyuo"]
 
-[ext_resource type="Script" path="res://addons/godot_gameplay_ability_system/source/ability_effect/ability_effect.gd" id="1_83gda"]
+[ext_resource type="Texture2D" uid="uid://86xdoau81gtp" path="res://asset/texture/icon/Spells/lightning_spell.png" id="1_r01ov"]
 [ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://scripts/systems/combat/ability/turn_based_buff_ability.gd" id="2_qjskh"]
 
 [resource]
@@ -11,5 +11,4 @@ value = 0
 can_stack = false
 ability_name = &""
 ability_description = ""
-level = 1
-effects = Array[ExtResource("1_83gda")]([])
+icon = ExtResource("1_r01ov")

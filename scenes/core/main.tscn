@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcxjfw256ynb5"]
+[gd_scene load_steps=12 format=3 uid="uid://dcxjfw256ynb5"]
 
 [ext_resource type="Script" uid="uid://c3djxdb3f0bkh" path="res://scenes/core/main.gd" id="1_i4sev"]
 [ext_resource type="Resource" uid="uid://bshhcvu884gan" path="res://resources/data/combat/combat_test.tres" id="2_p2r0i"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://b4u5ewpyjas2f" path="res://asset/texture/background/game_background_1/layers/front_decor.png" id="6_efxa6"]
 [ext_resource type="Texture2D" uid="uid://o0iacojv61wy" path="res://asset/texture/background/game_background_1/layers/ground_decor.png" id="7_dg77c"]
 [ext_resource type="PackedScene" uid="uid://bgj5fmjvlf8j" path="res://scenes/ui/widget/game_form.tscn" id="8_f6a44"]
+[ext_resource type="Resource" uid="uid://pnl45yj5lq7s" path="res://resources/data/character/hero/warrior.tres" id="10_ocd3q"]
+[ext_resource type="Resource" uid="uid://do7opu8hnabrh" path="res://resources/data/character/hero/leaf_ranger.tres" id="11_5xrq8"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_i4sev")
@@ -76,11 +78,13 @@ layer = 128
 position = Vector2(216, 144)
 
 [node name="PlayerCharacter5" parent="PlayerMarkers/Marker2D" groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
+character_model = ExtResource("10_ocd3q")
 
 [node name="Marker2D2" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(180, 168)
 
 [node name="PlayerCharacter2" parent="PlayerMarkers/Marker2D2" groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
+character_model = ExtResource("11_5xrq8")
 
 [node name="Marker2D3" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(132, 144)
