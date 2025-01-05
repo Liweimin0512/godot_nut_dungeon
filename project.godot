@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 CombatSystem="*res://source/combat_system/combat_system.gd"
-ProjectileSystem="*res://addons/godot_gameplay_projectile_system/source/projectile_system.gd"
 
 [display]
 
