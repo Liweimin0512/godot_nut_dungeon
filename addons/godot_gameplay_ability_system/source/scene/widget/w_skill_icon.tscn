@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://k33y1svd4wnm"]
+[gd_scene load_steps=2 format=3 uid="uid://k33y1svd4wnm"]
 
-[ext_resource type="Texture2D" uid="uid://clpo07hgxo3mv" path="res://asset/texture/icon/Spells/fire_spell.png" id="1_16d73"]
 [ext_resource type="Script" uid="uid://yn4hbuekab3q" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_skill_icon.gd" id="1_ly5c8"]
 
 [node name="W_SkillIcon" type="MarginContainer"]
@@ -9,7 +8,6 @@ script = ExtResource("1_ly5c8")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("1_16d73")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2

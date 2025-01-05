@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=3 format=3 uid="uid://civj478kyuck0"]
+
+[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_c4d63"]
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/combat/ability/turn_based_skill_ability.gd" id="2_hldlx"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_hldlx")
+cast_count = 1
+target_type = &""
+cost_resource_name = &""
+cost_resource_value = 0
+is_auto_cast = false
+cooldown = 0
+current_cooldown = 0
+pre_cast_time = 0.4
+post_cast_time = 0.4
+is_show = true
+sound_effect = &""
+animation = &""
+casting_position = 0
+ability_name = &"法力涌现"
+ability_description = "在成功施放一个伤害技能后，有一定概率触发，恢复大量魔法值。"
+level = 1
+effects = Array[ExtResource("1_c4d63")]([])

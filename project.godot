@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="turn-based-combat-system"
-run/main_scene="res://main.tscn"
+run/main_scene="res://scenes/core/main.tscn"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
-CombatSystem="*res://source/combat_system/combat_system.gd"
+CombatSystem="*res://scripts/systems/combat/combat_system.gd"
 
 [display]
 

@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=14 format=3 uid="uid://cqc630jp2v4jy"]
+
+[ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="1_wfywn"]
+[ext_resource type="AnimationLibrary" uid="uid://2n54xto66wk1" path="res://scenes/character/resources/animation/animation_library_flying_eye.res" id="5_hu6ev"]
+[ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="7_hurpf"]
+[ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="8_moms6"]
+[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_resource/health_resource.gd" id="9_xi3hv"]
+[ext_resource type="Script" path="res://resources/data/character/character_model.gd" id="10_fuogr"]
+
+[sub_resource type="Resource" id="Resource_jvqq5"]
+resource_local_to_scene = true
+script = ExtResource("7_hurpf")
+attribute_name = &"生命值"
+_base_value = 100.0
+
+[sub_resource type="Resource" id="Resource_yxhrg"]
+resource_local_to_scene = true
+script = ExtResource("7_hurpf")
+attribute_name = &"攻击力"
+_base_value = 10.0
+
+[sub_resource type="Resource" id="Resource_hvkvg"]
+resource_local_to_scene = true
+script = ExtResource("7_hurpf")
+attribute_name = &"防御力"
+_base_value = 5.0
+
+[sub_resource type="Resource" id="Resource_uqj3l"]
+resource_local_to_scene = true
+script = ExtResource("7_hurpf")
+attribute_name = &"速度"
+_base_value = 5.0
+
+[sub_resource type="Resource" id="Resource_fosf3"]
+script = ExtResource("7_hurpf")
+attribute_name = &"命中率"
+_base_value = 1.0
+
+[sub_resource type="Resource" id="Resource_g3nwv"]
+script = ExtResource("7_hurpf")
+attribute_name = &"暴击率"
+_base_value = 0.0
+
+[sub_resource type="Resource" id="Resource_2k26t"]
+resource_local_to_scene = true
+script = ExtResource("9_xi3hv")
+ability_resource_name = &"生命值"
+current_value = 0
+max_value = 30
+attribute_name = &"生命值"
+resource_color = Color(1, 0, 0, 1)
+size_y = 10
+
+[resource]
+script = ExtResource("10_fuogr")
+character_name = &"眼魔"
+ability_attributes = Array[ExtResource("7_hurpf")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l"), SubResource("Resource_fosf3"), SubResource("Resource_g3nwv")])
+abilities = Array[ExtResource("1_wfywn")]([])
+ability_resources = Array[ExtResource("8_moms6")]([SubResource("Resource_2k26t")])
+animation_library = ExtResource("5_hu6ev")
+sprite_position = Vector2(-1, -27)

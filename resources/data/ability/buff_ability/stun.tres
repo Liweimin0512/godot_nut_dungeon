@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="TurnBasedBuffAbility" load_steps=3 format=3 uid="uid://bnribbjurhd1f"]
+
+[ext_resource type="Script" path="res://addons/godot_gameplay_ability_system/source/ability_effect/ability_effect.gd" id="1_juct3"]
+[ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://scripts/systems/combat/ability/turn_based_buff_ability.gd" id="2_sii1e"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_sii1e")
+buff_type = 1
+is_permanent = false
+value = 2
+can_stack = true
+ability_name = &"眩晕"
+ability_description = "目标在眩晕状态下无法进行任何行动"
+level = 1
+effects = Array[ExtResource("1_juct3")]([])

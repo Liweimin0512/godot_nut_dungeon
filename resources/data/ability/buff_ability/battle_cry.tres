@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BuffAbility" load_steps=2 format=3 uid="uid://cd7qfemfd5dhe"]
+
+[ext_resource type="Script" uid="uid://c1olb7jgy5d6c" path="res://addons/godot_gameplay_ability_system/source/ability/buff_ability.gd" id="2_pgkp3"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_pgkp3")
+buff_type = 0
+is_permanent = false
+value = 0
+can_stack = false
+ability_name = &""
+ability_description = ""

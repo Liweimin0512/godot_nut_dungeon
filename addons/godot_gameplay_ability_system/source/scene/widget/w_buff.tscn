@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwi4swyerhcbg"]
+[gd_scene load_steps=2 format=3 uid="uid://bwi4swyerhcbg"]
 
 [ext_resource type="Script" uid="uid://dhobnt3buvn5n" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_buff.gd" id="1_fd1xj"]
-[ext_resource type="Texture2D" uid="uid://dymtptr4legxc" path="res://asset/texture/icon/Buffs/attack_boost.png" id="1_onwca"]
 
 [node name="W_Buff" type="MarginContainer"]
 custom_minimum_size = Vector2(14, 14)
@@ -12,7 +11,6 @@ script = ExtResource("1_fd1xj")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("1_onwca")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="."]

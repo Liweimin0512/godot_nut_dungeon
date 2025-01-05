@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://cokqr3cv3dqo6"]
+
+[ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
+[ext_resource type="Texture2D" uid="uid://clkhxmxdtgch" path="res://asset/texture/character/hero/crystal_mauler/idle.png" id="2_cj4oh"]
+[ext_resource type="Script" uid="uid://y1mgjyqenlv7" path="res://scripts/systems/combat/combat_component.gd" id="2_ghtna"]
+[ext_resource type="Script" uid="uid://n67wyu14blxx" path="res://addons/godot_gameplay_ability_system/source/ability_component.gd" id="3_6a5vl"]
+[ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
+[ext_resource type="AnimationLibrary" uid="uid://cd0oe24x0pr5f" path="res://scenes/character/resources/animation/animation_library_crystal_mauler.res" id="6_g8e5i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gnpp6"]
+size = Vector2(151, 154)
+
+[node name="Character" type="Node2D"]
+script = ExtResource("1_qu267")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -64)
+texture = ExtResource("2_cj4oh")
+hframes = 8
+frame = 4
+
+[node name="W_Status" parent="." instance=ExtResource("6_cj4oh")]
+offset_left = -37.0
+offset_top = 6.0
+offset_right = 43.0
+offset_bottom = 34.0
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(65.5, 67)
+shape = SubResource("RectangleShape2D_gnpp6")
+
+[node name="CombatComponent" type="Node" parent="."]
+script = ExtResource("2_ghtna")
+action_time = 0.3
+
+[node name="AbilityComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_6a5vl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": ExtResource("6_g8e5i")
+}
+autoplay = "idle"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+offset_left = -26.0
+offset_top = -103.0
+offset_right = 38.0
+offset_bottom = -63.0
+
+[node name="LabelAbility" type="Label" parent="MarginContainer2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "技能名称"
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="died" from="CombatComponent" to="." method="_on_combat_component_died"]
+[connection signal="hited" from="CombatComponent" to="." method="_on_combat_component_hited"]
+[connection signal="hurted" from="CombatComponent" to="." method="_on_combat_component_hurted"]
+[connection signal="pre_cast" from="AbilityComponent" to="." method="_on_ability_component_pre_cast"]
+[connection signal="resource_changed" from="AbilityComponent" to="." method="_on_ability_component_resource_changed"]
