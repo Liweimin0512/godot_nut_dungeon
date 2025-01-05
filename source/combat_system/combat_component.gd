@@ -69,7 +69,9 @@ func action() -> void:
 		print(self, "当前处于眩晕状态，无法动！跳过本回合！")
 		return
 	print("combat_component: {0} 行动".format([self]))
-	var ability: Ability = _get_available_abilities().pick_random()
+	var available_abilities := _get_available_abilities()
+	if available_abilities.is_empty(): return
+	var ability: Ability = available_abilities.pick_random()
 	if not ability:
 		print("combat_component: 无可用技能，跳过{0}的回合".format([self]))
 	else:
@@ -117,12 +119,14 @@ func combat_end() -> void:
 	print(self, " 战斗结束", "剩余血量: ", ability_component.get_resource_value("生命值"))
 	_current_combat = null
 	ability_component.handle_game_event("on_combat_end")
-	for buff in ability_component.get_buffs():
-		ability_component.remove_ability(buff)
+	for ability in ability_component.get_abilities():
+		if ability is BuffAbility:
+			ability_component.remove_ability(ability)
 	combat_ended.emit()
 
 ## 攻击
-func hit(target: CombatComponent, damage: AbilityDamage) -> void:
+func hit(damage: AbilityDamage) -> void:
+	var target : CombatComponent = damage.defender
 	if not target: return
 	print("combat_component: {0} 攻击： {1}, damage info:{2}".format([
 		self, target, damage.damage_value

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=3 format=3 uid="uid://djxtouuveyace"]
 
-[ext_resource type="Script" path="res://addons/godot_gameplay_ability_system/source/ability_effect/ability_effect.gd" id="1_wf84b"]
+[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect.gd" id="1_wf84b"]
 [ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://source/combat_system/ability/turn_based_skill_ability.gd" id="2_l368v"]
 
 [resource]

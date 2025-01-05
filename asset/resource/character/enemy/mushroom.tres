@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=15 format=3 uid="uid://cudg3bsvfej7w"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=14 format=3 uid="uid://cudg3bsvfej7w"]
 
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="1_1c0j8"]
-[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://asset/resource/ability/skill_ability/attack.tres" id="2_1umeu"]
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="7_4n56t"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="8_3j2sv"]
 [ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_resource/health_resource.gd" id="9_m6b3c"]
@@ -56,7 +55,7 @@ size_y = 10
 script = ExtResource("11_lj6li")
 character_name = &"蘑菇怪"
 ability_attributes = Array[ExtResource("7_4n56t")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l"), SubResource("Resource_fosf3"), SubResource("Resource_g3nwv")])
-abilities = Array[ExtResource("1_1c0j8")]([ExtResource("2_1umeu")])
+abilities = Array[ExtResource("1_1c0j8")]([])
 ability_resources = Array[ExtResource("8_3j2sv")]([SubResource("Resource_2k26t")])
 animation_library = ExtResource("10_xs4ak")
 sprite_position = Vector2(-1, -27)

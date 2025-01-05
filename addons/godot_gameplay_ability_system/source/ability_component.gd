@@ -9,6 +9,8 @@ class_name AbilityComponent
 @export var _ability_resources : Dictionary[StringName, AbilityResource]
 ## 当前单位所拥有的全部技能（包括BUFF）
 @export var _abilities : Dictionary[StringName, Ability]
+## 技能触发器集
+@export var _ability_triggers : Dictionary[StringName, Array]
 
 ## 属性变化时发出
 signal attribute_changed(atr_name: StringName, value: float)
@@ -159,8 +161,8 @@ func apply_ability(ability: Ability, ability_context: Dictionary) -> void:
 	ability_applied.emit(ability)
 
 ## 移除技能
-func remove_ability(ability: Ability, ability_context: Dictionary = {}) -> void:
-	ability.remove(ability_context)
+func remove_ability(ability: Ability) -> void:
+	ability.remove()
 	var key : StringName = _abilities.find_key(ability)
 	if key: _abilities.erase(key)
 	print("移除Ability：", ability)
@@ -177,17 +179,40 @@ func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
 
 #endregion
 
+#region 触发器相关
+
 ## 处理游戏事件
 func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -> void:
-	print("接收到游戏事件：{0}，事件上下文{1}".format([event_name, event_context]))
+	GASLogger.info("接收到游戏事件：{0}，事件上下文{1}".format([event_name, event_context]))
 	_handle_resource_callback(event_name, event_context)
 	for ability in _abilities.values():
-		if ability.trigger and ability.trigger.trigger_type == event_name:
-			if ability.trigger.check(event_context):
-				print("处理游戏事件：{0}，事件上下文{1}，触发技能{2}".format([event_name, event_context, ability]))
-				await try_cast_ability(ability, event_context)
+		# if ability.trigger and ability.trigger.trigger_type == event_name:
+		# 	if ability.trigger.check(event_context):
+		# 		print("处理游戏事件：{0}，事件上下文{1}，触发技能{2}".format([event_name, event_context, ability]))
+		# 		await try_cast_ability(ability, event_context)
 		if ability.has_method(event_name):
 			ability.call(event_name, event_context)
+	var triggers : Array = _ability_triggers.get(event_name, [])
+	if triggers.is_empty():
+		GASLogger.info("没有找到触发器：{0}".format([event_name]))
+		return
+	for trigger : AbilityEffectTriggerNode in triggers:
+		trigger.handle_trigger(event_context)
+
+## 添加触发器
+func add_ability_trigger(trigger_type: StringName, trigger: AbilityEffectTriggerNode) -> void:
+	var triggers : Array[AbilityEffectTriggerNode] = _ability_triggers.get(trigger_type, [])
+	triggers.append(trigger)
+	_ability_triggers[trigger_type] = triggers
+
+## 移除触发器
+func remove_ability_trigger(trigger_type: StringName, trigger: AbilityEffectTriggerNode) -> void:
+	var triggers : Array[AbilityEffectTriggerNode] = _ability_triggers.get(trigger_type, [])
+	if triggers.has(trigger):
+		triggers.erase(trigger)
+		_ability_triggers[trigger_type] = triggers
+
+#endregion
 
 ## 应用伤害
 func apply_damage(damage: AbilityDamage) -> void:

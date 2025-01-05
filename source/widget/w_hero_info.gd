@@ -1,7 +1,7 @@
 extends PanelContainer
 class_name W_HeroInfo
 
-const W_SKILL_ICON = preload("res://source/widget/w_skill_icon.tscn")
+const W_SKILL_ICON = preload("res://addons/godot_gameplay_ability_system/source/scene/widget/w_skill_icon.tscn")
 
 @onready var texture_rect_hero_icon: TextureRect = %TextureRectHeroIcon
 @onready var label_hero_name: Label = %LabelHeroName

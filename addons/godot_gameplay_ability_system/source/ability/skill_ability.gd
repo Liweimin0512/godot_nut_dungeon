@@ -44,13 +44,13 @@ func _init() -> void:
 
 ## 应用技能
 func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
-	if is_auto_cast and trigger == null:
+	if is_auto_cast:
 		ability_component.try_cast_ability(self, context)
 	super(ability_component, context)
 
 ## 移除技能
-func remove(context: Dictionary = {}) -> void:
-	super(context)
+func remove() -> void:
+	super()
 
 ## 执行技能
 func cast(context: Dictionary) -> bool:

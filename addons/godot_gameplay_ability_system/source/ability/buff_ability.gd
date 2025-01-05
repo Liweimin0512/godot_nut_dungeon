@@ -8,7 +8,7 @@ class_name BuffAbility
 
 ## buff类型
 @export var buff_type: AbilityDefinition.BUFF_TYPE
-## 是否永久, 永久指持续到战斗结束
+## 是否永久
 @export var is_permanent: bool = false
 ## buff值，含义取决于BUFF类型，数值型代表层数，持续型代表持续时间
 @export var value: int:
@@ -29,14 +29,13 @@ func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
 		if _buff.buff_type == AbilityDefinition.BUFF_TYPE.DURATION or _buff.can_stack:
 			value += _buff.value
 	ability_context["source"] = self
-	print("应用BUFF：", self)
-	if not trigger:
-		ability_component.try_cast_ability(self, context)
+	GASLogger.info("应用BUFF：{0}".format([self]))
+	cast(context)
 	super(ability_component, context)
 
 ## 移除技能
-func remove(context: Dictionary = {}) -> void:
-	super(context)
+func remove() -> void:
+	super()
 
 ## 执行技能
 func cast(context: Dictionary) -> bool:
@@ -46,12 +45,12 @@ func cast(context: Dictionary) -> bool:
 func update() -> void:
 	print("更新{0} BUFF状态".format([self]))
 	if buff_type == AbilityDefinition.BUFF_TYPE.VALUE:
-		if not is_permanent: _ability_component.remove_ability(self, _context)
+		if not is_permanent: _ability_component.remove_ability(self)
 	elif buff_type == AbilityDefinition.BUFF_TYPE.DURATION:
 		if not is_permanent:
 			value -= 1
 			if value <= 0:
-				_ability_component.remove_ability(self, _context)
+				_ability_component.remove_ability(self)
 	print("更新buff {0} 的状态，完成！ 当前层数{1}".format([self, value]))
 
 func _to_string() -> String:

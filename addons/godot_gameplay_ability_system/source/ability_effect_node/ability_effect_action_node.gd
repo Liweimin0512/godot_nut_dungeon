@@ -1,0 +1,33 @@
+extends AbilityEffectNode
+class_name AbilityEffectActionNode
+
+## 执行节点：执行具体的游戏效果
+
+## 记录是否执行成功
+var _is_success: bool = false
+
+func _execute(context: Dictionary) -> STATUS:
+	if not _validate_parameters():
+		_is_success = false
+		return STATUS.FAILURE
+	var result = await _perform_action(context)
+	if result == STATUS.SUCCESS:
+		_is_success = true
+	return result
+
+func _revoke() -> STATUS:
+	if _is_success:
+		return await _revoke_action()
+	GASLogger.error("AbilityEffectNode revoke failed, because execute failed")
+	return STATUS.FAILURE
+
+func _validate_parameters() -> bool:
+	return true
+
+## 子类实现，执行具体的游戏效果
+func _perform_action(_context: Dictionary) -> STATUS:
+	return STATUS.SUCCESS
+
+## 子类实现，撤销具体的游戏效果
+func _revoke_action() -> STATUS:
+	return STATUS.SUCCESS

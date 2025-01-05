@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dvv4g5klxas5k" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_modifier.gd" id="3_2iy4h"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="3_2ltb5"]
 [ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_resource/health_resource.gd" id="4_edw1v"]
-[ext_resource type="Script" uid="uid://dhuwnhvd04eqj" path="res://addons/godot_gameplay_ability_system/source/ability_effect/deal_damage.gd" id="4_u5csj"]
+[ext_resource type="Script" uid="uid://dhuwnhvd04eqj" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect/deal_damage.gd" id="4_u5csj"]
 [ext_resource type="Script" uid="uid://cd6fc32jqp3s2" path="res://addons/godot_gameplay_ability_system/source/core/ability_trigger_condition.gd" id="5_hn2er"]
 [ext_resource type="Script" uid="uid://c744pwwq5p86c" path="res://addons/godot_gameplay_ability_system/source/ability/skill_ability.gd" id="5_ljx8s"]
 
