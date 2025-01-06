@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bygyexnnjxflw"
-path="res://.godot/imported/leaf_ranger.png-c32ec6dbbddadcac0f167f91b8c72299.ctex"
+uid="uid://soh3pdkvfr2w"
+path="res://.godot/imported/crystal_mauler.png-fb7f0999becd2ab59e465846803cdcc4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/character/profile_picture/leaf_ranger.png"
-dest_files=["res://.godot/imported/leaf_ranger.png-c32ec6dbbddadcac0f167f91b8c72299.ctex"]
+source_file="res://assets/texture/icon/character_profile_picture/crystal_mauler.png"
+dest_files=["res://.godot/imported/crystal_mauler.png-fb7f0999becd2ab59e465846803cdcc4.ctex"]
 
 [params]
 

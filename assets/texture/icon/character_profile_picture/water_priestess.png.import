@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dawdthb5ao5sm"
-path="res://.godot/imported/metal_bladekeeper.png-0e7e5c418fb1caff88732be0ea017885.ctex"
+uid="uid://bue8pimoybodo"
+path="res://.godot/imported/water_priestess.png-0856a7a436ad6017f779e505a92ed93a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/character/profile_picture/metal_bladekeeper.png"
-dest_files=["res://.godot/imported/metal_bladekeeper.png-0e7e5c418fb1caff88732be0ea017885.ctex"]
+source_file="res://assets/texture/icon/character_profile_picture/water_priestess.png"
+dest_files=["res://.godot/imported/water_priestess.png-0856a7a436ad6017f779e505a92ed93a.ctex"]
 
 [params]
 

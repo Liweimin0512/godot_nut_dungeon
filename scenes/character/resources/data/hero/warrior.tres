@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_resource/health_resource.gd" id="9_buvuu"]
 [ext_resource type="Script" uid="uid://cfeo8lbyg1cn4" path="res://addons/godot_gameplay_ability_system/source/ability_resource/rage_resource.gd" id="10_sscue"]
 [ext_resource type="AnimationLibrary" uid="uid://cd0oe24x0pr5f" path="res://scenes/character/resources/animation/animation_library_crystal_mauler.res" id="11_gn00n"]
-[ext_resource type="Texture2D" uid="uid://soh3pdkvfr2w" path="res://assets/texture/character/profile_picture/crystal_mauler.png" id="12_68ck3"]
+[ext_resource type="Texture2D" uid="uid://soh3pdkvfr2w" path="res://assets/texture/icon/character_profile_picture/crystal_mauler.png" id="12_68ck3"]
 [ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="13_4u6yn"]
 
 [sub_resource type="Resource" id="Resource_jvqq5"]
