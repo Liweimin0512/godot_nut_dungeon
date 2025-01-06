@@ -1,5 +1,5 @@
-extends AbilityEffectDecoratorNode
-class_name AbilityEffectTriggerNode
+extends DecoratorNode
+class_name DecoratorTriggerNode
 
 ## 触发器节点
 

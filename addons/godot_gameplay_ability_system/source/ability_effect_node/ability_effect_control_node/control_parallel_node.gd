@@ -1,5 +1,5 @@
-extends AbilityEffectControlNode
-class_name AbilityEffectParallelNode
+extends ControlNode
+class_name ControlParallelNode
 
 ## 并行节点：同时执行所有子节点
 enum POLICY {

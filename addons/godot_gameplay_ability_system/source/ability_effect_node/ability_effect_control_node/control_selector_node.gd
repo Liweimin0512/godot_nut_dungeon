@@ -1,14 +1,14 @@
-extends AbilityEffectControlNode
-class_name AbilityEffectSequenceNode
+extends ControlNode
+class_name ControlSelectorNode
 
-## 序列节点：按顺序执行所有子节点，一个失败则整体失败
+## 选择节点：执行子节点直到一个成功
 
 func _execute(context: Dictionary) -> STATUS:
 	for child in children:
 		var status = await child.execute(context)
-		if status != STATUS.SUCCESS:
+		if status != STATUS.FAILURE:
 			return status
-	return STATUS.SUCCESS
+	return STATUS.FAILURE
 
 func _revoke() -> STATUS:
 	for child in children:

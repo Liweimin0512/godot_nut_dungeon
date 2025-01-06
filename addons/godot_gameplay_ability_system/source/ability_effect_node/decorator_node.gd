@@ -1,5 +1,5 @@
 extends AbilityEffectNode
-class_name AbilityEffectDecoratorNode
+class_name DecoratorNode
 
 ## 装饰器节点：修改或增强单个子节点的行为
 

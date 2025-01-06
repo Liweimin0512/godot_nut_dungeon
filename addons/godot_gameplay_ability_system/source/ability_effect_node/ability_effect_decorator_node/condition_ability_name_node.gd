@@ -1,5 +1,5 @@
-extends AbilityEffectDecoratorNode
-class_name AbilityNameConditionDecoratorNode
+extends DecoratorNode
+class_name ConditionAbilityNameNode
 
 ## 技能名称条件判断
 

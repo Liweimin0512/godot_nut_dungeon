@@ -1,5 +1,5 @@
 extends AbilityEffectNode
-class_name AbilityEffectControlNode
+class_name ControlNode
 
 ## 控制节点：负责控制多个子节点的执行流程
 @export var children: Array[AbilityEffectNode]

@@ -1,5 +1,5 @@
-extends AbilityEffectDecoratorNode
-class_name RepeatDecoratorNode
+extends DecoratorNode
+class_name DecoratorRepeatNode
 
 ## 重复装饰器：重复执行子节点
 

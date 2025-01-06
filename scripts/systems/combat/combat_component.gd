@@ -9,6 +9,8 @@ class_name CombatComponent
 @export var combat_camp : CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.NONE
 ## 近身施法位置偏移
 @export var melee_action_offset: Vector2 = Vector2(20, 0)
+## 施法位置Marker2D字典
+var cast_position_dict : Dictionary[String, Marker2D] = {}
 ## 是否为存活单位
 var is_alive : bool :
 	get:
@@ -76,7 +78,7 @@ func action() -> void:
 		print("combat_component: 无可用技能，跳过{0}的回合".format([self]))
 	else:
 		#await get_tree().create_timer(action_time).timeout
-		var targets := _get_ability_targets(ability)
+		var target := _get_ability_target(ability)
 		print("combat_component: {0} 尝试释放技能{1}".format([
 			self, ability
 		]))
@@ -84,7 +86,7 @@ func action() -> void:
 			"caster" : self,
 			"enemies" : _current_combat.get_all_enemies(self),
 			"allies" : _current_combat.get_all_allies(self),
-			"targets" : targets,
+			"target" : target,
 			"ability" : ability,
 			"tree": get_tree(),
 		}
@@ -156,6 +158,13 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 		_die()
 	hurted.emit(damage.damage_value)
 
+## 获取施法位置
+func get_cast_position(position_type: String) -> Vector2:
+	var marker : Marker2D = cast_position_dict.get(position_type)
+	if marker:
+		return marker.position
+	return Vector2.ZERO
+
 ## 死亡
 func _die() -> void:
 	ability_component.handle_game_event("on_die")
@@ -168,23 +177,21 @@ func _get_random_enemy() -> CombatComponent:
 	return _current_combat.get_random_enemy(self)
 
 ## 获取技能目标
-func _get_ability_targets(ability : Ability) -> Array[CombatComponent]:
+func _get_ability_target(ability : Ability) -> CombatComponent:
 	# 主动释放的技能需要提供目标，在自动战斗中这需要通过战斗角色的AI来完成
 	# 现阶段可以简化处理，直接获取随机目标
-	var targets : Array[CombatComponent] = []  # 使用 := 进行类型推断和变量初始化
 	var target_pool := []  # 统一的数组来存储目标池
-	if ability.target_type.is_empty(): return []
+	if ability.target_type.is_empty(): return null
 	# 根据目标类型确定目标池
 	if ability.target_type == "self":
-		return [self]
+		# 以自身为目标的技能不需要提供
+		return self
 	elif ability.target_type == "ally":
 		target_pool = _current_combat.get_all_allies(self).duplicate()
 	elif ability.target_type == "enemy":
 		target_pool = _current_combat.get_all_enemies(self).duplicate()
 	var target : Node = target_pool.pick_random()
-	targets.append(target)
-	#target_pool.erase(target)  # 从目标池中移除已选目标
-	return targets
+	return target
 
 ## 移动到行动位置
 func _move_to_action(ability_context: Dictionary) -> void:

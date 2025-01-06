@@ -1,5 +1,5 @@
-extends AbilityEffectDecoratorNode
-class_name DelayDecoratorNode
+extends DecoratorNode
+class_name DecoratorDelayNode
 
 ## 延时装饰器：延迟执行子节点
 @export var delay_time: float = 1.0            # 延迟时间（秒）

@@ -1,5 +1,5 @@
-extends AbilityEffectDecoratorNode
-class_name ProbabilityDecoratorNode
+extends DecoratorNode
+class_name DecoratorProbabilityNode
 
 ## 概率装饰器：按概率决定是否执行子节点
 

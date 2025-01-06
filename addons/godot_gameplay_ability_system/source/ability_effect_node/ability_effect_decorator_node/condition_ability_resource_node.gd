@@ -1,5 +1,5 @@
-extends AbilityEffectDecoratorNode
-class_name AbilityResourceConditionNode
+extends DecoratorNode
+class_name ConditionAbilityResourceNode
 
 ## 资源条件判断，是否足够
 

@@ -46,8 +46,14 @@ func _cast(context: Dictionary) -> bool:
 		print("技能正在冷却！")
 		return false
 	var caster : Node = context.get("caster")
+	var target : Node
+	if target_type == "self":
+		target = caster
+	else:
+		target = context.get("target", null)
 	_ability_component.consume_resources(cost_resource_name, cost_resource_value)
 	current_cooldown = cooldown
+	context.merge({"target": target}, true)
 	var ok := await super(context)
 	return ok
 
