@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="TurnBasedBuffAbility" load_steps=3 format=3 uid="uid://ba2s8ue7kw4l3"]
+[gd_resource type="Resource" script_class="TurnBasedBuffAbility" load_steps=2 format=3 uid="uid://ba2s8ue7kw4l3"]
 
-[ext_resource type="Script" uid="uid://carlbxgjnsnu4" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_node.gd" id="1_8ibky"]
-[ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://scripts/systems/combat/ability/turn_based_buff_ability.gd" id="2_jikmn"]
+[ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://scripts/systems/ability/turn_based_buff_ability.gd" id="2_jikmn"]
 
 [resource]
 script = ExtResource("2_jikmn")
@@ -11,5 +10,4 @@ value = 2
 can_stack = true
 ability_name = &"魔法盾"
 ability_description = "魔法盾吸收伤害并恢复魔法值"
-level = 1
-effects = Array[ExtResource("1_8ibky")]([])
+effect_config_path = "res://resources/data/abilities/effects/magic_shield_buff.json"

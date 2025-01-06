@@ -1,35 +1,11 @@
-[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=8 format=3 uid="uid://beqppdym756qn"]
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=3 format=3 uid="uid://beqppdym756qn"]
 
-[ext_resource type="Script" uid="uid://carlbxgjnsnu4" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_node.gd" id="1_uvjij"]
-[ext_resource type="Script" uid="uid://chd8ky037o7bu" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/play_animation_node.gd" id="2_0ya1u"]
-[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="2_8cohj"]
-[ext_resource type="Script" uid="uid://dg313716g8kfa" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_parallel_node.gd" id="3_qt4wx"]
-[ext_resource type="Texture2D" uid="uid://ey4jlg2yhxxs" path="res://assets/texture/icon/Buffs/critical_boost.png" id="4_j1thq"]
-
-[sub_resource type="Resource" id="Resource_l08as"]
-script = ExtResource("2_0ya1u")
-animation_name = "defend"
-blend_time = 0.2
-custom_speed = 1.0
-wait_for_completion = false
-animation_unit_type = "caster"
-pre_delay = 0.0
-post_delay = 0.0
-effect_name = &""
-enabled = true
-metadata/_custom_type_script = ExtResource("2_0ya1u")
-
-[sub_resource type="Resource" id="Resource_qtvbx"]
-script = ExtResource("3_qt4wx")
-success_policy = 0
-children = Array[ExtResource("1_uvjij")]([SubResource("Resource_l08as"), null])
-effect_name = &""
-enabled = true
-metadata/_custom_type_script = ExtResource("3_qt4wx")
+[ext_resource type="Texture2D" uid="uid://ey4jlg2yhxxs" path="res://assets/texture/icon/Buffs/critical_boost.png" id="1_pxem3"]
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="2_fyh0o"]
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("2_8cohj")
+script = ExtResource("2_fyh0o")
 casting_position = 0
 cast_count = 1
 target_type = &"ally"
@@ -41,5 +17,5 @@ current_cooldown = 0
 is_show = true
 ability_name = &"战吼"
 ability_description = "发出怒吼，激励自己和周围的盟友。"
-icon = ExtResource("4_j1thq")
-effect_tree_root = SubResource("Resource_qtvbx")
+icon = ExtResource("1_pxem3")
+effect_config_path = "res://resources/data/abilities/skill_effects/battle_cry_effect.json"

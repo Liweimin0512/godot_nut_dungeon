@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=3 format=3 uid="uid://c4s7gbk66xo5y"]
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=2 format=3 uid="uid://c4s7gbk66xo5y"]
 
-[ext_resource type="Script" uid="uid://b5irrw841lhgl" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_node.gd" id="1_1p2kw"]
-[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/combat/ability/turn_based_skill_ability.gd" id="2_pj8v3"]
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="2_pj8v3"]
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_pj8v3")
+casting_position = 0
 cast_count = 1
 target_type = &"enemy"
 cost_resource_name = &"魔法值"
@@ -13,13 +13,7 @@ cost_resource_value = 30
 is_auto_cast = false
 cooldown = 2
 current_cooldown = 0
-pre_cast_time = 0.4
-post_cast_time = 0.4
 is_show = true
-sound_effect = &""
-animation = &""
-casting_position = 0
 ability_name = &"火球术"
 ability_description = "法师凝聚火元素，释放一个火球对单个敌人造成巨大伤害。"
-level = 1
-effects = Array[ExtResource("1_1p2kw")]([])
+effect_config_path = "res://resources/data/abilities/skill_effects/heroic_strike_effect.json"

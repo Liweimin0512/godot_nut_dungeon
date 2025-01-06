@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="TurnBasedBuffAbility" load_steps=3 format=3 uid="uid://bnribbjurhd1f"]
+[gd_resource type="Resource" script_class="TurnBasedBuffAbility" load_steps=2 format=3 uid="uid://bnribbjurhd1f"]
 
-[ext_resource type="Script" uid="uid://carlbxgjnsnu4" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_node.gd" id="1_juct3"]
-[ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://scripts/systems/combat/ability/turn_based_buff_ability.gd" id="2_sii1e"]
+[ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://scripts/systems/ability/turn_based_buff_ability.gd" id="2_sii1e"]
 
 [resource]
 resource_local_to_scene = true
@@ -12,5 +11,4 @@ value = 2
 can_stack = true
 ability_name = &"眩晕"
 ability_description = "目标在眩晕状态下无法进行任何行动"
-level = 1
-effects = Array[ExtResource("1_juct3")]([])
+effect_config_path = "res://resources/data/abilities/effects/stun_buff.json"

@@ -12,3 +12,4 @@ can_stack = false
 ability_name = &""
 ability_description = ""
 icon = ExtResource("1_r01ov")
+effect_config_path = "res://resources/data/abilities/buff_effects/stun_buff.json"
