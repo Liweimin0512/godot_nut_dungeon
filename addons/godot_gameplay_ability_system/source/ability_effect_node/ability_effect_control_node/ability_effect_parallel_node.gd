@@ -10,7 +10,7 @@ enum POLICY {
 ## 成功策略：所有子节点都成功才算成功，或者只要一个子节点成功就算成功
 @export var success_policy: POLICY = POLICY.REQUIRE_ALL
 
-func _execute(context: Dictionary) -> STATUS:	
+func _execute(context: Dictionary) -> STATUS:
 	for child in children:
 		await child.execute(context)
 		if success_policy == POLICY.REQUIRE_ONE:

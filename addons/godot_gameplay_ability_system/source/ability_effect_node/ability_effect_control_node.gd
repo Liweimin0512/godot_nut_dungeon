@@ -12,3 +12,13 @@ func remove_child(child: AbilityEffectNode) -> void:
 
 func clear_children() -> void:
 	children.clear()
+
+func get_node(effect_name: StringName) -> AbilityEffectNode:
+	for child in children:
+		if child.effect_name == effect_name:
+			return child
+		if child.has_method("get_node"):
+			var node = child.get_node(effect_name)
+			if node:
+				return node
+	return null

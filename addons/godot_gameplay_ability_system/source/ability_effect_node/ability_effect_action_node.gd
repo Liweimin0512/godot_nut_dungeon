@@ -3,6 +3,10 @@ class_name AbilityEffectActionNode
 
 ## 执行节点：执行具体的游戏效果
 
+## 前摇延时
+@export var pre_delay: float = 0.0
+## 后摇延时
+@export var post_delay: float = 0.0
 ## 记录是否执行成功
 var _is_success: bool = false
 
@@ -10,9 +14,17 @@ func _execute(context: Dictionary) -> STATUS:
 	if not _validate_parameters():
 		_is_success = false
 		return STATUS.FAILURE
+	var scene_tree : SceneTree = context.get("tree", null)
+	if not scene_tree:
+		GASLogger.error("AbilityEffectNode execute failed, because scene tree is null")
+		return STATUS.FAILURE
+	if pre_delay > 0.0:
+		await scene_tree.create_timer(pre_delay).timeout
 	var result = await _perform_action(context)
 	if result == STATUS.SUCCESS:
 		_is_success = true
+	if post_delay > 0.0:
+		await scene_tree.create_timer(post_delay).timeout
 	return result
 
 func _revoke() -> STATUS:

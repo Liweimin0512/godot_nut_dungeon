@@ -9,6 +9,9 @@ enum STATUS {
 	FAILURE,    ## 失败
 }
 
+## 节点名称（ID), 用于获取节点
+@export var effect_name: StringName = ""
+
 ## 是否启用
 @export var enabled := true
 
@@ -28,14 +31,14 @@ func execute(context: Dictionary) -> STATUS:
 	if not enabled: return STATUS.FAILURE
 	# 如果已执行，则无法再次执行
 	if is_executed: return STATUS.FAILURE
-	return _execute(context)
+	return await _execute(context)
 
 ## 撤销
 func revoke() -> STATUS:
 	if not enabled: return STATUS.FAILURE
 	# 如果未执行，则无法撤销
 	if not is_executed: return STATUS.FAILURE
-	return _revoke()
+	return await _revoke()
 
 ## 子类中实现的执行方法
 func _execute(context: Dictionary) -> STATUS:
@@ -44,3 +47,9 @@ func _execute(context: Dictionary) -> STATUS:
 ## 子类中实现的撤销方法
 func _revoke() -> STATUS:
 	return STATUS.FAILURE
+
+## 获取节点, 子类实现
+func get_node(effect_name: StringName) -> AbilityEffectNode:
+	if self.effect_name == effect_name:
+		return self
+	return null	

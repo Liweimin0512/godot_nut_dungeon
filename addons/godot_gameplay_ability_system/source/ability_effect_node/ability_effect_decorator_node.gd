@@ -13,3 +13,8 @@ func clear_child() -> void:
 
 func _revoke() -> STATUS:
 	return await child.revoke() if child else STATUS.SUCCESS
+
+func get_node(name: StringName) -> AbilityEffectNode:
+	if effect_name == name:
+		return self
+	return child.get_node(name) if child else null
