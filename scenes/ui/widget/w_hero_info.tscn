@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://k33y1svd4wnm" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_skill_icon.tscn" id="1_6odac"]
 [ext_resource type="Script" uid="uid://0plx8hfh70ec" path="res://scenes/ui/widget/w_hero_info.gd" id="1_t8bix"]
-[ext_resource type="Texture2D" uid="uid://bygyexnnjxflw" path="res://asset/texture/character/hero/leaf_ranger/leaf_ranger.png" id="2_owqm7"]
+[ext_resource type="Texture2D" uid="uid://bygyexnnjxflw" path="res://assets/texture/character/profile_picture/leaf_ranger.png" id="2_owqm7"]
 
 [node name="W_HeroInfo" type="PanelContainer"]
 size_flags_horizontal = 0

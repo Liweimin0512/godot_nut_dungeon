@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="TurnBasedBuffAbility" load_steps=3 format=3 uid="uid://dhcd1db3vsyuo"]
 
-[ext_resource type="Texture2D" uid="uid://86xdoau81gtp" path="res://asset/texture/icon/Spells/lightning_spell.png" id="1_r01ov"]
-[ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://scripts/systems/combat/ability/turn_based_buff_ability.gd" id="2_qjskh"]
+[ext_resource type="Texture2D" uid="uid://86xdoau81gtp" path="res://assets/texture/icon/Spells/lightning_spell.png" id="1_r01ov"]
+[ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://scripts/systems/ability/turn_based_buff_ability.gd" id="2_qjskh"]
 
 [resource]
 script = ExtResource("2_qjskh")

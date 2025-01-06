@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="BuffAbility" load_steps=3 format=3 uid="uid://cd7qfemfd5dhe"]
 
-[ext_resource type="Texture2D" uid="uid://ey4jlg2yhxxs" path="res://asset/texture/icon/Buffs/critical_boost.png" id="1_jw8a4"]
+[ext_resource type="Texture2D" uid="uid://ey4jlg2yhxxs" path="res://assets/texture/icon/Buffs/critical_boost.png" id="1_jw8a4"]
 [ext_resource type="Script" uid="uid://c1olb7jgy5d6c" path="res://addons/godot_gameplay_ability_system/source/ability/buff_ability.gd" id="2_pgkp3"]
 
 [resource]

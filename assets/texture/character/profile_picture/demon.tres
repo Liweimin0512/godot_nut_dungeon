@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://b6oo6oi8svuay"]
+
+[ext_resource type="Texture2D" uid="uid://che7ghp5vya45" path="res://assets/sprites/characters/enemies/demon/idle.png" id="1_oamiu"]
+
+[resource]
+atlas = ExtResource("1_oamiu")
+region = Rect2(120, 80, 32, 32)

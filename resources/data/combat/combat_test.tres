@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="1_hckfi"]
 [ext_resource type="Script" uid="uid://bebfj2ga1x7eh" path="res://scripts/resources/combat_model.gd" id="2_jdrd6"]
-[ext_resource type="Resource" uid="uid://dusj10wryboti" path="res://resources/data/character/enemy/goblin.tres" id="2_xbup4"]
+[ext_resource type="Resource" uid="uid://dusj10wryboti" path="res://scenes/character/resources/data/enemy/goblin.tres" id="2_xbup4"]
 
 [resource]
 resource_local_to_scene = true

@@ -86,6 +86,7 @@ func action() -> void:
 			"allies" : _current_combat.get_all_allies(self),
 			"targets" : targets,
 			"ability" : ability,
+			"tree": get_tree(),
 		}
 		await _pre_action(ability_context)
 		var ok := await ability_component.try_cast_ability(ability, ability_context)

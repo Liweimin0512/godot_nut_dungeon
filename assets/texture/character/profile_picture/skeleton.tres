@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://3xvytvse5ckc"]
+
+[ext_resource type="Texture2D" uid="uid://dlhj7bi7dncqh" path="res://assets/sprites/characters/enemies/skeleton/Idle.png" id="1_fubau"]
+
+[resource]
+atlas = ExtResource("1_fubau")
+region = Rect2(72, 48, 32, 32)
