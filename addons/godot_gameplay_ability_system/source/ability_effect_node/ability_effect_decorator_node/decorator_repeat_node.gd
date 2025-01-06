@@ -10,6 +10,7 @@ class_name DecoratorRepeatNode
 
 func execute(context: Dictionary) -> STATUS:
 	for i in repeat_count:
+		context["repeat_index"] = i + 1
 		# 执行子节点
 		var status = await child.execute(context)
 		if status == STATUS.FAILURE:

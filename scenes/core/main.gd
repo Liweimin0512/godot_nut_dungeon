@@ -1,6 +1,19 @@
 extends Node2D
 
 const CHARACTER = preload("res://scenes/character/character.tscn")
+## 需要预加载的effect配置文件列表
+const EFFECT_CONFIGS := [
+	"res://resources/data/abilities/effects/battle_cry_effect.json",
+	"res://resources/data/abilities/effects/chain_lightning_effect.json",
+	"res://resources/data/abilities/effects/counter_attack_buff.json",
+	"res://resources/data/abilities/effects/fireball_effect.json",
+	"res://resources/data/abilities/effects/heroic_strike_effect.json",
+	"res://resources/data/abilities/effects/ignite_buff.json",
+	"res://resources/data/abilities/effects/magic_missile_effect.json",
+	"res://resources/data/abilities/effects/magic_shield_skill_effect.json",
+	"res://resources/data/abilities/effects/mana_surge_buff.json",
+	"res://resources/data/abilities/effects/unyielding_buff.json"
+]
 
 # @onready var rich_text_label: RichTextLabel = %RichTextLabel
 # @onready var player_character: Character = $PlayerCharacter
@@ -11,6 +24,9 @@ const CHARACTER = preload("res://scenes/character/character.tscn")
 @export var combat_test : CombatModel
 
 func _ready() -> void:
+	JsonLoader.batch_load_json(EFFECT_CONFIGS, _on_load_json_complete)
+
+func _on_load_json_complete(_results: Dictionary) -> void:
 	var combat : Combat = _create_combat(combat_test.duplicate())
 	game_form.setup(_get_players())
 	# 因为combat是自动执行的，所以不会发出这个信号！

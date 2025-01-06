@@ -3,14 +3,14 @@ class_name CombatComponent
 
 ## 战斗组件，管理战斗流程相关内容
 
-## 依赖于技能系统组件
-@onready var ability_component: AbilityComponent = %AbilityComponent
 ## 所属阵营
 @export var combat_camp : CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.NONE
 ## 近身施法位置偏移
 @export var melee_action_offset: Vector2 = Vector2(20, 0)
 ## 施法位置Marker2D字典
-var cast_position_dict : Dictionary[String, Marker2D] = {}
+@export var cast_position_dict : Dictionary[String, Marker2D] = {}
+## 行动耗时
+@export var action_time : float = 0.5
 ## 是否为存活单位
 var is_alive : bool :
 	get:
@@ -19,14 +19,16 @@ var is_alive : bool :
 var speed : float :
 	get:
 		return ability_component.get_attribute_value("速度")
+
 ## 当前战斗，为空则表示不是在战斗状态
 var _current_combat: Combat
 ## 战斗组件所属角色，为了测试时候看着方便
 var _combat_owner_name : StringName : 
 	get:
 		return self.to_string()
-## 行动耗时
-@export var action_time : float = 0.5
+
+## 依赖于技能系统组件
+@onready var ability_component: AbilityComponent = %AbilityComponent
 
 signal hited(target: CombatComponent)
 signal hurted(damage: int)
@@ -67,7 +69,7 @@ func turn_start() -> void:
 
 ## 行动
 func action() -> void:
-	if is_in_group("stun"):
+	if not _can_action():
 		print(self, "当前处于眩晕状态，无法动！跳过本回合！")
 		return
 	print("combat_component: {0} 行动".format([self]))
@@ -95,20 +97,6 @@ func action() -> void:
 		if not ok:
 			print("combat_component: {0} 释放技能失败".format([self]))
 		await _post_action(ability_context)
-
-## 行动前
-func _pre_action(ability_context: Dictionary) -> void:
-	ability_component.handle_game_event("on_pre_action", ability_context)
-	# var ability : Ability = ability_context.get("ability")
-	_move_to_action(ability_context)
-	await get_tree().create_timer(action_time).timeout
-
-## 行动后
-func _post_action(ability_context: Dictionary) -> void:
-	ability_component.handle_game_event("on_post_action", ability_context)
-	# var ability : Ability = ability_context.get("ability")
-	_move_from_action()
-	await get_tree().create_timer(action_time).timeout
 
 ## 回合结束
 func turn_end() -> void:
@@ -162,19 +150,41 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 func get_cast_position(position_type: String) -> Vector2:
 	var marker : Marker2D = cast_position_dict.get(position_type)
 	if marker:
-		return marker.position
+		var point : Vector2
+		if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER:
+			point = marker.position
+		else:
+			point = marker.position * Vector2(-1, 1)
+		return point
 	return Vector2.ZERO
+
+## 播放动画
+func play_action_animation(animation_name : StringName) -> void:
+	%AnimationPlayer.play(animation_name)
+
+## 行动前
+func _pre_action(ability_context: Dictionary) -> void:
+	ability_component.handle_game_event("on_pre_action", ability_context)
+	# var ability : Ability = ability_context.get("ability")
+	_move_to_action(ability_context)
+	await get_tree().create_timer(action_time).timeout
+
+## 行动后
+func _post_action(ability_context: Dictionary) -> void:
+	ability_component.handle_game_event("on_post_action", ability_context)
+	# var ability : Ability = ability_context.get("ability")
+	_move_from_action()
+	await get_tree().create_timer(action_time).timeout
+
+## 能否行动？
+func _can_action() -> bool:
+	return not is_in_group("stunned")
 
 ## 死亡
 func _die() -> void:
 	ability_component.handle_game_event("on_die")
 	print("角色死亡：", self)
 	died.emit()
-
-## 获取随机敌人
-func _get_random_enemy() -> CombatComponent:
-	assert(_current_combat, "当前战斗不存在！不是战斗状态么？")
-	return _current_combat.get_random_enemy(self)
 
 ## 获取技能目标
 func _get_ability_target(ability : Ability) -> CombatComponent:
@@ -221,10 +231,6 @@ func _get_action_point(ability_context: Dictionary) -> Vector2:
 			_:
 				point = _current_combat.action_marker.position
 	return point
-
-## 播放动画
-func play_action_animation(animation_name : StringName) -> void:
-	%AnimationPlayer.play(animation_name)
 
 ## 获取技能上下文
 func _get_ability_context() -> Dictionary:

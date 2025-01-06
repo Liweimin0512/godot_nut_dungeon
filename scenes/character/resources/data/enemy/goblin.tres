@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="1_ckwfc"]
 [ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="1_qi5g2"]
-[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://resources/data/ability/skill_ability/attack.tres" id="2_1kaq7"]
+[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://resources/data/abilities/skill_ability/attack.tres" id="2_1kaq7"]
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="2_gfiar"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="3_yxnkf"]
 [ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_resource/health_resource.gd" id="4_hfljm"]
-[ext_resource type="AnimationLibrary" uid="uid://blhiy6bt07lej" path="res://scenes/character/resources/animation/animation_library_goblin.res" id="6_po6yb"]
+[ext_resource type="AnimationLibrary" uid="uid://blhiy6bt07lej" path="res://scenes/character/resources/animation/enemy/animation_library_goblin.res" id="6_po6yb"]
 
 [sub_resource type="Resource" id="Resource_jvqq5"]
 resource_local_to_scene = true

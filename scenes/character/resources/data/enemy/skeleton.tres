@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="CharacterModel" load_steps=15 format=3 uid="uid://bajp6d2vebx6d"]
 
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="1_xex30"]
-[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://resources/data/ability/skill_ability/attack.tres" id="2_4xrul"]
+[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://resources/data/abilities/skill_ability/attack.tres" id="2_4xrul"]
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="7_bld4i"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="8_gl8pk"]
 [ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_resource/health_resource.gd" id="9_o0e7y"]
-[ext_resource type="AnimationLibrary" uid="uid://bcayii75as5t8" path="res://scenes/character/resources/animation/animation_library_skeleton.res" id="10_q5dm8"]
+[ext_resource type="AnimationLibrary" uid="uid://bcayii75as5t8" path="res://scenes/character/resources/animation/enemy/animation_library_skeleton.res" id="10_q5dm8"]
 [ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="11_lqhap"]
 
 [sub_resource type="Resource" id="Resource_jvqq5"]

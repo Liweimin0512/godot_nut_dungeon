@@ -15,7 +15,7 @@ class_name PlayAnimationNode
 @export_enum("caster", "target")
 var animation_unit_type: String = "caster"
 
-func _perform_visual(context: Dictionary) -> STATUS:
+func _perform_action(context: Dictionary) -> STATUS:
     var unit = context.get(animation_unit_type)
     if not unit or not unit.has_method("play_animation"):
         GASLogger.error("PlayAnimationNode unit is null or unit has no play_animation method")

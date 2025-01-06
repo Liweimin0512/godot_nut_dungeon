@@ -1,0 +1,67 @@
+{
+    "type": "sequence",
+    "children": [
+        {
+            "type": "spawn_projectile",
+            "projectile_scene": "@scene://resources/scenes/projectile/lightning_projectile.tscn",
+            "speed": 500.0,
+            "start_position_type": "hand",
+            "target_position_type": "body"
+        },
+        {
+            "type": "deal_damage",
+            "damage_type": "magic",
+            "damage_value_type": "percent",
+            "damage_value": 120.0
+        },
+        {
+            "type": "spawn_vfx",
+            "vfx_scene": "@scene://resources/scenes/vfx/lightning_hit_vfx.tscn",
+            "attach_to_target": true,
+            "mount_target_type": "target",
+            "mount_point_type": "body",
+            "auto_free": true
+        },
+        {
+            "type": "decorator_repeat",
+            "repeat_count": 2,
+            "children": [
+                {
+                    "type": "sequence",
+                    "children": [
+                        {
+                            "type": "random_target",
+                            "target_type": "enemies",
+                            "exclude_current": true
+                        },
+                        {
+                            "type": "spawn_projectile",
+                            "projectile_scene": "@scene://resources/scenes/projectile/lightning_chain_projectile.tscn",
+                            "speed": 600.0,
+                            "spawn_from_last_target": true,
+                            "start_position_type": "body",
+                            "target_position_type": "body"
+                        },
+                        {
+                            "type": "deal_damage",
+                            "damage_type": "magic",
+                            "damage_value_type": "percent",
+                            "damage_value": {
+                                "1": 100.0,
+                                "2": 80.0
+                            }
+                        },
+                        {
+                            "type": "spawn_vfx",
+                            "vfx_scene": "@scene://resources/scenes/vfx/lightning_chain_hit_vfx.tscn",
+                            "attach_to_target": true,
+                            "mount_target_type": "target",
+                            "mount_point_type": "body",
+                            "auto_free": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+} 

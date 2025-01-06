@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
-[ext_resource type="Texture2D" uid="uid://clkhxmxdtgch" path="res://assets/sprites/characters/heros/crystal_mauler/idle.png" id="2_cj4oh"]
+[ext_resource type="Texture2D" uid="uid://c8u84o1yqlptj" path="res://assets/sprites/characters/heros/crystal_mauler/defend.png" id="2_7ex5l"]
 [ext_resource type="Script" uid="uid://y1mgjyqenlv7" path="res://scripts/systems/combat/combat_component.gd" id="2_ghtna"]
 [ext_resource type="Script" uid="uid://n67wyu14blxx" path="res://addons/godot_gameplay_ability_system/source/ability_component.gd" id="3_6a5vl"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
-[ext_resource type="AnimationLibrary" uid="uid://cd0oe24x0pr5f" path="res://scenes/character/resources/animation/animation_library_crystal_mauler.res" id="6_g8e5i"]
+[ext_resource type="AnimationLibrary" uid="uid://cd0oe24x0pr5f" path="res://scenes/character/resources/animation/hero/animation_library_crystal_mauler.res" id="6_g8e5i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnpp6"]
 size = Vector2(151, 154)
@@ -15,9 +15,26 @@ script = ExtResource("1_qu267")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -64)
-texture = ExtResource("2_cj4oh")
-hframes = 8
-frame = 4
+texture = ExtResource("2_7ex5l")
+hframes = 9
+frame = 8
+
+[node name="cast_points" type="Node2D" parent="."]
+
+[node name="head" type="Marker2D" parent="cast_points"]
+unique_name_in_owner = true
+position = Vector2(0, -36)
+
+[node name="body" type="Marker2D" parent="cast_points"]
+unique_name_in_owner = true
+position = Vector2(0, -18)
+
+[node name="feet" type="Marker2D" parent="cast_points"]
+unique_name_in_owner = true
+
+[node name="hand" type="Marker2D" parent="cast_points"]
+unique_name_in_owner = true
+position = Vector2(17, -32)
 
 [node name="W_Status" parent="." instance=ExtResource("6_cj4oh")]
 offset_left = -37.0
@@ -31,14 +48,6 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(65.5, 67)
 shape = SubResource("RectangleShape2D_gnpp6")
-
-[node name="CombatComponent" type="Node" parent="."]
-script = ExtResource("2_ghtna")
-action_time = 0.3
-
-[node name="AbilityComponent" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("3_6a5vl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -60,6 +69,20 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 text = "技能名称"
+
+[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("cast_position_dict")]
+script = ExtResource("2_ghtna")
+cast_position_dict = {
+"body": NodePath("../cast_points/body"),
+"feet": NodePath("../cast_points/feet"),
+"hand": NodePath("../cast_points/hand"),
+"head": NodePath("../cast_points/head")
+}
+action_time = 0.3
+
+[node name="AbilityComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_6a5vl")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="died" from="CombatComponent" to="." method="_on_combat_component_died"]

@@ -1,0 +1,27 @@
+{
+    "type": "decorator_trigger",
+    "trigger_type": "ON_TURN_START",
+    "persistent": true,
+    "children": [
+        {
+            "type": "sequence",
+            "children": [
+                {
+                    "type": "spawn_vfx",
+                    "vfx_scene": "@scene://resources/scenes/vfx/ignite_vfx.tscn",
+                    "attach_to_target": true,
+                    "mount_target_type": "target",
+                    "mount_point_type": "body",
+                    "auto_free": true
+                },
+                {
+                    "type": "deal_damage",
+                    "damage_type": "indirect",
+                    "damage_value_type": "percent",
+                    "damage_value": 50.0,
+                    "source_type": "caster"
+                }
+            ]
+        }
+    ]
+} 

@@ -1,0 +1,78 @@
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=12 format=3 uid="uid://bxts26yvle7x7"]
+
+[ext_resource type="Script" uid="uid://carlbxgjnsnu4" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_node.gd" id="1_8v503"]
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="1_srb4c"]
+[ext_resource type="Script" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_random_selector_node.gd" id="2_7u2l7"]
+[ext_resource type="Script" uid="uid://chd8ky037o7bu" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/play_animation_node.gd" id="2_8bt5p"]
+[ext_resource type="Script" uid="uid://cnxxo4hdjduk2" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/deal_damage_node.gd" id="3_8bt5p"]
+[ext_resource type="Script" uid="uid://dg313716g8kfa" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_parallel_node.gd" id="4_d52dm"]
+
+[sub_resource type="Resource" id="Resource_d52dm"]
+script = ExtResource("2_8bt5p")
+animation_name = "attack"
+blend_time = 0.2
+custom_speed = 1.0
+wait_for_completion = false
+animation_unit_type = "caster"
+pre_delay = 0.0
+post_delay = 0.0
+effect_name = &""
+enabled = true
+metadata/_custom_type_script = ExtResource("2_8bt5p")
+
+[sub_resource type="Resource" id="Resource_igoux"]
+script = ExtResource("2_8bt5p")
+animation_name = "attack_2"
+blend_time = 0.2
+custom_speed = 1.0
+wait_for_completion = false
+animation_unit_type = "caster"
+pre_delay = 0.0
+post_delay = 0.0
+effect_name = &""
+enabled = true
+metadata/_custom_type_script = ExtResource("2_8bt5p")
+
+[sub_resource type="Resource" id="Resource_34mli"]
+script = ExtResource("2_7u2l7")
+weights = Array[float]([2.0, 1.0])
+children = Array[ExtResource("1_8v503")]([SubResource("Resource_d52dm"), SubResource("Resource_igoux")])
+effect_name = &""
+enabled = true
+metadata/_custom_type_script = ExtResource("2_7u2l7")
+
+[sub_resource type="Resource" id="Resource_ikc7c"]
+script = ExtResource("3_8bt5p")
+damage_multiplier = 1.0
+damage_type = 0
+is_indirect = false
+pre_delay = 0.3
+post_delay = 0.4
+effect_name = &"造成伤害"
+enabled = true
+metadata/_custom_type_script = ExtResource("3_8bt5p")
+
+[sub_resource type="Resource" id="Resource_npvxw"]
+script = ExtResource("4_d52dm")
+success_policy = 0
+children = Array[ExtResource("1_8v503")]([SubResource("Resource_34mli"), SubResource("Resource_ikc7c")])
+effect_name = &""
+enabled = true
+metadata/_custom_type_script = ExtResource("4_d52dm")
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_srb4c")
+casting_position = 1
+cast_count = 1
+target_type = &""
+cost_resource_name = &""
+cost_resource_value = 0
+is_auto_cast = false
+cooldown = 0
+current_cooldown = 0
+is_show = false
+ability_name = &"普攻"
+ability_description = ""
+effect_tree_root = SubResource("Resource_npvxw")
+metadata/_custom_type_script = ExtResource("1_srb4c")

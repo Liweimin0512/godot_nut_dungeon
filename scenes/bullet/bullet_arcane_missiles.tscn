@@ -1,3 +1,13 @@
-[gd_scene format=3 uid="uid://dabc2cn5sso4j"]
+[gd_scene load_steps=3 format=3 uid="uid://dabc2cn5sso4j"]
+
+[ext_resource type="Script" uid="uid://d1khw4weq1bki" path="res://addons/godot_gameplay_ability_system/source/scene/proximity_bullet.gd" id="1_x2bfn"]
+[ext_resource type="SpriteFrames" uid="uid://cahryn3qt4xds" path="res://scenes/bullet/resources/sprite_frames/arcane_missiles.tres" id="2_qg33g"]
 
 [node name="BulletArcaneMissiles" type="Node2D"]
+script = ExtResource("1_x2bfn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_qg33g")
+autoplay = "default"
+frame = 11
+frame_progress = 1.0

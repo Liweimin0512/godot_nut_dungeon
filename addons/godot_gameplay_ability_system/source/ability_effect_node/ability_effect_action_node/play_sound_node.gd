@@ -13,7 +13,7 @@ class_name PlaySoundNode
 @export var bus: String = "Master"
 @export var position_type: String = "2D"  # "2D" or "3D"
 
-func _perform_visual(context: Dictionary) -> STATUS:
+func _perform_action(context: Dictionary) -> STATUS:
     var target = context.get("target")
     if not target:
         return STATUS.FAILURE

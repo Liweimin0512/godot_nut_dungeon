@@ -1,0 +1,38 @@
+{
+    "type": "decorator_trigger",
+    "trigger_type": "ON_ABILITY_CAST_SUCCESS",
+    "persistent": true,
+    "children": [
+        {
+            "type": "decorator_condition",
+            "condition_type": "ability_name",
+            "ability_names": ["fireball", "magic_missile"],
+            "children": [
+                {
+                    "type": "decorator_probability",
+                    "probability": 0.4,
+                    "children": [
+                        {
+                            "type": "sequence",
+                            "children": [
+                                {
+                                    "type": "restore_mana",
+                                    "restore_type": "percent",
+                                    "restore_value": 20.0
+                                },
+                                {
+                                    "type": "spawn_vfx",
+                                    "vfx_scene": "@scene://resources/scenes/vfx/mana_restore_vfx.tscn",
+                                    "attach_to_target": true,
+                                    "mount_target_type": "target",
+                                    "mount_point_type": "body",
+                                    "auto_free": true
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+} 

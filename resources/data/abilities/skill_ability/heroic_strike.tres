@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=10 format=3 uid="uid://dkk2ibiqesm12"]
+
+[ext_resource type="Script" uid="uid://carlbxgjnsnu4" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_node.gd" id="1_0eb48"]
+[ext_resource type="Script" uid="uid://chd8ky037o7bu" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/play_animation_node.gd" id="2_abrbs"]
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="2_b5112"]
+[ext_resource type="Script" uid="uid://cnxxo4hdjduk2" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/deal_damage_node.gd" id="3_0gbca"]
+[ext_resource type="Script" uid="uid://dg313716g8kfa" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_parallel_node.gd" id="3_ltqvj"]
+[ext_resource type="Texture2D" uid="uid://pahg3p51mxjh" path="res://assets/texture/icon/Spells/poison_dagger.png" id="4_0gbca"]
+
+[sub_resource type="Resource" id="Resource_6q7ou"]
+script = ExtResource("2_abrbs")
+animation_name = "attack_3"
+blend_time = 0.2
+custom_speed = 1.0
+wait_for_completion = false
+animation_unit_type = "caster"
+pre_delay = 0.0
+post_delay = 0.0
+effect_name = &""
+enabled = true
+metadata/_custom_type_script = ExtResource("2_abrbs")
+
+[sub_resource type="Resource" id="Resource_l5hd1"]
+script = ExtResource("3_0gbca")
+damage_multiplier = 2.0
+damage_type = 0
+is_indirect = false
+pre_delay = 1.0
+post_delay = 0.7
+effect_name = &""
+enabled = true
+metadata/_custom_type_script = ExtResource("3_0gbca")
+
+[sub_resource type="Resource" id="Resource_wdlej"]
+script = ExtResource("3_ltqvj")
+success_policy = 0
+children = Array[ExtResource("1_0eb48")]([SubResource("Resource_6q7ou"), SubResource("Resource_l5hd1")])
+effect_name = &""
+enabled = true
+metadata/_custom_type_script = ExtResource("3_ltqvj")
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_b5112")
+casting_position = 0
+cast_count = 1
+target_type = &"enemy"
+cost_resource_name = &"怒气值"
+cost_resource_value = 15
+is_auto_cast = false
+cooldown = 1
+current_cooldown = 0
+is_show = true
+ability_name = &"英勇打击"
+ability_description = "对单个敌人进行强力打击"
+icon = ExtResource("4_0gbca")
+effect_tree_root = SubResource("Resource_wdlej")

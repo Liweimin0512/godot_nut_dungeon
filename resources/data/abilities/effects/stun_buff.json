@@ -1,0 +1,18 @@
+{
+    "type": "sequence",
+    "children": [
+        {
+            "type": "spawn_vfx",
+            "vfx_scene": "@scene://resources/scenes/vfx/stun_loop_vfx.tscn",
+            "attach_to_target": true,
+            "mount_target_type": "target",
+            "mount_point_type": "head",
+            "auto_free": false
+        },
+        {
+            "type": "apply_tag",
+            "tag_name": "stunned",
+            "persistent": true
+        }
+    ]
+}
