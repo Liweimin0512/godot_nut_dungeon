@@ -121,7 +121,7 @@ func is_json_cached(path: String) -> bool:
 func get_cached_json(path: String) -> Dictionary:
 	var config : Dictionary
 	if not _json_cache.has(path):
-		push_error("没找到缓存的json")
+		push_error("没找到缓存的json: ", path)
 		config = _load_json_file(path)
 	else:
 		config = _json_cache.get(path, {})
@@ -184,10 +184,11 @@ func _load_resource(path: String, type: String) -> Variant:
 		result = load_json(path)  # 直接返回JSON数据作为字典
 	elif ResourceLoader.exists(path):
 		result = load(path)
-	
+	else:
+		push_error("资源地址无效: ", path)
+		return null
 	if result:
 		_resource_cache[path] = result
-		
 	return result
 
 ## 启动加载线程

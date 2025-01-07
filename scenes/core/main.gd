@@ -11,7 +11,7 @@ const EFFECT_CONFIGS : Array[String] = [
 	"res://resources/data/abilities/skill_effects/magic_shield_skill_effect.json",
 	"res://resources/data/abilities/skill_effects/counter_attack_effect.json",
 	"res://resources/data/abilities/skill_effects/mana_surge.json",
-	"res://resources/data/abilities/skill_effects/unyielding_buff.json",
+	"res://resources/data/abilities/skill_effects/unyielding_effect.json",
 	"res://resources/data/abilities/buff_effects/ignite_buff.json",
 	"res://resources/data/abilities/buff_effects/magic_shield_buff.json",
 	"res://resources/data/abilities/buff_effects/battle_cry_buff.json",
@@ -29,7 +29,7 @@ const EFFECT_CONFIGS : Array[String] = [
 func _ready() -> void:
 	# 异步加载（默认）
 	# _load_json_batch_async()
-
+	
 	# 同步加载
 	_load_json_batch_sync()
 

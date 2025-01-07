@@ -11,7 +11,7 @@
                 },
                 {
                     "type": "spawn_projectile",
-                    "projectile_scene": "@scene://resources/scenes/projectile/magic_missile_projectile.tscn",
+                    "projectile_scene": "@scene://scenes/projectile/magic_missile_projectile.tscn",
                     "speed": 300.0,
                     "start_position_type": "hand",
                     "target_position_type": "body"
@@ -19,19 +19,17 @@
                 {
                     "type": "deal_damage",
                     "damage_type": "magic",
-                    "damage_value_type": "percent",
-                    "damage_value": 80.0
+                    "damage_multiplier": 0.8
                 },
                 {
                     "type": "decorator_probability",
                     "probability": 0.2,
-                    "children": [
+                    "child":
                         {
                             "type": "apply_ability",
-                            "ability_config": "@resource://resources/data/abilities/buffs/stun.tres",
+                            "ability": "@resource://resources/data/abilities/buffs/stun.tres",
                             "duration": 2
                         }
-                    ]
                 }
             ]
         }

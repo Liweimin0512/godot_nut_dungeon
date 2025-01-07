@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://ddmkj4okxq1o4"]
+
+[node name="LightningHitVfx" type="Node2D"]

@@ -6,7 +6,6 @@
 resource_local_to_scene = true
 script = ExtResource("5_181li")
 casting_position = 1
-cast_count = 1
 target_type = &"enemy"
 cost_resource_name = &""
 cost_resource_value = 0
@@ -14,3 +13,6 @@ is_auto_cast = false
 cooldown = 0
 current_cooldown = 0
 is_show = false
+ability_name = &""
+ability_description = ""
+effect_config_path = ""

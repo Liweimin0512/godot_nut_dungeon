@@ -3,7 +3,7 @@
     "children": [
         {
             "type": "spawn_vfx",
-            "vfx_scene": "@scene://resources/scenes/vfx/magic_shield_loop_vfx.tscn",
+            "vfx_scene": "@scene://scenes/vfx/magic_shield_loop_vfx.tscn",
             "attach_to_target": true,
             "mount_target_type": "target",
             "mount_point_type": "body",
@@ -13,13 +13,13 @@
             "type": "decorator_trigger",
             "trigger_type": "ON_PRE_HURT",
             "persistent": true,
-            "children": [
+            "child":
                 {
                     "type": "sequence",
                     "children": [
                         {
                             "type": "spawn_vfx",
-                            "vfx_scene": "@scene://resources/scenes/vfx/magic_shield_block_vfx.tscn",
+                            "vfx_scene": "@scene://scenes/vfx/magic_shield_block_vfx.tscn",
                             "attach_to_target": true,
                             "mount_target_type": "target",
                             "mount_point_type": "body",
@@ -32,7 +32,6 @@
                         }
                     ]
                 }
-            ]
         }
     ]
 } 

@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://m4tq7xsmayc5"]
+
+[node name="LightningProjectile" type="Node2D"]

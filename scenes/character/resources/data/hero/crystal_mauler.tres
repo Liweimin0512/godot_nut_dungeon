@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=23 format=3 uid="uid://pnl45yj5lq7s"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=22 format=3 uid="uid://pnl45yj5lq7s"]
 
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="1_0qs4x"]
 [ext_resource type="Resource" uid="uid://bxts26yvle7x7" path="res://resources/data/abilities/skill_ability/crystal_mauler_attack.tres" id="2_0qs4x"]
@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://bsraf1kid81uk" path="res://resources/data/abilities/skill_ability/resolute.tres" id="5_xt16c"]
 [ext_resource type="Resource" uid="uid://6mxwf4314lcl" path="res://resources/data/abilities/skill_ability/retaliate.tres" id="6_77l2l"]
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="7_a5qn6"]
-[ext_resource type="Resource" uid="uid://cythnyvhpjh5c" path="res://resources/data/abilities/skill_ability/test.tres" id="7_ebyd0"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="8_8iohq"]
 [ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_resource/health_resource.gd" id="9_kq6xn"]
 [ext_resource type="Script" uid="uid://cfeo8lbyg1cn4" path="res://addons/godot_gameplay_ability_system/source/ability_resource/rage_resource.gd" id="10_f4crp"]
@@ -76,7 +75,7 @@ script = ExtResource("13_1o7v7")
 character_name = &"战士"
 character_icon = ExtResource("12_6xcs7")
 ability_attributes = Array[ExtResource("7_a5qn6")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l"), SubResource("Resource_w4m7k"), SubResource("Resource_1sug7")])
-abilities = Array[ExtResource("1_0qs4x")]([ExtResource("2_0qs4x"), ExtResource("3_jyyfn"), ExtResource("4_sud3p"), ExtResource("5_xt16c"), ExtResource("6_77l2l"), ExtResource("7_ebyd0")])
+abilities = Array[ExtResource("1_0qs4x")]([ExtResource("2_0qs4x"), ExtResource("3_jyyfn"), ExtResource("4_sud3p"), ExtResource("5_xt16c"), ExtResource("6_77l2l")])
 ability_resources = Array[ExtResource("8_8iohq")]([SubResource("Resource_bgern"), SubResource("Resource_5uifr")])
 animation_library = ExtResource("11_b7bw3")
 sprite_position = Vector2(0, -64)

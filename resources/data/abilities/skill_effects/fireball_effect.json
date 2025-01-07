@@ -3,7 +3,7 @@
     "children": [
         {
             "type": "spawn_projectile",
-            "projectile_scene": "@scene://resources/scenes/projectile/fireball_projectile.tscn",
+            "projectile_scene": "@scene://scenes/projectile/fireball_projectile.tscn",
             "speed": 400.0,
             "start_position_type": "hand",
             "target_position_type": "body"
@@ -14,12 +14,11 @@
                 {
                     "type": "deal_damage",
                     "damage_type": "magic",
-                    "damage_value_type": "percent",
-                    "damage_value": 200.0
+                    "damage_multiplier": 2.0
                 },
                 {
                     "type": "spawn_vfx",
-                    "vfx_scene": "@scene://resources/scenes/vfx/fireball_explosion_vfx.tscn",
+                    "vfx_scene": "@scene://scenes/vfx/fireball_explosion_vfx.tscn",
                     "attach_to_target": true,
                     "mount_target_type": "target",
                     "mount_point_type": "body",
@@ -28,13 +27,12 @@
                 {
                     "type": "decorator_probability",
                     "probability": 0.3,
-                    "children": [
+                    "child":
                         {
                             "type": "apply_ability",
-                            "ability_config": "@resource://resources/data/abilities/buffs/ignite.tres",
+                            "ability": "@resource://resources/data/abilities/buffs/ignite.tres",
                             "duration": 3
                         }
-                    ]
                 }
             ]
         }

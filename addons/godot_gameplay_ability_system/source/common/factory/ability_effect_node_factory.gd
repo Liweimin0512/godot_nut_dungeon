@@ -83,7 +83,7 @@ func create_from_config(config: Dictionary) -> AbilityEffectNode:
 		return null
 		
 	var node_script = _node_type_map[node_type]
-	var node = node_script.new()
+	var node : AbilityEffectNode = node_script.new()
 	
 	# 设置节点属性
 	for key in config:
@@ -91,12 +91,23 @@ func create_from_config(config: Dictionary) -> AbilityEffectNode:
 			continue
 		if node.get(key) != null:  # 只设置节点已有的属性
 			node.set(key, config[key])
-	
+		else:
+			push_error("set property failed! key: %s, node_type: %s, node get key is %s" % [key, node_type, node.get(key)])
+
 	# 递归创建子节点
 	if config.has("children") and config.children is Array:
 		for child_config in config.children:
 			var child = create_from_config(child_config)
-			if child and node.has_method("add_effect_child"):
-				node.add_effect_child(child)
+			if child and node.has_method("add_child"):
+				node.add_child(child)
+			else:
+				push_error("add child failed：%s" % [node_type])
+	elif config.has("child"):
+		var child_config :Dictionary = config.child
+		var child = create_from_config(child_config)
+		if child and node.has_method("set_child"):
+			node.set_child(child)
+		else:
+			push_error("set child failed! %s" %[node_type])
 	
 	return node
