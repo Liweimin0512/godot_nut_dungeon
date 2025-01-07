@@ -19,11 +19,13 @@ func _execute(context: Dictionary) -> STATUS:
 		GASLogger.error("AbilityEffectNode execute failed, because scene tree is null")
 		return STATUS.FAILURE
 	if pre_delay > 0.0:
+		GASLogger.debug("AbilityEffectNode pre_delay: %s" % [pre_delay])
 		await scene_tree.create_timer(pre_delay).timeout
 	var result = await _perform_action(context)
 	if result == STATUS.SUCCESS:
 		_is_success = true
 	if post_delay > 0.0:
+		GASLogger.debug("AbilityEffectNode post_delay: %s" % [post_delay])
 		await scene_tree.create_timer(post_delay).timeout
 	return result
 

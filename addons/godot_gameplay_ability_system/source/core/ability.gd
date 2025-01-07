@@ -25,6 +25,7 @@ signal cast_finished
 func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
 	_ability_component = ability_component
 	_context = context
+	_context["ability"] = self
 	if not effect_config_path.is_empty():
 		_load_effect_config()
 	_apply(context)

@@ -41,11 +41,11 @@ signal turn_ended
 ## 组件初始化
 func initialization(camp: CombatDefinition.COMBAT_CAMP_TYPE) -> void:
 	combat_camp = camp
-	print("combat_component: {0} 初始化".format([_combat_owner_name]))
+	_print("combat_component: {0} 初始化".format([_combat_owner_name]))
 
 ## 战斗开始
 func combat_start(combat: Combat) -> void:
-	print(self, "战斗开始！")
+	_print("战斗开始！")
 	_current_combat = combat
 	ability_component.handle_game_event("on_combat_start")
 	combat_started.emit()
@@ -58,9 +58,9 @@ func pre_turn_start() -> void:
 
 ## 回合开始
 func turn_start() -> void:
-	print(self, "====== 回合开始")
+	_print("回合开始！")
 	if not _current_combat: 
-		print(self, "当前非战斗状态！")
+		_print("当前非战斗状态！")
 		return
 	turn_started.emit()
 	# 回合开始时更新技能的冷却计时
@@ -70,18 +70,18 @@ func turn_start() -> void:
 ## 行动
 func action() -> void:
 	if not _can_action():
-		print(self, "当前处于眩晕状态，无法动！跳过本回合！")
+		_print("当前处于眩晕状态，无法动！跳过本回合！")
 		return
-	print("combat_component: {0} 行动".format([self]))
+	_print("combat_component: {0} 行动".format([self]))
 	var available_abilities := _get_available_abilities()
 	if available_abilities.is_empty(): return
 	var ability: Ability = available_abilities.pick_random()
 	if not ability:
-		print("combat_component: 无可用技能，跳过{0}的回合".format([self]))
+		_print("combat_component: 无可用技能，跳过{0}的回合".format([self]))
 	else:
 		#await get_tree().create_timer(action_time).timeout
 		var target := _get_ability_target(ability)
-		print("combat_component: {0} 尝试释放技能{1}".format([
+		_print("combat_component: {0} 尝试释放技能{1}".format([
 			self, ability
 		]))
 		var ability_context : Dictionary = {
@@ -95,19 +95,19 @@ func action() -> void:
 		await _pre_action(ability_context)
 		var ok := await ability_component.try_cast_ability(ability, ability_context)
 		if not ok:
-			print("combat_component: {0} 释放技能失败".format([self]))
+			_print("combat_component: {0} 释放技能失败".format([self]))
 		await _post_action(ability_context)
 
 ## 回合结束
 func turn_end() -> void:
 	if not _current_combat: return
-	print(self, "====== 回合结束")
+	_print("====== 回合结束")
 	ability_component.handle_game_event("on_turn_end", {})
 	turn_ended.emit()
 
 ## 战斗结束
 func combat_end() -> void:
-	print(self, " 战斗结束", "剩余血量: ", ability_component.get_resource_value("生命值"))
+	_print("===== 战斗结束! 剩余血量: {0}".format([ability_component.get_resource_value("生命值")]))
 	_current_combat = null
 	ability_component.handle_game_event("on_combat_end")
 	for ability in ability_component.get_abilities():
@@ -119,7 +119,7 @@ func combat_end() -> void:
 func hit(damage: AbilityDamage) -> void:
 	var target : CombatComponent = damage.defender
 	if not target: return
-	print("combat_component: {0} 攻击： {1}, damage info:{2}".format([
+	_print("combat_component: {0} 攻击： {1}, damage info:{2}".format([
 		self, target, damage.damage_value
 	]))
 	ability_component.handle_game_event("on_pre_hit", {"damage" : damage})
@@ -134,7 +134,7 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 		"damage": damage, "caster": self
 	}
 	ability_component.handle_game_event("on_pre_hurt", ability_context)
-	print("combat_component: {0} 受到来自 {1} 的伤害 {2} 点， 当前生命值{3}/{4}".format([
+	_print("combat_component: {0} 受到来自 {1} 的伤害 {2} 点， 当前生命值{3}/{4}".format([
 		self, damage_source, damage.damage_value, 
 		ability_component.get_resource_value("生命值"), 
 		ability_component.get_attribute_value("生命值")
@@ -159,8 +159,8 @@ func get_cast_position(position_type: String) -> Vector2:
 	return Vector2.ZERO
 
 ## 播放动画
-func play_action_animation(animation_name : StringName) -> void:
-	%AnimationPlayer.play(animation_name)
+func play_animation(animation_name : StringName, blend_time: float = 0.0, custom_speed: float = 1.0) -> void:
+	%AnimationPlayer.play(animation_name, blend_time, custom_speed)
 
 ## 行动前
 func _pre_action(ability_context: Dictionary) -> void:
@@ -183,7 +183,7 @@ func _can_action() -> bool:
 ## 死亡
 func _die() -> void:
 	ability_component.handle_game_event("on_die")
-	print("角色死亡：", self)
+	_print("角色死亡!")
 	died.emit()
 
 ## 获取技能目标
@@ -226,9 +226,9 @@ func _get_action_point(ability_context: Dictionary) -> Vector2:
 		var target = ability_context.get("target").owner
 		match ability.casting_position:
 			AbilityDefinition.CASTING_POSITION.MELEE:
-				point = target.global_position + (melee_action_offset * Vector2(-1, 0)) if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else melee_action_offset
+				point = target.global_position + melee_action_offset * (Vector2(-1, 0) if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else Vector2(1, 0))
 			AbilityDefinition.CASTING_POSITION.BEHINDENEMY:
-				point = target.global_position + melee_action_offset if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else melee_action_offset * Vector2(-1, 0)
+				point = target.global_position + melee_action_offset * (Vector2(1, 0) if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else Vector2(-1, 0))
 			_:
 				point = _current_combat.action_marker.position
 	return point
@@ -250,6 +250,10 @@ func _is_ability_available(ability: Ability) -> bool:
 	if not ability is SkillAbility: return false
 	## 这个方法用来筛选哪些可用的主动技能
 	return not ability.is_cooldown and not ability.is_auto_cast and ability_component.has_enough_resources(ability.cost_resource_name, ability.cost_resource_value)
+
+func _print(s : String) -> void:
+	var color = "#FFFF00"
+	print_rich("[color={0}] [COMBAT_COMPONENT] {2} : {1}[/color]".format([color, s, self.to_string()]))
 
 func _to_string() -> String:
 	return owner.to_string()

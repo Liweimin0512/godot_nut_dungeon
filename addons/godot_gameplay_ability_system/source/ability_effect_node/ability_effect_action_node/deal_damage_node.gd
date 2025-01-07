@@ -18,8 +18,10 @@ func _perform_action(context: Dictionary) -> STATUS:
 	var _damage_multiplier : float
 	var repeat_index = context.get("repeat_index", null)
 	if repeat_index != null:
+		GASLogger.debug("DealDamageEffectNode repeat_index: %s" % [repeat_index])
 		_damage_multiplier = damage_multiplier_array[repeat_index - 1]
 	else:
+		GASLogger.debug("DealDamageEffectNode damage_multiplier: %s" % [damage_multiplier])
 		_damage_multiplier = damage_multiplier
 	var caster : Node = context.get("caster")
 	var target : Node = context.get("target")

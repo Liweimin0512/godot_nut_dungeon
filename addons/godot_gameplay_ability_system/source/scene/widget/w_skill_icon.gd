@@ -15,5 +15,5 @@ func setup(skill: SkillAbility) -> void:
 	_update_cooldown_display(_skill_ability.current_cooldown)
 
 func _update_cooldown_display(cooldown: int) -> void:
-	label.text = str(_skill_ability.cooldown)
-	label.visible = _skill_ability.cooldown > 0
+	label.text = str(cooldown)
+	label.visible = cooldown > 0

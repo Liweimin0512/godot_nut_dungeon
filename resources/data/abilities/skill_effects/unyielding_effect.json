@@ -1,6 +1,6 @@
 {
   "type": "decorator_trigger",
-  "trigger_type": "ON_DAMAGE_RECEIVED",
+  "trigger_type": "on_post_hurt",
   "persistent": true,
   "child": {
 	"type": "decorator_probability",

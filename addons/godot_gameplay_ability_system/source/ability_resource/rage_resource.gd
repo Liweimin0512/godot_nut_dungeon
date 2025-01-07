@@ -18,8 +18,10 @@ func initialization(ability_component: AbilityComponent) -> void:
 
 ## 造成伤害后恢复怒气
 func on_post_hit(_context: Dictionary) -> void:
+	GASLogger.info("on_post_hit: %s" % [regain_hited])
 	restore(regain_hited)
 
 ## 受到伤害后恢复怒气
 func on_post_hurt(_context: Dictionary) -> void:
+	GASLogger.info("on_post_hurt: %s" % [regain_hurted])
 	restore(regain_hurted)

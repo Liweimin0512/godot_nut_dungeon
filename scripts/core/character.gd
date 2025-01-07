@@ -27,7 +27,11 @@ func setup() -> void:
 		ability_component.initialization(
 			character_model.ability_attributes,
 			character_model.ability_resources,
-			character_model.abilities
+			character_model.abilities,
+			{
+				"caster": combat_component,
+				"ability_component": ability_component
+			}
 		)
 		combat_component.initialization(character_camp)
 		_animation_player_setup()
@@ -40,8 +44,9 @@ func setup() -> void:
 func _animation_player_setup() -> void:
 	animation_player.remove_animation_library("")
 	animation_player.add_animation_library("", character_model.animation_library)
-	animation_player.animation_set_next("attack", "idle")
-	animation_player.animation_set_next("hit", "idle")
+	for animation in animation_player.get_animation_list():
+		if animation != "die":
+			animation_player.animation_set_next(animation, "idle")
 	animation_player.stop()
 	animation_player.play("idle")
 

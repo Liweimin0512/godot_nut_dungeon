@@ -56,9 +56,9 @@ func _cast(context: Dictionary) -> bool:
 	return ok
 
 ## 更新冷却时间
-func _update_cooldown() -> void:
+func _update_cooldown(amount: int) -> void:
 	if is_cooldown:
-		current_cooldown -= 1
+		current_cooldown -= amount
 
 func _to_string() -> String:
 	return "{0}冷却{1}".format([ability_name, current_cooldown])

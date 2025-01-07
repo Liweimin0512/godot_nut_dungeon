@@ -24,12 +24,18 @@ signal ability_cast_finished(ability: Ability)
 signal ability_applied(ability: Ability)
 ## 技能移除触发
 signal ability_removed(ability: Ability)
+## 技能触发成功
+signal ability_trigger_success(ability: Ability)
+## 技能触发失败
+signal ability_trigger_failed(ability: Ability)
 
 ## 组件初始化
 func initialization(
 		attribute_set: Array[AbilityAttribute] = [],
 		ability_resource_set : Array[AbilityResource] = [],
-		ability_set : Array[Ability] = []) -> void:
+		ability_set : Array[Ability] = [],
+		ability_context: Dictionary = {}
+		) -> void:
 	for attribute : AbilityAttribute in attribute_set:
 		# attribute.initialization(self)
 		if not _ability_attributes.has(attribute.attribute_name):
@@ -42,7 +48,7 @@ func initialization(
 				resource_changed.emit(res.ability_resource_name, value)
 		)
 	for ability in ability_set:
-		ability.apply(self, {})
+		ability.apply(self, ability_context)
 		_abilities[ability.ability_name] = ability
 		ability.cast_finished.connect(
 			func() -> void:
@@ -183,7 +189,7 @@ func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
 
 ## 处理游戏事件
 func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -> void:
-	GASLogger.info("接收到游戏事件：{0}，事件上下文{1}".format([event_name, event_context]))
+	GASLogger.info("{0} 接收到游戏事件：{1}，事件上下文{2}".format([self, event_name, event_context]))
 	_handle_resource_callback(event_name, event_context)
 	for ability in _abilities.values():
 		# if ability.trigger and ability.trigger.trigger_type == event_name:
@@ -194,16 +200,24 @@ func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -
 			ability.call(event_name, event_context)
 	var triggers : Array = _ability_triggers.get(event_name, [])
 	if triggers.is_empty():
-		GASLogger.info("没有找到触发器：{0}".format([event_name]))
+		GASLogger.debug("没有找到触发器：{0}".format([event_name]))
 		return
 	for trigger : DecoratorTriggerNode in triggers:
-		trigger.handle_trigger(event_context)
+		trigger.handle_trigger(event_context, func(result: bool, ability: Ability) -> void:
+			if result:
+				GASLogger.debug("触发器成功：{0}".format([ability]))
+				ability_trigger_success.emit(ability)
+			else:
+				GASLogger.debug("触发器失败：{0}".format([ability]))
+				ability_trigger_failed.emit(ability)
+		)
 
 ## 添加触发器
 func add_ability_trigger(trigger_type: StringName, trigger: DecoratorTriggerNode) -> void:
-	var triggers : Array[DecoratorTriggerNode] = _ability_triggers.get(trigger_type, [])
-	triggers.append(trigger)
-	_ability_triggers[trigger_type] = triggers
+	if _ability_triggers.has(trigger_type):
+		_ability_triggers[trigger_type].append(trigger)
+	else:
+		_ability_triggers[trigger_type] = [trigger]
 
 ## 移除触发器
 func remove_ability_trigger(trigger_type: StringName, trigger: DecoratorTriggerNode) -> void:

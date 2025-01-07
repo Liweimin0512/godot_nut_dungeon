@@ -17,13 +17,14 @@ var _registered: bool = false
 var _original_context: Dictionary
 
 ## 处理触发器, AbilityComponent 调用
-func handle_trigger(trigger_data: Dictionary) -> void:
+func handle_trigger(trigger_data: Dictionary, callback:  Callable = Callable()) -> void:
 	# 检查子节点
 	if not child: 
 		GASLogger.error("child is null")
 		return
 	# 检查触发次数
 	if trigger_count > 0 and _current_triggers >= trigger_count:
+		GASLogger.debug("trigger count reached, unregister trigger")
 		_unregister_trigger()
 		return
 
@@ -32,11 +33,20 @@ func handle_trigger(trigger_data: Dictionary) -> void:
 	_original_context.merge(trigger_data, true)
 	
 	# 执行子节点
-	await child.execute(_original_context)
+	var result := await child.execute(_original_context)
 
 	# 检查是否需要解除注册
 	if not persistent or (trigger_count > 0 and _current_triggers >= trigger_count):
 		_unregister_trigger()
+		
+	if callback.is_valid():
+		var ability = _original_context.get("ability", null)
+		if result == STATUS.SUCCESS:
+			GASLogger.debug("trigger success")
+			callback.call(true, ability)
+		else:
+			GASLogger.debug("trigger failed")
+			callback.call(false, ability)
 
 func _execute(context: Dictionary) -> STATUS:
 	if not _registered:
@@ -59,7 +69,7 @@ func _revoke() -> STATUS:
 func _register_trigger(context: Dictionary) -> bool:
 	var caster = context.get("caster", null)
 	if not caster:
-		GASLogger.error("caster is null")
+		GASLogger.error("caster is null！ cant register effect trigger!")
 		return false
 	var ability_component : AbilityComponent = context.ability_component
 	ability_component.add_ability_trigger(trigger_type, self)
