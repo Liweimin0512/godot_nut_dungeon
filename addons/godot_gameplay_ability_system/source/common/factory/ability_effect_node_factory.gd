@@ -18,6 +18,7 @@ var _node_type_map: Dictionary = {
 	"decorator_delay": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_decorator_node/decorator_delay_node.gd"),
 	"decorator_probability": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_decorator_node/decorator_probability_node.gd"),
 	"decorator_trigger": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_decorator_node/decorator_trigger_node.gd"),
+	"decorator_repeat": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_decorator_node/decorator_repeat_node.gd"),
 
 	# 动作节点
 	"deal_damage": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/deal_damage_node.gd"),

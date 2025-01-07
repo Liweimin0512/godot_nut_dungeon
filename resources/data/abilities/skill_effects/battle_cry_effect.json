@@ -1,19 +1,19 @@
 {
-	"type": "parallel",
-	"children": [
-		{
-			"type": "play_animation",
-			"animation_name": "defend"
-		},
-		{
-			"type": "for_each_target",
-			"target_type": "allies",
-			"child": {
-				"type": "apply_ability",
-				"ability": "@resource://resources/data/abilities/buffs/battle_cry.tres",
-				"pre_delay": 0.4,
-				"post_delay": 0.5
-			}
-		}
-	]
+  "type": "parallel",
+  "children": [
+	{
+	  "type": "play_animation",
+	  "animation_name": "defend"
+	},
+	{
+	  "type": "for_each_target",
+	  "target_type": "allies",
+	  "child": {
+		"type": "apply_ability",
+		"ability": "@resource://resources/data/abilities/buffs/battle_cry.tres",
+		"pre_delay": 0.4,
+		"post_delay": 0.5
+	  }
+	}
+  ]
 }

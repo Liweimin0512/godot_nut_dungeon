@@ -1,14 +1,14 @@
 {
-	"type": "parallel",
-	"children": [
-		{
-			"type": "play_animation",
-			"animation_name": "attack"
-		},
-		{
-			"type": "deal_damage",
-			"damage_type": "physical",
-			"damage_multiplier": 1.0
-		}
-	]
+  "type": "parallel",
+  "children": [
+	{
+	  "type": "play_animation",
+	  "animation_name": "attack"
+	},
+	{
+	  "type": "deal_damage",
+	  "damage_type": "physical",
+	  "damage_multiplier": 1
+	}
+  ]
 }

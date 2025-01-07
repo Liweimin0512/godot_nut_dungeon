@@ -40,7 +40,7 @@ func _load_json_batch_async() -> void:
 
 func _load_json_batch_sync() -> void:
 	JsonLoader.enable_thread = false
-	var results = JsonLoader.load_json_batch(EFFECT_CONFIGS,
+	JsonLoader.load_json_batch(EFFECT_CONFIGS,
 		_on_load_json_complete,
 		_on_load_json_progress)
 

@@ -1,23 +1,22 @@
 {
-    "type": "sequence",
-    "children": [
-        {
-            "type": "play_animation",
-            "animation_name": "cast"
-        },
-        {
-            "type": "apply_ability",
-            "ability": "@resource://resources/data/abilities/buffs/magic_shield.tres",
-            "pre_delay": 0.2,
-            "target_type": "self"
-        },
-        {
-            "type": "spawn_vfx",
-            "vfx_scene": "@scene://scenes/vfx/magic_shield_cast_vfx.tscn",
-            "attach_to_target": true,
-            "mount_target_type": "caster",
-            "mount_point_type": "body",
-            "auto_free": true
-        }
-    ]
-} 
+  "type": "sequence",
+  "children": [
+    {
+      "type": "play_animation",
+      "animation_name": "cast"
+    },
+    {
+      "type": "apply_ability",
+      "ability": "@resource://resources/data/abilities/buffs/magic_shield.tres",
+      "pre_delay": 0.2
+    },
+    {
+      "type": "spawn_vfx",
+      "vfx_scene": "@scene://scenes/vfx/magic_shield_cast_vfx.tscn",
+      "attach_to_target": true,
+      "mount_target_type": "caster",
+      "mount_point_type": "body",
+      "auto_free": true
+    }
+  ]
+}
