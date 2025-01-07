@@ -28,10 +28,10 @@ const EFFECT_CONFIGS : Array[String] = [
 
 func _ready() -> void:
 	# 异步加载（默认）
-	# _load_json_batch_async()
+	_load_json_batch_async()
 	
 	# 同步加载
-	_load_json_batch_sync()
+	#_load_json_batch_sync()
 
 func _load_json_batch_async() -> void:
 	JsonLoader.load_json_batch(EFFECT_CONFIGS,
@@ -43,7 +43,6 @@ func _load_json_batch_sync() -> void:
 	var results = JsonLoader.load_json_batch(EFFECT_CONFIGS,
 		_on_load_json_complete,
 		_on_load_json_progress)
-	_on_load_json_complete(results)
 
 func _on_load_json_progress(current: int, total: int) -> void:
 	print("JSON加载进度: {0}/{1}".format([current, total]))
@@ -107,6 +106,7 @@ func _create_combat(combat_model: CombatModel) -> Combat:
 		enemy_markers.get_child(index).add_child(enemy)
 		# 这一步一定要在添加场景树之后，否则combat_component为空
 		enemy_combats.append(enemy.combat_component)
+		enemy.setup()
 		index += 1
 	var player_combats: Array[CombatComponent]
 	for player : Character in _get_players():

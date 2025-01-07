@@ -92,7 +92,7 @@ func create_from_config(config: Dictionary) -> AbilityEffectNode:
 		if node.get(key) != null:  # 只设置节点已有的属性
 			node.set(key, config[key])
 		else:
-			push_error("set property failed! key: %s, node_type: %s, node get key is %s" % [key, node_type, node.get(key)])
+			push_error("set property failed! key: %s, node_type: %s" % [key, node_type])
 
 	# 递归创建子节点
 	if config.has("children") and config.children is Array:

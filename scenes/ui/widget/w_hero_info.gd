@@ -36,5 +36,6 @@ func setup(character : Character) -> void:
 	for ability : Ability in ability_component.get_abilities():
 		if ability is SkillAbility and ability.is_show:
 			var w_skill : W_SkillIcon = skill_container.get_child(index)
-			w_skill.setup(ability)
+			if w_skill:
+				w_skill.setup(ability)
 			index += 1

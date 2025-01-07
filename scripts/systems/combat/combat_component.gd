@@ -218,11 +218,12 @@ func _move_from_action() -> void:
 ## 获取行动位置
 func _get_action_point(ability_context: Dictionary) -> Vector2:
 	var point : Vector2
-	if ability_context.get("targets").is_empty(): 
+	if not ability_context.get("target"): 
 		point = _current_combat.action_marker.position
 	else:
 		var ability: SkillAbility = ability_context.get("ability")
-		var target: Node2D = ability_context.get("targets")[0].owner
+		#var target: Node2D = ability_context.get("targets")[0].owner
+		var target = ability_context.get("target").owner
 		match ability.casting_position:
 			AbilityDefinition.CASTING_POSITION.MELEE:
 				point = target.global_position + (melee_action_offset * Vector2(-1, 0)) if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else melee_action_offset
