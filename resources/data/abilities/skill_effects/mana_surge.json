@@ -3,8 +3,7 @@
   "trigger_type": "ON_ABILITY_CAST_SUCCESS",
   "persistent": true,
   "child": {
-	"type": "decorator_condition",
-	"condition_type": "ability_name",
+	"type": "condition_ability_name",
 	"ability_names": [
 	  "fireball",
 	  "magic_missile"
@@ -16,9 +15,10 @@
 		"type": "sequence",
 		"children": [
 		  {
-			"type": "restore_mana",
-			"restore_type": "percent",
-			"restore_value": 20
+			"type": "modify_ability_resource",
+			"ability_resource_name": "mana",
+			"ability_resource_amount": 0.2,
+			"modify_type": "percentage"
 		  },
 		  {
 			"type": "spawn_vfx",

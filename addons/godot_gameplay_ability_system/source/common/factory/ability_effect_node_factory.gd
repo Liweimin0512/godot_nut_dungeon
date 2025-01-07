@@ -101,7 +101,7 @@ func create_from_config(config: Dictionary) -> AbilityEffectNode:
 			# 	value = value as Ability
 			node.set(key, value)
 		else:
-			push_error("set property failed! key: %s, node_type: %s" % [key, node_type])
+			GASLogger.error("set property failed! key: %s, node_type: %s" % [key, node_type])
 
 	# 递归创建子节点
 	if config.has("children") and config.children is Array:
@@ -110,13 +110,13 @@ func create_from_config(config: Dictionary) -> AbilityEffectNode:
 			if child and node.has_method("add_child"):
 				node.add_child(child)
 			else:
-				push_error("add child failed：%s" % [node_type])
+				GASLogger.error("add child failed：%s" % [node_type])
 	elif config.has("child"):
 		var child_config :Dictionary = config.child
 		var child = create_from_config(child_config)
 		if child and node.has_method("set_child"):
 			node.set_child(child)
 		else:
-			push_error("set child failed! %s" %[node_type])
+			GASLogger.error("set child failed! %s" %[node_type])
 	
 	return node
