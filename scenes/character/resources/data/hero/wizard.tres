@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=22 format=3 uid="uid://4obtwqc0eawy"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=23 format=3 uid="uid://4obtwqc0eawy"]
 
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="1_wa4vv"]
 [ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://resources/data/abilities/skill_ability/attack.tres" id="2_2bvtc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_resource/health_resource.gd" id="9_salwa"]
 [ext_resource type="Script" uid="uid://cjk7fe0ya120s" path="res://addons/godot_gameplay_ability_system/source/ability_resource/mana_resource.gd" id="10_e7ea1"]
 [ext_resource type="AnimationLibrary" uid="uid://cjkmf7tw7ssh8" path="res://scenes/character/resources/animation/hero/animation_library_wizard.res" id="11_11q1p"]
+[ext_resource type="Texture2D" uid="uid://bue8pimoybodo" path="res://assets/texture/icon/character_profile_picture/water_priestess.png" id="12_2bvtc"]
 [ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="12_x31db"]
 
 [sub_resource type="Resource" id="Resource_e1joa"]
@@ -74,6 +75,7 @@ size_y = 10
 resource_local_to_scene = true
 script = ExtResource("12_x31db")
 character_name = &"法师"
+character_icon = ExtResource("12_2bvtc")
 ability_attributes = Array[ExtResource("7_xjp3e")]([SubResource("Resource_e1joa"), SubResource("Resource_gc0bh"), SubResource("Resource_g7ipd"), SubResource("Resource_4anai"), SubResource("Resource_5h64c"), SubResource("Resource_2gihe"), SubResource("Resource_e4jre")])
 abilities = Array[ExtResource("1_wa4vv")]([ExtResource("2_2bvtc"), ExtResource("3_rh36k"), ExtResource("4_v5fnh"), ExtResource("5_jf3ip"), ExtResource("6_sikta")])
 ability_resources = Array[ExtResource("8_csepx")]([SubResource("Resource_sw5wc"), SubResource("Resource_klj23")])

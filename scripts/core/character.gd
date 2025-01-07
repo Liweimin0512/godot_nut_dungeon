@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 class_name Character
 
@@ -19,6 +18,9 @@ class_name Character
 var character_name : String = ""
 
 func _ready() -> void:
+	pass
+
+func setup() -> void:
 	if character_model:
 		#character_model = character_model.duplicate()
 		character_name = character_model.character_name

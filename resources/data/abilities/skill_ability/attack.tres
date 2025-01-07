@@ -1,44 +1,6 @@
-[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=9 format=3 uid="uid://djxtouuveyace"]
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=2 format=3 uid="uid://djxtouuveyace"]
 
-[ext_resource type="Script" uid="uid://carlbxgjnsnu4" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_node.gd" id="1_vd7dw"]
-[ext_resource type="Script" uid="uid://chd8ky037o7bu" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/play_animation_node.gd" id="2_loqtb"]
-[ext_resource type="Script" uid="uid://cnxxo4hdjduk2" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/deal_damage_node.gd" id="3_0yct3"]
-[ext_resource type="Script" uid="uid://dg313716g8kfa" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_parallel_node.gd" id="4_xlike"]
 [ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="5_181li"]
-
-[sub_resource type="Resource" id="Resource_1wbb0"]
-script = ExtResource("2_loqtb")
-animation_name = "attack"
-blend_time = 0.2
-custom_speed = 1.0
-wait_for_completion = false
-animation_unit_type = "caster"
-pre_delay = 0.0
-post_delay = 0.0
-effect_name = &""
-enabled = true
-metadata/_custom_type_script = ExtResource("2_loqtb")
-
-[sub_resource type="Resource" id="Resource_serwv"]
-script = ExtResource("3_0yct3")
-damage_multiplier = 1.0
-damage_multiplier_array = Array[float]([])
-damage_type = 0
-is_indirect = false
-pre_delay = 0.4
-post_delay = 0.4
-effect_name = &"伤害"
-enabled = true
-metadata/_custom_type_script = ExtResource("3_0yct3")
-
-[sub_resource type="Resource" id="Resource_koaka"]
-resource_local_to_scene = true
-script = ExtResource("4_xlike")
-success_policy = 0
-children = Array[ExtResource("1_vd7dw")]([SubResource("Resource_1wbb0"), SubResource("Resource_serwv")])
-effect_name = &""
-enabled = true
-metadata/_custom_type_script = ExtResource("4_xlike")
 
 [resource]
 resource_local_to_scene = true
@@ -52,7 +14,3 @@ is_auto_cast = false
 cooldown = 0
 current_cooldown = 0
 is_show = false
-ability_name = &"普通攻击"
-ability_description = "一次普通攻击，对幼小的心灵造成多么大的伤害！"
-effect_container = SubResource("Resource_koaka")
-effect_config_path = ""

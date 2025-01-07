@@ -12,17 +12,7 @@ class_name Ability
 ## 效果容器
 @export var effect_container: AbilityEffectNode
 ## 效果配置文件路径
-@export_file("*.json") var effect_config_path: String:
-	set(value):
-		effect_config_path = value
-		if Engine.is_editor_hint():
-			# 编辑器中即时更新
-			_load_effect_config()
-		elif not value.is_empty():
-			# 运行时加载
-			_load_effect_config()
-	get:
-		return effect_config_path
+@export_file("*.json") var effect_config_path: String
 
 ## 所属技能组件
 var _ability_component: AbilityComponent
@@ -69,7 +59,7 @@ func _cast(context: Dictionary) -> bool:
 func _load_effect_config() -> void:
 	if effect_config_path.is_empty():
 		return
-	var effect_tree = AbilityEffectNodeFactory.create_from_json(effect_config_path)
+	var effect_tree = EffectNodeFactory.create_from_json(effect_config_path)
 	if effect_tree:
 		effect_container = effect_tree
 	else:

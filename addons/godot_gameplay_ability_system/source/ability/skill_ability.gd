@@ -3,8 +3,6 @@ class_name SkillAbility
 
 ## 技能
 
-## 执行次数
-@export var cast_count: int = 1
 ## 目标类型，如self, ally, enemy
 @export var target_type: StringName
 ## 消耗资源

@@ -196,18 +196,18 @@ func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -
 	if triggers.is_empty():
 		GASLogger.info("没有找到触发器：{0}".format([event_name]))
 		return
-	for trigger : AbilityEffectTriggerNode in triggers:
+	for trigger : DecoratorTriggerNode in triggers:
 		trigger.handle_trigger(event_context)
 
 ## 添加触发器
-func add_ability_trigger(trigger_type: StringName, trigger: AbilityEffectTriggerNode) -> void:
-	var triggers : Array[AbilityEffectTriggerNode] = _ability_triggers.get(trigger_type, [])
+func add_ability_trigger(trigger_type: StringName, trigger: DecoratorTriggerNode) -> void:
+	var triggers : Array[DecoratorTriggerNode] = _ability_triggers.get(trigger_type, [])
 	triggers.append(trigger)
 	_ability_triggers[trigger_type] = triggers
 
 ## 移除触发器
-func remove_ability_trigger(trigger_type: StringName, trigger: AbilityEffectTriggerNode) -> void:
-	var triggers : Array[AbilityEffectTriggerNode] = _ability_triggers.get(trigger_type, [])
+func remove_ability_trigger(trigger_type: StringName, trigger: DecoratorTriggerNode) -> void:
+	var triggers : Array[DecoratorTriggerNode] = _ability_triggers.get(trigger_type, [])
 	if triggers.has(trigger):
 		triggers.erase(trigger)
 		_ability_triggers[trigger_type] = triggers

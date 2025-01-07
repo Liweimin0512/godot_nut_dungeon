@@ -11,6 +11,9 @@ const RESOURCE_TYPE_MARKERS = {
 	"resource": "@resource://",     # 资源
 }
 
+## 是否启用线程加载
+@export var enable_thread: bool = true
+
 ## 资源缓存
 var _json_cache: Dictionary = {}      # JSON配置缓存
 var _resource_cache: Dictionary = {}  # 资源缓存
@@ -28,59 +31,101 @@ signal batch_load_completed(results: Dictionary)
 signal json_loaded(path: String, data: Dictionary)
 
 func _init() -> void:
-	_loading_mutex = Mutex.new()
-	_loading_semaphore = Semaphore.new()
-	_loading_queue = []
-	_start_loading_thread()
+	if enable_thread:
+		_loading_mutex = Mutex.new()
+		_loading_semaphore = Semaphore.new()
+		_loading_queue = []
+		_start_loading_thread()
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_PREDELETE:
+	if what == NOTIFICATION_PREDELETE and enable_thread:
 		_stop_loading_thread()
 
-## 启动加载线程
-func _start_loading_thread() -> void:
-	_loading_thread = Thread.new()
-	_is_loading = true
-	_loading_thread.start(_loading_thread_function)
-
-## 停止加载线程
-func _stop_loading_thread() -> void:
-	_is_loading = false
-	_loading_semaphore.post()  # 唤醒线程以便退出
-	_loading_thread.wait_to_finish()
-
-## 加载线程函数
-func _loading_thread_function() -> void:
-	while _is_loading:
-		_loading_semaphore.wait()  # 等待加载请求
-		if not _is_loading:
-			break
-			
-		# 获取下一个加载任务
+## 加载单个JSON文件
+## path: JSON文件路径
+## callback: 加载完成回调（仅在异步模式下有效）
+func load_json(path: String, callback: Callable = Callable()) -> Dictionary:
+	if enable_thread:
 		_loading_mutex.lock()
-		var task = _loading_queue.pop_front() if not _loading_queue.is_empty() else null
+		_loading_queue.append({
+			"path": path,
+			"callback": callback
+		})
 		_loading_mutex.unlock()
+		_loading_semaphore.post()
+		return {}
+	else:
+		var result = _load_json_file(path)
+		if callback.is_valid():
+			callback.call(result)
+		return result
+
+## 批量加载JSON文件
+## paths: JSON文件路径数组
+## callback: 全部加载完成后的回调（仅在异步模式下有效）
+## progress_callback: 加载进度回调 (current, total)（仅在异步模式下有效）
+func load_json_batch(paths: Array[String], 
+		callback: Callable = Callable(),
+		progress_callback: Callable = Callable()) -> Dictionary:
+	if enable_thread:
+		var total = paths.size()
+		var results = {}
+		var shared_data = {"current": 0}  # 使用字典来共享计数器
 		
-		if task:
-			var result = _load_json_file(task.path)
-			# 处理加载结果
-			call_deferred("_on_json_loaded", task.path, result, task.callback)
+		if total == 0:
+			if callback.is_valid():
+				callback.call(results)
+			batch_load_completed.emit(results)
+			return results
+		
+		for path in paths:
+			load_json(path, func(result: Dictionary) -> void:
+				shared_data.current += 1  # 使用共享计数器
+				results[path] = result
+				
+				if progress_callback.is_valid():
+					progress_callback.call(shared_data.current, total)
+				
+				json_loaded.emit(path, result)
+				
+				if shared_data.current >= total:
+					print("所有JSON加载完成，结果数：", results.size())
+					if callback.is_valid():
+						callback.call(results)
+					batch_load_completed.emit(results)
+			)
+		return {}
+	else:
+		var results = {}
+		var total = paths.size()
+		for i in range(total):
+			var path = paths[i]
+			results[path] = _load_json_file(path)
+			if progress_callback.is_valid():
+				progress_callback.call(i + 1, total)
+		if callback.is_valid():
+			callback.call(results)
+		batch_load_completed.emit(results)
+		return results
 
-## 异步加载JSON文件
-func load_json_async(path: String, callback: Callable = Callable()) -> void:
-	_loading_mutex.lock()
-	_loading_queue.append({
-		"path": path,
-		"callback": callback
-	})
-	_loading_mutex.unlock()
-	_loading_semaphore.post()
+## 清除缓存
+func clear_cache() -> void:
+	_json_cache.clear()
+	_resource_cache.clear()
 
-## 同步加载JSON文件
-func load_json(path: String) -> Dictionary:
-	if _json_cache.has(path):
-		return _json_cache[path]
-	return _load_json_file(path)
+## 检查某个路径的JSON是否已缓存
+func is_json_cached(path: String) -> bool:
+	return _json_cache.has(path)
+
+## 获取已缓存的JSON数据
+func get_cached_json(path: String) -> Dictionary:
+	var config : Dictionary
+	if not _json_cache.has(path):
+		push_error("没找到缓存的json")
+		config = _load_json_file(path)
+	else:
+		config = _json_cache.get(path, {})
+	return config
 
 ## 实际的JSON加载函数
 func _load_json_file(path: String) -> Dictionary:
@@ -145,72 +190,39 @@ func _load_resource(path: String, type: String) -> Variant:
 		
 	return result
 
+## 启动加载线程
+func _start_loading_thread() -> void:
+	_loading_thread = Thread.new()
+	_is_loading = true
+	_loading_thread.start(_loading_thread_function)
+
+## 停止加载线程
+func _stop_loading_thread() -> void:
+	_is_loading = false
+	_loading_semaphore.post()  # 唤醒线程以便退出
+	_loading_thread.wait_to_finish()
+
+## 加载线程函数
+func _loading_thread_function() -> void:
+	while _is_loading:
+		_loading_semaphore.wait()  # 等待加载请求
+		if not _is_loading:
+			break
+			
+		# 获取下一个加载任务
+		_loading_mutex.lock()
+		var task = _loading_queue.pop_front() if not _loading_queue.is_empty() else null
+		_loading_mutex.unlock()
+		
+		if task:
+			var result = _load_json_file(task.path)
+			# 即使加载失败也调用回调
+			call_deferred("_on_json_loaded", task.path, result, task.callback)
+
 ## 加载完成回调
 func _on_json_loaded(path: String, result: Dictionary, callback: Callable) -> void:
-	_json_cache[path] = result
+	if not result.is_empty():
+		_json_cache[path] = result
+	# 无论加载是否成功都调用回调
 	if callback.is_valid():
 		callback.call(result)
-
-## 清除缓存
-func clear_cache() -> void:
-	_json_cache.clear()
-	_resource_cache.clear()
-
-## 预加载JSON文件
-func preload_json(paths: Array[String]) -> void:
-	for path in paths:
-		load_json_async(path)
-
-## 批量加载JSON文件
-## paths: JSON文件路径数组
-## callback: 全部加载完成后的回调
-## progress_callback: 加载进度回调 (current, total)
-func batch_load_json(paths: Array[String], 
-		callback: Callable = Callable(),
-		progress_callback: Callable = Callable()) -> void:
-	var total = paths.size()
-	var current = 0
-	var results = {}
-	
-	# 如果没有文件需要加载
-	if total == 0:
-		if callback.is_valid():
-			callback.call(results)
-		batch_load_completed.emit(results)
-		return
-	
-	# 处理每个文件加载完成的回调
-	for path in paths:
-		load_json_async(path, func(result: Dictionary) -> void:
-			current += 1
-			results[path] = result
-			
-			# 发送加载进度
-			if progress_callback.is_valid():
-				progress_callback.call(current, total)
-			
-			# 发送单个文件加载完成信号
-			json_loaded.emit(path, result)
-			
-			# 检查是否全部加载完成
-			if current == total:
-				if callback.is_valid():
-					callback.call(results)
-				batch_load_completed.emit(results)
-		)
-
-## 同步批量加载JSON文件
-## 注意：这会阻塞直到所有文件加载完成
-func batch_load_json_sync(paths: Array[String]) -> Dictionary:
-	var results = {}
-	for path in paths:
-		results[path] = load_json(path)
-	return results
-
-## 检查某个路径的JSON是否已缓存
-func is_json_cached(path: String) -> bool:
-	return _json_cache.has(path)
-
-## 获取已缓存的JSON数据
-func get_cached_json(path: String) -> Dictionary:
-	return _json_cache.get(path, {})

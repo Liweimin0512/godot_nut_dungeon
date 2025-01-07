@@ -8,12 +8,14 @@ func _enter_tree() -> void:
 	# 注册自定义类型
 	_register_custom_types()
 	add_autoload_singleton("JsonLoader", "source/common/autoload/json_loader.gd")
+	add_autoload_singleton("EffectNodeFactory", "source/common/factory/ability_effect_node_factory.gd")
 	print("{0} v{1} initialized".format([PLUGIN_NAME, PLUGIN_VERSION]))
 
 func _exit_tree() -> void:
 	# 移除自定义类型
 	_unregister_custom_types()
 	remove_autoload_singleton("JsonLoader")
+	remove_autoload_singleton("EffectNodeFactory")
 	print("{0} v{1} unloaded".format([PLUGIN_NAME, PLUGIN_VERSION]))
 
 func _register_custom_types() -> void:

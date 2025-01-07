@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 CombatSystem="*res://scripts/systems/combat/combat_system.gd"
 JsonLoader="*res://addons/godot_gameplay_ability_system/source/common/autoload/json_loader.gd"
+EffectNodeFactory="*res://addons/godot_gameplay_ability_system/source/common/factory/ability_effect_node_factory.gd"
 
 [display]
 

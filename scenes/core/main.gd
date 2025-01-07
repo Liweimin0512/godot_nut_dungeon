@@ -2,17 +2,20 @@ extends Node2D
 
 const CHARACTER = preload("res://scenes/character/character.tscn")
 ## 需要预加载的effect配置文件列表
-const EFFECT_CONFIGS := [
-	"res://resources/data/abilities/effects/battle_cry_effect.json",
-	"res://resources/data/abilities/effects/chain_lightning_effect.json",
-	"res://resources/data/abilities/effects/counter_attack_buff.json",
-	"res://resources/data/abilities/effects/fireball_effect.json",
-	"res://resources/data/abilities/effects/heroic_strike_effect.json",
-	"res://resources/data/abilities/effects/ignite_buff.json",
-	"res://resources/data/abilities/effects/magic_missile_effect.json",
-	"res://resources/data/abilities/effects/magic_shield_skill_effect.json",
-	"res://resources/data/abilities/effects/mana_surge_buff.json",
-	"res://resources/data/abilities/effects/unyielding_buff.json"
+const EFFECT_CONFIGS : Array[String] = [
+	"res://resources/data/abilities/skill_effects/battle_cry_effect.json",
+	"res://resources/data/abilities/skill_effects/chain_lightning_effect.json",
+	"res://resources/data/abilities/skill_effects/fireball_effect.json",
+	"res://resources/data/abilities/skill_effects/heroic_strike_effect.json",
+	"res://resources/data/abilities/skill_effects/magic_missile_effect.json",
+	"res://resources/data/abilities/skill_effects/magic_shield_skill_effect.json",
+	"res://resources/data/abilities/skill_effects/counter_attack_effect.json",
+	"res://resources/data/abilities/skill_effects/mana_surge.json",
+	"res://resources/data/abilities/skill_effects/unyielding_buff.json",
+	"res://resources/data/abilities/buff_effects/ignite_buff.json",
+	"res://resources/data/abilities/buff_effects/magic_shield_buff.json",
+	"res://resources/data/abilities/buff_effects/battle_cry_buff.json",
+	"res://resources/data/abilities/buff_effects/stun_buff.json",
 ]
 
 # @onready var rich_text_label: RichTextLabel = %RichTextLabel
@@ -24,10 +27,31 @@ const EFFECT_CONFIGS := [
 @export var combat_test : CombatModel
 
 func _ready() -> void:
-	JsonLoader.batch_load_json(EFFECT_CONFIGS, _on_load_json_complete)
+	# 异步加载（默认）
+	# _load_json_batch_async()
+
+	# 同步加载
+	_load_json_batch_sync()
+
+func _load_json_batch_async() -> void:
+	JsonLoader.load_json_batch(EFFECT_CONFIGS,
+		_on_load_json_complete,
+		_on_load_json_progress)
+
+func _load_json_batch_sync() -> void:
+	JsonLoader.enable_thread = false
+	var results = JsonLoader.load_json_batch(EFFECT_CONFIGS,
+		_on_load_json_complete,
+		_on_load_json_progress)
+	_on_load_json_complete(results)
+
+func _on_load_json_progress(current: int, total: int) -> void:
+	print("JSON加载进度: {0}/{1}".format([current, total]))
 
 func _on_load_json_complete(_results: Dictionary) -> void:
 	var combat : Combat = _create_combat(combat_test.duplicate())
+	for player in _get_players():
+		player.setup()
 	game_form.setup(_get_players())
 	# 因为combat是自动执行的，所以不会发出这个信号！
 	combat.combat_started.connect(
