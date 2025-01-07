@@ -87,10 +87,18 @@ func create_from_config(config: Dictionary) -> AbilityEffectNode:
 	
 	# 设置节点属性
 	for key in config:
-		if key == "type" or key == "children":
+		if key == "type" or key == "children" or key == "child":
 			continue
-		if node.get(key) != null:  # 只设置节点已有的属性
-			node.set(key, config[key])
+		var has_property = false
+		for p in node.get_property_list():
+			if p.name == key:
+				has_property = true
+				break
+		if has_property:  # 只设置节点已有的属性
+			var value = config[key]
+			# if key == "ability":
+			# 	value = value as Ability
+			node.set(key, value)
 		else:
 			push_error("set property failed! key: %s, node_type: %s" % [key, node_type])
 
