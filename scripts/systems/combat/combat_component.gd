@@ -12,13 +12,13 @@ class_name CombatComponent
 ## 行动耗时
 @export var action_time : float = 0.5
 ## 是否为存活单位
-var is_alive : bool :
+var is_alive : bool = true:
 	get:
-		return ability_component.get_resource_value("生命值") > 0
+		return ability_resource_component.get_resource_value("生命值") > 0
 ## 行动速度
 var speed : float :
 	get:
-		return ability_component.get_attribute_value("速度")
+		return ability_attribute_component.get_attribute_value("速度")
 
 ## 当前战斗，为空则表示不是在战斗状态
 var _current_combat: Combat
@@ -28,8 +28,9 @@ var _combat_owner_name : StringName :
 		return self.to_string()
 
 ## 依赖于技能系统组件
-@onready var ability_component: AbilityComponent = %AbilityComponent
-
+@export var ability_component: AbilityComponent
+@export var ability_resource_component: AbilityResourceComponent
+@export var ability_attribute_component: AbilityAttributeComponent
 signal hited(target: CombatComponent)
 signal hurted(damage: int)
 signal died
@@ -107,7 +108,7 @@ func turn_end() -> void:
 
 ## 战斗结束
 func combat_end() -> void:
-	_print("===== 战斗结束! 剩余血量: {0}".format([ability_component.get_resource_value("生命值")]))
+	_print("===== 战斗结束! 剩余血量: {0}".format([ability_resource_component.get_resource_value("生命值")]))
 	_current_combat = null
 	await ability_component.handle_game_event("on_combat_end")
 	for ability in ability_component.get_abilities():
@@ -136,14 +137,14 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 	await ability_component.handle_game_event("on_pre_hurt", ability_context)
 	_print("combat_component: {0} 受到来自 {1} 的伤害 {2} 点， 当前生命值{3}/{4}".format([
 		self, damage_source, damage.damage_value, 
-		ability_component.get_resource_value("生命值"), 
-		ability_component.get_attribute_value("生命值")
+		ability_resource_component.get_resource_value("生命值"), 
+		ability_attribute_component.get_attribute_value("生命值")
 	]))
-	ability_component.apply_damage(damage)
+	ability_resource_component.apply_damage(damage)
 	hurted.emit(damage.damage_value)
 	await get_tree().create_timer(0.5).timeout
 	await ability_component.handle_game_event("on_post_hurt", ability_context)
-	var health_value : float = ability_component.get_resource_value("生命值")
+	var health_value : float = ability_resource_component.get_resource_value("生命值")
 	if health_value <= 0:
 		_die()
 
@@ -242,7 +243,7 @@ func _get_ability_context() -> Dictionary:
 func _get_available_abilities() -> Array[Ability]:
 	var available_abilities : Array[Ability] = []
 	for ability in ability_component.get_abilities():
-		if ability is SkillAbility and _is_ability_available(ability):
+		if _is_ability_available(ability):
 			available_abilities.append(ability as SkillAbility)
 	return available_abilities
 
@@ -250,7 +251,7 @@ func _get_available_abilities() -> Array[Ability]:
 func _is_ability_available(ability: Ability) -> bool:
 	if not ability is SkillAbility: return false
 	## 这个方法用来筛选哪些可用的主动技能
-	return not ability.is_cooldown and not ability.is_auto_cast and ability_component.has_enough_resources(ability.cost_resource_name, ability.cost_resource_value)
+	return not ability.is_cooldown and not ability.is_auto_cast and ability.can_cast
 
 func _print(s : String) -> void:
 	var color = "#FFFF00"
@@ -258,7 +259,6 @@ func _print(s : String) -> void:
 
 func _on_ability_component_ability_trigger_success(ability: Ability) -> void:
 	_print("触发了技能：{0}".format([ability]))
-
 
 func _on_ability_component_ability_trigger_failed(ability: Ability) -> void:
 	_print("触发技能失败：{0}".format([ability]))

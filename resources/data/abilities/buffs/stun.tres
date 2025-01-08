@@ -10,5 +10,7 @@ is_permanent = false
 value = 2
 can_stack = true
 ability_name = &"眩晕"
+ability_tags = Array[StringName]([])
 ability_description = "目标在眩晕状态下无法进行任何行动"
+is_auto_cast = true
 effect_config_path = "res://resources/data/abilities/effects/stun_buff.json"

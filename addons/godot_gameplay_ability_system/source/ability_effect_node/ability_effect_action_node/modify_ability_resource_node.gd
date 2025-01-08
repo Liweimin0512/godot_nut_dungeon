@@ -12,18 +12,18 @@ class_name ModifyAbilityResourceNode
 
 func _perform_action(context: Dictionary = {}) -> STATUS:
 	var caster : Node = context.caster
-	var ability_component : AbilityComponent = caster.ability_component
-	var ability_resource : AbilityResource = ability_component.get_resource(ability_resource_name)
+	var ability_resource_component : AbilityResourceComponent = caster.ability_resource_component
+	var ability_resource : AbilityResource = ability_resource_component.get_resource(ability_resource_name)
 	if not ability_resource:
 		GASLogger.error("ModifyAbilityResourceNode ability_resource is null")
 		return STATUS.FAILURE
 	var _amount := ability_resource_amount
 	if modify_type == "percentage":
-		_amount = ability_component.get_resource_value(ability_resource_name) * _amount
+		_amount = ability_resource_component.get_resource_value(ability_resource_name) * _amount
 	if _amount > 0:
-		ability_resource.restore(int(_amount))
+		ability_resource_component.restore(int(_amount))
 	else:
-		ability_resource.consume(int(_amount))
+		ability_resource_component.consume(int(_amount))
 	return STATUS.SUCCESS
 
 func _description_getter() -> String:

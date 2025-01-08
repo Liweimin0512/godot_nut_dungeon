@@ -11,8 +11,8 @@ class_name RageResource
 ## 受到伤害时恢复的值
 @export var regain_hurted: int = 5
 
-func initialization(ability_component: AbilityComponent) -> void:
-	super(ability_component)
+func initialization(attribute_component: AbilityAttributeComponent) -> void:
+	super(attribute_component)
 	current_value = 0
 	ability_resource_name = "怒气值"
 

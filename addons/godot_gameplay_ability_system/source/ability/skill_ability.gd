@@ -7,8 +7,6 @@ class_name SkillAbility
 @export var target_type: StringName
 ## 技能消耗
 @export var ability_cost: AbilityCost
-## 技能是否在满足条件时自动施放
-@export var is_auto_cast: bool
 ## 冷却时间（回合数）
 @export var cooldown: int
 ## 当前冷却时间
@@ -23,32 +21,37 @@ var is_cooldown: bool:
 	get:
 		return current_cooldown > 0
 
+## 能否施放
+var can_cast: bool:
+	get:
+		return ability_cost.can_cost(_context) if ability_cost else true
+
 signal cooldown_changed(value: int) 
 
 func _init() -> void:
 	resource_local_to_scene = true
 	ability_tags.append("skill")
 
-## 应用技能
-func _apply(context: Dictionary) -> void:
-	if is_auto_cast:
-		_ability_component.try_cast_ability(self, context)
-
-## 执行技能
-func _cast(context: Dictionary) -> bool:
-	if not ability_cost.can_cost(context):
-		print("消耗不足，无法释放技能！")
-		return false
+## 判断能否施放
+func _can_cast(context: Dictionary) -> bool:
 	if is_cooldown:
 		print("技能正在冷却！")
 		return false
+	if ability_cost and not ability_cost.can_cost(context):
+		print("消耗不足，无法释放技能！")
+		return false
+	elif ability_cost:
+		ability_cost.cost(context)
+	return true
+
+## 执行技能
+func _cast(context: Dictionary) -> bool:
 	var caster : Node = context.get("caster")
 	var target : Node
 	if target_type == "self":
 		target = caster
 	else:
 		target = context.get("target", null)
-	ability_cost.cost(context)
 	current_cooldown = cooldown
 	context.merge({"target": target}, true)
 	var ok := await super(context)

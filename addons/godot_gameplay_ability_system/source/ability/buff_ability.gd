@@ -22,6 +22,7 @@ signal value_changed(value: int)
 
 func _init() -> void:
 	ability_tags.append("buff")
+	is_auto_cast = true
 
 ## 应用技能
 func _apply(context: Dictionary) -> void:
@@ -33,15 +34,6 @@ func _apply(context: Dictionary) -> void:
 			value += _buff.value
 	ability_context["source"] = self
 	GASLogger.info("应用BUFF：{0}".format([self]))
-	cast(context)
-
-## 移除技能
-func _remove() -> void:
-	super()
-
-## 执行技能
-func _cast(context: Dictionary) -> bool:
-	return await super(context)
 
 ## 更新BUFF状态
 func _update() -> void:

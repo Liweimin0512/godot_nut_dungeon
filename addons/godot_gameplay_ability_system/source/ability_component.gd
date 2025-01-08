@@ -1,108 +1,61 @@
 extends Node
 class_name AbilityComponent
 
-## 技能组件，管理技能属性，技能资源，技能（BUFF、SKILL）等
-
-## 技能属性集
-@export var _ability_attributes : Dictionary[StringName, AbilityAttribute]
+## 技能组件，维护广义上的技能（BUFF、SKILL）等
 ## 当前单位所拥有的全部技能（包括BUFF）
+
 @export var _abilities : Array[Ability]
 ## 技能触发器集
 @export var _ability_triggers : Dictionary[StringName, Array]
 
-## 属性变化时发出
-signal attribute_changed(atr_name: StringName, value: float)
 ## 技能释放前发出
-signal pre_cast(ability: Ability)
+signal ability_cast_started(ability: Ability, context: Dictionary)
 ## 技能释放时发出
-signal ability_cast_finished(ability: Ability)
+signal ability_cast_finished(ability: Ability, context: Dictionary)
 ## 技能应用触发
-signal ability_applied(ability: Ability)
+signal ability_applied(ability: Ability, context: Dictionary)
 ## 技能移除触发
-signal ability_removed(ability: Ability)
+signal ability_removed(ability: Ability, context: Dictionary)
 ## 技能触发成功
-signal ability_trigger_success(ability: Ability)
+signal ability_trigger_success(ability: Ability, context: Dictionary)
 ## 技能触发失败
-signal ability_trigger_failed(ability: Ability)
+signal ability_trigger_failed(ability: Ability, context: Dictionary)
+## 游戏事件处理完成
+signal game_event_handled(event_name: StringName, event_context: Dictionary)
 
 ## 组件初始化
 func initialization(
-		attribute_set: Array[AbilityAttribute] = [],
-		ability_resource_set : Array[AbilityResource] = [],
 		ability_set : Array[Ability] = [],
 		ability_context: Dictionary = {}
 		) -> void:
-	for attribute : AbilityAttribute in attribute_set:
-		# attribute.initialization(self)
-		if not _ability_attributes.has(attribute.attribute_name):
-			_ability_attributes[attribute.attribute_name] = attribute
-	for res : AbilityResource in ability_resource_set:
-		res.initialization(self)
-		_ability_resources[res.ability_resource_name] = res
-		res.current_value_changed.connect(
-			func(value: int) -> void:
-				resource_changed.emit(res.ability_resource_name, value)
-		)
 	for ability in ability_set:
-		#ability.apply(self, ability_context)
 		apply_ability(ability, ability_context)
-		ability.cast_finished.connect(
-			func() -> void:
-				ability_cast_finished.emit(ability)
+		ability.applied.connect(
+			func(context: Dictionary) -> void:
+				ability_applied.emit(ability, context)
 		)
-	print("ability_component: {0} 初始化".format([owner.to_string()]))
-
-#region 技能属性相关
-
-## 是否存在属性
-func has_attribute(atr_name: StringName) -> bool:
-	return _ability_attributes.has(atr_name)
-
-## 获取属性
-func get_attribute(atr_name: StringName) -> AbilityAttribute:
-	var attribute : AbilityAttribute = _ability_attributes.get(atr_name)
-	if attribute:
-		return attribute
-	return null
-
-## 获取属性值
-func get_attribute_value(atr_name : StringName) -> float:
-	var attribute := get_attribute(atr_name)
-	if attribute:
-		return attribute.attribute_value
-	#assert(false, "找不到需要的属性："+ atr_name)
-	push_error("找不到需要的属性：" + atr_name)
-	return -1
-
-## 增加属性修改器
-func apply_attribute_modifier(modifier: AbilityAttributeModifier):
-	var attribute: AbilityAttribute = get_attribute(modifier.attribute_name)
-	assert(attribute, "无效的属性：" + attribute.to_string())
-	attribute.add_modifier(modifier)
-	attribute_changed.emit(modifier.attribute_name, get_attribute_value(modifier.attribute_name))
-	
-## 移除属性修改器
-func remove_attribute_modifier(modifier: AbilityAttributeModifier):
-	var attribute: AbilityAttribute = get_attribute(modifier.attribute_name)
-	assert(attribute, "无效的属性：" + attribute.to_string())
-	attribute.remove_modifier(modifier)
-	attribute_changed.emit(modifier.attribute_name, get_attribute_value(modifier.attribute_name))
-
-## 获取属性的所有修改器
-func get_attribute_modifiers(attribute_name: StringName) -> Array[AbilityAttributeModifier]:
-	var attribute := get_attribute(attribute_name)
-	if attribute:
-		return attribute.get_modifiers()
-	return []
-
-#endregion
+		ability.removed.connect(
+			func(context: Dictionary) -> void:
+				ability_removed.emit(ability, context)
+		)
+		ability.cast_started.connect(
+			func(context: Dictionary) -> void:
+				ability_cast_started.emit(ability, context)
+		)
+		ability.cast_finished.connect(
+			func(context: Dictionary) -> void:
+				ability_cast_finished.emit(ability, context)
+		)	
+		print("ability_component: {0} 初始化".format([owner.to_string()]))
 
 #region 技能相关
 
 ## 获取相同名称的技能
 func get_same_ability(ability: Ability) -> Ability:
-	var ability_key = ability.get_class() + "_" + ability.ability_name
-	return _abilities.get(ability_key)
+	for a in _abilities:
+		if a.ability_name == ability.ability_name and a.ability_tags == ability.ability_tags:
+			return a
+	return null
 
 ## 获取全部技能
 func get_abilities(ability_tags: Array[StringName] = []) -> Array[Ability]:
@@ -122,23 +75,17 @@ func apply_ability(ability: Ability, ability_context: Dictionary) -> void:
 		})
 	ability.apply(self, ability_context)
 	_abilities.append(ability)
-	ability_applied.emit(ability)
 
 ## 移除技能
 func remove_ability(ability: Ability) -> void:
 	ability.remove()
 	_abilities.erase(ability)
-	print("移除Ability：", ability)
-	ability_removed.emit(ability)
 
 ## 尝试释放技能
 func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
 	#var caster : Node = context.caster
-	print("ability_component: {0}尝试释放技能：{1}".format([self, ability]))
-	pre_cast.emit(ability)
-	await ability.cast(context)
-	print("ability: {0}释放技能：{1}".format([self, ability]))
-	return true
+	var ok = await ability.cast(context)
+	return ok
 
 #endregion
 
@@ -147,7 +94,6 @@ func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
 ## 处理游戏事件
 func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -> void:
 	GASLogger.info("{0} 接收到游戏事件：{1}，事件上下文{2}".format([self, event_name, event_context]))
-	_handle_resource_callback(event_name, event_context)
 	for ability in _abilities:
 		if ability.has_method(event_name):
 			ability.call(event_name, event_context)
@@ -164,6 +110,7 @@ func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -
 				GASLogger.debug("触发器失败：{0}".format([ability]))
 				ability_trigger_failed.emit(ability)
 		)
+	game_event_handled.emit(event_name, event_context)
 
 ## 添加触发器
 func add_ability_trigger(trigger_type: StringName, trigger: DecoratorTriggerNode) -> void:
@@ -180,11 +127,6 @@ func remove_ability_trigger(trigger_type: StringName, trigger: DecoratorTriggerN
 		_ability_triggers[trigger_type] = triggers
 
 #endregion
-
-## 应用伤害
-func apply_damage(damage: AbilityDamage) -> void:
-	var health : AbilityResource = get_resource("生命值")
-	health.consume(round(damage.damage_value))
 
 func _to_string() -> String:
 	return owner.to_string()

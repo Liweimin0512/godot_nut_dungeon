@@ -23,9 +23,15 @@ func _register_custom_types() -> void:
 	add_custom_type("AbilityComponent", "Node", preload("source/ability_component.gd"), preload("icons/ability_component.svg"))
 	add_custom_type("Ability", "Resource", preload("source/core/ability.gd"), preload("icons/ability.svg"))
 	add_custom_type("AbilityAttribute", "Resource", preload("source/core/ability_attribute.gd"), preload("icons/attribute.svg"))
+	add_custom_type("AbilityResource", "Resource", preload("source/core/ability_resource.gd"), preload("icons/ability_resource.svg"))
+	add_custom_type("AbilityResourceComponent", "Node", preload("source/ability_resource_component.gd"), preload("icons/ability_resource_component.svg"))
+	add_custom_type("AbilityAttributeComponent", "Node", preload("source/ability_attribute_component.gd"), preload("icons/ability_attribute_component.svg"))
 
 func _unregister_custom_types() -> void:
 	# 移除注册的类型
 	remove_custom_type("AbilityComponent")
 	remove_custom_type("Ability")
 	remove_custom_type("AbilityAttribute")
+	remove_custom_type("AbilityResource")
+	remove_custom_type("AbilityResourceComponent")
+	remove_custom_type("AbilityAttributeComponent")

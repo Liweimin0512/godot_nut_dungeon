@@ -6,6 +6,8 @@ class_name Character
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var combat_component: CombatComponent = $CombatComponent
 @onready var ability_component: AbilityComponent = %AbilityComponent
+@onready var ability_resource_component: AbilityResourceComponent = %AbilityResourceComponent
+@onready var ability_attribute_component: AbilityAttributeComponent = %AbilityAttributeComponent
 @onready var w_status: W_Status = $W_Status
 
 @export var character_model : CharacterModel
@@ -24,9 +26,9 @@ func setup() -> void:
 	if character_model:
 		#character_model = character_model.duplicate()
 		character_name = character_model.character_name
+		ability_attribute_component.initialization(character_model.ability_attributes)
+		ability_resource_component.initialization(character_model.ability_resources)
 		ability_component.initialization(
-			character_model.ability_attributes,
-			character_model.ability_resources,
 			character_model.abilities,
 			{
 				"caster": combat_component,
@@ -70,7 +72,7 @@ func _on_combat_component_hited(_target: CombatComponent) -> void:
 func _on_combat_component_hurted(_damage: int) -> void:
 	animation_player.play("hit")
 
-func _on_ability_component_pre_cast(ability: Ability) -> void:
+func _on_ability_component_ability_cast_started(ability: Ability, _context: Dictionary) -> void:
 	%LabelAbility.text = ability.ability_name
 	%LabelAbility.show()
 	await get_tree().create_timer(1).timeout

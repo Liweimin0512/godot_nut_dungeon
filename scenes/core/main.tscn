@@ -16,10 +16,10 @@
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="12_pr6ky"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_random_selector_node.gd" id="13_42t4q"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="13_yomsl"]
-[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_resource/health_resource.gd" id="14_b2ey7"]
+[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_cost_resource/health_resource.gd" id="14_b2ey7"]
 [ext_resource type="Script" uid="uid://cnxxo4hdjduk2" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/deal_damage_node.gd" id="14_gi53d"]
 [ext_resource type="Script" uid="uid://dg313716g8kfa" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_parallel_node.gd" id="15_exoq3"]
-[ext_resource type="Script" uid="uid://cfeo8lbyg1cn4" path="res://addons/godot_gameplay_ability_system/source/ability_resource/rage_resource.gd" id="15_yg6x3"]
+[ext_resource type="Script" uid="uid://cfeo8lbyg1cn4" path="res://addons/godot_gameplay_ability_system/source/ability_cost_resource/rage_resource.gd" id="15_yg6x3"]
 [ext_resource type="Texture2D" uid="uid://cuda6m0iar23d" path="res://assets/sprites/characters/heros/crystal_mauler/death.png" id="16_xle73"]
 [ext_resource type="Texture2D" uid="uid://bdnbkx1smbbb8" path="res://assets/sprites/characters/heros/crystal_mauler/take_hit.png" id="17_ah51y"]
 [ext_resource type="Texture2D" uid="uid://ey4jlg2yhxxs" path="res://assets/texture/icon/Buffs/critical_boost.png" id="17_w7hn7"]
@@ -95,15 +95,13 @@ resource_local_to_scene = true
 script = ExtResource("11_fbmiv")
 casting_position = 1
 target_type = &"enemy"
-cost_resource_name = &""
-cost_resource_value = 0
-is_auto_cast = false
 cooldown = 0
 current_cooldown = 0
 is_show = false
 ability_name = &"普通攻击"
 ability_tags = Array[StringName]([])
 ability_description = ""
+is_auto_cast = false
 effect_container = SubResource("Resource_0fhl8")
 effect_config_path = ""
 metadata/_custom_type_script = ExtResource("11_fbmiv")
@@ -113,9 +111,6 @@ resource_local_to_scene = true
 script = ExtResource("11_fbmiv")
 casting_position = 0
 target_type = &"ally"
-cost_resource_name = &"怒气"
-cost_resource_value = 30
-is_auto_cast = false
 cooldown = 3
 current_cooldown = 0
 is_show = true
@@ -123,6 +118,7 @@ ability_name = &"战争怒吼"
 ability_tags = Array[StringName]([])
 ability_description = "发出怒吼，激励自己和周围的盟友。"
 icon = ExtResource("17_w7hn7")
+is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/battle_cry_effect.json"
 
 [sub_resource type="Resource" id="Resource_yomsl"]
@@ -130,9 +126,6 @@ resource_local_to_scene = true
 script = ExtResource("11_fbmiv")
 casting_position = 1
 target_type = &"enemy"
-cost_resource_name = &"怒气值"
-cost_resource_value = 15
-is_auto_cast = false
 cooldown = 2
 current_cooldown = 0
 is_show = true
@@ -140,6 +133,7 @@ ability_name = &"重击"
 ability_tags = Array[StringName]([])
 ability_description = "对单个敌人进行强力一击"
 icon = ExtResource("18_lsjgq")
+is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/heroic_strike_effect.json"
 
 [sub_resource type="Resource" id="Resource_b2ey7"]
@@ -147,9 +141,6 @@ resource_local_to_scene = true
 script = ExtResource("11_fbmiv")
 casting_position = 0
 target_type = &"self"
-cost_resource_name = &""
-cost_resource_value = 0
-is_auto_cast = true
 cooldown = 0
 current_cooldown = 0
 is_show = true
@@ -157,6 +148,7 @@ ability_name = &"不屈精神"
 ability_tags = Array[StringName]([])
 ability_description = "在受到攻击时，有几率获得额外的怒气"
 icon = ExtResource("19_fbmiv")
+is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/unyielding_effect.json"
 
 [sub_resource type="Resource" id="Resource_yg6x3"]
@@ -164,9 +156,6 @@ resource_local_to_scene = true
 script = ExtResource("11_fbmiv")
 casting_position = 0
 target_type = &""
-cost_resource_name = &""
-cost_resource_value = 0
-is_auto_cast = true
 cooldown = 0
 current_cooldown = 0
 is_show = true
@@ -174,6 +163,7 @@ ability_name = &"反击"
 ability_tags = Array[StringName]([])
 ability_description = "在受到普通攻击时有机会进行反击"
 icon = ExtResource("20_pr6ky")
+is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/counter_attack_effect.json"
 
 [sub_resource type="Resource" id="Resource_xle73"]

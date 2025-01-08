@@ -5,8 +5,8 @@
 [ext_resource type="AnimationLibrary" uid="uid://2n54xto66wk1" path="res://scenes/character/resources/animation/enemy/animation_library_flying_eye.res" id="5_hu6ev"]
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="7_hurpf"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="8_moms6"]
-[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_resource/health_resource.gd" id="9_xi3hv"]
-[ext_resource type="Script" path="res://resources/data/character/character_model.gd" id="10_fuogr"]
+[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_cost_resource/health_resource.gd" id="9_xi3hv"]
+[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="10_fuogr"]
 
 [sub_resource type="Resource" id="Resource_jvqq5"]
 resource_local_to_scene = true

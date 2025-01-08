@@ -13,11 +13,14 @@ var _ability_character: Node
 func setup(ability_character : Node) -> void:
 	_ability_character = ability_character
 	var ability_component : AbilityComponent = _ability_character.get("ability_component")
+	var ability_resource_component: AbilityResourceComponent = _ability_character.get("ability_resource_component")
 	if not ability_component:
-		GASLogger.error("cant found ability component in node: {0}".format([ability_character]))
+		GASLogger.error("cannt found ability component in node: {0}".format([ability_character]))
 		return
+	if not ability_resource_component:
+		GASLogger.error("cannt found ability resource component in node: {0}".format([ability_character]))
 	$VBoxContainer/W_AbilityResource.queue_free()
-	for res : AbilityResource in ability_component.get_resources():
+	for res : AbilityResource in ability_resource_component.get_resources():
 		var w_res : W_AbilityResource = W_ABILITY_RESOURCE.instantiate()
 		v_box_container.add_child(w_res)
 		w_res.setup(res)

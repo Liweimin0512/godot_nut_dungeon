@@ -10,4 +10,3 @@ func can_cost(context: Dictionary) -> bool:
 ## 消耗
 func cost(context: Dictionary) -> void:
 	pass
-

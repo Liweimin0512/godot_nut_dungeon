@@ -1,18 +1,19 @@
-[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=2 format=3 uid="uid://bsraf1kid81uk"]
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=3 format=3 uid="uid://bsraf1kid81uk"]
 
 [ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="1_2js8s"]
+[ext_resource type="Texture2D" uid="uid://bpvjoschbdt58" path="res://assets/texture/icon/skills/Icon26.png" id="1_v47dq"]
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_2js8s")
 casting_position = 0
 target_type = &"self"
-cost_resource_name = &""
-cost_resource_value = 0
-is_auto_cast = true
 cooldown = 0
 current_cooldown = 0
 is_show = true
 ability_name = &"不屈精神"
+ability_tags = Array[StringName]([])
 ability_description = "在受到攻击时，有几率获得额外的怒气"
+icon = ExtResource("1_v47dq")
+is_auto_cast = true
 effect_config_path = "res://resources/data/abilities/skill_effects/unyielding_effect.json"

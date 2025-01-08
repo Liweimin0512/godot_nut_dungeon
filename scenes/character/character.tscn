@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cokqr3cv3dqo6"]
+[gd_scene load_steps=10 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
 [ext_resource type="Texture2D" uid="uid://d2444c4t2hu45" path="res://assets/sprites/characters/heros/warrior/Idle.png" id="2_7ex5l"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://n67wyu14blxx" path="res://addons/godot_gameplay_ability_system/source/ability_component.gd" id="3_6a5vl"]
 [ext_resource type="AnimationLibrary" uid="uid://blhiy6bt07lej" path="res://scenes/character/resources/animation/enemy/animation_library_goblin.res" id="4_bix7t"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
+[ext_resource type="Script" uid="uid://cchps1pajt3jv" path="res://addons/godot_gameplay_ability_system/source/ability_attribute_component.gd" id="7_bix7t"]
+[ext_resource type="Script" uid="uid://dy54mfe63g1mx" path="res://addons/godot_gameplay_ability_system/source/ability_resource_component.gd" id="8_bblvu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnpp6"]
 size = Vector2(151, 154)
@@ -69,7 +71,24 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 text = "技能名称"
 
-[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("cast_position_dict")]
+[node name="AbilityComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_6a5vl")
+
+[node name="AbilityAttributeComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_bix7t")
+metadata/_custom_type_script = ExtResource("7_bix7t")
+
+[node name="AbilityResourceComponent" type="Node" parent="." node_paths=PackedStringArray("_ability_component", "_attribute_component")]
+unique_name_in_owner = true
+script = ExtResource("8_bblvu")
+_ability_component = NodePath("../AbilityComponent")
+_attribute_component = NodePath("../AbilityAttributeComponent")
+metadata/_custom_type_script = ExtResource("8_bblvu")
+
+[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("cast_position_dict", "ability_component", "ability_resource_component", "ability_attribute_component")]
+unique_name_in_owner = true
 script = ExtResource("2_ghtna")
 melee_action_offset = Vector2(50, 0)
 cast_position_dict = {
@@ -79,17 +98,15 @@ cast_position_dict = {
 "head": NodePath("../cast_points/head")
 }
 action_time = 0.3
-
-[node name="AbilityComponent" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("3_6a5vl")
+ability_component = NodePath("../AbilityComponent")
+ability_resource_component = NodePath("../AbilityResourceComponent")
+ability_attribute_component = NodePath("../AbilityAttributeComponent")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="died" from="CombatComponent" to="." method="_on_combat_component_died"]
-[connection signal="hited" from="CombatComponent" to="." method="_on_combat_component_hited"]
-[connection signal="hurted" from="CombatComponent" to="." method="_on_combat_component_hurted"]
+[connection signal="ability_cast_started" from="AbilityComponent" to="." method="_on_ability_component_ability_cast_started"]
 [connection signal="ability_trigger_failed" from="AbilityComponent" to="CombatComponent" method="_on_ability_component_ability_trigger_failed"]
 [connection signal="ability_trigger_success" from="AbilityComponent" to="." method="_on_ability_component_ability_trigger_success"]
 [connection signal="ability_trigger_success" from="AbilityComponent" to="CombatComponent" method="_on_ability_component_ability_trigger_success"]
-[connection signal="pre_cast" from="AbilityComponent" to="." method="_on_ability_component_pre_cast"]
-[connection signal="resource_changed" from="AbilityComponent" to="." method="_on_ability_component_resource_changed"]
+[connection signal="died" from="CombatComponent" to="." method="_on_combat_component_died"]
+[connection signal="hited" from="CombatComponent" to="." method="_on_combat_component_hited"]
+[connection signal="hurted" from="CombatComponent" to="." method="_on_combat_component_hurted"]

@@ -11,6 +11,8 @@ class_name Ability
 @export var ability_description: String
 ## 技能图标
 @export var icon: Texture2D
+## 技能是否在满足条件时自动施放
+@export var is_auto_cast: bool
 ## 效果容器
 @export var effect_container: AbilityEffectNode
 ## 效果配置文件路径
@@ -21,26 +23,37 @@ var _ability_component: AbilityComponent
 ## 技能上下文
 var _context : Dictionary
 
-signal cast_finished
+signal applied(context: Dictionary)
+signal removed(context: Dictionary)
+signal cast_started(context: Dictionary)
+signal cast_finished(context: Dictionary)
 
 ## 应用技能
 func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
 	_ability_component = ability_component
 	_context = context
-	#_context["ability"] = self
 	if not effect_config_path.is_empty():
 		_load_effect_config()
 	_apply(context)
+	applied.emit(context)
+	if is_auto_cast:
+		cast(context)
 
 ## 移除技能
 func remove() -> void:
 	effect_container.revoke()
 	_remove()
+	removed.emit(_context)
 
 ## 执行技能
 func cast(context: Dictionary) -> bool:
+	cast_started.emit(context)
 	_context.merge(context, true)
-	return await _cast(_context)
+	if not _can_cast(_context):
+		return false
+	var ok = await _cast(_context)
+	cast_finished.emit(_context)
+	return ok
 
 ## 添加标签
 func add_tag(tag: StringName) -> void:
@@ -63,6 +76,10 @@ func _apply(context: Dictionary) -> void:
 
 func _remove() -> void:
 	pass
+
+## 判断能否施放, 子类实现
+func _can_cast(_context: Dictionary) -> bool:
+	return true
 
 func _cast(context: Dictionary) -> bool:
 	if not effect_container: return false

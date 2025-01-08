@@ -9,5 +9,7 @@ is_permanent = false
 value = 2
 can_stack = true
 ability_name = &"魔法盾"
+ability_tags = Array[StringName]([])
 ability_description = "魔法盾吸收伤害并恢复魔法值"
+is_auto_cast = true
 effect_config_path = "res://resources/data/abilities/effects/magic_shield_buff.json"

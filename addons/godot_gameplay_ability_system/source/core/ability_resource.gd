@@ -39,9 +39,9 @@ signal current_value_changed(value : int)
 signal max_value_changed(value: int, max_value: int)
 
 ## ability_component的initialization
-func initialization(ability_component: AbilityComponent) -> void:
+func initialization(attribute_component: AbilityAttributeComponent) -> void:
 	if not attribute_name.is_empty():
-		_attribute = ability_component.get_attribute(attribute_name)
+		_attribute = attribute_component.get_attribute(attribute_name)
 		max_value = round(_attribute.attribute_value)
 		current_value = max_value
 		_attribute.attribute_value_changed.connect(
@@ -54,7 +54,7 @@ func initialization(ability_component: AbilityComponent) -> void:
 func consume(amount: int) -> bool:
 	if current_value >= amount:
 		current_value -= amount
-		print("技能资源消耗：{0} 消耗 {1} 点，当前值： {2} / {3} ".format([
+		GASLogger.debug("技能资源消耗：{0} 消耗 {1} 点，当前值： {2} / {3} ".format([
 			ability_resource_name, amount, current_value, max_value
 		]))
 		return true
@@ -64,6 +64,6 @@ func consume(amount: int) -> bool:
 func restore(amount: int) -> void:
 	current_value += amount
 	current_value = min(current_value, max_value)
-	print("技能资源恢复：{0} 恢复 {1} 点，当前值： {2} / {3}".format([
+	GASLogger.debug("技能资源恢复：{0} 恢复 {1} 点，当前值： {2} / {3}".format([
 		ability_resource_name, amount, current_value, max_value
 	]))

@@ -1,19 +1,19 @@
-[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=2 format=3 uid="uid://6mxwf4314lcl"]
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=3 format=3 uid="uid://6mxwf4314lcl"]
 
+[ext_resource type="Texture2D" uid="uid://bao6re1ye1rot" path="res://assets/texture/icon/skills/Icon34.png" id="1_g2fmo"]
 [ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="1_xsk2b"]
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_xsk2b")
 casting_position = 0
-cast_count = 1
 target_type = &""
-cost_resource_name = &""
-cost_resource_value = 0
-is_auto_cast = true
 cooldown = 0
 current_cooldown = 0
 is_show = true
 ability_name = &"反击"
+ability_tags = Array[StringName]([])
 ability_description = "在受到普通攻击时有机会进行反击"
+icon = ExtResource("1_g2fmo")
+is_auto_cast = true
 effect_config_path = "res://resources/data/abilities/skill_effects/counter_attack_effect.json"
