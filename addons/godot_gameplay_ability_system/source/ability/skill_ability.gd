@@ -5,10 +5,8 @@ class_name SkillAbility
 
 ## 目标类型，如self, ally, enemy
 @export var target_type: StringName
-## 消耗资源
-@export var cost_resource_name: StringName = ""
-## 消耗资源值
-@export var cost_resource_value: int = 0
+## 技能消耗
+@export var ability_cost: AbilityCost
 ## 技能是否在满足条件时自动施放
 @export var is_auto_cast: bool
 ## 冷却时间（回合数）
@@ -38,7 +36,7 @@ func _apply(context: Dictionary) -> void:
 
 ## 执行技能
 func _cast(context: Dictionary) -> bool:
-	if not _ability_component.has_enough_resources(cost_resource_name, cost_resource_value):
+	if not ability_cost.can_cost(context):
 		print("消耗不足，无法释放技能！")
 		return false
 	if is_cooldown:
@@ -50,7 +48,7 @@ func _cast(context: Dictionary) -> bool:
 		target = caster
 	else:
 		target = context.get("target", null)
-	_ability_component.consume_resources(cost_resource_name, cost_resource_value)
+	ability_cost.cost(context)
 	current_cooldown = cooldown
 	context.merge({"target": target}, true)
 	var ok := await super(context)
