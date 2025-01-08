@@ -10,7 +10,7 @@
 	  "children": [
 		{
 		  "type": "modify_ability_resource",
-		  "ability_resource_name": "rage",
+		  "ability_resource_name": "怒气值",
 		  "ability_resource_amount": 10,
 		  "modify_type": "value"
 		},

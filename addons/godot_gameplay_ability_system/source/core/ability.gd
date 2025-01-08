@@ -5,6 +5,8 @@ class_name Ability
 
 ## 技能名称
 @export var ability_name: StringName
+## 技能类型
+@export var ability_tags: Array[StringName] = []
 ## 技能描述
 @export var ability_description: String
 ## 技能图标
@@ -25,7 +27,7 @@ signal cast_finished
 func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
 	_ability_component = ability_component
 	_context = context
-	_context["ability"] = self
+	#_context["ability"] = self
 	if not effect_config_path.is_empty():
 		_load_effect_config()
 	_apply(context)
@@ -39,6 +41,22 @@ func remove() -> void:
 func cast(context: Dictionary) -> bool:
 	_context.merge(context, true)
 	return await _cast(_context)
+
+## 添加标签
+func add_tag(tag: StringName) -> void:
+	ability_tags.append(tag)
+
+## 移除标签
+func remove_tag(tag: StringName) -> void:
+	ability_tags.erase(tag)
+
+## 是否包含标签
+func has_tag(tag: StringName) -> bool:
+	return ability_tags.has(tag)
+
+## 是否包含标签
+func has_tags(tags: Array[StringName]) -> bool:
+	return tags.all(func(tag: StringName) -> bool: return ability_tags.has(tag))
 
 func _apply(context: Dictionary) -> void:
 	pass

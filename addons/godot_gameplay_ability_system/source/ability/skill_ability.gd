@@ -29,6 +29,7 @@ signal cooldown_changed(value: int)
 
 func _init() -> void:
 	resource_local_to_scene = true
+	ability_tags.append("skill")
 
 ## 应用技能
 func _apply(context: Dictionary) -> void:

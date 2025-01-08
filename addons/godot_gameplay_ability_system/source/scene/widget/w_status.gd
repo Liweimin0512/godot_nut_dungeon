@@ -8,11 +8,14 @@ const W_ABILITY_RESOURCE = preload("res://addons/godot_gameplay_ability_system/s
 @onready var w_buff_container: MarginContainer = %W_BuffContainer
 @onready var grid_container: GridContainer = %GridContainer
 
-var _character: Character
+var _ability_character: Node
 
-func setup(character : Character) -> void:
-	_character = character
-	var ability_component : AbilityComponent = _character.ability_component
+func setup(ability_character : Node) -> void:
+	_ability_character = ability_character
+	var ability_component : AbilityComponent = _ability_character.get("ability_component")
+	if not ability_component:
+		GASLogger.error("cant found ability component in node: {0}".format([ability_character]))
+		return
 	$VBoxContainer/W_AbilityResource.queue_free()
 	for res : AbilityResource in ability_component.get_resources():
 		var w_res : W_AbilityResource = W_ABILITY_RESOURCE.instantiate()

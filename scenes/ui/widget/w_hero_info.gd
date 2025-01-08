@@ -7,14 +7,17 @@ const W_SKILL_ICON = preload("res://addons/godot_gameplay_ability_system/source/
 @onready var label_hero_name: Label = %LabelHeroName
 @onready var attribute_container: GridContainer = %AttributeContainer
 @onready var skill_container: HBoxContainer = %SkillContainer
+@onready var w_status: W_Status = %W_Status
 
 @export var attribute_names : PackedStringArray = [
 	"生命值", "魔法值", "攻击力", "防御力", "暴击率", "命中率"
 ]
+
 var _character : Character
 
 func setup(character : Character) -> void:
 	_character = character
+	w_status.setup(character)
 	texture_rect_hero_icon.texture = _character.character_icon
 	label_hero_name.text = _character.character_name
 	var ability_component := _character.ability_component

@@ -8,7 +8,7 @@ class_name AbilityComponent
 ## 当前单位所有的技能消耗资源，同名资源是单例
 @export var _ability_resources : Dictionary[StringName, AbilityResource]
 ## 当前单位所拥有的全部技能（包括BUFF）
-@export var _abilities : Dictionary[StringName, Ability]
+@export var _abilities : Array[Ability]
 ## 技能触发器集
 @export var _ability_triggers : Dictionary[StringName, Array]
 
@@ -48,8 +48,8 @@ func initialization(
 				resource_changed.emit(res.ability_resource_name, value)
 		)
 	for ability in ability_set:
-		ability.apply(self, ability_context)
-		_abilities[ability.ability_name] = ability
+		#ability.apply(self, ability_context)
+		apply_ability(ability, ability_context)
 		ability.cast_finished.connect(
 			func() -> void:
 				ability_cast_finished.emit(ability)
@@ -152,25 +152,29 @@ func get_same_ability(ability: Ability) -> Ability:
 	return _abilities.get(ability_key)
 
 ## 获取全部技能
-func get_abilities() -> Array[Ability]:
+func get_abilities(ability_tags: Array[StringName] = []) -> Array[Ability]:
+	# 空标签表示获取全部技能
 	var abilities : Array[Ability] = []
-	for ability : Ability in _abilities.values():
-		abilities.append(ability)
+	# 判断标签是否匹配
+	for ability : Ability in _abilities:
+		if ability_tags.is_empty() or ability.has_tags(ability_tags):
+			abilities.append(ability)
 	return abilities
 
 ## 应用技能
 func apply_ability(ability: Ability, ability_context: Dictionary) -> void:
+	ability_context.merge({
+		"tree": get_tree(),
+		"ability": ability,
+		})
 	ability.apply(self, ability_context)
-	# 使用类型名+技能名作为key,避免不同派生类对象名称重复
-	var ability_key = ability.get_class() + "_" + ability.ability_name
-	_abilities[ability_key] = ability
+	_abilities.append(ability)
 	ability_applied.emit(ability)
 
 ## 移除技能
 func remove_ability(ability: Ability) -> void:
 	ability.remove()
-	var key : StringName = _abilities.find_key(ability)
-	if key: _abilities.erase(key)
+	_abilities.erase(ability)
 	print("移除Ability：", ability)
 	ability_removed.emit(ability)
 
@@ -191,11 +195,7 @@ func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
 func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -> void:
 	GASLogger.info("{0} 接收到游戏事件：{1}，事件上下文{2}".format([self, event_name, event_context]))
 	_handle_resource_callback(event_name, event_context)
-	for ability in _abilities.values():
-		# if ability.trigger and ability.trigger.trigger_type == event_name:
-		# 	if ability.trigger.check(event_context):
-		# 		print("处理游戏事件：{0}，事件上下文{1}，触发技能{2}".format([event_name, event_context, ability]))
-		# 		await try_cast_ability(ability, event_context)
+	for ability in _abilities:
 		if ability.has_method(event_name):
 			ability.call(event_name, event_context)
 	var triggers : Array = _ability_triggers.get(event_name, [])
@@ -203,7 +203,7 @@ func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -
 		GASLogger.debug("没有找到触发器：{0}".format([event_name]))
 		return
 	for trigger : DecoratorTriggerNode in triggers:
-		trigger.handle_trigger(event_context, func(result: bool, ability: Ability) -> void:
+		await trigger.handle_trigger(event_context, func(result: bool, ability: Ability) -> void:
 			if result:
 				GASLogger.debug("触发器成功：{0}".format([ability]))
 				ability_trigger_success.emit(ability)

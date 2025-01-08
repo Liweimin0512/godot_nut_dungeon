@@ -36,10 +36,10 @@ unique_name_in_owner = true
 position = Vector2(17, -32)
 
 [node name="W_Status" parent="." instance=ExtResource("6_cj4oh")]
-offset_left = -37.0
-offset_top = 6.0
-offset_right = 43.0
-offset_bottom = 34.0
+offset_left = -28.0
+offset_top = 4.0
+offset_right = 28.0
+offset_bottom = 14.0
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
@@ -71,6 +71,7 @@ text = "技能名称"
 
 [node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("cast_position_dict")]
 script = ExtResource("2_ghtna")
+melee_action_offset = Vector2(50, 0)
 cast_position_dict = {
 "body": NodePath("../cast_points/body"),
 "feet": NodePath("../cast_points/feet"),
@@ -87,5 +88,8 @@ script = ExtResource("3_6a5vl")
 [connection signal="died" from="CombatComponent" to="." method="_on_combat_component_died"]
 [connection signal="hited" from="CombatComponent" to="." method="_on_combat_component_hited"]
 [connection signal="hurted" from="CombatComponent" to="." method="_on_combat_component_hurted"]
+[connection signal="ability_trigger_failed" from="AbilityComponent" to="CombatComponent" method="_on_ability_component_ability_trigger_failed"]
+[connection signal="ability_trigger_success" from="AbilityComponent" to="." method="_on_ability_component_ability_trigger_success"]
+[connection signal="ability_trigger_success" from="AbilityComponent" to="CombatComponent" method="_on_ability_component_ability_trigger_success"]
 [connection signal="pre_cast" from="AbilityComponent" to="." method="_on_ability_component_pre_cast"]
 [connection signal="resource_changed" from="AbilityComponent" to="." method="_on_ability_component_resource_changed"]

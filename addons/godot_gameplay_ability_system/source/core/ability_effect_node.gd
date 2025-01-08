@@ -53,3 +53,9 @@ func get_node(effect_name: StringName) -> AbilityEffectNode:
 	if self.effect_name == effect_name:
 		return self
 	return null	
+
+func _to_string() -> String:
+	var _script_name = get_script().resource_path.get_file().get_basename()
+	if effect_name == "":
+		return _script_name
+	return "{0} : {1}".format([_script_name, effect_name])

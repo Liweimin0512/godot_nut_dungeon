@@ -20,6 +20,9 @@ class_name BuffAbility
 
 signal value_changed(value: int)
 
+func _init() -> void:
+	ability_tags.append("buff")
+
 ## 应用技能
 func _apply(context: Dictionary) -> void:
 	var ability_context : Dictionary = context

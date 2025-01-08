@@ -102,14 +102,14 @@ func action() -> void:
 func turn_end() -> void:
 	if not _current_combat: return
 	_print("====== 回合结束")
-	ability_component.handle_game_event("on_turn_end", {})
+	await ability_component.handle_game_event("on_turn_end", {})
 	turn_ended.emit()
 
 ## 战斗结束
 func combat_end() -> void:
 	_print("===== 战斗结束! 剩余血量: {0}".format([ability_component.get_resource_value("生命值")]))
 	_current_combat = null
-	ability_component.handle_game_event("on_combat_end")
+	await ability_component.handle_game_event("on_combat_end")
 	for ability in ability_component.get_abilities():
 		if ability is BuffAbility:
 			ability_component.remove_ability(ability)
@@ -122,10 +122,10 @@ func hit(damage: AbilityDamage) -> void:
 	_print("combat_component: {0} 攻击： {1}, damage info:{2}".format([
 		self, target, damage.damage_value
 	]))
-	ability_component.handle_game_event("on_pre_hit", {"damage" : damage})
+	await ability_component.handle_game_event("on_pre_hit", {"damage" : damage})
 	target.hurt(self, damage)
 	hited.emit(target)
-	ability_component.handle_game_event("on_post_hit", {"damage" : damage})
+	await ability_component.handle_game_event("on_post_hit", {"damage" : damage})
 
 ## 受击
 func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
@@ -133,18 +133,19 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 	var ability_context : Dictionary = {
 		"damage": damage, "caster": self
 	}
-	ability_component.handle_game_event("on_pre_hurt", ability_context)
+	await ability_component.handle_game_event("on_pre_hurt", ability_context)
 	_print("combat_component: {0} 受到来自 {1} 的伤害 {2} 点， 当前生命值{3}/{4}".format([
 		self, damage_source, damage.damage_value, 
 		ability_component.get_resource_value("生命值"), 
 		ability_component.get_attribute_value("生命值")
 	]))
 	ability_component.apply_damage(damage)
-	ability_component.handle_game_event("on_post_hurt", ability_context)
+	hurted.emit(damage.damage_value)
+	await get_tree().create_timer(0.5).timeout
+	await ability_component.handle_game_event("on_post_hurt", ability_context)
 	var health_value : float = ability_component.get_resource_value("生命值")
 	if health_value <= 0:
 		_die()
-	hurted.emit(damage.damage_value)
 
 ## 获取施法位置
 func get_cast_position(position_type: String) -> Vector2:
@@ -254,6 +255,13 @@ func _is_ability_available(ability: Ability) -> bool:
 func _print(s : String) -> void:
 	var color = "#FFFF00"
 	print_rich("[color={0}] [COMBAT_COMPONENT] {2} : {1}[/color]".format([color, s, self.to_string()]))
+
+func _on_ability_component_ability_trigger_success(ability: Ability) -> void:
+	_print("触发了技能：{0}".format([ability]))
+
+
+func _on_ability_component_ability_trigger_failed(ability: Ability) -> void:
+	_print("触发技能失败：{0}".format([ability]))
 
 func _to_string() -> String:
 	return owner.to_string()

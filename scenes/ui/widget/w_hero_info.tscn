@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbbx8idrk5q7h"]
+[gd_scene load_steps=5 format=3 uid="uid://cbbx8idrk5q7h"]
 
 [ext_resource type="PackedScene" uid="uid://k33y1svd4wnm" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_skill_icon.tscn" id="1_6odac"]
 [ext_resource type="Script" uid="uid://0plx8hfh70ec" path="res://scenes/ui/widget/w_hero_info.gd" id="1_t8bix"]
 [ext_resource type="Texture2D" uid="uid://bygyexnnjxflw" path="res://assets/texture/icon/character_profile_picture/leaf_ranger.png" id="2_owqm7"]
+[ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="3_yxprq"]
 
 [node name="W_HeroInfo" type="PanelContainer"]
 size_flags_horizontal = 0
@@ -41,6 +42,14 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 12
 text = "法师"
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="W_Status" parent="MarginContainer/VBoxContainer/MarginContainer4" instance=ExtResource("3_yxprq")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

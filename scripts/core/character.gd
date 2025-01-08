@@ -75,3 +75,9 @@ func _on_ability_component_pre_cast(ability: Ability) -> void:
 	%LabelAbility.show()
 	await get_tree().create_timer(1).timeout
 	%LabelAbility.hide()
+
+func _on_ability_component_ability_trigger_success(ability: Ability) -> void:
+	%LabelAbility.text = ability.ability_name
+	%LabelAbility.show()
+	await get_tree().create_timer(1).timeout
+	%LabelAbility.hide()
