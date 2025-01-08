@@ -5,8 +5,6 @@ class_name AbilityComponent
 
 ## 技能属性集
 @export var _ability_attributes : Dictionary[StringName, AbilityAttribute]
-## 当前单位所有的技能消耗资源，同名资源是单例
-@export var _ability_resources : Dictionary[StringName, AbilityResource]
 ## 当前单位所拥有的全部技能（包括BUFF）
 @export var _abilities : Array[Ability]
 ## 技能触发器集
@@ -14,8 +12,6 @@ class_name AbilityComponent
 
 ## 属性变化时发出
 signal attribute_changed(atr_name: StringName, value: float)
-## 资源变化时发出
-signal resource_changed(res_name: StringName, value: float)
 ## 技能释放前发出
 signal pre_cast(ability: Ability)
 ## 技能释放时发出
@@ -98,49 +94,6 @@ func get_attribute_modifiers(attribute_name: StringName) -> Array[AbilityAttribu
 	if attribute:
 		return attribute.get_modifiers()
 	return []
-
-#endregion
-
-#region 消耗资源相关
-
-## 检查资源是否足够消耗
-func has_enough_resources(res_name: StringName, cost: int) -> bool:
-	if res_name.is_empty(): return true
-	return get_resource_value(res_name) >= cost
-
-## 获取资源数量
-func get_resource_value(res_name: StringName) -> int:
-	var res := get_resource(res_name)
-	if res:
-		return res.current_value
-	return -1
-
-## 获取资源
-func get_resource(res_name: StringName) -> AbilityResource:
-	var res : AbilityResource = _ability_resources.get(res_name)
-	if res:
-		return res
-	return null
-
-## 消耗资源
-func consume_resources(res_name: StringName, cost: int) -> bool:
-	var res := get_resource(res_name)
-	if res:
-		return res.consume(cost)
-	return false
-
-## 获取所有资源
-func get_resources() -> Array[AbilityResource]:
-	var _resources : Array[AbilityResource]
-	for res : AbilityResource in _ability_resources.values():
-		_resources.append(res)
-	return _resources
-
-## 触发资源回调
-func _handle_resource_callback(callback_name: StringName, context : Dictionary) -> void:
-	for res : AbilityResource in _ability_resources.values():
-		if res.has_method(callback_name):
-			res.call(callback_name, context)
 
 #endregion
 
