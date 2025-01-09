@@ -13,10 +13,8 @@ metadata/_custom_type_script = ExtResource("1_rdmt1")
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_b5112")
-casting_position = 1
 target_type = &"enemy"
 ability_cost = SubResource("Resource_h4l4i")
-is_auto_cast = false
 cooldown = 2
 current_cooldown = 0
 is_show = true
@@ -24,4 +22,5 @@ ability_name = &"重击"
 ability_tags = Array[StringName]([])
 ability_description = "对单个敌人进行强力一击"
 icon = ExtResource("4_0gbca")
+is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/heroic_strike_effect.json"

@@ -3,7 +3,11 @@ class_name ModifyAttributeNode
 
 ## 属性修改器的技能效果包装
 
+## 属性修改器
 @export var modifiers : Array[AbilityAttributeModifier]
+## 属性修改器配置, 用于读取配置数据
+@export var modifier_configs: Array
+## 修改倍率
 @export_storage var modify_multiplier: int = 1
 
 func _perform_action(context: Dictionary = {}) -> STATUS:
@@ -11,13 +15,18 @@ func _perform_action(context: Dictionary = {}) -> STATUS:
 	if not target:
 		GASLogger.error("ModifyAttributeNode target is null")
 		return STATUS.FAILURE
-	var _s = context.get("source")
-	if _s and _s is BuffAbility:
-		modify_multiplier = _s.value
-	var ability_component: AbilityComponent = target.ability_component
+	var attribute_component: AbilityAttributeComponent = context.get("attribute_component")
+	if modifiers.is_empty():
+		for modifier_config in modifier_configs:
+			var modifier : AbilityAttributeModifier = AbilityAttributeModifier.new(
+				modifier_config.get("attribute_name"),
+				modifier_config.get("modify_type"),
+				modifier_config.get("value"),
+			)
+			modifiers.append(modifier)
 	for modifier : AbilityAttributeModifier in modifiers:
 		modifier.value *= modify_multiplier
-		ability_component.apply_attribute_modifier(modifier)
+		attribute_component.apply_attribute_modifier(modifier)
 		GASLogger.info("对目标应用属性修改器：{0}".format([modifier]))
 	return STATUS.SUCCESS
 
@@ -27,9 +36,9 @@ func _revoke_action(context: Dictionary = {}) -> STATUS:
 	if not target:
 		GASLogger.error("ModifyAttributeNode target is null")
 		return STATUS.FAILURE
-	var ability_component: AbilityComponent = target.ability_component
+	var attribute_component: AbilityAttributeComponent = context.get("attribute_component")
 	for modifier : AbilityAttributeModifier in modifiers:
-		ability_component.remove_attribute_modifier(modifier)
+		modifier.remove(attribute_component.get_attribute(modifier.attribute_name))
 		GASLogger.info("移除效果：对目标应用属性修改器：{0}".format([modifier]))
 	return STATUS.SUCCESS
 

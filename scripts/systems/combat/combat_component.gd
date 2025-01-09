@@ -10,7 +10,7 @@ class_name CombatComponent
 ## 施法位置Marker2D字典
 @export var cast_position_dict : Dictionary[String, Marker2D] = {}
 ## 返回行动耗时
-@export var return_action_time : float = 0.5
+@export var return_action_time : float = 0.2
 ## 是否为存活单位
 var is_alive : bool = true:
 	get:
@@ -96,6 +96,9 @@ func action() -> void:
 			"target" : target,
 			"ability" : ability,
 			"tree": get_tree(),
+			"casting_point": _current_combat.action_marker.global_position,
+			"resource_component": ability_resource_component,
+			"attribute_component": ability_attribute_component
 		}
 		await _pre_action(ability_context)
 		var ok := await ability_component.try_cast_ability(ability, ability_context)
@@ -128,7 +131,7 @@ func hit(damage: AbilityDamage) -> void:
 		self, target, damage.damage_value
 	]))
 	await ability_component.handle_game_event("on_pre_hit", {"damage" : damage})
-	target.hurt(self, damage)
+	await target.hurt(self, damage)
 	hited.emit(target)
 	await ability_component.handle_game_event("on_post_hit", {"damage" : damage})
 
@@ -136,7 +139,7 @@ func hit(damage: AbilityDamage) -> void:
 func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 	if not damage_source: return
 	var ability_context : Dictionary = {
-		"damage": damage, "caster": self
+		"damage": damage, "caster": self , "target": damage.attacker
 	}
 	await ability_component.handle_game_event("on_pre_hurt", ability_context)
 	_print("combat_component: {0} 受到来自 {1} 的伤害 {2} 点， 当前生命值{3}/{4}".format([
@@ -171,6 +174,7 @@ func play_animation(animation_name : StringName, blend_time: float = 0.0, custom
 ## 行动前
 func _pre_action(ability_context: Dictionary) -> void:
 	ability_component.handle_game_event("on_action_started", ability_context)
+	await get_tree().create_timer(0.2).timeout
 
 ## 行动后
 func _post_action(ability_context: Dictionary) -> void:
@@ -218,7 +222,7 @@ func _get_ability_context() -> Dictionary:
 func _get_available_abilities() -> Array[Ability]:
 	var available_abilities : Array[Ability] = []
 	for ability in ability_component.get_abilities():
-		if _is_ability_available(ability):
+		if ability is SkillAbility and ability.is_available:
 			available_abilities.append(ability as SkillAbility)
 	return available_abilities
 

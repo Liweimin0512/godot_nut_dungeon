@@ -3,7 +3,7 @@
   "children": [
 	{
 		"type": "move_to_casting_position",
-		"casting_position": "melee"
+		"casting_position_type": 1
 	},
 	{
 	  "type": "play_animation",
@@ -12,7 +12,9 @@
 	{
 	  "type": "deal_damage",
 	  "damage_type": "physical",
-	  "damage_multiplier": 1
+	  "damage_multiplier": 1,
+	  "pre_delay": 0.4,
+	  "post_delay": 0.4
 	}
   ]
 }

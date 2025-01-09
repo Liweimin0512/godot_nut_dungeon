@@ -18,8 +18,6 @@ class_name Ability
 ## 效果配置文件路径
 @export_file("*.json") var effect_config_path: String
 
-## 所属技能组件
-var _ability_component: AbilityComponent
 ## 技能上下文
 var _context : Dictionary
 
@@ -30,14 +28,14 @@ signal cast_finished(context: Dictionary)
 
 ## 应用技能
 func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
-	_ability_component = ability_component
-	_context = context
+	_context = context.duplicate(true)
+	_context.ability = self
 	if not effect_config_path.is_empty():
 		_load_effect_config()
-	_apply(context)
-	applied.emit(context)
+	_apply(_context)
+	applied.emit(_context)
 	if is_auto_cast:
-		cast(context)
+		cast(_context)
 
 ## 移除技能
 func remove() -> void:
@@ -86,7 +84,7 @@ func _cast(context: Dictionary) -> bool:
 	var result = await effect_container.execute(_context)
 	if result == AbilityEffectNode.STATUS.SUCCESS:
 		GASLogger.info("技能{0}执行成功".format([self]))
-		cast_finished.emit()
+		cast_finished.emit(context)
 		return true
 	GASLogger.error("技能{0}执行失败".format([self]))
 	return false

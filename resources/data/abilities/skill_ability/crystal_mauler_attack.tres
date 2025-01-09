@@ -1,16 +1,30 @@
-[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=12 format=3 uid="uid://bxts26yvle7x7"]
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=16 format=3 uid="uid://bxts26yvle7x7"]
 
 [ext_resource type="Script" uid="uid://carlbxgjnsnu4" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_node.gd" id="1_b6ojv"]
 [ext_resource type="Script" uid="uid://chd8ky037o7bu" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/play_animation_node.gd" id="2_17kkl"]
+[ext_resource type="Script" uid="uid://c06x73u7b664j" path="res://scripts/systems/ability/ability_effect_node/move_to_casting_position_effect.gd" id="2_bhvkr"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_random_selector_node.gd" id="3_bhvkr"]
 [ext_resource type="Script" uid="uid://cnxxo4hdjduk2" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/deal_damage_node.gd" id="4_17kkl"]
 [ext_resource type="Script" uid="uid://dg313716g8kfa" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_parallel_node.gd" id="4_qpwpp"]
 [ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="5_04fxw"]
+[ext_resource type="Script" uid="uid://cm45kxk6egxy8" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_sequence_node.gd" id="6_qpwpp"]
 
-[sub_resource type="Resource" id="Resource_51sya"]
+[sub_resource type="Resource" id="Resource_04fxw"]
+script = ExtResource("2_bhvkr")
+casting_position_type = 1
+action_position_offset = Vector2(50, 0)
+move_time = 0.4
+wait_move_complete = true
+pre_delay = 0.0
+post_delay = 0.0
+effect_name = &""
+enabled = true
+metadata/_custom_type_script = ExtResource("2_bhvkr")
+
+[sub_resource type="Resource" id="Resource_qpwpp"]
 script = ExtResource("2_17kkl")
 animation_name = "attack"
-blend_time = 0.2
+blend_time = -1.0
 custom_speed = 1.0
 wait_for_completion = false
 animation_unit_type = "caster"
@@ -20,10 +34,10 @@ effect_name = &""
 enabled = true
 metadata/_custom_type_script = ExtResource("2_17kkl")
 
-[sub_resource type="Resource" id="Resource_3uxty"]
+[sub_resource type="Resource" id="Resource_5h322"]
 script = ExtResource("2_17kkl")
 animation_name = "attack_2"
-blend_time = 0.2
+blend_time = -1.0
 custom_speed = 1.0
 wait_for_completion = false
 animation_unit_type = "caster"
@@ -33,39 +47,44 @@ effect_name = &""
 enabled = true
 metadata/_custom_type_script = ExtResource("2_17kkl")
 
-[sub_resource type="Resource" id="Resource_flti0"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_51sya"]
 script = ExtResource("3_bhvkr")
 weights = Array[float]([])
-children = Array[ExtResource("1_b6ojv")]([SubResource("Resource_51sya"), SubResource("Resource_3uxty")])
+children = Array[ExtResource("1_b6ojv")]([SubResource("Resource_qpwpp"), SubResource("Resource_5h322")])
 effect_name = &""
 enabled = true
 metadata/_custom_type_script = ExtResource("3_bhvkr")
 
-[sub_resource type="Resource" id="Resource_bhvkr"]
+[sub_resource type="Resource" id="Resource_3uxty"]
 script = ExtResource("4_17kkl")
 damage_multiplier = 1.0
 damage_multiplier_array = Array[float]([])
 damage_type = 0
 is_indirect = false
-pre_delay = 0.0
-post_delay = 0.0
-effect_name = &"处理伤害"
+pre_delay = 0.4
+post_delay = 0.4
+effect_name = &""
 enabled = true
 metadata/_custom_type_script = ExtResource("4_17kkl")
 
-[sub_resource type="Resource" id="Resource_0fhl8"]
+[sub_resource type="Resource" id="Resource_flti0"]
 script = ExtResource("4_qpwpp")
 success_policy = 0
-children = Array[ExtResource("1_b6ojv")]([SubResource("Resource_flti0"), SubResource("Resource_bhvkr")])
+children = Array[ExtResource("1_b6ojv")]([SubResource("Resource_51sya"), SubResource("Resource_3uxty")])
 effect_name = &""
 enabled = true
 metadata/_custom_type_script = ExtResource("4_qpwpp")
 
+[sub_resource type="Resource" id="Resource_0fhl8"]
+script = ExtResource("6_qpwpp")
+children = Array[ExtResource("1_b6ojv")]([SubResource("Resource_04fxw"), SubResource("Resource_flti0")])
+effect_name = &""
+enabled = true
+metadata/_custom_type_script = ExtResource("6_qpwpp")
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("5_04fxw")
-casting_position = 1
 target_type = &"enemy"
 cooldown = 0
 current_cooldown = 0
@@ -73,7 +92,7 @@ is_show = false
 ability_name = &"普通攻击"
 ability_tags = Array[StringName]([])
 ability_description = ""
-is_auto_cast = true
+is_auto_cast = false
 effect_container = SubResource("Resource_0fhl8")
 effect_config_path = ""
 metadata/_custom_type_script = ExtResource("5_04fxw")

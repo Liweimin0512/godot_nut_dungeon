@@ -3,7 +3,7 @@
   "children": [
     {
       "type": "move_to_casting_position",
-      "casting_position": "melee"
+      "casting_position_type": 1
     },
     {
       "type": "play_animation",

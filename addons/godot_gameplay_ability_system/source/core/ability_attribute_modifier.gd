@@ -9,8 +9,13 @@ class_name AbilityAttributeModifier
 @export_enum("value", "percentage", "absolute") var modify_type: String = "value"
 ## 修改数值
 @export var value: float
-## 修改来源，例如装备、天赋或被动技能等
-@export_storage var source: Node
+## 来源
+@export var source : Resource
+
+func _init(attribute_name: StringName, modify_type: String, value: float) -> void:
+	self.attribute_name = attribute_name
+	self.modify_type = modify_type
+	self.value = value
 
 ## 添加修改器
 func apply(attribute: AbilityAttribute) -> void:

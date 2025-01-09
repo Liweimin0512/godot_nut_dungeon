@@ -26,26 +26,30 @@ func _init() -> void:
 
 ## 应用技能
 func _apply(context: Dictionary) -> void:
-	var ability_context : Dictionary = context
-	var _buff := _ability_component.get_same_ability(self)
-	if _buff:
-		_ability_component.remove_ability(_buff)
-		if _buff.buff_type == 0 or _buff.can_stack:
-			value += _buff.value
-	ability_context["source"] = self
-	GASLogger.info("应用BUFF：{0}".format([self]))
+	var ability_component : AbilityComponent = _context.get("ability_component")
+	if not ability_component:
+		GASLogger.error("can not found ability_component in context! {0}".format([self]))
+	var old : BuffAbility = ability_component.get_same_ability(self)
+	if old and old.can_stack:
+		_merge_buff(old, self)
+		GASLogger.info("合并BUFF：{0}".format([self]))
+	else:
+		_context["source"] = self
+		GASLogger.info("应用BUFF：{0}".format([self]))
 
 ## 更新BUFF状态
 func _update() -> void:
 	print("更新{0} BUFF状态".format([self]))
-	if buff_type == 1:
-		if not is_permanent: _ability_component.remove_ability(self)
+	if is_permanent: return
+	if buff_type == 1: remove()
 	elif buff_type == 0:
-		if not is_permanent:
-			value -= 1
-			if value <= 0:
-				_ability_component.remove_ability(self)
+		value -= 1
+		if value <= 0: remove()
 	print("更新buff {0} 的状态，完成！ 当前层数{1}".format([self, value]))
+
+## 合并BUFF
+func _merge_buff(old: BuffAbility, new: BuffAbility) -> void:
+	old.value += new.value
 
 func _to_string() -> String:
 	return "{0}层数{1}".format([ability_name, value])

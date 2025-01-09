@@ -3,7 +3,7 @@
   "children": [
     {
       "type": "move_to_casting_position",
-      "casting_position": "range"
+      "casting_position_type": 2
     },
     {
       "type": "decorator_repeat",

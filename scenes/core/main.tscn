@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://dcxjfw256ynb5"]
+[gd_scene load_steps=70 format=3 uid="uid://dcxjfw256ynb5"]
 
 [ext_resource type="Script" uid="uid://c3djxdb3f0bkh" path="res://scenes/core/main.gd" id="1_i4sev"]
 [ext_resource type="Resource" uid="uid://bshhcvu884gan" path="res://resources/data/combat/combat_test.tres" id="2_p2r0i"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="10_i3jsw"]
 [ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="11_fbmiv"]
 [ext_resource type="Script" uid="uid://carlbxgjnsnu4" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_node.gd" id="11_jgqsp"]
+[ext_resource type="Script" uid="uid://c06x73u7b664j" path="res://scripts/systems/ability/ability_effect_node/move_to_casting_position_effect.gd" id="12_b2ey7"]
 [ext_resource type="Script" uid="uid://chd8ky037o7bu" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/play_animation_node.gd" id="12_ebkt3"]
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="12_pr6ky"]
 [ext_resource type="Script" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_random_selector_node.gd" id="13_42t4q"]
@@ -23,19 +24,33 @@
 [ext_resource type="Texture2D" uid="uid://cuda6m0iar23d" path="res://assets/sprites/characters/heros/crystal_mauler/death.png" id="16_xle73"]
 [ext_resource type="Texture2D" uid="uid://bdnbkx1smbbb8" path="res://assets/sprites/characters/heros/crystal_mauler/take_hit.png" id="17_ah51y"]
 [ext_resource type="Texture2D" uid="uid://ey4jlg2yhxxs" path="res://assets/texture/icon/Buffs/critical_boost.png" id="17_w7hn7"]
+[ext_resource type="Script" uid="uid://cm45kxk6egxy8" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_sequence_node.gd" id="17_yg6x3"]
 [ext_resource type="Texture2D" uid="uid://clkhxmxdtgch" path="res://assets/sprites/characters/heros/crystal_mauler/idle.png" id="18_gcaj3"]
 [ext_resource type="Texture2D" uid="uid://pahg3p51mxjh" path="res://assets/texture/icon/Spells/poison_dagger.png" id="18_lsjgq"]
-[ext_resource type="Texture2D" uid="uid://bkqup4u5v3f7n" path="res://assets/texture/icon/skills/Icon6.png" id="19_fbmiv"]
 [ext_resource type="Texture2D" uid="uid://cqcg1s3a5cmh7" path="res://assets/sprites/characters/heros/crystal_mauler/attack_1.png" id="19_jgqsp"]
+[ext_resource type="Script" uid="uid://b5wl0kwy4qx4h" path="res://addons/godot_gameplay_ability_system/source/ability_cost/ability_resource_cost.gd" id="19_xle73"]
 [ext_resource type="Texture2D" uid="uid://wi5dcpmpg532" path="res://assets/sprites/characters/heros/crystal_mauler/attack_2.png" id="20_ebkt3"]
-[ext_resource type="Texture2D" uid="uid://s4e7e4o5nat6" path="res://assets/texture/icon/skills/Icon28.png" id="20_pr6ky"]
 [ext_resource type="Texture2D" uid="uid://do32nap8q4ivc" path="res://assets/sprites/characters/heros/crystal_mauler/attack_3.png" id="21_42t4q"]
+[ext_resource type="Texture2D" uid="uid://bpvjoschbdt58" path="res://assets/texture/icon/skills/Icon26.png" id="22_ah51y"]
 [ext_resource type="Texture2D" uid="uid://cp1hx3khybf0k" path="res://assets/sprites/characters/heros/crystal_mauler/attack_sp.png" id="22_gi53d"]
 [ext_resource type="Texture2D" uid="uid://c8u84o1yqlptj" path="res://assets/sprites/characters/heros/crystal_mauler/defend.png" id="23_exoq3"]
+[ext_resource type="Texture2D" uid="uid://bao6re1ye1rot" path="res://assets/texture/icon/skills/Icon34.png" id="23_gcaj3"]
 [ext_resource type="Texture2D" uid="uid://soh3pdkvfr2w" path="res://assets/texture/icon/character_profile_picture/crystal_mauler.png" id="24_w7hn7"]
 [ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="25_lsjgq"]
 
-[sub_resource type="Resource" id="Resource_51sya"]
+[sub_resource type="Resource" id="Resource_04fxw"]
+script = ExtResource("12_b2ey7")
+casting_position_type = 1
+action_position_offset = Vector2(50, 0)
+move_time = 0.4
+wait_move_complete = true
+pre_delay = 0.0
+post_delay = 0.0
+effect_name = &""
+enabled = true
+metadata/_custom_type_script = ExtResource("12_b2ey7")
+
+[sub_resource type="Resource" id="Resource_qpwpp"]
 script = ExtResource("12_ebkt3")
 animation_name = "attack"
 blend_time = -1.0
@@ -48,7 +63,7 @@ effect_name = &""
 enabled = true
 metadata/_custom_type_script = ExtResource("12_ebkt3")
 
-[sub_resource type="Resource" id="Resource_3uxty"]
+[sub_resource type="Resource" id="Resource_5h322"]
 script = ExtResource("12_ebkt3")
 animation_name = "attack_2"
 blend_time = -1.0
@@ -61,16 +76,15 @@ effect_name = &""
 enabled = true
 metadata/_custom_type_script = ExtResource("12_ebkt3")
 
-[sub_resource type="Resource" id="Resource_flti0"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_51sya"]
 script = ExtResource("13_42t4q")
 weights = Array[float]([])
-children = Array[ExtResource("11_jgqsp")]([SubResource("Resource_51sya"), SubResource("Resource_3uxty")])
+children = Array[ExtResource("11_jgqsp")]([SubResource("Resource_qpwpp"), SubResource("Resource_5h322")])
 effect_name = &""
 enabled = true
 metadata/_custom_type_script = ExtResource("13_42t4q")
 
-[sub_resource type="Resource" id="Resource_bhvkr"]
+[sub_resource type="Resource" id="Resource_3uxty"]
 script = ExtResource("14_gi53d")
 damage_multiplier = 1.0
 damage_multiplier_array = Array[float]([])
@@ -78,22 +92,28 @@ damage_type = 0
 is_indirect = false
 pre_delay = 0.4
 post_delay = 0.4
-effect_name = &"处理伤害"
+effect_name = &""
 enabled = true
 metadata/_custom_type_script = ExtResource("14_gi53d")
 
-[sub_resource type="Resource" id="Resource_0fhl8"]
+[sub_resource type="Resource" id="Resource_flti0"]
 script = ExtResource("15_exoq3")
 success_policy = 0
-children = Array[ExtResource("11_jgqsp")]([SubResource("Resource_flti0"), SubResource("Resource_bhvkr")])
+children = Array[ExtResource("11_jgqsp")]([SubResource("Resource_51sya"), SubResource("Resource_3uxty")])
 effect_name = &""
 enabled = true
 metadata/_custom_type_script = ExtResource("15_exoq3")
 
-[sub_resource type="Resource" id="Resource_fbmiv"]
+[sub_resource type="Resource" id="Resource_0fhl8"]
+script = ExtResource("17_yg6x3")
+children = Array[ExtResource("11_jgqsp")]([SubResource("Resource_04fxw"), SubResource("Resource_flti0")])
+effect_name = &""
+enabled = true
+metadata/_custom_type_script = ExtResource("17_yg6x3")
+
+[sub_resource type="Resource" id="Resource_b2ey7"]
 resource_local_to_scene = true
 script = ExtResource("11_fbmiv")
-casting_position = 1
 target_type = &"enemy"
 cooldown = 0
 current_cooldown = 0
@@ -106,11 +126,17 @@ effect_container = SubResource("Resource_0fhl8")
 effect_config_path = ""
 metadata/_custom_type_script = ExtResource("11_fbmiv")
 
-[sub_resource type="Resource" id="Resource_pr6ky"]
+[sub_resource type="Resource" id="Resource_w0r25"]
+script = ExtResource("19_xle73")
+cost_resource_name = &"怒气值"
+cost_value = 30
+metadata/_custom_type_script = ExtResource("19_xle73")
+
+[sub_resource type="Resource" id="Resource_yg6x3"]
 resource_local_to_scene = true
 script = ExtResource("11_fbmiv")
-casting_position = 0
 target_type = &"ally"
+ability_cost = SubResource("Resource_w0r25")
 cooldown = 3
 current_cooldown = 0
 is_show = true
@@ -121,11 +147,17 @@ icon = ExtResource("17_w7hn7")
 is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/battle_cry_effect.json"
 
-[sub_resource type="Resource" id="Resource_yomsl"]
+[sub_resource type="Resource" id="Resource_h4l4i"]
+script = ExtResource("19_xle73")
+cost_resource_name = &"怒气值"
+cost_value = 15
+metadata/_custom_type_script = ExtResource("19_xle73")
+
+[sub_resource type="Resource" id="Resource_xle73"]
 resource_local_to_scene = true
 script = ExtResource("11_fbmiv")
-casting_position = 1
 target_type = &"enemy"
+ability_cost = SubResource("Resource_h4l4i")
 cooldown = 2
 current_cooldown = 0
 is_show = true
@@ -136,10 +168,9 @@ icon = ExtResource("18_lsjgq")
 is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/heroic_strike_effect.json"
 
-[sub_resource type="Resource" id="Resource_b2ey7"]
+[sub_resource type="Resource" id="Resource_ah51y"]
 resource_local_to_scene = true
 script = ExtResource("11_fbmiv")
-casting_position = 0
 target_type = &"self"
 cooldown = 0
 current_cooldown = 0
@@ -147,14 +178,13 @@ is_show = true
 ability_name = &"不屈精神"
 ability_tags = Array[StringName]([])
 ability_description = "在受到攻击时，有几率获得额外的怒气"
-icon = ExtResource("19_fbmiv")
-is_auto_cast = false
+icon = ExtResource("22_ah51y")
+is_auto_cast = true
 effect_config_path = "res://resources/data/abilities/skill_effects/unyielding_effect.json"
 
-[sub_resource type="Resource" id="Resource_yg6x3"]
+[sub_resource type="Resource" id="Resource_gcaj3"]
 resource_local_to_scene = true
 script = ExtResource("11_fbmiv")
-casting_position = 0
 target_type = &""
 cooldown = 0
 current_cooldown = 0
@@ -162,29 +192,29 @@ is_show = true
 ability_name = &"反击"
 ability_tags = Array[StringName]([])
 ability_description = "在受到普通攻击时有机会进行反击"
-icon = ExtResource("20_pr6ky")
-is_auto_cast = false
+icon = ExtResource("23_gcaj3")
+is_auto_cast = true
 effect_config_path = "res://resources/data/abilities/skill_effects/counter_attack_effect.json"
 
-[sub_resource type="Resource" id="Resource_xle73"]
+[sub_resource type="Resource" id="Resource_jgqsp"]
 resource_local_to_scene = true
 script = ExtResource("12_pr6ky")
 attribute_name = &"生命值"
 _base_value = 100.0
 
-[sub_resource type="Resource" id="Resource_ah51y"]
+[sub_resource type="Resource" id="Resource_ebkt3"]
 resource_local_to_scene = true
 script = ExtResource("12_pr6ky")
 attribute_name = &"攻击力"
 _base_value = 10.0
 
-[sub_resource type="Resource" id="Resource_gcaj3"]
+[sub_resource type="Resource" id="Resource_42t4q"]
 resource_local_to_scene = true
 script = ExtResource("12_pr6ky")
 attribute_name = &"防御力"
 _base_value = 5.0
 
-[sub_resource type="Resource" id="Resource_jgqsp"]
+[sub_resource type="Resource" id="Resource_gi53d"]
 resource_local_to_scene = true
 script = ExtResource("12_pr6ky")
 attribute_name = &"速度"
@@ -209,17 +239,177 @@ attribute_name = &"生命值"
 resource_color = Color(1, 0, 0, 1)
 size_y = 10
 
-[sub_resource type="Resource" id="Resource_ebkt3"]
+[sub_resource type="Resource" id="Resource_exoq3"]
 resource_local_to_scene = true
 script = ExtResource("15_yg6x3")
 regain_hited = 10
 regain_hurted = 5
-ability_resource_name = &"怒气"
+ability_resource_name = &"怒气值"
 current_value = 0
 max_value = 100
 attribute_name = &""
 resource_color = Color(0.678431, 0.215686, 0, 1)
 size_y = 10
+
+[sub_resource type="Animation" id="Animation_ui101"]
+resource_name = "die"
+length = 1.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("16_xle73")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_cndte"]
+resource_name = "hit"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_ah51y")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_f8bwf"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("18_gcaj3")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
 
 [sub_resource type="Animation" id="Animation_p0q65"]
 resource_name = "attack"
@@ -486,167 +676,7 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]
 }
 
-[sub_resource type="Animation" id="Animation_ui101"]
-resource_name = "die"
-length = 1.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("16_xle73")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [15]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-}
-
-[sub_resource type="Animation" id="Animation_cndte"]
-resource_name = "hit"
-length = 0.6
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("17_ah51y")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_f8bwf"]
-resource_name = "idle"
-length = 0.8
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("18_gcaj3")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_42t4q"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w7hn7"]
 resource_local_to_scene = true
 _data = {
 &"attack": SubResource("Animation_p0q65"),
@@ -659,15 +689,15 @@ _data = {
 &"idle": SubResource("Animation_f8bwf")
 }
 
-[sub_resource type="Resource" id="Resource_gi53d"]
+[sub_resource type="Resource" id="Resource_lsjgq"]
 resource_local_to_scene = true
 script = ExtResource("25_lsjgq")
 character_name = &"战士"
 character_icon = ExtResource("24_w7hn7")
-ability_attributes = Array[ExtResource("12_pr6ky")]([SubResource("Resource_xle73"), SubResource("Resource_ah51y"), SubResource("Resource_gcaj3"), SubResource("Resource_jgqsp"), SubResource("Resource_w4m7k"), SubResource("Resource_1sug7")])
-abilities = Array[ExtResource("10_i3jsw")]([SubResource("Resource_fbmiv"), SubResource("Resource_pr6ky"), SubResource("Resource_yomsl"), SubResource("Resource_b2ey7"), SubResource("Resource_yg6x3")])
-ability_resources = Array[ExtResource("13_yomsl")]([SubResource("Resource_bgern"), SubResource("Resource_ebkt3")])
-animation_library = SubResource("AnimationLibrary_42t4q")
+ability_attributes = Array[ExtResource("12_pr6ky")]([SubResource("Resource_jgqsp"), SubResource("Resource_ebkt3"), SubResource("Resource_42t4q"), SubResource("Resource_gi53d"), SubResource("Resource_w4m7k"), SubResource("Resource_1sug7")])
+abilities = Array[ExtResource("10_i3jsw")]([SubResource("Resource_b2ey7"), SubResource("Resource_yg6x3"), SubResource("Resource_xle73"), SubResource("Resource_ah51y"), SubResource("Resource_gcaj3")])
+ability_resources = Array[ExtResource("13_yomsl")]([SubResource("Resource_bgern"), SubResource("Resource_exoq3")])
+animation_library = SubResource("AnimationLibrary_w7hn7")
 sprite_position = Vector2(0, -64)
 
 [node name="Main" type="Node2D"]
@@ -736,7 +766,7 @@ layer = 128
 position = Vector2(216, 144)
 
 [node name="PlayerCharacter5" parent="PlayerMarkers/Marker2D" groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
-character_model = SubResource("Resource_gi53d")
+character_model = SubResource("Resource_lsjgq")
 
 [node name="Marker2D2" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(180, 168)

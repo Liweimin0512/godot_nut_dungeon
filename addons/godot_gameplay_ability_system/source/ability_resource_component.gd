@@ -15,8 +15,8 @@ signal resource_changed(res_name: StringName, value: float)
 func initialization(ability_resource_set: Array[AbilityResource] = []) -> void:
 	for res : AbilityResource in ability_resource_set:
 		if not _ability_resources.has(res.ability_resource_name):
-			_ability_resources[res.ability_resource_name] = res
 			res.initialization(_attribute_component)
+			_ability_resources[res.ability_resource_name] = res
 	_ability_component.game_event_handled.connect(_on_ability_component_game_event_handled)	
 
 ## 检查资源是否足够消耗
@@ -59,12 +59,6 @@ func apply_damage(damage: AbilityDamage) -> void:
 		if res.has_method("apply_damage"):
 			res.call("apply_damage", damage)
 
-## 触发资源回调
-func _handle_resource_callback(callback_name: StringName, context : Dictionary) -> void:
-	for res : AbilityResource in _ability_resources.values():
-		if res.has_method(callback_name):
-			res.call(callback_name, context)
-
 ## 消耗技能
 func cost_ability(ability: Ability, context: Dictionary) -> bool:
 	if not ability.ability_cost.can_cost(context):
@@ -75,6 +69,12 @@ func cost_ability(ability: Ability, context: Dictionary) -> bool:
 ## 是否能消耗技能
 func can_cost_ability(ability: Ability, context: Dictionary) -> bool:
 	return ability.ability_cost.can_cost(context)
+
+## 触发资源回调
+func _handle_resource_callback(callback_name: StringName, context : Dictionary) -> void:
+	for res : AbilityResource in _ability_resources.values():
+		if res.has_method(callback_name):
+			res.call(callback_name, context)
 
 ## 处理游戏事件
 func _on_ability_component_game_event_handled(event_name: StringName, event_context: Dictionary) -> void:

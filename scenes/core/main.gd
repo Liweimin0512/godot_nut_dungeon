@@ -3,6 +3,7 @@ extends Node2D
 const CHARACTER = preload("res://scenes/character/character.tscn")
 ## 需要预加载的effect配置文件列表
 const EFFECT_CONFIGS : Array[String] = [
+	"res://resources/data/abilities/skill_effects/attack.json",
 	"res://resources/data/abilities/skill_effects/battle_cry_effect.json",
 	"res://resources/data/abilities/skill_effects/chain_lightning_effect.json",
 	"res://resources/data/abilities/skill_effects/fireball_effect.json",
@@ -92,7 +93,7 @@ func _on_load_json_complete(_results: Dictionary) -> void:
 				game_form.handle_game_event("combat_hurt", {"owner": c_combat.owner, "damage": damage})
 		)
 		c_combat.ability_component.ability_cast_finished.connect(
-			func(ability: Ability) -> void:
+			func(ability: Ability, _context: Dictionary) -> void:
 				# rich_text_label.text += "{0} 释放 {1} 技能！\n".format([c_combat, ability])
 				game_form.handle_game_event("combat_ability_cast", {"owner": c_combat.owner, "ability": ability})
 		)

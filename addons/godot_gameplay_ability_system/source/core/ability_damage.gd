@@ -102,10 +102,10 @@ func _init(
 func apply_damage() -> void:
 	if is_indirect:
 		# 如果为间接伤害，则防守方受到伤害（触发受击事件）
-		defender.hurt(self)
+		await defender.hurt(self)
 	elif attacker:
 		# 如果为直接伤害，则攻击方攻击（触发攻击事件）
-		attacker.hit(self)
+		await attacker.hit(self)
 
 ## 应用伤害修饰器（比如增伤、减伤效果）
 func apply_damage_modifier(modifier_type: String, value: float) -> void:
@@ -116,7 +116,7 @@ func apply_damage_modifier(modifier_type: String, value: float) -> void:
 			_modify_value += value
 
 func _to_string() -> String:
-	return "伤害信息：\n攻击者：{0} 攻击力：{1}\n 防御者{2} 防御力：{3}，\n 伤害值{4} \n {5}暴击".format([
+	return "伤害信息： 攻击者：{0} 攻击力：{1}; 防御者{2} 防御力：{3}， 伤害值: {4}; {5}暴击".format([
 		attacker, _attack_value, defender, _defense_value, 
 		damage_value, "是" if _is_critical else "不是"
 	])

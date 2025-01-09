@@ -31,7 +31,7 @@ func _perform_action(context: Dictionary) -> STATUS:
 	var damage : AbilityDamage = AbilityDamage.new(
 		caster, target, damage_type, is_indirect, effect)
 	damage.apply_damage_modifier("percentage", _damage_multiplier - 1)
-	damage.apply_damage()
+	await damage.apply_damage()
 	return STATUS.SUCCESS
 
 func _description_getter() -> String:

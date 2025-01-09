@@ -30,7 +30,7 @@ enum TARGET_TYPE{
 }
 
 ## 技能施法位置
-enum CASTING_POSITION
+enum CASTING_POSITION_TYPE
 {
 	NONE, 			## 默认施法位置
 	MELEE,			## 近战施法位置

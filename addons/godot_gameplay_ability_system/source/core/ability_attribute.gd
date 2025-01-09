@@ -45,12 +45,12 @@ func _modify(modify_type: String, value: float) -> void:
 ## 添加修改器
 func add_modifier(modifier: AbilityAttributeModifier) -> void:
 	_modifiers.append(modifier)
-	_modify(modifier.modifier_type, modifier.value)
+	_modify(modifier.modify_type, modifier.value)
 
 ## 移除修改器
 func remove_modifier(modifier: AbilityAttributeModifier) -> void:
 	_modifiers.erase(modifier)
-	_modify(modifier.modifier_type, -modifier.value)
+	_modify(modifier.modify_type, modifier.value * -1)
 
 ## 获取所有修改器
 func get_modifiers() -> Array[AbilityAttributeModifier]:

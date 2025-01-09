@@ -6,7 +6,7 @@ class_name SkillAbility
 ## 目标类型，如self, ally, enemy
 @export var target_type: StringName
 ## 技能消耗
-@export var ability_cost: AbilityCost
+@export var ability_cost: AbilityCost = null
 ## 冷却时间（回合数）
 @export var cooldown: int
 ## 当前冷却时间
@@ -21,10 +21,12 @@ var is_cooldown: bool:
 	get:
 		return current_cooldown > 0
 
-## 能否施放
-var can_cast: bool:
+## 是否为可用的主动技能
+var is_available : bool = false:
 	get:
-		return ability_cost.can_cost(_context) if ability_cost else true
+		if is_auto_cast or is_cooldown: return false
+		if not ability_cost or ability_cost.can_cost(_context): return true
+		return false
 
 signal cooldown_changed(value: int) 
 

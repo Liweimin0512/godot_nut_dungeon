@@ -55,7 +55,7 @@ func _execute(context: Dictionary) -> STATUS:
 			GASLogger.error("register trigger failed")
 			return STATUS.FAILURE
 	_original_context = context.duplicate(true)
-	return STATUS.SUCCESS
+	return STATUS.FAILURE
 
 func _revoke() -> STATUS:
 	if not _registered: 
@@ -63,7 +63,7 @@ func _revoke() -> STATUS:
 		return STATUS.FAILURE
 	_unregister_trigger()
 	_original_context = {}
-	return STATUS.SUCCESS
+	return STATUS.FAILURE
 
 ## 注册触发器
 func _register_trigger(context: Dictionary) -> bool:

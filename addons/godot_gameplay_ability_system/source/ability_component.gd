@@ -30,22 +30,6 @@ func initialization(
 		) -> void:
 	for ability in ability_set:
 		apply_ability(ability, ability_context)
-		ability.applied.connect(
-			func(context: Dictionary) -> void:
-				ability_applied.emit(ability, context)
-		)
-		ability.removed.connect(
-			func(context: Dictionary) -> void:
-				ability_removed.emit(ability, context)
-		)
-		ability.cast_started.connect(
-			func(context: Dictionary) -> void:
-				ability_cast_started.emit(ability, context)
-		)
-		ability.cast_finished.connect(
-			func(context: Dictionary) -> void:
-				ability_cast_finished.emit(ability, context)
-		)	
 		print("ability_component: {0} 初始化".format([owner.to_string()]))
 
 #region 技能相关
@@ -71,19 +55,25 @@ func get_abilities(ability_tags: Array[StringName] = []) -> Array[Ability]:
 func apply_ability(ability: Ability, ability_context: Dictionary) -> void:
 	ability_context.merge({
 		"tree": get_tree(),
-		"ability": ability,
 		})
+	ability.applied.connect(_on_ability_applied.bind(ability))
+	ability.cast_started.connect(_on_ability_cast_started.bind(ability))
+	ability.cast_finished.connect(_on_ability_cast_finished.bind(ability))
+	ability.removed.connect(_on_ability_removed.bind(ability))
 	ability.apply(self, ability_context)
 	_abilities.append(ability)
 
 ## 移除技能
 func remove_ability(ability: Ability) -> void:
+	ability.applied.disconnect(_on_ability_applied.bind(ability))
+	ability.cast_started.disconnect(_on_ability_cast_started.bind(ability))
+	ability.cast_finished.disconnect(_on_ability_cast_finished.bind(ability))
+	ability.removed.disconnect(_on_ability_removed.bind(ability))
 	ability.remove()
 	_abilities.erase(ability)
 
 ## 尝试释放技能
 func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
-	#var caster : Node = context.caster
 	var ok = await ability.cast(context)
 	return ok
 
@@ -94,6 +84,7 @@ func try_cast_ability(ability: Ability, context: Dictionary) -> bool:
 ## 处理游戏事件
 func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -> void:
 	GASLogger.info("{0} 接收到游戏事件：{1}，事件上下文{2}".format([self, event_name, event_context]))
+	game_event_handled.emit(event_name, event_context)
 	for ability in _abilities:
 		if ability.has_method(event_name):
 			ability.call(event_name, event_context)
@@ -110,7 +101,6 @@ func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -
 				GASLogger.debug("触发器失败：{0}".format([ability]))
 				ability_trigger_failed.emit(ability)
 		)
-	game_event_handled.emit(event_name, event_context)
 
 ## 添加触发器
 func add_ability_trigger(trigger_type: StringName, trigger: DecoratorTriggerNode) -> void:
@@ -127,6 +117,18 @@ func remove_ability_trigger(trigger_type: StringName, trigger: DecoratorTriggerN
 		_ability_triggers[trigger_type] = triggers
 
 #endregion
+
+func _on_ability_applied(context: Dictionary, ability: Ability) -> void:
+	ability_applied.emit(ability, context)
+
+func _on_ability_removed(context: Dictionary, ability: Ability) -> void:
+	ability_removed.emit(ability, context)
+
+func _on_ability_cast_started(context: Dictionary, ability: Ability) -> void:
+	ability_cast_started.emit(ability, context)
+
+func _on_ability_cast_finished(context: Dictionary, ability: Ability) -> void:
+	ability_cast_finished.emit(ability, context)
 
 func _to_string() -> String:
 	return owner.to_string()

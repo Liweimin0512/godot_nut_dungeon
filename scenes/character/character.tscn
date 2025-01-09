@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
-[ext_resource type="Texture2D" uid="uid://d2444c4t2hu45" path="res://assets/sprites/characters/heros/warrior/Idle.png" id="2_7ex5l"]
+[ext_resource type="Texture2D" uid="uid://dfl4443uqmgkr" path="res://assets/sprites/characters/enemies/goblin/Attack.png" id="2_bblvu"]
 [ext_resource type="Script" uid="uid://y1mgjyqenlv7" path="res://scripts/systems/combat/combat_component.gd" id="2_ghtna"]
 [ext_resource type="Script" uid="uid://n67wyu14blxx" path="res://addons/godot_gameplay_ability_system/source/ability_component.gd" id="3_6a5vl"]
 [ext_resource type="AnimationLibrary" uid="uid://blhiy6bt07lej" path="res://scenes/character/resources/animation/enemy/animation_library_goblin.res" id="4_bix7t"]
@@ -17,8 +17,8 @@ script = ExtResource("1_qu267")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -26)
-texture = ExtResource("2_7ex5l")
-hframes = 6
+texture = ExtResource("2_bblvu")
+hframes = 8
 
 [node name="cast_points" type="Node2D" parent="."]
 
@@ -58,10 +58,10 @@ libraries = {
 autoplay = "idle"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
-offset_left = -26.0
-offset_top = -103.0
-offset_right = 38.0
-offset_bottom = -63.0
+offset_left = -32.0
+offset_top = -77.0
+offset_right = 32.0
+offset_bottom = -37.0
 
 [node name="LabelAbility" type="Label" parent="MarginContainer2"]
 unique_name_in_owner = true
@@ -97,7 +97,6 @@ cast_position_dict = {
 "hand": NodePath("../cast_points/hand"),
 "head": NodePath("../cast_points/head")
 }
-action_time = 0.3
 ability_component = NodePath("../AbilityComponent")
 ability_resource_component = NodePath("../AbilityResourceComponent")
 ability_attribute_component = NodePath("../AbilityAttributeComponent")

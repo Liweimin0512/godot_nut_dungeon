@@ -13,10 +13,8 @@ metadata/_custom_type_script = ExtResource("1_fyh0o")
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_fyh0o")
-casting_position = 1
 target_type = &"ally"
 ability_cost = SubResource("Resource_w0r25")
-is_auto_cast = false
 cooldown = 3
 current_cooldown = 0
 is_show = true
@@ -24,4 +22,5 @@ ability_name = &"战争怒吼"
 ability_tags = Array[StringName]([])
 ability_description = "发出怒吼，激励自己和周围的盟友。"
 icon = ExtResource("1_pxem3")
+is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/battle_cry_effect.json"

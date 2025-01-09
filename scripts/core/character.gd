@@ -32,7 +32,8 @@ func setup() -> void:
 			character_model.abilities,
 			{
 				"caster": combat_component,
-				"ability_component": ability_component
+				"ability_component": ability_component,
+				"resource_component": ability_resource_component
 			}
 		)
 		combat_component.initialization(character_camp)
@@ -73,6 +74,7 @@ func _on_combat_component_hurted(_damage: int) -> void:
 	animation_player.play("hit")
 
 func _on_ability_component_ability_cast_started(ability: Ability, _context: Dictionary) -> void:
+	if ability.is_auto_cast: return
 	%LabelAbility.text = ability.ability_name
 	%LabelAbility.show()
 	await get_tree().create_timer(1).timeout

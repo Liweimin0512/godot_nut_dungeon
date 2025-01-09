@@ -9,11 +9,11 @@ class_name AbilityResourceCost
 func can_cost(context: Dictionary) -> bool:
 	var ability = context.get("ability")
 	if not ability:
-		GASLogger.error("技能{0}消耗资源{1}时，技能不存在".format([self, resource_name]))
+		GASLogger.error("技能{0}判断消耗资源{1}时，技能不存在".format([self, resource_name]))
 		return false
 	var resource_component : AbilityResourceComponent = context.get("resource_component")
 	if not resource_component: 
-		GASLogger.error("技能{0}消耗资源{1}时，资源组件不存在".format([ability, resource_name]))
+		GASLogger.error("技能{0}判断消耗资源{1}时，资源组件不存在".format([ability, resource_name]))
 		return false
 	return resource_component.has_enough_resources(cost_resource_name, cost_value)
 

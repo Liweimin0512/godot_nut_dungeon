@@ -21,9 +21,9 @@ func _perform_action(context: Dictionary = {}) -> STATUS:
 	if modify_type == "percentage":
 		_amount = ability_resource_component.get_resource_value(ability_resource_name) * _amount
 	if _amount > 0:
-		ability_resource_component.restore(int(_amount))
+		ability_resource.restore(int(_amount))
 	else:
-		ability_resource_component.consume(int(_amount))
+		ability_resource.consume(int(_amount))
 	return STATUS.SUCCESS
 
 func _description_getter() -> String:

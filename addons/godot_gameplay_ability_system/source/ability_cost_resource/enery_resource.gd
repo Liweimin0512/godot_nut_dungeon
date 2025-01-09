@@ -6,3 +6,6 @@ class_name EneryResource
 
 ## 每次回复的值
 @export var per_regain: int
+
+func _get_resource_name() -> StringName:
+	return "能量值"
