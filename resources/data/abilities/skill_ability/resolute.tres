@@ -6,7 +6,6 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_2js8s")
-casting_position = 0
 target_type = &"self"
 cooldown = 0
 current_cooldown = 0

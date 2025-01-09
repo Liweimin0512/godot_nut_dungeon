@@ -6,7 +6,6 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_xsk2b")
-casting_position = 0
 target_type = &""
 cooldown = 0
 current_cooldown = 0
