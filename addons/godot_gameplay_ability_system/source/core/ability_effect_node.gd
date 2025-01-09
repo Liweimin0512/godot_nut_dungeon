@@ -16,9 +16,12 @@ enum STATUS {
 @export var enabled := true
 
 ## 节点状态
-var state : STATUS = STATUS.SUCCESS	
-## 节点是否已执行
-var is_executed : bool = false
+var state : STATUS = STATUS.SUCCESS
+var _script_name: StringName = "":
+	get:
+		return get_script().resource_path.get_file().get_basename()
+## 执行过了，有些技能需要条件判断，条件不满足需要撤回到不满足的步骤
+var _is_executed: bool = false
 
 ## 节点状态改变
 signal state_changed(state: STATUS)
@@ -26,18 +29,23 @@ signal state_changed(state: STATUS)
 func _init():
 	resource_local_to_scene = true
 
+## 获取节点, 子类实现
+func get_node(effect_name: StringName) -> AbilityEffectNode:
+	return _get_effect_node(effect_name)
+
 ## 执行
 func execute(context: Dictionary) -> STATUS:
 	if not enabled: return STATUS.FAILURE
-	# 如果已执行，则无法再次执行
-	if is_executed: return STATUS.FAILURE
-	return await _execute(context)
+	var result = await _execute(context)
+	if result == STATUS.SUCCESS:
+		_is_executed = true
+	return result
 
 ## 撤销
 func revoke() -> STATUS:
 	if not enabled: return STATUS.FAILURE
-	# 如果未执行，则无法撤销
-	if not is_executed: return STATUS.FAILURE
+	# 如果不能撤销（没有执行过），则直接成功
+	if not _is_executed: return STATUS.SUCCESS
 	return await _revoke()
 
 ## 子类中实现的执行方法
@@ -46,16 +54,20 @@ func _execute(context: Dictionary) -> STATUS:
 
 ## 子类中实现的撤销方法
 func _revoke() -> STATUS:
-	return STATUS.FAILURE
+	return STATUS.SUCCESS
 
-## 获取节点, 子类实现
-func get_node(effect_name: StringName) -> AbilityEffectNode:
-	if self.effect_name == effect_name:
+func _get_effect_node(effect_name: StringName) -> AbilityEffectNode:
+	if effect_name == "":
 		return self
-	return null	
+	return get_node(effect_name)
+
+func _get_context_value(context: Dictionary, key: StringName) -> Variant:
+	if context.has(key):
+		return context[key]
+	GASLogger.error("AbilityEffectNode {0}: _get_context_value: context not has key: {1}".format([_script_name, key]))
+	return null
 
 func _to_string() -> String:
-	var _script_name = get_script().resource_path.get_file().get_basename()
 	if effect_name == "":
 		return _script_name
 	return "{0} : {1}".format([_script_name, effect_name])

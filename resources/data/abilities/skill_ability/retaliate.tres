@@ -5,15 +5,12 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_xsk2b")
-casting_position = 0
-cast_count = 1
 target_type = &""
-cost_resource_name = &""
-cost_resource_value = 0
-is_auto_cast = true
 cooldown = 0
 current_cooldown = 0
 is_show = true
 ability_name = &"反击"
+ability_tags = Array[StringName]([])
 ability_description = "在受到普通攻击时有机会进行反击"
+is_auto_cast = true
 effect_config_path = "res://resources/data/abilities/skill_effects/counter_attack_effect.json"

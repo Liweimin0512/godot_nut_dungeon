@@ -5,14 +5,12 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_2js8s")
-casting_position = 0
 target_type = &"self"
-cost_resource_name = &""
-cost_resource_value = 0
-is_auto_cast = true
 cooldown = 0
 current_cooldown = 0
 is_show = true
 ability_name = &"不屈精神"
+ability_tags = Array[StringName]([])
 ability_description = "在受到攻击时，有几率获得额外的怒气"
+is_auto_cast = true
 effect_config_path = "res://resources/data/abilities/skill_effects/unyielding_effect.json"

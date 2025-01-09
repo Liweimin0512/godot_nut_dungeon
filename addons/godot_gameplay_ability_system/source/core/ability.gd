@@ -71,8 +71,11 @@ func _cast(context: Dictionary) -> bool:
 		GASLogger.info("技能{0}执行成功".format([self]))
 		cast_finished.emit()
 		return true
-	GASLogger.error("技能{0}执行失败".format([self]))
-	return false
+	else:
+		GASLogger.error("技能{0}执行失败".format([self]))
+		# 撤销执行
+		effect_container.revoke()
+		return false
 
 ## 从配置加载效果节点树
 func _load_effect_config() -> void:

@@ -6,15 +6,13 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_b5112")
-casting_position = 1
 target_type = &"enemy"
-cost_resource_name = &"怒气值"
-cost_resource_value = 15
-is_auto_cast = false
 cooldown = 2
 current_cooldown = 0
 is_show = true
 ability_name = &"重击"
+ability_tags = Array[StringName]([])
 ability_description = "对单个敌人进行强力一击"
 icon = ExtResource("4_0gbca")
+is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/heroic_strike_effect.json"
