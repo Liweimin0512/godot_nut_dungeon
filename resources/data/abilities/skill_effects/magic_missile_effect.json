@@ -1,34 +1,43 @@
 {
-  "type": "decorator_repeat",
-  "repeat_count": 3,
-  "child": {
-    "type": "sequence",
-    "children": [
-      {
-        "type": "random_target",
-        "target_type": "enemies"
-      },
-      {
-        "type": "spawn_projectile",
-        "projectile_scene": "@scene://scenes/projectile/magic_missile_projectile.tscn",
-        "speed": 300,
-        "start_position_type": "hand",
-        "target_position_type": "body"
-      },
-      {
-        "type": "deal_damage",
-        "damage_type": "magic",
-        "damage_multiplier": 0.8
-      },
-      {
-        "type": "decorator_probability",
-        "probability": 0.2,
-        "child": {
-          "type": "apply_ability",
-          "ability": "@resource://resources/data/abilities/buffs/stun.tres",
-          "duration": 2
-        }
+  "type": "sequence",
+  "children": [
+    {
+      "type": "move_to_casting_position",
+      "casting_position": "range"
+    },
+    {
+      "type": "decorator_repeat",
+      "repeat_count": 3,
+      "child": {
+        "type": "sequence",
+        "children": [
+          {
+            "type": "random_target",
+            "target_type": "enemies"
+          },
+          {
+            "type": "spawn_projectile",
+            "projectile_scene": "@scene://scenes/projectile/magic_missile_projectile.tscn",
+            "speed": 300,
+            "start_position_type": "hand",
+            "target_position_type": "body"
+          },
+          {
+            "type": "deal_damage",
+            "damage_type": "magic",
+            "damage_multiplier": 0.8
+          },
+          {
+            "type": "decorator_probability",
+            "probability": 0.2,
+            "child": {
+              "type": "apply_ability",
+              "ability": "@resource://resources/data/abilities/buffs/stun.tres",
+              "duration": 2
+            }
+          }
+        ]
       }
-    ]
-  }
+    }
+  ]
 }

@@ -13,14 +13,6 @@
 		  "ability_resource_name": "怒气值",
 		  "ability_resource_amount": 10,
 		  "modify_type": "value"
-		},
-		{
-		  "type": "spawn_vfx",
-		  "vfx_scene": "@scene://scenes/vfx/rage_gain_vfx.tscn",
-		  "attach_to_target": true,
-		  "mount_target_type": "target",
-		  "mount_point_type": "body",
-		  "auto_free": true
 		}
 	  ]
 	}

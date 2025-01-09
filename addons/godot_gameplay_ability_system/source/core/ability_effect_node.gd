@@ -19,6 +19,9 @@ enum STATUS {
 var state : STATUS = STATUS.SUCCESS	
 ## 节点是否已执行
 var is_executed : bool = false
+var _script_name: StringName = "":
+	get:
+		return get_script().resource_path.get_file().get_basename()
 
 ## 节点状态改变
 signal state_changed(state: STATUS)
@@ -26,6 +29,9 @@ signal state_changed(state: STATUS)
 func _init():
 	resource_local_to_scene = true
 
+## 获取节点, 子类实现
+func get_node(effect_name: StringName) -> AbilityEffectNode:
+	return _get_effect_node(effect_name)
 ## 执行
 func execute(context: Dictionary) -> STATUS:
 	if not enabled: return STATUS.FAILURE
@@ -48,14 +54,18 @@ func _execute(context: Dictionary) -> STATUS:
 func _revoke() -> STATUS:
 	return STATUS.FAILURE
 
-## 获取节点, 子类实现
-func get_node(effect_name: StringName) -> AbilityEffectNode:
-	if self.effect_name == effect_name:
+func _get_effect_node(effect_name: StringName) -> AbilityEffectNode:
+	if effect_name == "":
 		return self
-	return null	
+	return get_node(effect_name)
+
+func _get_context_value(context: Dictionary, key: StringName) -> Variant:
+	if context.has(key):
+		return context[key]
+	GASLogger.error("AbilityEffectNode {0}: _get_context_value: context not has key: {1}".format([_script_name, key]))
+	return null
 
 func _to_string() -> String:
-	var _script_name = get_script().resource_path.get_file().get_basename()
 	if effect_name == "":
 		return _script_name
 	return "{0} : {1}".format([_script_name, effect_name])

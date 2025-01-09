@@ -14,7 +14,7 @@ func _execute(context: Dictionary) -> STATUS:
 	if not _validate_parameters():
 		_is_success = false
 		return STATUS.FAILURE
-	var scene_tree : SceneTree = context.get("tree", null)
+	var scene_tree : SceneTree = _get_context_value(context, "tree")
 	if not scene_tree:
 		GASLogger.error("AbilityEffectNode {0} execute failed, because scene tree is null".format([self]))
 		return STATUS.FAILURE

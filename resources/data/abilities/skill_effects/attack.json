@@ -2,6 +2,10 @@
   "type": "parallel",
   "children": [
 	{
+		"type": "move_to_casting_position",
+		"casting_position": "melee"
+	},
+	{
 	  "type": "play_animation",
 	  "animation_name": "attack"
 	},

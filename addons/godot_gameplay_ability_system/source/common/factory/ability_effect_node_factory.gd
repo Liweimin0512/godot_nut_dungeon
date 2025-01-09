@@ -39,11 +39,11 @@ var _ability_effect_node_cache: Dictionary = {}
 ## 注册新的节点类型
 func register_node_type(type_name: String, script_path: String) -> void:
 	if _node_type_map.has(type_name):
-		push_warning("Node type '%s' already registered, will be overwritten" % type_name)
+		GASLogger.warning("Node type '%s' already registered, will be overwritten" % type_name)
 	
 	var script = load(script_path)
 	if not script:
-		push_error("Failed to load script: %s" % script_path)
+		GASLogger.error("Failed to load script: %s" % script_path)
 		return
 		
 	_node_type_map[type_name] = script

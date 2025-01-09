@@ -1,12 +1,12 @@
 {
   "type": "decorator_trigger",
-  "trigger_type": "ON_ABILITY_CAST_SUCCESS",
+  "trigger_type": "on_action_completed",
   "persistent": true,
   "child": {
 	"type": "condition_ability_name",
 	"ability_names": [
-	  "fireball",
-	  "magic_missile"
+	  "火球术",
+	  "魔法飞弹"
 	],
 	"child": {
 	  "type": "decorator_probability",

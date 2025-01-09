@@ -2,6 +2,10 @@
   "type": "sequence",
   "children": [
     {
+      "type": "move_to_casting_position",
+      "casting_position": "range"
+    },
+    {
       "type": "spawn_projectile",
       "projectile_scene": "@scene://scenes/projectile/fireball_projectile.tscn",
       "speed": 400,

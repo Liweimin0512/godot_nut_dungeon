@@ -48,6 +48,7 @@ func _on_load_json_progress(current: int, total: int) -> void:
 	print("JSON加载进度: {0}/{1}".format([current, total]))
 
 func _on_load_json_complete(_results: Dictionary) -> void:
+	EffectNodeFactory.register_node_type("move_to_casting_position", "res://scripts/systems/ability/ability_effect_node/move_to_casting_position_effect.gd")
 	var combat : Combat = _create_combat(combat_test.duplicate())
 	for player in _get_players():
 		player.setup()

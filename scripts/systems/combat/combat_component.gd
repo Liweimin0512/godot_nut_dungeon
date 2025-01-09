@@ -9,8 +9,8 @@ class_name CombatComponent
 @export var melee_action_offset: Vector2 = Vector2(20, 0)
 ## 施法位置Marker2D字典
 @export var cast_position_dict : Dictionary[String, Marker2D] = {}
-## 行动耗时
-@export var action_time : float = 0.5
+## 返回行动耗时
+@export var return_action_time : float = 0.5
 ## 是否为存活单位
 var is_alive : bool = true:
 	get:
@@ -26,11 +26,14 @@ var _current_combat: Combat
 var _combat_owner_name : StringName : 
 	get:
 		return self.to_string()
+## 战斗位置
+var _combat_position : Vector2 = Vector2.ZERO
 
 ## 依赖于技能系统组件
 @export var ability_component: AbilityComponent
 @export var ability_resource_component: AbilityResourceComponent
 @export var ability_attribute_component: AbilityAttributeComponent
+
 signal hited(target: CombatComponent)
 signal hurted(damage: int)
 signal died
@@ -43,6 +46,7 @@ signal turn_ended
 func initialization(camp: CombatDefinition.COMBAT_CAMP_TYPE) -> void:
 	combat_camp = camp
 	_print("combat_component: {0} 初始化".format([_combat_owner_name]))
+	_combat_position = owner.global_position
 
 ## 战斗开始
 func combat_start(combat: Combat) -> void:
@@ -166,17 +170,12 @@ func play_animation(animation_name : StringName, blend_time: float = 0.0, custom
 
 ## 行动前
 func _pre_action(ability_context: Dictionary) -> void:
-	ability_component.handle_game_event("on_pre_action", ability_context)
-	# var ability : Ability = ability_context.get("ability")
-	_move_to_action(ability_context)
-	await get_tree().create_timer(action_time).timeout
+	ability_component.handle_game_event("on_action_started", ability_context)
 
 ## 行动后
 func _post_action(ability_context: Dictionary) -> void:
-	ability_component.handle_game_event("on_post_action", ability_context)
-	# var ability : Ability = ability_context.get("ability")
-	_move_from_action()
-	await get_tree().create_timer(action_time).timeout
+	ability_component.handle_game_event("on_action_completed", ability_context)
+	await _move_from_action()
 
 ## 能否行动？
 func _can_action() -> bool:
@@ -205,35 +204,11 @@ func _get_ability_target(ability : Ability) -> CombatComponent:
 	var target : Node = target_pool.pick_random()
 	return target
 
-## 移动到行动位置
-func _move_to_action(ability_context: Dictionary) -> void:
-	if not _current_combat or not _current_combat.action_marker : return
-	if not has_meta("global_position"): set_meta("global_position", owner.global_position)
-	var target_point := _get_action_point(ability_context)
-	create_tween().tween_property(owner, "global_position", target_point, action_time)
-	
 ## 移动回原位置
 func _move_from_action() -> void:
-	var point : Vector2 = get_meta("global_position")
-	create_tween().tween_property(owner, "global_position", point, action_time)
-
-## 获取行动位置
-func _get_action_point(ability_context: Dictionary) -> Vector2:
-	var point : Vector2
-	if not ability_context.get("target"): 
-		point = _current_combat.action_marker.position
-	else:
-		var ability: SkillAbility = ability_context.get("ability")
-		#var target: Node2D = ability_context.get("targets")[0].owner
-		var target = ability_context.get("target").owner
-		match ability.casting_position:
-			AbilityDefinition.CASTING_POSITION.MELEE:
-				point = target.global_position + melee_action_offset * (Vector2(-1, 0) if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else Vector2(1, 0))
-			AbilityDefinition.CASTING_POSITION.BEHINDENEMY:
-				point = target.global_position + melee_action_offset * (Vector2(1, 0) if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else Vector2(-1, 0))
-			_:
-				point = _current_combat.action_marker.position
-	return point
+	var tween : Tween = get_tree().create_tween()
+	tween.tween_property(owner, "global_position", _combat_position, return_action_time)
+	await tween.finished
 
 ## 获取技能上下文
 func _get_ability_context() -> Dictionary:
