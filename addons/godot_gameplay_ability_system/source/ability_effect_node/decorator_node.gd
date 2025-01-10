@@ -9,6 +9,7 @@ func set_child(new_child: AbilityEffectNode) -> void:
 	child = new_child
 
 func clear_child() -> void:
+	if not child: return
 	child = null
 
 func _revoke() -> STATUS:

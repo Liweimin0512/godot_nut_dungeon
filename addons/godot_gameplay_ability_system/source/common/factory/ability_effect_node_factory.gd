@@ -11,8 +11,9 @@ var _node_type_map: Dictionary = {
 	"random_selector": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_random_selector_node.gd"),
 	
 	# 装饰器节点
-	"random_target": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_decorator_node/decorator_random_target_node.gd"),
-	"for_each_target": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_decorator_node/decorator_for_each_target_node.gd"),
+	"target_selector": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_decorator_node/decorator_target_selector.gd"),
+	# "random_target": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_decorator_node/decorator_random_target_node.gd"),
+	# "for_each_target": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_decorator_node/decorator_for_each_target_node.gd"),
 	"condition_ability_name": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_decorator_node/condition_ability_name_node.gd"),
 	"condition_ability_resource": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_decorator_node/condition_ability_resource_node.gd"),
 	"decorator_delay": preload("res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_decorator_node/decorator_delay_node.gd"),

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://carlbxgjnsnu4" path="res://addons/godot_gameplay_ability_system/source/core/ability_effect_node.gd" id="1_b6ojv"]
 [ext_resource type="Script" uid="uid://chd8ky037o7bu" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/play_animation_node.gd" id="2_17kkl"]
 [ext_resource type="Script" uid="uid://c06x73u7b664j" path="res://scripts/systems/ability/ability_effect_node/move_to_casting_position_effect.gd" id="2_bhvkr"]
-[ext_resource type="Script" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_random_selector_node.gd" id="3_bhvkr"]
+[ext_resource type="Script" uid="uid://bj014por13kqm" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_random_selector_node.gd" id="3_bhvkr"]
 [ext_resource type="Script" uid="uid://cnxxo4hdjduk2" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_action_node/deal_damage_node.gd" id="4_17kkl"]
 [ext_resource type="Script" uid="uid://dg313716g8kfa" path="res://addons/godot_gameplay_ability_system/source/ability_effect_node/ability_effect_control_node/control_parallel_node.gd" id="4_qpwpp"]
 [ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="5_04fxw"]

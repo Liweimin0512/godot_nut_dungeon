@@ -26,16 +26,13 @@
 	  "auto_free": true
 	},
 	{
-	  "type": "decorator_repeat",
-	  "repeat_count": 2,
+	  "type": "target_selector",
+	  "target_type": "enemy",
+	  "select_type": "random",
+	  "target_count": 2,
 	  "child": {
 		"type": "sequence",
 		"children": [
-		  {
-			"type": "random_target",
-			"target_type": "enemies",
-			"exclude_current": true
-		  },
 		  {
 			"type": "spawn_projectile",
 			"projectile_scene": "@scene://scenes/projectile/lightning_chain_projectile.tscn",
@@ -47,10 +44,10 @@
 		  {
 			"type": "deal_damage",
 			"damage_type": "magic",
-			"damage_multiplier_array": {
-			  "1": 100,
-			  "2": 80
-			}
+			"damage_multiplier_array": [
+			  1,
+			  0.8
+			]
 		  },
 		  {
 			"type": "spawn_vfx",

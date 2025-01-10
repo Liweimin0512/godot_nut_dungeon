@@ -1,0 +1,23 @@
+{
+  "type": "decorator_trigger",
+  "trigger_type": "on_pre_hurt",
+  "persistent": true,
+  "child": {
+	"type": "decorator_probability",
+	"probability": 0.3,
+	"child": {
+	  "type": "parallel",
+	  "children": [
+		{
+		  "type": "play_animation",
+		  "animation_name": "defend"
+		},
+		{
+		  "type": "modify_damage",
+		  "modify_type": "percentage",
+		  "modify_value": -0.8
+		}
+	  ]
+	}
+  }
+}

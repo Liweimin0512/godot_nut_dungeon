@@ -1,0 +1,30 @@
+{
+  "type": "sequence",
+  "children": [
+    {
+      "type": "move_to_casting_position",
+      "casting_position_type": 2
+    },
+    {
+      "type": "parallel",
+      "children": [
+        {
+          "type": "play_animation",
+          "animation_name": "attack_sp"
+        },
+        {
+          "type": "target_selector",
+          "target_type": "enemy",
+          "select_type": "random",
+          "target_count": 3,
+          "child": {
+            "type": "apply_ability",
+            "ability": "@resource://resources/data/abilities/buffs/torrential_curse.tres",
+            "pre_delay": 0.4,
+            "post_delay": 0.5
+          }
+        }
+      ]
+    }
+  ]
+}

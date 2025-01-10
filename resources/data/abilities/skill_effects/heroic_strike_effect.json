@@ -1,28 +1,28 @@
 {
   "type": "sequence",
   "children": [
-    {
-      "type": "move_to_casting_position",
-      "casting_position_type": 1
-    },
-    {
-      "type": "play_animation",
-      "animation_name": "attack_2"
-    },
-    {
-      "type": "deal_damage",
-      "damage_type": "physical",
-      "damage_multiplier": 2,
-      "pre_delay": 0.4,
-      "post_delay": 0.4
-    },
-    {
-      "type": "spawn_vfx",
-      "vfx_scene": "@scene://scenes/vfx/heroic_strike_hit_vfx.tscn",
-      "attach_to_target": true,
-      "mount_target_type": "target",
-      "mount_point_type": "body",
-      "auto_free": true
-    }
+	{
+	  "type": "move_to_casting_position",
+	  "casting_position_type": 1
+	},
+	{
+	  "type": "play_animation",
+	  "animation_name": "attack_2"
+	},
+	{
+	  "type": "deal_damage",
+	  "damage_type": "physical",
+	  "damage_multiplier": 2,
+	  "pre_delay": 0.4,
+	  "post_delay": 0.4
+	},
+	{
+	  "type": "spawn_vfx",
+	  "vfx_scene": "@scene://scenes/vfx/heroic_strike_hit_vfx.tscn",
+	  "attach_to_target": true,
+	  "mount_target_type": "target",
+	  "mount_point_type": "body",
+	  "auto_free": true
+	}
   ]
 }

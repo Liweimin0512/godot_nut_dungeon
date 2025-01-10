@@ -12,15 +12,17 @@
         "type": "sequence",
         "children": [
           {
-            "type": "random_target",
-            "target_type": "enemies"
-          },
-          {
-            "type": "spawn_projectile",
-            "projectile_scene": "@scene://scenes/projectile/magic_missile_projectile.tscn",
-            "speed": 300,
-            "start_position_type": "hand",
-            "target_position_type": "body"
+            "type": "target_selector",
+            "target_type": "enemy",
+            "select_type": "random",
+            "target_count": 1,
+            "child": {
+              "type": "spawn_projectile",
+              "projectile_scene": "@scene://scenes/projectile/magic_missile_projectile.tscn",
+              "speed": 300,
+              "start_position_type": "hand",
+              "target_position_type": "body"
+            }
           },
           {
             "type": "deal_damage",

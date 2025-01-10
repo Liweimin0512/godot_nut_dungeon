@@ -13,6 +13,6 @@ func _execute(context: Dictionary) -> STATUS:
 func _revoke() -> STATUS:
 	for child in children:
 		var status = await child.revoke()
-		if status != STATUS.SUCCESS:
+		if status != STATUS.FAILURE:
 			return status
-	return STATUS.SUCCESS
+	return STATUS.FAILURE

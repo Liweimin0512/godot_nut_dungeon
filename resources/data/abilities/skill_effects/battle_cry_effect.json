@@ -13,8 +13,9 @@
 		  "animation_name": "defend"
 		},
 		{
-		  "type": "for_each_target",
+		  "type": "target_selector",
 		  "target_type": "ally",
+		  "select_type": "all",
 		  "child": {
 			"type": "apply_ability",
 			"ability": "@resource://resources/data/abilities/buffs/battle_cry.tres",

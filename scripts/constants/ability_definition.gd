@@ -35,5 +35,5 @@ enum CASTING_POSITION_TYPE
 	NONE, 			## 默认施法位置
 	MELEE,			## 近战施法位置
 	RANGED,			## 远程施法位置
-	BEHINDENEMY,	## 身后施法位置
+	BEHINDENEMY,		## 身后施法位置
 }
