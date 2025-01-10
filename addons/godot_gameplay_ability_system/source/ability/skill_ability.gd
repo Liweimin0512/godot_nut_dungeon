@@ -34,6 +34,11 @@ func _init() -> void:
 	resource_local_to_scene = true
 	ability_tags.append("skill")
 
+## 应用冷却
+func apply_cooldown() -> void:
+	if cooldown <= 0: return
+	current_cooldown = cooldown
+
 ## 判断能否施放
 func _can_cast(context: Dictionary) -> bool:
 	if is_cooldown:
@@ -54,7 +59,7 @@ func _cast(context: Dictionary) -> bool:
 		target = caster
 	else:
 		target = context.get("target", null)
-	current_cooldown = cooldown
+	apply_cooldown()
 	context.merge({"target": target}, true)
 	var ok := await super(context)
 	return ok

@@ -27,7 +27,7 @@ func _get_action_point(caster : CombatComponent, context: Dictionary) -> Vector2
 	var target : CombatComponent = _get_context_value(context, "target")
 	var owner : Node2D = caster.owner
 	if not target:
-		return owner.global_position
+		point = owner.global_position
 	var caster_camp : CombatDefinition.COMBAT_CAMP_TYPE = caster.combat_camp
 	match casting_position_type:
 		AbilityDefinition.CASTING_POSITION_TYPE.MELEE:

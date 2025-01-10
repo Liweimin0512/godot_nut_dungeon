@@ -18,7 +18,7 @@ func _perform_action(context: Dictionary = {}) -> STATUS:
 	if not target:
 		GASLogger.error("ModifyAttributeNode target is null")
 		return STATUS.FAILURE
-	var attribute_component: AbilityAttributeComponent = context.get("attribute_component")
+	var attribute_component: AbilityAttributeComponent = target.get("ability_attribute_component")
 	if modifiers.is_empty():
 		for modifier_config in modifier_configs:
 			var modifier : AbilityAttributeModifier = AbilityAttributeModifier.new(
@@ -39,7 +39,7 @@ func _revoke_action() -> STATUS:
 	if not target:
 		GASLogger.error("ModifyAttributeNode target is null")
 		return STATUS.FAILURE
-	var attribute_component: AbilityAttributeComponent = _original_context.get("attribute_component")
+	var attribute_component: AbilityAttributeComponent = target.get("ability_attribute_component")
 	for modifier : AbilityAttributeModifier in modifiers:
 		attribute_component.remove_attribute_modifier(modifier)
 		GASLogger.info("移除效果：对目标应用属性修改器：{0}".format([modifier]))

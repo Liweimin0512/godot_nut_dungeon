@@ -1,9 +1,16 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=14 format=3 uid="uid://bxvnlwkdgup5e"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=23 format=3 uid="uid://bxvnlwkdgup5e"]
 
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="1_vx4r6"]
+[ext_resource type="Resource" uid="uid://cf6dfjvcobct6" path="res://resources/data/skills/water_priestess/aqua_shield.tres" id="2_vx4r6"]
+[ext_resource type="Resource" uid="uid://bwwrqd2ae0uog" path="res://resources/data/skills/water_priestess/healing_spring.tres" id="3_p463m"]
+[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_cost_resource/health_resource.gd" id="4_cb118"]
+[ext_resource type="Resource" uid="uid://dpwbu30kr2nts" path="res://resources/data/skills/water_priestess/tidal_fury.tres" id="4_hlq87"]
+[ext_resource type="Script" uid="uid://cjk7fe0ya120s" path="res://addons/godot_gameplay_ability_system/source/ability_cost_resource/mana_resource.gd" id="5_nsa12"]
+[ext_resource type="Resource" uid="uid://bip3hun3xf3tf" path="res://resources/data/skills/water_priestess/vortex_bind.tres" id="5_ows5h"]
+[ext_resource type="Resource" uid="uid://ccm1j42och1au" path="res://resources/data/skills/water_priestess/water_blade_slash.tres" id="6_khnuq"]
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="7_knbke"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="8_pbx0d"]
-[ext_resource type="AnimationLibrary" uid="uid://cd0oe24x0pr5f" path="res://scenes/character/resources/animation/hero/animation_library_crystal_mauler.res" id="11_h2dud"]
+[ext_resource type="AnimationLibrary" uid="uid://br30iodn51mob" path="res://scenes/character/resources/animation/hero/animation_library_water_priestess.res" id="11_vx4r6"]
 [ext_resource type="Texture2D" uid="uid://bue8pimoybodo" path="res://assets/texture/icon/character_profile_picture/water_priestess.png" id="12_vx4r6"]
 [ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="13_ddhl8"]
 
@@ -47,13 +54,33 @@ attribute_name = &"魔法值"
 _base_value = 100.0
 metadata/_custom_type_script = ExtResource("7_knbke")
 
+[sub_resource type="Resource" id="Resource_h2x7v"]
+script = ExtResource("4_cb118")
+ability_resource_name = &"生命值"
+current_value = 0
+max_value = 0
+attribute_name = &"生命值"
+resource_color = Color(1, 0, 0, 1)
+size_y = 10
+metadata/_custom_type_script = ExtResource("4_cb118")
+
+[sub_resource type="Resource" id="Resource_qaclj"]
+script = ExtResource("5_nsa12")
+ability_resource_name = &"魔法值"
+current_value = 0
+max_value = 0
+attribute_name = &"魔法值"
+resource_color = Color(0.184314, 0, 0.760784, 1)
+size_y = 10
+metadata/_custom_type_script = ExtResource("5_nsa12")
+
 [resource]
 resource_local_to_scene = true
 script = ExtResource("13_ddhl8")
 character_name = &"水灵儿"
 character_icon = ExtResource("12_vx4r6")
 ability_attributes = Array[ExtResource("7_knbke")]([SubResource("Resource_jvqq5"), SubResource("Resource_yxhrg"), SubResource("Resource_hvkvg"), SubResource("Resource_uqj3l"), SubResource("Resource_w4m7k"), SubResource("Resource_1sug7"), SubResource("Resource_cb118")])
-abilities = Array[ExtResource("1_vx4r6")]([])
-ability_resources = Array[ExtResource("8_pbx0d")]([])
-animation_library = ExtResource("11_h2dud")
+abilities = Array[ExtResource("1_vx4r6")]([ExtResource("2_vx4r6"), ExtResource("3_p463m"), ExtResource("4_hlq87"), ExtResource("5_ows5h"), ExtResource("6_khnuq")])
+ability_resources = Array[ExtResource("8_pbx0d")]([SubResource("Resource_h2x7v"), SubResource("Resource_qaclj")])
+animation_library = ExtResource("11_vx4r6")
 sprite_position = Vector2(0, -64)

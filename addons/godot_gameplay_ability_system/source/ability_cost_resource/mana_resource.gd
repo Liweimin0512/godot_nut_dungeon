@@ -17,5 +17,10 @@ func consume(amount: int) -> bool:
 		current_value = 0
 	return ok
 
+## 每回合自动恢复
+func on_turn_start(_context: Dictionary) -> void:
+	var amount = max_value * 0.1
+	restore(amount)
+
 func _get_resource_name() -> StringName:
 	return "魔法值"

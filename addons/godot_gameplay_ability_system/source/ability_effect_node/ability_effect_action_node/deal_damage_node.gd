@@ -15,6 +15,8 @@ class_name DealDamageEffectNode
 @export var effect: AbilityEffectNode = null
 
 func _perform_action(context: Dictionary) -> STATUS:
+	if context.get("ability").ability_name == "漩涡约束":
+		pass
 	var _damage_multiplier : float
 	var repeat_index = context.get("repeat_index", null)
 	if repeat_index != null:

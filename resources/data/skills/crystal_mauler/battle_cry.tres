@@ -1,18 +1,18 @@
 [gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=5 format=3 uid="uid://beqppdym756qn"]
 
-[ext_resource type="Script" uid="uid://b5wl0kwy4qx4h" path="res://addons/godot_gameplay_ability_system/source/ability_cost/ability_resource_cost.gd" id="1_fyh0o"]
-[ext_resource type="Texture2D" uid="uid://ey4jlg2yhxxs" path="res://assets/texture/icon/Buffs/critical_boost.png" id="1_pxem3"]
-[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="2_fyh0o"]
+[ext_resource type="Script" uid="uid://b5wl0kwy4qx4h" path="res://addons/godot_gameplay_ability_system/source/ability_cost/ability_resource_cost.gd" id="1_i4ybt"]
+[ext_resource type="Texture2D" uid="uid://ey4jlg2yhxxs" path="res://assets/texture/icon/Buffs/critical_boost.png" id="2_khxhl"]
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="3_myyfh"]
 
 [sub_resource type="Resource" id="Resource_w0r25"]
-script = ExtResource("1_fyh0o")
+script = ExtResource("1_i4ybt")
 cost_resource_name = &"怒气值"
 cost_value = 30
-metadata/_custom_type_script = ExtResource("1_fyh0o")
+metadata/_custom_type_script = ExtResource("1_i4ybt")
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("2_fyh0o")
+script = ExtResource("3_myyfh")
 target_type = &"ally"
 ability_cost = SubResource("Resource_w0r25")
 cooldown = 3
@@ -21,6 +21,6 @@ is_show = true
 ability_name = &"战争怒吼"
 ability_tags = Array[StringName]([])
 ability_description = "发出怒吼，激励自己和周围的盟友。"
-icon = ExtResource("1_pxem3")
+icon = ExtResource("2_khxhl")
 is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/battle_cry_effect.json"

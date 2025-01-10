@@ -179,11 +179,13 @@ func play_animation(animation_name : StringName, blend_time: float = 0.0, custom
 
 ## 行动前
 func _pre_action(ability_context: Dictionary) -> void:
+	owner.z_index = 10
 	ability_component.handle_game_event("on_action_started", ability_context)
 	await get_tree().create_timer(0.2).timeout
 
 ## 行动后
 func _post_action(ability_context: Dictionary) -> void:
+	owner.z_index = 0
 	ability_component.handle_game_event("on_action_completed", ability_context)
 	await _move_from_action()
 

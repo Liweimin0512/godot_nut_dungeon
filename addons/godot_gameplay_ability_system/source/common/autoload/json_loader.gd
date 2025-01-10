@@ -121,7 +121,7 @@ func is_json_cached(path: String) -> bool:
 func get_cached_json(path: String) -> Dictionary:
 	var config : Dictionary
 	if not _json_cache.has(path):
-		push_error("没找到缓存的json: ", path)
+		push_warning("没找到缓存的json: ", path)
 		config = _load_json_file(path)
 	else:
 		config = _json_cache.get(path, {})

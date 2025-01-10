@@ -39,7 +39,7 @@ func apply(ability_component: AbilityComponent, context: Dictionary) -> void:
 
 ## 移除技能
 func remove() -> void:
-	effect_container.revoke()
+	await effect_container.revoke()
 	_remove()
 	removed.emit(_context)
 

@@ -41,14 +41,17 @@ func _apply(context: Dictionary) -> void:
 
 ## 更新BUFF状态
 func _update() -> void:
-	print("更新{0} BUFF状态".format([self]))
+	GASLogger.debug("更新{0} BUFF状态".format([self]))
 	if is_permanent: return
-	if buff_type == 1: remove()
+	if buff_type == 1: 
+		var ability_component : AbilityComponent = _context.get("ability_component")
+		ability_component.remove_ability(self)
 	elif buff_type == 0:
 		value -= 1
-		if value <= 0: 
-			remove()
-	print("更新buff {0} 的状态，完成！ 当前层数{1}".format([self, value]))
+		if value <= 0:
+			var ability_component : AbilityComponent = _context.get("ability_component")
+			ability_component.remove_ability(self)
+	GASLogger.debug("更新buff {0} 的状态，完成！ 当前层数{1}".format([self, value]))
 
 ## 合并BUFF
 func _merge_buff(old: BuffAbility, new: BuffAbility) -> void:

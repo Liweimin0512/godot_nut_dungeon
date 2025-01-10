@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://scripts/systems/ability/turn_based_buff_ability.gd" id="2_jikmn"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_jikmn")
 buff_type = 1
 is_permanent = false

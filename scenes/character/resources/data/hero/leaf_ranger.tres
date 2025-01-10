@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterModel" load_steps=18 format=3 uid="uid://do7opu8hnabrh"]
 
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="1_2d8hr"]
-[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://resources/data/abilities/skill_ability/attack.tres" id="2_ojc0e"]
+[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://resources/data/skills/common/attack.tres" id="2_ojc0e"]
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="3_t1nq4"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="4_si03u"]
 [ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_cost_resource/health_resource.gd" id="5_mgm5e"]

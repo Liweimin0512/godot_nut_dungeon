@@ -18,8 +18,12 @@ var _original_context: Dictionary
 
 ## 处理触发器, AbilityComponent 调用
 func handle_trigger(trigger_data: Dictionary, callback:  Callable = Callable()) -> void:
+	var ability = _get_context_value(_original_context, "ability")
+	if ability is SkillAbility and ability.is_cooldown:
+		# 处于冷却状态下的Skill没办法触发
+		return
 	# 检查子节点
-	if not child: 
+	if not child:
 		GASLogger.error("child is null")
 		return
 	# 检查触发次数
@@ -40,7 +44,6 @@ func handle_trigger(trigger_data: Dictionary, callback:  Callable = Callable()) 
 		_unregister_trigger()
 		
 	if callback.is_valid():
-		var ability = _original_context.get("ability", null)
 		if result == STATUS.SUCCESS:
 			GASLogger.debug("trigger success")
 			callback.call(true, ability)

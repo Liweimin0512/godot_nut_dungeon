@@ -12,14 +12,13 @@ metadata/_custom_type_script = ExtResource("1_s7cif")
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_ylg8l")
-casting_position = 0
 target_type = &"self"
 ability_cost = SubResource("Resource_1yfi6")
-is_auto_cast = false
 cooldown = 4
 current_cooldown = 0
 is_show = true
 ability_name = &"魔法盾"
 ability_tags = Array[StringName]([])
 ability_description = "激活魔法盾，吸收伤害的同时提高魔法恢复能力"
+is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/magic_shield_skill_effect.json"

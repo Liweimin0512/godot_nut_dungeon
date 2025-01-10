@@ -3,20 +3,15 @@ extends Node2D
 const CHARACTER = preload("res://scenes/character/character.tscn")
 ## 需要预加载的effect配置文件列表
 const EFFECT_CONFIGS : Array[String] = [
-	"res://resources/data/abilities/skill_effects/attack.json",
-	"res://resources/data/abilities/skill_effects/battle_cry_effect.json",
-	"res://resources/data/abilities/skill_effects/chain_lightning_effect.json",
-	"res://resources/data/abilities/skill_effects/fireball_effect.json",
-	"res://resources/data/abilities/skill_effects/heroic_strike_effect.json",
-	"res://resources/data/abilities/skill_effects/magic_missile_effect.json",
-	"res://resources/data/abilities/skill_effects/magic_shield_skill_effect.json",
-	"res://resources/data/abilities/skill_effects/counter_attack_effect.json",
-	"res://resources/data/abilities/skill_effects/mana_surge.json",
-	"res://resources/data/abilities/skill_effects/unyielding_effect.json",
-	"res://resources/data/abilities/buff_effects/ignite_buff.json",
-	"res://resources/data/abilities/buff_effects/magic_shield_buff.json",
-	"res://resources/data/abilities/buff_effects/battle_cry_buff.json",
-	"res://resources/data/abilities/buff_effects/stun_buff.json",
+	"res://resources/data/buffs/effects/battle_cry_buff.json",
+	"res://resources/data/buffs/effects/ignite_buff.json",
+	"res://resources/data/buffs/effects/magic_shield_buff.json",
+	"res://resources/data/buffs/effects/stun_buff.json",
+	"res://resources/data/buffs/effects/torrential_curse.json",
+	
+	#"res://resources/data/skills/common/effects/attack.json", "res://resources/data/skills/common/effects/chain_lightning_effect.json", "res://resources/data/skills/common/effects/fireball_effect.json", "res://resources/data/skills/common/effects/magic_missile_effect.json", "res://resources/data/skills/common/effects/magic_shield_skill_effect.json", "res://resources/data/skills/common/effects/mana_surge.json",
+	"res://resources/data/skills/water_priestess/effects/aqua_shield.json", "res://resources/data/skills/water_priestess/effects/healing_spring.json", "res://resources/data/skills/water_priestess/effects/tidal_fury.json", "res://resources/data/skills/water_priestess/effects/vortex_bind.json", "res://resources/data/skills/water_priestess/effects/water_blade_slash.json",
+	"res://resources/data/skills/crystal_mauler/effects/battle_cry_effect.json", "res://resources/data/skills/crystal_mauler/effects/counter_attack_effect.json", "res://resources/data/skills/crystal_mauler/effects/heroic_strike_effect.json", "res://resources/data/skills/crystal_mauler/effects/unyielding_effect.json"
 ]
 
 # @onready var rich_text_label: RichTextLabel = %RichTextLabel

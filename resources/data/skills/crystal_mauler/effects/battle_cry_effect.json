@@ -18,7 +18,7 @@
 		  "select_type": "all",
 		  "child": {
 			"type": "apply_ability",
-			"ability": "@resource://resources/data/abilities/buffs/battle_cry.tres",
+			"ability": "@resource://resources/data/buffs/battle_cry.tres",
 			"pre_delay": 0.4,
 			"post_delay": 0.5
 		  }

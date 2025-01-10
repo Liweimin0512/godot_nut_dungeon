@@ -100,6 +100,7 @@ func handle_game_event(event_name: StringName, event_context: Dictionary = {}) -
 		await trigger.handle_trigger(event_context, func(result: bool, ability: Ability) -> void:
 			if result:
 				GASLogger.debug("触发器成功：{0}".format([ability]))
+				if ability is SkillAbility: ability.apply_cooldown()
 				ability_trigger_success.emit(ability)
 			else:
 				GASLogger.debug("触发器失败：{0}".format([ability]))

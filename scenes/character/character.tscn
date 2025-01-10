@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
-[ext_resource type="Texture2D" uid="uid://cqcg1s3a5cmh7" path="res://assets/sprites/characters/heros/crystal_mauler/attack_1.png" id="2_bblvu"]
+[ext_resource type="Texture2D" uid="uid://chw4fofu6gtjx" path="res://assets/sprites/characters/heros/water_priestess/death.png" id="2_bblvu"]
 [ext_resource type="Script" uid="uid://y1mgjyqenlv7" path="res://scripts/systems/combat/combat_component.gd" id="2_ghtna"]
 [ext_resource type="Script" uid="uid://n67wyu14blxx" path="res://addons/godot_gameplay_ability_system/source/ability_component.gd" id="3_6a5vl"]
-[ext_resource type="AnimationLibrary" uid="uid://cd0oe24x0pr5f" path="res://scenes/character/resources/animation/hero/animation_library_crystal_mauler.res" id="4_q52vl"]
+[ext_resource type="AnimationLibrary" uid="uid://br30iodn51mob" path="res://scenes/character/resources/animation/hero/animation_library_water_priestess.res" id="4_q52vl"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
 [ext_resource type="Script" uid="uid://cchps1pajt3jv" path="res://addons/godot_gameplay_ability_system/source/ability_attribute_component.gd" id="7_bix7t"]
 [ext_resource type="Script" uid="uid://dy54mfe63g1mx" path="res://addons/godot_gameplay_ability_system/source/ability_resource_component.gd" id="8_bblvu"]
@@ -18,8 +18,8 @@ script = ExtResource("1_qu267")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -64)
 texture = ExtResource("2_bblvu")
-hframes = 6
-frame = 2
+hframes = 14
+frame = 5
 
 [node name="cast_points" type="Node2D" parent="."]
 

@@ -12,14 +12,13 @@ metadata/_custom_type_script = ExtResource("1_i6yv1")
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_pj8v3")
-casting_position = 0
 target_type = &"enemy"
 ability_cost = SubResource("Resource_503n1")
-is_auto_cast = false
 cooldown = 2
 current_cooldown = 0
 is_show = true
 ability_name = &"火球术"
 ability_tags = Array[StringName]([])
 ability_description = "法师凝聚火元素，释放一个火球对单个敌人造成巨大伤害。"
+is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/heroic_strike_effect.json"

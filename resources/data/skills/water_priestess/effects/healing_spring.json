@@ -1,0 +1,16 @@
+{
+  "type": "parallel",
+  "children": [
+	{
+	  "type": "play_animation",
+	  "animation_name": "heal"
+	},
+	{
+	  "type": "modify_ability_resource",
+	  "ability_resource_name": "生命值",
+	  "ability_resource_amount": 0.2,
+	  "modify_type": "percentage",
+	  "pre_delay": 0.2
+	}
+  ]
+}

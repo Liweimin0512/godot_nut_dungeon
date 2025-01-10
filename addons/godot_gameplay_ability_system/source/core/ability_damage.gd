@@ -102,7 +102,7 @@ func _init(
 func apply_damage() -> void:
 	if is_indirect:
 		# 如果为间接伤害，则防守方受到伤害（触发受击事件）
-		await defender.hurt(self)
+		await defender.hurt(attacker, self)
 	elif attacker:
 		# 如果为直接伤害，则攻击方攻击（触发攻击事件）
 		await attacker.hit(self)
