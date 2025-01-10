@@ -3,6 +3,9 @@ extends EditorPlugin
 
 const PLUGIN_NAME = "GodotGameplayAbilitySystem"
 const PLUGIN_VERSION = "0.1.0"
+const GenerateEffectInspectorPlugin = preload("res://addons/godot_gameplay_ability_system/source/editor/generate_effect_inspector_plugin.gd")
+
+var inspector_plugin = GenerateEffectInspectorPlugin.new()
 
 func _enter_tree() -> void:
 	# 注册自定义类型
@@ -10,6 +13,7 @@ func _enter_tree() -> void:
 	add_autoload_singleton("JsonLoader", "source/common/autoload/json_loader.gd")
 	add_autoload_singleton("EffectNodeFactory", "source/common/factory/ability_effect_node_factory.gd")
 	print("{0} v{1} initialized".format([PLUGIN_NAME, PLUGIN_VERSION]))
+	add_inspector_plugin(inspector_plugin)
 
 func _exit_tree() -> void:
 	# 移除自定义类型
@@ -17,6 +21,7 @@ func _exit_tree() -> void:
 	remove_autoload_singleton("JsonLoader")
 	remove_autoload_singleton("EffectNodeFactory")
 	print("{0} v{1} unloaded".format([PLUGIN_NAME, PLUGIN_VERSION]))
+	remove_inspector_plugin(inspector_plugin)
 
 func _register_custom_types() -> void:
 	# 注册核心组件
