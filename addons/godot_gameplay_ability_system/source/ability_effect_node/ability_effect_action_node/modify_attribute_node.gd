@@ -9,8 +9,11 @@ class_name ModifyAttributeNode
 @export var modifier_configs: Array
 ## 修改倍率
 @export_storage var modify_multiplier: int = 1
+## 技能上下文
+var _original_context: Dictionary
 
 func _perform_action(context: Dictionary = {}) -> STATUS:
+	_original_context = context.duplicate()
 	var target = context.get("target")
 	if not target:
 		GASLogger.error("ModifyAttributeNode target is null")
@@ -31,14 +34,14 @@ func _perform_action(context: Dictionary = {}) -> STATUS:
 	return STATUS.SUCCESS
 
 ## 移除效果
-func _revoke_action(context: Dictionary = {}) -> STATUS:
-	var target = context.get("target")
+func _revoke_action() -> STATUS:
+	var target = _original_context.get("target")
 	if not target:
 		GASLogger.error("ModifyAttributeNode target is null")
 		return STATUS.FAILURE
-	var attribute_component: AbilityAttributeComponent = context.get("attribute_component")
+	var attribute_component: AbilityAttributeComponent = _original_context.get("attribute_component")
 	for modifier : AbilityAttributeModifier in modifiers:
-		modifier.remove(attribute_component.get_attribute(modifier.attribute_name))
+		attribute_component.remove_attribute_modifier(modifier)
 		GASLogger.info("移除效果：对目标应用属性修改器：{0}".format([modifier]))
 	return STATUS.SUCCESS
 

@@ -48,7 +48,6 @@ layout_mode = 2
 
 [node name="W_Status" parent="MarginContainer/VBoxContainer/MarginContainer4" instance=ExtResource("3_yxprq")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]

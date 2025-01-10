@@ -9,5 +9,5 @@ func on_pre_turn_start(_data: Dictionary = {}) -> void:
 	_update()
 
 ## 战斗结束时，销毁自身
-func on_turn_end(_context: Dictionary) -> void:
+func on_combat_end(_ability_context: Dictionary) -> void:
 	remove()

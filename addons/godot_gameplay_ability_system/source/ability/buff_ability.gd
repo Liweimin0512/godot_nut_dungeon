@@ -46,7 +46,8 @@ func _update() -> void:
 	if buff_type == 1: remove()
 	elif buff_type == 0:
 		value -= 1
-		if value <= 0: remove()
+		if value <= 0: 
+			remove()
 	print("更新buff {0} 的状态，完成！ 当前层数{1}".format([self, value]))
 
 ## 合并BUFF

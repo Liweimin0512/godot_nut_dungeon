@@ -17,14 +17,6 @@ func _init(attribute_name: StringName, modify_type: String, value: float) -> voi
 	self.modify_type = modify_type
 	self.value = value
 
-## 添加修改器
-func apply(attribute: AbilityAttribute) -> void:
-	attribute.modify(modify_type, value)
-
-## 移除修改器
-func remove(attribute: AbilityAttribute) -> void:
-	attribute.modify(modify_type, value * -1)
-
 func _to_string() -> String:
 	var s := "属性修改器：修改{0}属性".format([attribute_name])
 	match modify_type:
