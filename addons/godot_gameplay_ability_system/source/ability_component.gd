@@ -65,10 +65,14 @@ func apply_ability(ability: Ability, ability_context: Dictionary) -> void:
 
 ## 移除技能
 func remove_ability(ability: Ability) -> void:
-	ability.applied.disconnect(_on_ability_applied.bind(ability))
-	ability.cast_started.disconnect(_on_ability_cast_started.bind(ability))
-	ability.cast_finished.disconnect(_on_ability_cast_finished.bind(ability))
-	ability.removed.disconnect(_on_ability_removed.bind(ability))
+	if ability.applied.is_connected(_on_ability_applied):
+		ability.applied.disconnect(_on_ability_applied.bind(ability))
+	if ability.cast_started.is_connected(_on_ability_cast_started):
+		ability.cast_started.disconnect(_on_ability_cast_started.bind(ability))
+	if ability.cast_finished.is_connected(_on_ability_cast_finished):
+		ability.cast_finished.disconnect(_on_ability_cast_finished.bind(ability))
+	if ability.removed.is_connected(_on_ability_removed):
+		ability.removed.disconnect(_on_ability_removed.bind(ability))
 	ability.remove()
 	_abilities.erase(ability)
 

@@ -28,6 +28,8 @@ var _combat_owner_name : StringName :
 		return self.to_string()
 ## 战斗位置
 var _combat_position : Vector2 = Vector2.ZERO
+## 当前是否为正在行动状态
+var _is_actioning : bool = false
 
 ## 依赖于技能系统组件
 @export var ability_component: AbilityComponent
@@ -100,12 +102,14 @@ func action() -> void:
 			"resource_component": ability_resource_component,
 			"attribute_component": ability_attribute_component
 		}
+		_is_actioning = true
 		await _pre_action(ability_context)
 		var ok := await ability_component.try_cast_ability(ability, ability_context)
 		if not ok:
 			_print("combat_component: {0} 释放技能失败".format([self]))
 		await _post_action(ability_context)
-
+		_is_actioning = false
+	
 ## 回合结束
 func turn_end() -> void:
 	if not _current_combat: return
@@ -153,6 +157,8 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 	await ability_component.handle_game_event("on_post_hurt", ability_context)
 	var health_value : float = ability_resource_component.get_resource_value("生命值")
 	if health_value <= 0:
+		if _is_actioning:
+			await _move_from_action()
 		_die()
 
 ## 获取施法位置

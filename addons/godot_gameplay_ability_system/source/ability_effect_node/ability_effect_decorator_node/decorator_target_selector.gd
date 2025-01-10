@@ -29,7 +29,7 @@ func _execute(context: Dictionary) -> STATUS:
 		_targets = _select_all(allies, enemies, caster)
 
 	for target in _targets:
-		child.executed.connect(_on_child_executed)
+		child.executed.connect(_on_child_executed.bind(target))
 		var target_context = context.duplicate(true)
 		target_context["target"] = target
 		if is_parallel:
@@ -42,6 +42,7 @@ func _execute(context: Dictionary) -> STATUS:
 
 func _revoke() -> STATUS:
 	for target in _targets:
+		child.revoked.connect(_on_child_revoked.bind(target))
 		if is_parallel:
 			child.revoke()
 		else:
@@ -84,12 +85,12 @@ func _select_all(allies: Array, enemies: Array, caster: Node) -> Array:
 			return allies + enemies
 	return []
 
-func _on_child_executed(status: STATUS) -> void:
-	_executed_targets.append(child.target)
+func _on_child_executed(_status: STATUS, target: Node) -> void:
+	_executed_targets.append(target)
 	if _executed_targets.size() >= _targets.size():
 		all_targets_executed.emit()
 
-func _on_child_revoked(status: STATUS) -> void:
-	_executed_targets.erase(child.target)
+func _on_child_revoked(_status: STATUS, target: Node) -> void:
+	_executed_targets.erase(target)
 	if _executed_targets.is_empty():
 		all_targets_revoked.emit()

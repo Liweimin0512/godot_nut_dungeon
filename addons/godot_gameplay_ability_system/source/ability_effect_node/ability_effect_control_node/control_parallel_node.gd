@@ -13,30 +13,34 @@ enum POLICY {
 ## 当前状态
 var status_type: STATUS = STATUS.FAILURE
 ## 已经执行的子节点
-var _executed_children: Array[ControlNode] = []
+var _executed_children: Array[AbilityEffectNode] = []
 ## 所有子节点执行完毕
 signal all_children_executed
 ## 所有子节点撤销完毕
 signal all_children_revoked
 
 func _execute(context: Dictionary) -> STATUS:
+	_executed_children.clear()
 	for child in children:
 		if not child.executed.is_connected(_on_child_executed):
 			child.executed.connect(_on_child_executed.bind(child))
 	for child in children:
 		child.execute(context)
-	await all_children_executed
+	if success_policy == POLICY.REQUIRE_ALL:
+		await all_children_executed
 	return status_type
 
 func _revoke() -> STATUS:
 	for child in children:
-		if not child.is_connected("revoked", _on_child_revoked):
+		if not child.revoked.is_connected(_on_child_revoked):
 			child.revoked.connect(_on_child_revoked.bind(child))
 		child.revoke()
-	await revoked
+	if success_policy == POLICY.REQUIRE_ALL:
+		await revoked
+	_executed_children.clear()
 	return status_type
 
-func _on_child_executed(status: STATUS, child: AbilityEffectActionNode) -> void:
+func _on_child_executed(status: STATUS, child: AbilityEffectNode) -> void:
 	_executed_children.append(child)
 	if success_policy == POLICY.REQUIRE_ONE:
 		status_type = STATUS.SUCCESS

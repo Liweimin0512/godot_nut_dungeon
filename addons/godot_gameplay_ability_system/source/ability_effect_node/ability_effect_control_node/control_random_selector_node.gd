@@ -15,7 +15,8 @@ func _execute(context: Dictionary) -> STATUS:
 	
 	# 记录选择的节点
 	_last_selected_index = selected_index
-
+	
+	await context.get("tree").create_timer(0.1).timeout
 	var status = await children[selected_index].execute(context)
 	return status
 

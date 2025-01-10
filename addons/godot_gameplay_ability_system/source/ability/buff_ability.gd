@@ -30,9 +30,11 @@ func _apply(context: Dictionary) -> void:
 	if not ability_component:
 		GASLogger.error("can not found ability_component in context! {0}".format([self]))
 	var old : BuffAbility = ability_component.get_same_ability(self)
-	if old and old.can_stack:
-		_merge_buff(old, self)
-		GASLogger.info("合并BUFF：{0}".format([self]))
+	if old:
+		if old.can_stack:
+			_merge_buff(old, self)
+			GASLogger.info("合并BUFF：{0}".format([self]))
+		old.remove()
 	else:
 		_context["source"] = self
 		GASLogger.info("应用BUFF：{0}".format([self]))
@@ -49,7 +51,7 @@ func _update() -> void:
 
 ## 合并BUFF
 func _merge_buff(old: BuffAbility, new: BuffAbility) -> void:
-	old.value += new.value
+	new.value += old.value
 
 func _to_string() -> String:
 	return "{0}层数{1}".format([ability_name, value])
