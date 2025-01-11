@@ -18,8 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 CombatSystem="*res://scripts/systems/combat/combat_system.gd"
-JsonLoader="*res://addons/godot_gameplay_ability_system/source/common/autoload/json_loader.gd"
-EffectNodeFactory="*res://addons/godot_gameplay_ability_system/source/common/factory/ability_effect_node_factory.gd"
 
 [display]
 
@@ -28,10 +26,6 @@ window/size/viewport_height=324
 window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/mode="viewport"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/godot_gameplay_ability_system/plugin.cfg")
 
 [global_group]
 
