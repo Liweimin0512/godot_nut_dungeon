@@ -15,7 +15,7 @@
                     "auto_free": true
                 },
                 {
-                    "type": "deal_damage",
+                    "type": "apply_damage",
                     "damage_type": "indirect",
                     "damage_multiplier": 0.5
                 }

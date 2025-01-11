@@ -17,7 +17,7 @@
 		  "target_type": "enemy",
 		  "select_type": "all",
 		  "child": {
-			"type": "deal_damage",
+			"type": "apply_damage",
 			"damage_type": 1,
 			"damage_multiplier": 2,
 			"pre_delay": 1.3,

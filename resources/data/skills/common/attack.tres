@@ -6,8 +6,8 @@
 resource_local_to_scene = true
 script = ExtResource("1_bo8pl")
 target_type = &"enemy"
-cooldown = 0
-current_cooldown = 0
+cooldown = 0.0
+current_cooldown = 0.0
 is_show = false
 ability_name = &"普攻"
 ability_tags = Array[StringName]([])

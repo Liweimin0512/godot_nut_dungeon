@@ -11,7 +11,7 @@
 		  "type": "decorator_trigger",
 		  "trigger_type": "on_turn_start",
 		  "child": {
-			"type": "deal_damage",
+			"type": "apply_damage",
 			"damage_type": 1,
 			"damage_multiplier": 1.0,
 			"is_indirect": true

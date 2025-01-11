@@ -124,7 +124,7 @@ func combat_end() -> void:
 	await ability_component.handle_game_event("on_combat_end")
 	for ability in ability_component.get_abilities():
 		if ability is BuffAbility:
-			ability_component.remove_ability(ability)
+			ability_component.remove_ability(ability, {})
 	combat_ended.emit()
 
 ## 攻击

@@ -13,7 +13,7 @@
 	  "target_position_type": "body"
 	},
 	{
-	  "type": "deal_damage",
+	  "type": "apply_damage",
 	  "damage_type": "magic",
 	  "damage_multiplier": 1.2
 	},
@@ -42,7 +42,7 @@
 			"target_position_type": "body"
 		  },
 		  {
-			"type": "deal_damage",
+			"type": "apply_damage",
 			"damage_type": "magic",
 			"damage_multiplier_array": [
 			  1,

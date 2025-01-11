@@ -73,8 +73,6 @@ ability_resource_name = &"生命值"
 current_value = 0
 max_value = 0
 attribute_id = &"health"
-resource_color = Color(1, 0, 0, 1)
-size_y = 10
 
 [sub_resource type="Resource" id="Resource_5uifr"]
 resource_local_to_scene = true

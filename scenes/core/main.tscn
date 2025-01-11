@@ -31,224 +31,134 @@
 [ext_resource type="Texture2D" uid="uid://b585iq81elnsf" path="res://assets/sprites/characters/heros/water_priestess/heal.png" id="28_42t4q"]
 [ext_resource type="Texture2D" uid="uid://bue8pimoybodo" path="res://assets/texture/icon/character_profile_picture/water_priestess.png" id="29_gi53d"]
 
-[sub_resource type="Resource" id="Resource_exoq3"]
+[sub_resource type="Resource" id="Resource_fvdfm"]
 resource_local_to_scene = true
 script = ExtResource("12_pr6ky")
+attribute_id = &""
 attribute_name = &"生命值"
 _base_value = 100.0
+_growth_value = 0.0
+attribute_level = 1
 
-[sub_resource type="Resource" id="Resource_w7hn7"]
+[sub_resource type="Resource" id="Resource_0k6rw"]
 resource_local_to_scene = true
 script = ExtResource("12_pr6ky")
+attribute_id = &""
 attribute_name = &"攻击力"
 _base_value = 10.0
+_growth_value = 0.0
+attribute_level = 1
 
-[sub_resource type="Resource" id="Resource_lsjgq"]
+[sub_resource type="Resource" id="Resource_tw145"]
 resource_local_to_scene = true
 script = ExtResource("12_pr6ky")
+attribute_id = &""
 attribute_name = &"防御力"
 _base_value = 5.0
+_growth_value = 0.0
+attribute_level = 1
 
-[sub_resource type="Resource" id="Resource_tlili"]
+[sub_resource type="Resource" id="Resource_i3jsw"]
 resource_local_to_scene = true
 script = ExtResource("12_pr6ky")
+attribute_id = &""
 attribute_name = &"速度"
 _base_value = 10.0
+_growth_value = 0.0
+attribute_level = 1
 
 [sub_resource type="Resource" id="Resource_w4m7k"]
 script = ExtResource("12_pr6ky")
+attribute_id = &""
 attribute_name = &"命中率"
 _base_value = 1.0
+_growth_value = 0.0
+attribute_level = 1
 
 [sub_resource type="Resource" id="Resource_1sug7"]
 script = ExtResource("12_pr6ky")
+attribute_id = &""
 attribute_name = &"暴击率"
 _base_value = 0.0
+_growth_value = 0.0
+attribute_level = 1
 
 [sub_resource type="Resource" id="Resource_cb118"]
 script = ExtResource("12_pr6ky")
+attribute_id = &""
 attribute_name = &"魔法值"
 _base_value = 100.0
+_growth_value = 0.0
+attribute_level = 1
 metadata/_custom_type_script = ExtResource("12_pr6ky")
 
 [sub_resource type="Resource" id="Resource_h2x7v"]
 script = ExtResource("14_b2ey7")
+ability_resource_id = &""
 ability_resource_name = &"生命值"
 current_value = 0
 max_value = 0
-attribute_name = &"生命值"
-resource_color = Color(1, 0, 0, 1)
-size_y = 10
+attribute_id = &""
 metadata/_custom_type_script = ExtResource("14_b2ey7")
 
 [sub_resource type="Resource" id="Resource_qaclj"]
 script = ExtResource("19_pr6ky")
+ability_resource_id = &""
 ability_resource_name = &"魔法值"
 current_value = 0
 max_value = 0
-attribute_name = &"魔法值"
-resource_color = Color(0.184314, 0, 0.760784, 1)
-size_y = 10
+attribute_id = &""
 metadata/_custom_type_script = ExtResource("19_pr6ky")
 
-[sub_resource type="Animation" id="Animation_ui101"]
-resource_name = "die"
-length = 1.6
-step = 0.1
+[sub_resource type="Animation" id="Animation_6gec8"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("20_yomsl")]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [16]
-}
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/path = NodePath("Sprite2D:hframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [14]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/path = NodePath("Sprite2D:vframes")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-}
-
-[sub_resource type="Animation" id="Animation_cndte"]
-resource_name = "hit"
-length = 0.7
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("21_b2ey7")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-
-[sub_resource type="Animation" id="Animation_f8bwf"]
-resource_name = "idle"
-length = 0.8
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("22_yg6x3")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
 [sub_resource type="Animation" id="Animation_p0q65"]
@@ -355,57 +265,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-}
-
-[sub_resource type="Animation" id="Animation_6gec8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("20_yomsl")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [14]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:vframes")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_7afe6"]
@@ -567,6 +426,59 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 }
 
+[sub_resource type="Animation" id="Animation_ui101"]
+resource_name = "die"
+length = 1.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("20_yomsl")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+}
+
 [sub_resource type="Animation" id="Animation_lr4cu"]
 resource_name = "heal"
 length = 1.2
@@ -620,7 +532,114 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0l26g"]
+[sub_resource type="Animation" id="Animation_cndte"]
+resource_name = "hit"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("21_b2ey7")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_f8bwf"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("22_yg6x3")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fbmiv"]
 resource_local_to_scene = true
 _data = {
 &"RESET": SubResource("Animation_6gec8"),
@@ -635,15 +654,15 @@ _data = {
 &"idle": SubResource("Animation_f8bwf")
 }
 
-[sub_resource type="Resource" id="Resource_7xcap"]
+[sub_resource type="Resource" id="Resource_pr6ky"]
 resource_local_to_scene = true
 script = ExtResource("25_lsjgq")
 character_name = &"水灵儿"
 character_icon = ExtResource("29_gi53d")
-ability_attributes = Array[ExtResource("12_pr6ky")]([SubResource("Resource_exoq3"), SubResource("Resource_w7hn7"), SubResource("Resource_lsjgq"), SubResource("Resource_tlili"), SubResource("Resource_w4m7k"), SubResource("Resource_1sug7"), SubResource("Resource_cb118")])
+ability_attributes = Array[ExtResource("12_pr6ky")]([SubResource("Resource_fvdfm"), SubResource("Resource_0k6rw"), SubResource("Resource_tw145"), SubResource("Resource_i3jsw"), SubResource("Resource_w4m7k"), SubResource("Resource_1sug7"), SubResource("Resource_cb118")])
 abilities = Array[ExtResource("10_i3jsw")]([ExtResource("11_fvdfm"), ExtResource("12_0k6rw"), ExtResource("13_tw145"), ExtResource("14_i3jsw"), ExtResource("15_fbmiv")])
 ability_resources = Array[ExtResource("13_yomsl")]([SubResource("Resource_h2x7v"), SubResource("Resource_qaclj")])
-animation_library = SubResource("AnimationLibrary_0l26g")
+animation_library = SubResource("AnimationLibrary_fbmiv")
 sprite_position = Vector2(0, -64)
 
 [node name="Main" type="Node2D"]
@@ -712,7 +731,7 @@ layer = 128
 position = Vector2(216, 144)
 
 [node name="PlayerCharacter5" parent="PlayerMarkers/Marker2D" groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
-character_model = SubResource("Resource_7xcap")
+character_model = SubResource("Resource_pr6ky")
 
 [node name="Marker2D2" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(180, 168)

@@ -10,7 +10,7 @@
 	  "animation_name": "attack_2"
 	},
 	{
-	  "type": "deal_damage",
+	  "type": "apply_damage",
 	  "damage_type": "physical",
 	  "damage_multiplier": 2,
 	  "pre_delay": 0.4,

@@ -16,7 +16,7 @@
 	  "type": "sequence",
 	  "children": [
 		{
-		  "type": "deal_damage",
+		  "type": "apply_damage",
 		  "damage_type": "magic",
 		  "damage_multiplier": 2
 		},
