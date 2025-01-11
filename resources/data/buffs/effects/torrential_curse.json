@@ -3,13 +3,9 @@
 	"children":[
 		{
 			"type": "modify_attribute",
-			"modifier_configs": [
-				{
-					"attribute_name": "速度",
-					"modify_type": "percentage",
-					"value": -0.3
-				}
-			]
+			"attribute_id": "speed",
+			"modify_type": "percentage",
+			"value": -0.3
 		},
 		{
 		  "type": "decorator_trigger",

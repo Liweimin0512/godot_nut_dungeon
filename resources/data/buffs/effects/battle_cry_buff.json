@@ -3,14 +3,9 @@
   "children": [
 	{
 	  "type": "modify_attribute",
-	  "modifier_configs": [
-		{
-		  "attribute_name": "攻击力",
-		  "modify_type": "percentage",
-		  "value": 0.2
-		}
-	  ],
-	  "duration": 10
+	  "attribute_id": "attack",
+	  "modify_type": "percentage",
+	  "value": 0.2
 	},
 	{
 	  "type": "spawn_vfx",
