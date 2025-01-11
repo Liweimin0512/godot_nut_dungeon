@@ -20,6 +20,8 @@ script = ExtResource("7_xjp3e")
 attribute_id = &"attack"
 attribute_name = &"攻击力"
 _base_value = 15.0
+_growth_value = 0.0
+attribute_level = 1
 
 [sub_resource type="Resource" id="Resource_gc0bh"]
 resource_local_to_scene = true
@@ -27,6 +29,8 @@ script = ExtResource("7_xjp3e")
 attribute_id = &"defense"
 attribute_name = &"防御力"
 _base_value = 3.0
+_growth_value = 0.0
+attribute_level = 1
 
 [sub_resource type="Resource" id="Resource_g7ipd"]
 resource_local_to_scene = true
@@ -34,6 +38,8 @@ script = ExtResource("7_xjp3e")
 attribute_id = &"health"
 attribute_name = &"生命值"
 _base_value = 100.0
+_growth_value = 0.0
+attribute_level = 1
 
 [sub_resource type="Resource" id="Resource_4anai"]
 resource_local_to_scene = true
@@ -41,40 +47,50 @@ script = ExtResource("7_xjp3e")
 attribute_id = &"speed"
 attribute_name = &"速度"
 _base_value = 6.0
+_growth_value = 0.0
+attribute_level = 1
 
 [sub_resource type="Resource" id="Resource_5h64c"]
 script = ExtResource("7_xjp3e")
 attribute_id = &"mana"
 attribute_name = &"魔法值"
 _base_value = 100.0
+_growth_value = 0.0
+attribute_level = 1
 
 [sub_resource type="Resource" id="Resource_2gihe"]
 script = ExtResource("7_xjp3e")
 attribute_id = &"hit_rate"
 attribute_name = &"命中率"
 _base_value = 1.0
+_growth_value = 0.0
+attribute_level = 1
 
 [sub_resource type="Resource" id="Resource_e4jre"]
 script = ExtResource("7_xjp3e")
 attribute_id = &"crit_rate"
 attribute_name = &"暴击率"
 _base_value = 0.0
+_growth_value = 0.0
+attribute_level = 1
 
 [sub_resource type="Resource" id="Resource_sw5wc"]
 script = ExtResource("9_salwa")
-ability_resource_name = &""
+ability_resource_id = &"health"
+ability_resource_name = &"生命值"
 current_value = 0
 max_value = 0
-attribute_name = &""
+attribute_id = &"health"
 resource_color = Color(1, 0, 0, 1)
 size_y = 10
 
 [sub_resource type="Resource" id="Resource_klj23"]
 script = ExtResource("10_e7ea1")
-ability_resource_name = &""
+ability_resource_id = &"mana"
+ability_resource_name = &"魔法值"
 current_value = 0
 max_value = 0
-attribute_name = &""
+attribute_id = &"mana"
 resource_color = Color(0, 0, 1, 1)
 size_y = 10
 

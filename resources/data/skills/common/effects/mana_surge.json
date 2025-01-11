@@ -16,7 +16,7 @@
 		"children": [
 		  {
 			"type": "modify_ability_resource",
-			"ability_resource_name": "mana",
+			"ability_resource_id": "mana",
 			"ability_resource_amount": 0.2,
 			"modify_type": "percentage"
 		  },

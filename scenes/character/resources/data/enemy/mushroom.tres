@@ -66,10 +66,11 @@ attribute_level = 1
 [sub_resource type="Resource" id="Resource_2k26t"]
 resource_local_to_scene = true
 script = ExtResource("9_m6b3c")
+ability_resource_id = &"health"
 ability_resource_name = &"生命值"
 current_value = 0
 max_value = 30
-attribute_name = &"生命值"
+attribute_id = &"health"
 resource_color = Color(1, 0, 0, 1)
 size_y = 10
 
