@@ -4,12 +4,16 @@
 
 [![Godot v4.3](https://img.shields.io/badge/Godot-v4.3-%23478cbf)](https://godotengine.org/)
 [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-[![GitHub](https://img.shields.io/badge/GitHub-仓库-black?logo=github)](https://github.com/Liweimin0512/TurnBasedCombatSystem)
-[![Gitee](https://img.shields.io/badge/Gitee-仓库-red?logo=gitee)](https://gitee.com/Liweimin0512/TurnBasedCombatSystem)
+[![GitHub](https://img.shields.io/badge/GitHub-仓库-black?logo=github)](https://github.com/Liweimin0512/GodotTurnBasedGameplayFramework)
+[![Gitee](https://img.shields.io/badge/Gitee-仓库-red?logo=gitee)](https://gitee.com/Giab/GodotTurnBasedGameplayFramework)
 
 ## 💡 简介
 
-基于godot4.3版本的回合制战斗系统框架，包含一个独立的技能系统插件。
+基于godot4.3版本的回合制游戏框架，包含一个独立的技能系统插件。计划包含战斗系统、技能系统、装备与道具系统、任务与对话系统等多个功能模块的实现，适合在此基础上制作自己的回合制RPG游戏。
+
+## 📄 许可证
+
+本项目采用 [MIT 许可证](LICENSE) 进行开源。
 
 ## ✨ 特性
 
@@ -29,17 +33,31 @@
 - [ ] 多样化的目标选择方式
 - [ ] 事件驱动的技能触发机制
 
+### 装备与道具系统
+
+- [ ] 内容正在规划中
+
+### 任务和对话系统
+
+- [ ] 内容正在规划中
+
 ## 🚀 快速开始
 
 1. 克隆或下载本项目
-2. 将ability_system文件夹复制到你的项目中作为插件使用
-3. 参考demo场景和示例代码来实现你自己的战斗系统
+2. ......
 
 ## 📁 项目结构
 
-- ability_system/ - 技能系统插件
-- combat_system/ - 回合制战斗框架
-- demo/ - 示例场景和代码
+- addons/ 插件目录
+    - godot_gameplay_ability_system/ 能力系统插件，以子模块方式提供
+- assets/ 原始资源文件，图片、精灵、字体和音乐音效等
+- docs/ 项目文档
+- resources/ 资源文件，包括自定义数据资源
+- scenes/ 场景文件，包括游戏中各种实体
+    - ui/ 存放界面相关的场景文件和脚本
+- scripts/ 脚本文件
+    - resources/ 自定义数据类
+- tests/ 测试，暂时没有
 
 ## 🎨 美术资源致谢
 
@@ -47,10 +65,6 @@
 
 - 英雄单位来自这位艺术家：[chierit](https://chierit.itch.io/)。他的角色都非常让人惊讶并且印象深刻，重点是大部分作品都提供了免费版本！他接受雇佣，推荐给所有喜欢这个风格的人！
 - 怪物单位来自这位艺术家：[luizmelo](https://luizmelo.itch.io/)，同样是非常优秀的美术作品，他的主页没有其他信息，很神秘但值得关注！
-
-## 📄 许可证
-
-本项目采用 [MIT 许可证](LICENSE) 进行开源。
 
 ### 代码许可
 
@@ -70,4 +84,4 @@
 
 ## 🤝 贡献
 
-欢迎贡献！请查看我们的[贡献指南](CONTRIBUTING.md)了解如何提交问题、拉取请求以及参与项目贡献。
+欢迎贡献！请查看我们的[贡献指南](docs/CONTRIBUTING.md)了解如何提交问题、拉取请求以及参与项目贡献。

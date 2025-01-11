@@ -1,8 +1,8 @@
 # 贡献指南
 
-[English](CONTRIBUTING.en.md) | [简体中文](CONTRIBUTING.md)
+[English](CONTRIBUTING.md) | [简体中文](CONTRIBUTING.CN.md)
 
-感谢你考虑为回合制战斗系统做出贡献！
+感谢你考虑为godot回合制游戏框架做出贡献！
 
 ## 🌟 贡献方式
 

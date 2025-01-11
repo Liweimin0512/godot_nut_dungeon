@@ -4,12 +4,16 @@
 
 [![Godot v4.3](https://img.shields.io/badge/Godot-v4.3-%23478cbf)](https://godotengine.org/)
 [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?logo=github)](https://github.com/YOUR_USERNAME/TurnBasedCombatSystem)
-[![Gitee](https://img.shields.io/badge/Gitee-Repository-red?logo=gitee)](https://gitee.com/YOUR_USERNAME/TurnBasedCombatSystem)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?logo=github)](https://github.com/Liweimin0512/GodotTurnBasedGameplayFramework)
+[![Gitee](https://img.shields.io/badge/Gitee-Repository-red?logo=gitee)](https://gitee.com/Giab/GodotTurnBasedGameplayFramework)
 
 ## 💡 Introduction
 
-A turn-based combat system framework based on Godot 4.3, featuring an independent ability system plugin.
+A turn-based game framework based on Godot 4.3, including a standalone skill system plugin. It is planned to implement multiple functional modules such as combat system, skill system, equipment and item system, quest and dialogue system, etc., making it suitable for creating your own turn-based RPG game on this basis.
+
+## 📄 License
+
+This project is open-sourced under the [MIT License](LICENSE).
 
 ## ✨ Features
 
@@ -47,10 +51,6 @@ The art assets in this project are from these amazing artists on itch.io:
 
 - Hero units from [chierit](https://chierit.itch.io/). Their characters are incredibly impressive, and most importantly, they offer free versions of most works! They are available for hire and highly recommended for anyone who likes this style!
 - Monster units from [luizmelo](https://luizmelo.itch.io/), another excellent artist. Their profile doesn't have much information, but they're mysterious and worth following!
-
-## 📄 License
-
-This project is open-sourced under the [MIT License](LICENSE).
 
 ### Code License
 
