@@ -17,36 +17,54 @@
 [sub_resource type="Resource" id="Resource_jvqq5"]
 resource_local_to_scene = true
 script = ExtResource("7_a5qn6")
+attribute_id = &"health"
 attribute_name = &"生命值"
 _base_value = 100.0
+_growth_value = 0.0
+attribute_level = 0
 
 [sub_resource type="Resource" id="Resource_yxhrg"]
 resource_local_to_scene = true
 script = ExtResource("7_a5qn6")
+attribute_id = &"attack"
 attribute_name = &"攻击力"
 _base_value = 10.0
+_growth_value = 0.0
+attribute_level = 0
 
 [sub_resource type="Resource" id="Resource_hvkvg"]
 resource_local_to_scene = true
 script = ExtResource("7_a5qn6")
+attribute_id = &"defense"
 attribute_name = &"防御力"
 _base_value = 5.0
+_growth_value = 0.0
+attribute_level = 0
 
 [sub_resource type="Resource" id="Resource_uqj3l"]
 resource_local_to_scene = true
 script = ExtResource("7_a5qn6")
+attribute_id = &"speed"
 attribute_name = &"速度"
 _base_value = 10.0
+_growth_value = 0.0
+attribute_level = 0
 
 [sub_resource type="Resource" id="Resource_w4m7k"]
 script = ExtResource("7_a5qn6")
+attribute_id = &"hit_rate"
 attribute_name = &"命中率"
 _base_value = 1.0
+_growth_value = 0.0
+attribute_level = 0
 
 [sub_resource type="Resource" id="Resource_1sug7"]
 script = ExtResource("7_a5qn6")
+attribute_id = &"crit_rate"
 attribute_name = &"暴击率"
 _base_value = 0.0
+_growth_value = 0.0
+attribute_level = 0
 
 [sub_resource type="Resource" id="Resource_bgern"]
 script = ExtResource("9_kq6xn")
