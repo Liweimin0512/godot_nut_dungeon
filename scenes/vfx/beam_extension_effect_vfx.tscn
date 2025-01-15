@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://dglr5x6uq2842"]
+
+[ext_resource type="Texture2D" uid="uid://dquheqblcow8i" path="res://assets/sprites/characters/heros/leaf_ranger/projectiles_and_effects/beam_extension_effect.png" id="1_w017d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe6dy"]
+atlas = ExtResource("1_w017d")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuvpk"]
+atlas = ExtResource("1_w017d")
+region = Rect2(256, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvcjf"]
+atlas = ExtResource("1_w017d")
+region = Rect2(512, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pheb"]
+atlas = ExtResource("1_w017d")
+region = Rect2(768, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1xxs"]
+atlas = ExtResource("1_w017d")
+region = Rect2(1024, 0, 256, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_maja8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oe6dy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cuvpk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvcjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pheb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1xxs")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="beam_extension_effect_vfx" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.321569)
+position = Vector2(135, -28)
+sprite_frames = SubResource("SpriteFrames_maja8")

@@ -1,0 +1,37 @@
+{
+    "type": "sequence",
+    "children": [
+        {
+            "type": "move_to_casting_position",
+            "casting_position_type": 2
+        },
+        {
+            "type":"parallel",
+            "childre":[
+                {
+                    "type":"sequence",
+                    "children":[
+                        {
+                            "type": "play_animation",
+                            "animation_name": "attack_2"
+                        },
+                        {
+                            "type": "spawn_projectile",
+                            "projectile_scene": "@scene://scenes/projectile/arrow.tscn",
+                            "speed": 500,
+                            "start_position_type": "hand",
+                            "target_position_type": "body",
+                            "pre_delay": 0.7
+                        }
+                    ]
+                },
+                {
+                    "type": "apply_damage",
+                    "damage_type": 0,
+                    "damage_multiplier": 1,
+                    "pre_delay": 1
+                }
+            ]
+        }
+    ]
+}

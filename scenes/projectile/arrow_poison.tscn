@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://c1qxrvrpma582"]
+
+[ext_resource type="Texture2D" uid="uid://b58n5a36qrbtt" path="res://assets/sprites/characters/heros/leaf_ranger/projectiles_and_effects/arrow_.png" id="1_ckn3b"]
+[ext_resource type="Texture2D" uid="uid://bhw1hsioj3vld" path="res://assets/sprites/characters/heros/leaf_ranger/projectiles_and_effects/arrow_hit_poison.png" id="2_r7br3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btfbg"]
+atlas = ExtResource("1_ckn3b")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l884r"]
+atlas = ExtResource("2_r7br3")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rlhq"]
+atlas = ExtResource("2_r7br3")
+region = Rect2(256, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe6dy"]
+atlas = ExtResource("2_r7br3")
+region = Rect2(512, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuvpk"]
+atlas = ExtResource("2_r7br3")
+region = Rect2(768, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvcjf"]
+atlas = ExtResource("2_r7br3")
+region = Rect2(1024, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pheb"]
+atlas = ExtResource("2_r7br3")
+region = Rect2(1280, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1xxs"]
+atlas = ExtResource("2_r7br3")
+region = Rect2(1536, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_maja8"]
+atlas = ExtResource("2_r7br3")
+region = Rect2(1792, 0, 256, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_btfbg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btfbg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l884r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rlhq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oe6dy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cuvpk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvcjf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pheb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1xxs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_maja8")
+}],
+"loop": true,
+"name": &"on_hit",
+"speed": 5.0
+}]
+
+[node name="arrow_poison" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_btfbg")
+animation = &"on_hit"

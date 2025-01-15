@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=3 uid="uid://cy476xfxjivt3"]
+
+[ext_resource type="Texture2D" uid="uid://b58n5a36qrbtt" path="res://assets/sprites/characters/heros/leaf_ranger/projectiles_and_effects/arrow_.png" id="1_kj6v4"]
+[ext_resource type="Texture2D" uid="uid://bkcfntri4i0rg" path="res://assets/sprites/characters/heros/leaf_ranger/projectiles_and_effects/arrow_hit_entangle.png" id="2_kj6v4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btfbg"]
+atlas = ExtResource("1_kj6v4")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b22di"]
+atlas = ExtResource("2_kj6v4")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t600r"]
+atlas = ExtResource("2_kj6v4")
+region = Rect2(256, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d81vk"]
+atlas = ExtResource("2_kj6v4")
+region = Rect2(512, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymgmm"]
+atlas = ExtResource("2_kj6v4")
+region = Rect2(768, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cl2nm"]
+atlas = ExtResource("2_kj6v4")
+region = Rect2(1024, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkbsu"]
+atlas = ExtResource("2_kj6v4")
+region = Rect2(1280, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyo13"]
+atlas = ExtResource("2_kj6v4")
+region = Rect2(1536, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se85o"]
+atlas = ExtResource("2_kj6v4")
+region = Rect2(1792, 0, 256, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kj6v4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btfbg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b22di")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t600r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d81vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymgmm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cl2nm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkbsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyo13")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_se85o")
+}],
+"loop": true,
+"name": &"on_hit",
+"speed": 5.0
+}]
+
+[node name="arrow_poison" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kj6v4")
+animation = &"on_hit"
+frame_progress = 0.810247

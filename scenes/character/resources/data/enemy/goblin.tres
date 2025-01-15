@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="CharacterModel" load_steps=16 format=3 uid="uid://dusj10wryboti"]
+[gd_resource type="Resource" script_class="CharacterModel" load_steps=15 format=3 uid="uid://dusj10wryboti"]
 
 [ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="1_ckwfc"]
 [ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="1_qi5g2"]
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="2_gfiar"]
-[ext_resource type="Resource" uid="uid://djxtouuveyace" path="res://resources/data/skills/common/attack.tres" id="2_sld1y"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="3_yxnkf"]
 [ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_cost_resource/health_resource.gd" id="5_lpv4q"]
 [ext_resource type="AnimationLibrary" uid="uid://blhiy6bt07lej" path="res://scenes/character/resources/animation/enemy/animation_library_goblin.res" id="6_po6yb"]
@@ -78,7 +77,7 @@ script = ExtResource("1_qi5g2")
 character_name = &"哥布林"
 character_icon = ExtResource("6_qcvc5")
 ability_attributes = Array[ExtResource("2_gfiar")]([SubResource("Resource_l64l3"), SubResource("Resource_rqmhk"), SubResource("Resource_r6efn"), SubResource("Resource_mlwpa"), SubResource("Resource_jfdym"), SubResource("Resource_psjmy")])
-abilities = Array[ExtResource("1_ckwfc")]([ExtResource("2_sld1y")])
+abilities = Array[ExtResource("1_ckwfc")]([])
 ability_resources = Array[ExtResource("3_yxnkf")]([SubResource("Resource_32bnk")])
 animation_library = ExtResource("6_po6yb")
 sprite_position = Vector2(1, -26)

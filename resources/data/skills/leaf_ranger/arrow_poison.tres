@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=6 format=3 uid="uid://d1n4lod6yi16j"]
+
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="1_718n5"]
+[ext_resource type="Script" uid="uid://dftoe3slypm17" path="res://addons/godot_gameplay_ability_system/source/core/ability_cost.gd" id="1_csmmi"]
+[ext_resource type="Script" uid="uid://b5wl0kwy4qx4h" path="res://addons/godot_gameplay_ability_system/source/ability_cost/ability_resource_cost.gd" id="2_ts6d1"]
+[ext_resource type="Texture2D" uid="uid://bc28nrqw60fwi" path="res://assets/texture/icon/skills/Icon30.png" id="3_flgcq"]
+
+[sub_resource type="Resource" id="Resource_uh7lb"]
+script = ExtResource("2_ts6d1")
+cost_resource_id = &"enery"
+cost_value = 20
+metadata/_custom_type_script = ExtResource("2_ts6d1")
+
+[resource]
+script = ExtResource("1_718n5")
+target_type = &"enemy"
+ability_costs = Array[ExtResource("1_csmmi")]([SubResource("Resource_uh7lb")])
+cooldown = 3.0
+current_cooldown = 0.0
+is_show = true
+ability_name = &"苦痛之箭"
+ability_tags = Array[StringName]([])
+ability_description = "向目标发射苦痛之箭，对目标造成150%物理伤害，同时使目标中毒2回合"
+icon = ExtResource("3_flgcq")
+is_auto_cast = false
+effect_config_path = "res://resources/data/skills/leaf_ranger/effects/arrow_poison.json"
+metadata/_custom_type_script = ExtResource("1_718n5")

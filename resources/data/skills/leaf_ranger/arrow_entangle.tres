@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=6 format=3 uid="uid://2lx176dx4l3q"]
+
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="1_cp5ci"]
+[ext_resource type="Script" uid="uid://dftoe3slypm17" path="res://addons/godot_gameplay_ability_system/source/core/ability_cost.gd" id="1_wtnn3"]
+[ext_resource type="Script" uid="uid://b5wl0kwy4qx4h" path="res://addons/godot_gameplay_ability_system/source/ability_cost/ability_resource_cost.gd" id="2_ii81e"]
+[ext_resource type="Texture2D" uid="uid://s4e7e4o5nat6" path="res://assets/texture/icon/skills/Icon28.png" id="3_5tm3a"]
+
+[sub_resource type="Resource" id="Resource_lenyl"]
+script = ExtResource("2_ii81e")
+cost_resource_id = &"enery"
+cost_value = 10
+metadata/_custom_type_script = ExtResource("2_ii81e")
+
+[resource]
+script = ExtResource("1_cp5ci")
+target_type = &"enemy"
+ability_costs = Array[ExtResource("1_wtnn3")]([SubResource("Resource_lenyl")])
+cooldown = 2.0
+current_cooldown = 0.0
+is_show = true
+ability_name = &"缠绕之箭"
+ability_tags = Array[StringName]([])
+ability_description = "对目标发射一只缠绕之箭，造成100%物理伤害的同时，使目标定身2回合"
+icon = ExtResource("3_5tm3a")
+is_auto_cast = false
+effect_config_path = "res://resources/data/skills/leaf_ranger/effects/arrow_entangle.json"
+metadata/_custom_type_script = ExtResource("1_cp5ci")

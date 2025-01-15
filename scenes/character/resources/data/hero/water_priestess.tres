@@ -81,8 +81,6 @@ ability_resource_name = &"生命值"
 current_value = 0
 max_value = 0
 attribute_id = &"health"
-resource_color = Color(1, 0, 0, 1)
-size_y = 10
 metadata/_custom_type_script = ExtResource("4_cb118")
 
 [sub_resource type="Resource" id="Resource_qaclj"]
@@ -92,8 +90,6 @@ ability_resource_name = &"魔法值"
 current_value = 0
 max_value = 0
 attribute_id = &"mana"
-resource_color = Color(0.184314, 0, 0.760784, 1)
-size_y = 10
 metadata/_custom_type_script = ExtResource("5_nsa12")
 
 [resource]

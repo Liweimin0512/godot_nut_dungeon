@@ -1,4 +1,4 @@
-extends AbilityEffectActionNode
+extends AbilityAction
 class_name MoveToCastingPositionEffectNode
 
 ## 移动到施法位置

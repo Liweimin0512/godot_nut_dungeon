@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=3 format=3 uid="uid://cf6dfjvcobct6"]
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=4 format=3 uid="uid://cf6dfjvcobct6"]
 
 [ext_resource type="Texture2D" uid="uid://bfioxtia7s7tq" path="res://assets/texture/icon/skills/Icon9.png" id="1_6f2ib"]
 [ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="1_bqu22"]
+[ext_resource type="Script" uid="uid://dftoe3slypm17" path="res://addons/godot_gameplay_ability_system/source/core/ability_cost.gd" id="1_dk8mc"]
 
 [resource]
 script = ExtResource("1_bqu22")
 target_type = &"self"
+ability_costs = Array[ExtResource("1_dk8mc")]([])
 cooldown = 4
-current_cooldown = 0
+current_cooldown = 0.0
 is_show = true
 ability_name = &"水之护盾"
 ability_tags = Array[StringName]([&"skill"])

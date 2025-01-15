@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
-[ext_resource type="Texture2D" uid="uid://chw4fofu6gtjx" path="res://assets/sprites/characters/heros/water_priestess/death.png" id="2_bblvu"]
 [ext_resource type="Script" uid="uid://y1mgjyqenlv7" path="res://scripts/systems/combat/combat_component.gd" id="2_ghtna"]
+[ext_resource type="Texture2D" uid="uid://6sd1tikuk4pn" path="res://assets/sprites/characters/heros/leaf_ranger/attack_2.png" id="2_q52vl"]
 [ext_resource type="Script" uid="uid://n67wyu14blxx" path="res://addons/godot_gameplay_ability_system/source/ability_component.gd" id="3_6a5vl"]
-[ext_resource type="AnimationLibrary" uid="uid://br30iodn51mob" path="res://scenes/character/resources/animation/hero/animation_library_water_priestess.res" id="4_q52vl"]
+[ext_resource type="AnimationLibrary" uid="uid://b82bxlch76pwa" path="res://scenes/character/resources/animation/hero/animation_library_leaf_ranger.res" id="4_l884r"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
 [ext_resource type="Script" uid="uid://cchps1pajt3jv" path="res://addons/godot_gameplay_ability_system/source/ability_attribute_component.gd" id="7_bix7t"]
 [ext_resource type="Script" uid="uid://dy54mfe63g1mx" path="res://addons/godot_gameplay_ability_system/source/ability_resource_component.gd" id="8_bblvu"]
@@ -17,9 +17,9 @@ script = ExtResource("1_qu267")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -64)
-texture = ExtResource("2_bblvu")
-hframes = 14
-frame = 5
+texture = ExtResource("2_q52vl")
+hframes = 15
+frame = 10
 
 [node name="cast_points" type="Node2D" parent="."]
 
@@ -43,6 +43,12 @@ offset_left = -28.0
 offset_top = 4.0
 offset_right = 28.0
 offset_bottom = 14.0
+ability_resource_colors = Dictionary[StringName, Color]({
+&"energy": Color(1, 1, 0, 1),
+&"health": Color(1, 0, 0, 1),
+&"mana": Color(0, 0, 1, 1),
+&"rage": Color(0.545098, 0, 0, 1)
+})
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
@@ -54,7 +60,7 @@ shape = SubResource("RectangleShape2D_gnpp6")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-&"": ExtResource("4_q52vl")
+&"": ExtResource("4_l884r")
 }
 autoplay = "idle"
 
@@ -103,10 +109,6 @@ ability_resource_component = NodePath("../AbilityResourceComponent")
 ability_attribute_component = NodePath("../AbilityAttributeComponent")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="ability_cast_started" from="AbilityComponent" to="." method="_on_ability_component_ability_cast_started"]
-[connection signal="ability_trigger_failed" from="AbilityComponent" to="CombatComponent" method="_on_ability_component_ability_trigger_failed"]
-[connection signal="ability_trigger_success" from="AbilityComponent" to="." method="_on_ability_component_ability_trigger_success"]
-[connection signal="ability_trigger_success" from="AbilityComponent" to="CombatComponent" method="_on_ability_component_ability_trigger_success"]
 [connection signal="died" from="CombatComponent" to="." method="_on_combat_component_died"]
 [connection signal="hited" from="CombatComponent" to="." method="_on_combat_component_hited"]
 [connection signal="hurted" from="CombatComponent" to="." method="_on_combat_component_hurted"]

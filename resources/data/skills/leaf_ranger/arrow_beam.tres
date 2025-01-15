@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="TurnBasedSkillAbility" load_steps=6 format=3 uid="uid://bjgbnpjpu2cxm"]
+
+[ext_resource type="Script" uid="uid://dftoe3slypm17" path="res://addons/godot_gameplay_ability_system/source/core/ability_cost.gd" id="1_58j64"]
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="1_ftd40"]
+[ext_resource type="Script" uid="uid://b5wl0kwy4qx4h" path="res://addons/godot_gameplay_ability_system/source/ability_cost/ability_resource_cost.gd" id="2_atxjb"]
+[ext_resource type="Texture2D" uid="uid://d1asrjqcfrvpr" path="res://assets/texture/icon/skills/Icon38.png" id="3_atxjb"]
+
+[sub_resource type="Resource" id="Resource_ulirn"]
+script = ExtResource("2_atxjb")
+cost_resource_id = &"enery"
+cost_value = 30
+metadata/_custom_type_script = ExtResource("2_atxjb")
+
+[resource]
+script = ExtResource("1_ftd40")
+target_type = &""
+ability_costs = Array[ExtResource("1_58j64")]([SubResource("Resource_ulirn")])
+cooldown = 4.0
+current_cooldown = 0.0
+is_show = true
+ability_name = &"光束射线"
+ability_tags = Array[StringName]([])
+ability_description = "召唤自然女神的力量，向正前方发射光束，对所有敌人造成200%物理伤害"
+icon = ExtResource("3_atxjb")
+is_auto_cast = false
+effect_config_path = "res://resources/data/skills/leaf_ranger/effects/arrow_beam.json"
+metadata/_custom_type_script = ExtResource("1_ftd40")
