@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dcxjfw256ynb5"]
+[gd_scene load_steps=57 format=3 uid="uid://dcxjfw256ynb5"]
 
 [ext_resource type="Script" uid="uid://c3djxdb3f0bkh" path="res://scenes/core/main.gd" id="1_i4sev"]
 [ext_resource type="Resource" uid="uid://bshhcvu884gan" path="res://resources/data/combat/combat_test.tres" id="2_p2r0i"]
@@ -9,33 +9,34 @@
 [ext_resource type="Texture2D" uid="uid://b4u5ewpyjas2f" path="res://assets/texture/background/game_background_1/layers/front_decor.png" id="6_efxa6"]
 [ext_resource type="Texture2D" uid="uid://o0iacojv61wy" path="res://assets/texture/background/game_background_1/layers/ground_decor.png" id="7_dg77c"]
 [ext_resource type="PackedScene" uid="uid://bgj5fmjvlf8j" path="res://scenes/ui/widget/game_form.tscn" id="8_f6a44"]
-[ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="10_fvdfm"]
-[ext_resource type="Script" uid="uid://dftoe3slypm17" path="res://addons/godot_gameplay_ability_system/source/core/ability_cost.gd" id="11_0k6rw"]
-[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="12_tw145"]
-[ext_resource type="Texture2D" uid="uid://ey4jlg2yhxxs" path="res://assets/texture/icon/Buffs/critical_boost.png" id="13_i3jsw"]
-[ext_resource type="Texture2D" uid="uid://pahg3p51mxjh" path="res://assets/texture/icon/Spells/poison_dagger.png" id="14_fbmiv"]
-[ext_resource type="Texture2D" uid="uid://bpvjoschbdt58" path="res://assets/texture/icon/skills/Icon26.png" id="15_pr6ky"]
-[ext_resource type="Texture2D" uid="uid://bao6re1ye1rot" path="res://assets/texture/icon/skills/Icon34.png" id="16_yomsl"]
-[ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="17_b2ey7"]
-[ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="18_yg6x3"]
-[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_cost_resource/health_resource.gd" id="19_xle73"]
-[ext_resource type="Script" uid="uid://cfeo8lbyg1cn4" path="res://addons/godot_gameplay_ability_system/source/ability_cost_resource/rage_resource.gd" id="20_ah51y"]
-[ext_resource type="Texture2D" uid="uid://cuda6m0iar23d" path="res://assets/sprites/characters/heros/crystal_mauler/death.png" id="21_gcaj3"]
-[ext_resource type="Texture2D" uid="uid://bdnbkx1smbbb8" path="res://assets/sprites/characters/heros/crystal_mauler/take_hit.png" id="22_jgqsp"]
-[ext_resource type="Texture2D" uid="uid://clkhxmxdtgch" path="res://assets/sprites/characters/heros/crystal_mauler/idle.png" id="23_ebkt3"]
-[ext_resource type="Texture2D" uid="uid://cqcg1s3a5cmh7" path="res://assets/sprites/characters/heros/crystal_mauler/attack_1.png" id="24_42t4q"]
-[ext_resource type="Texture2D" uid="uid://wi5dcpmpg532" path="res://assets/sprites/characters/heros/crystal_mauler/attack_2.png" id="25_gi53d"]
-[ext_resource type="Texture2D" uid="uid://do32nap8q4ivc" path="res://assets/sprites/characters/heros/crystal_mauler/attack_3.png" id="26_exoq3"]
-[ext_resource type="Texture2D" uid="uid://cp1hx3khybf0k" path="res://assets/sprites/characters/heros/crystal_mauler/attack_sp.png" id="27_w7hn7"]
-[ext_resource type="Texture2D" uid="uid://c8u84o1yqlptj" path="res://assets/sprites/characters/heros/crystal_mauler/defend.png" id="28_lsjgq"]
-[ext_resource type="Texture2D" uid="uid://soh3pdkvfr2w" path="res://assets/texture/icon/character_profile_picture/crystal_mauler.png" id="29_tlili"]
-[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="30_0l26g"]
+[ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="10_tpf3y"]
+[ext_resource type="Script" uid="uid://dftoe3slypm17" path="res://addons/godot_gameplay_ability_system/source/core/ability_cost.gd" id="11_etpvq"]
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="12_fvdfm"]
+[ext_resource type="Texture2D" uid="uid://bpvjoschbdt58" path="res://assets/texture/icon/skills/Icon26.png" id="13_0k6rw"]
+[ext_resource type="Script" uid="uid://b5wl0kwy4qx4h" path="res://addons/godot_gameplay_ability_system/source/ability_cost/ability_resource_cost.gd" id="13_tw145"]
+[ext_resource type="Texture2D" uid="uid://ey4jlg2yhxxs" path="res://assets/texture/icon/Buffs/critical_boost.png" id="14_i3jsw"]
+[ext_resource type="Texture2D" uid="uid://bao6re1ye1rot" path="res://assets/texture/icon/skills/Icon34.png" id="14_tw145"]
+[ext_resource type="Texture2D" uid="uid://pahg3p51mxjh" path="res://assets/texture/icon/Spells/poison_dagger.png" id="15_fbmiv"]
+[ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="15_i3jsw"]
+[ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="16_fbmiv"]
+[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://scripts/systems/ability/ability_cost_resource/health_resource.gd" id="17_pr6ky"]
+[ext_resource type="Script" uid="uid://cfeo8lbyg1cn4" path="res://scripts/systems/ability/ability_cost_resource/rage_resource.gd" id="18_yomsl"]
+[ext_resource type="Texture2D" uid="uid://cuda6m0iar23d" path="res://assets/sprites/characters/heros/crystal_mauler/death.png" id="19_b2ey7"]
+[ext_resource type="Texture2D" uid="uid://bdnbkx1smbbb8" path="res://assets/sprites/characters/heros/crystal_mauler/take_hit.png" id="20_yg6x3"]
+[ext_resource type="Texture2D" uid="uid://clkhxmxdtgch" path="res://assets/sprites/characters/heros/crystal_mauler/idle.png" id="21_xle73"]
+[ext_resource type="Texture2D" uid="uid://cqcg1s3a5cmh7" path="res://assets/sprites/characters/heros/crystal_mauler/attack_1.png" id="22_ah51y"]
+[ext_resource type="Texture2D" uid="uid://wi5dcpmpg532" path="res://assets/sprites/characters/heros/crystal_mauler/attack_2.png" id="23_gcaj3"]
+[ext_resource type="Texture2D" uid="uid://do32nap8q4ivc" path="res://assets/sprites/characters/heros/crystal_mauler/attack_3.png" id="24_jgqsp"]
+[ext_resource type="Texture2D" uid="uid://cp1hx3khybf0k" path="res://assets/sprites/characters/heros/crystal_mauler/attack_sp.png" id="25_ebkt3"]
+[ext_resource type="Texture2D" uid="uid://c8u84o1yqlptj" path="res://assets/sprites/characters/heros/crystal_mauler/defend.png" id="26_42t4q"]
+[ext_resource type="Texture2D" uid="uid://soh3pdkvfr2w" path="res://assets/texture/icon/character_profile_picture/crystal_mauler.png" id="27_gi53d"]
+[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="28_exoq3"]
 
-[sub_resource type="Resource" id="Resource_7xcap"]
+[sub_resource type="Resource" id="Resource_pr6ky"]
 resource_local_to_scene = true
-script = ExtResource("12_tw145")
+script = ExtResource("12_fvdfm")
 target_type = &"enemy"
-ability_costs = Array[ExtResource("11_0k6rw")]([])
+ability_costs = Array[ExtResource("11_etpvq")]([])
 cooldown = 0.0
 current_cooldown = 0.0
 is_show = false
@@ -43,132 +44,156 @@ ability_name = &""
 ability_tags = Array[StringName]([])
 ability_description = ""
 is_auto_cast = false
-effect_config_path = ""
-metadata/_custom_type_script = ExtResource("12_tw145")
+effect_config_path = "res://resources/data/skills/crystal_mauler/effects/cm_attack.json"
+metadata/_custom_type_script = ExtResource("12_fvdfm")
 
-[sub_resource type="Resource" id="Resource_8gm2o"]
+[sub_resource type="Resource" id="Resource_myyfh"]
+script = ExtResource("13_tw145")
+cost_resource_id = &"rage"
+cost_value = 30
+metadata/_custom_type_script = ExtResource("13_tw145")
+
+[sub_resource type="Resource" id="Resource_yomsl"]
 resource_local_to_scene = true
-script = ExtResource("12_tw145")
+script = ExtResource("12_fvdfm")
 target_type = &"ally"
-ability_costs = Array[ExtResource("11_0k6rw")]([])
+ability_costs = Array[ExtResource("11_etpvq")]([SubResource("Resource_myyfh")])
 cooldown = 3
 current_cooldown = 0.0
 is_show = true
 ability_name = &"战争怒吼"
 ability_tags = Array[StringName]([])
 ability_description = "发出怒吼，激励自己和周围的盟友。"
-icon = ExtResource("13_i3jsw")
+icon = ExtResource("14_i3jsw")
 is_auto_cast = false
-effect_config_path = "res://resources/data/abilities/skill_effects/battle_cry_effect.json"
+effect_config_path = "res://resources/data/skills/crystal_mauler/effects/heroic_strike_effect.json"
 
-[sub_resource type="Resource" id="Resource_x7cjn"]
+[sub_resource type="Resource" id="Resource_jqrrp"]
+script = ExtResource("13_tw145")
+cost_resource_id = &"rage"
+cost_value = 15
+metadata/_custom_type_script = ExtResource("13_tw145")
+
+[sub_resource type="Resource" id="Resource_b2ey7"]
 resource_local_to_scene = true
-script = ExtResource("12_tw145")
+script = ExtResource("12_fvdfm")
 target_type = &"enemy"
-ability_costs = Array[ExtResource("11_0k6rw")]([])
+ability_costs = Array[ExtResource("11_etpvq")]([SubResource("Resource_jqrrp")])
 cooldown = 2.0
 current_cooldown = 0.0
 is_show = true
 ability_name = &"重击"
 ability_tags = Array[StringName]([])
 ability_description = "对单个敌人进行强力一击"
-icon = ExtResource("14_fbmiv")
+icon = ExtResource("15_fbmiv")
 is_auto_cast = false
 effect_config_path = "res://resources/data/abilities/skill_effects/heroic_strike_effect.json"
 
-[sub_resource type="Resource" id="Resource_jhm21"]
+[sub_resource type="Resource" id="Resource_yg6x3"]
 resource_local_to_scene = true
-script = ExtResource("12_tw145")
+script = ExtResource("12_fvdfm")
 target_type = &"self"
-ability_costs = Array[ExtResource("11_0k6rw")]([])
+ability_costs = Array[ExtResource("11_etpvq")]([])
 cooldown = 0.0
 current_cooldown = 0.0
 is_show = true
 ability_name = &"不屈精神"
 ability_tags = Array[StringName]([])
 ability_description = "在受到攻击时，有几率获得额外的怒气"
-icon = ExtResource("15_pr6ky")
+icon = ExtResource("13_0k6rw")
 is_auto_cast = true
-effect_config_path = "res://resources/data/abilities/skill_effects/unyielding_effect.json"
+effect_config_path = "res://resources/data/skills/crystal_mauler/effects/counter_attack_effect.json"
 
-[sub_resource type="Resource" id="Resource_e5jue"]
+[sub_resource type="Resource" id="Resource_xle73"]
 resource_local_to_scene = true
-script = ExtResource("12_tw145")
+script = ExtResource("12_fvdfm")
 target_type = &""
-ability_costs = Array[ExtResource("11_0k6rw")]([])
+ability_costs = Array[ExtResource("11_etpvq")]([])
 cooldown = 0.0
 current_cooldown = 0.0
 is_show = true
 ability_name = &"反击"
 ability_tags = Array[StringName]([])
 ability_description = "在受到普通攻击时有机会进行反击"
-icon = ExtResource("16_yomsl")
+icon = ExtResource("14_tw145")
 is_auto_cast = true
 effect_config_path = "res://resources/data/abilities/skill_effects/counter_attack_effect.json"
 
-[sub_resource type="Resource" id="Resource_fsx3p"]
+[sub_resource type="Resource" id="Resource_ah51y"]
 resource_local_to_scene = true
-script = ExtResource("17_b2ey7")
+script = ExtResource("15_i3jsw")
 attribute_id = &"health"
 attribute_name = &"生命值"
 _base_value = 100.0
 _growth_value = 0.0
 attribute_level = 0
+is_show = true
+is_percentage = false
 
-[sub_resource type="Resource" id="Resource_tunlp"]
+[sub_resource type="Resource" id="Resource_gcaj3"]
 resource_local_to_scene = true
-script = ExtResource("17_b2ey7")
+script = ExtResource("15_i3jsw")
 attribute_id = &"attack"
 attribute_name = &"攻击力"
 _base_value = 10.0
 _growth_value = 0.0
 attribute_level = 0
+is_show = true
+is_percentage = false
 
-[sub_resource type="Resource" id="Resource_m41gb"]
+[sub_resource type="Resource" id="Resource_jgqsp"]
 resource_local_to_scene = true
-script = ExtResource("17_b2ey7")
+script = ExtResource("15_i3jsw")
 attribute_id = &"defense"
 attribute_name = &"防御力"
 _base_value = 5.0
 _growth_value = 0.0
 attribute_level = 0
+is_show = true
+is_percentage = false
 
-[sub_resource type="Resource" id="Resource_clesx"]
+[sub_resource type="Resource" id="Resource_ebkt3"]
 resource_local_to_scene = true
-script = ExtResource("17_b2ey7")
+script = ExtResource("15_i3jsw")
 attribute_id = &"speed"
 attribute_name = &"速度"
 _base_value = 10.0
 _growth_value = 0.0
 attribute_level = 0
+is_show = true
+is_percentage = false
 
 [sub_resource type="Resource" id="Resource_w4m7k"]
-script = ExtResource("17_b2ey7")
+script = ExtResource("15_i3jsw")
 attribute_id = &"hit_rate"
 attribute_name = &"命中率"
 _base_value = 1.0
 _growth_value = 0.0
 attribute_level = 0
+is_show = true
+is_percentage = false
 
 [sub_resource type="Resource" id="Resource_1sug7"]
-script = ExtResource("17_b2ey7")
+script = ExtResource("15_i3jsw")
 attribute_id = &"crit_rate"
 attribute_name = &"暴击率"
 _base_value = 0.0
 _growth_value = 0.0
 attribute_level = 0
+is_show = true
+is_percentage = false
 
 [sub_resource type="Resource" id="Resource_bgern"]
-script = ExtResource("19_xle73")
+script = ExtResource("17_pr6ky")
 ability_resource_id = &"health"
 ability_resource_name = &"生命值"
 current_value = 0
 max_value = 0
 attribute_id = &"health"
 
-[sub_resource type="Resource" id="Resource_edmk7"]
+[sub_resource type="Resource" id="Resource_42t4q"]
 resource_local_to_scene = true
-script = ExtResource("20_ah51y")
+script = ExtResource("18_yomsl")
 regain_hited = 10
 regain_hurted = 5
 ability_resource_id = &"rage"
@@ -191,7 +216,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("21_gcaj3")]
+"values": [ExtResource("19_b2ey7")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -244,7 +269,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("22_jgqsp")]
+"values": [ExtResource("20_yg6x3")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -298,7 +323,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("23_ebkt3")]
+"values": [ExtResource("21_xle73")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -351,7 +376,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("24_42t4q")]
+"values": [ExtResource("22_ah51y")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -404,7 +429,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("25_gi53d")]
+"values": [ExtResource("23_gcaj3")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -457,7 +482,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("26_exoq3")]
+"values": [ExtResource("24_jgqsp")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -510,7 +535,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("27_w7hn7")]
+"values": [ExtResource("25_ebkt3")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -563,7 +588,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("28_lsjgq")]
+"values": [ExtResource("26_42t4q")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -602,7 +627,7 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jj8q0"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gi53d"]
 resource_local_to_scene = true
 _data = {
 &"attack": SubResource("Animation_p0q65"),
@@ -615,15 +640,15 @@ _data = {
 &"idle": SubResource("Animation_f8bwf")
 }
 
-[sub_resource type="Resource" id="Resource_1y6u5"]
+[sub_resource type="Resource" id="Resource_exoq3"]
 resource_local_to_scene = true
-script = ExtResource("30_0l26g")
+script = ExtResource("28_exoq3")
 character_name = &"战士"
-character_icon = ExtResource("29_tlili")
-ability_attributes = Array[ExtResource("17_b2ey7")]([SubResource("Resource_fsx3p"), SubResource("Resource_tunlp"), SubResource("Resource_m41gb"), SubResource("Resource_clesx"), SubResource("Resource_w4m7k"), SubResource("Resource_1sug7")])
-abilities = Array[ExtResource("10_fvdfm")]([SubResource("Resource_7xcap"), SubResource("Resource_8gm2o"), SubResource("Resource_x7cjn"), SubResource("Resource_jhm21"), SubResource("Resource_e5jue")])
-ability_resources = Array[ExtResource("18_yg6x3")]([SubResource("Resource_bgern"), SubResource("Resource_edmk7")])
-animation_library = SubResource("AnimationLibrary_jj8q0")
+character_icon = ExtResource("27_gi53d")
+ability_attributes = Array[ExtResource("15_i3jsw")]([SubResource("Resource_ah51y"), SubResource("Resource_gcaj3"), SubResource("Resource_jgqsp"), SubResource("Resource_ebkt3"), SubResource("Resource_w4m7k"), SubResource("Resource_1sug7")])
+abilities = Array[ExtResource("10_tpf3y")]([SubResource("Resource_pr6ky"), SubResource("Resource_yomsl"), SubResource("Resource_b2ey7"), SubResource("Resource_yg6x3"), SubResource("Resource_xle73")])
+ability_resources = Array[ExtResource("16_fbmiv")]([SubResource("Resource_bgern"), SubResource("Resource_42t4q")])
+animation_library = SubResource("AnimationLibrary_gi53d")
 sprite_position = Vector2(0, -64)
 
 [node name="Main" type="Node2D"]
@@ -692,7 +717,7 @@ layer = 128
 position = Vector2(216, 144)
 
 [node name="PlayerCharacter5" parent="PlayerMarkers/Marker2D" groups=["Character", "Player"] instance=ExtResource("2_tbu6l")]
-character_model = SubResource("Resource_1y6u5")
+character_model = SubResource("Resource_exoq3")
 
 [node name="Marker2D2" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(180, 168)

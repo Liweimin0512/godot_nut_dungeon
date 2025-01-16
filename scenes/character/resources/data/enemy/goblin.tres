@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="1_qi5g2"]
 [ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="2_gfiar"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="3_yxnkf"]
-[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_cost_resource/health_resource.gd" id="5_lpv4q"]
+[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://scripts/systems/ability/ability_cost_resource/health_resource.gd" id="5_lpv4q"]
 [ext_resource type="AnimationLibrary" uid="uid://blhiy6bt07lej" path="res://scenes/character/resources/animation/enemy/animation_library_goblin.res" id="6_po6yb"]
 [ext_resource type="Texture2D" uid="uid://cp2eebhl4u78d" path="res://assets/texture/icon/character_profile_picture/goblin.tres" id="6_qcvc5"]
 

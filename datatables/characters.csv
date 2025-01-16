@@ -1,0 +1,11 @@
+﻿ID,character_name,character_icon,ability_attributes,abilities,ability_resources
+ID,角色名,角色头像,属性组,技能组,技能资源组
+string,string,texture,string,string[],string[]
+crystal_mauler,战士,res://assets/texture/icon/character_profile_picture/crystal_mauler.png,crystal_mauler,attack*battle_cry*herioc_strike*resolute*retaliate,health*rage
+leaf_ranger,游侠,res://assets/texture/icon/character_profile_picture/leaf_ranger.png,leaf_ranger,arrow_attack*arrow_beam*arrow_entangle*arrow_poison*arrow_shower,health*enery
+water_priestess,水祭祀,res://assets/texture/icon/character_profile_picture/water_priestess.png,water_priestess,water_blade_slash*vortex_bind*tidal_fury*healing_spring*aqua_shield,health*mana
+wizard,法师,res://assets/texture/icon/character_profile_picture/wizard.tres,wizard,attack*arcane_missiles*fireball*magic_shield*mana_surge,health*mana
+flying_eye,眼魔,res://assets/texture/icon/character_profile_picture/flying_eye.tres,flying_eye,attack,health
+goblin,哥布林,res://assets/texture/icon/character_profile_picture/goblin.tres,goblin,attack,health
+mushroom,蘑菇怪,res://assets/texture/icon/character_profile_picture/mushroom.tres,mushroom,attack,health
+skeleton,骷髅士兵,res://assets/texture/icon/character_profile_picture/skeleton.tres,skeleton,attack,health

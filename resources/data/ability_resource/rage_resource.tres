@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RageResource" load_steps=2 format=3 uid="uid://5w42pjacqx6j"]
 
-[ext_resource type="Script" uid="uid://cfeo8lbyg1cn4" path="res://addons/godot_gameplay_ability_system/source/ability_resource/rage_resource.gd" id="1_3lxjs"]
+[ext_resource type="Script" uid="uid://cfeo8lbyg1cn4" path="res://scripts/systems/ability/ability_cost_resource/rage_resource.gd" id="1_3lxjs"]
 
 [resource]
 resource_local_to_scene = true

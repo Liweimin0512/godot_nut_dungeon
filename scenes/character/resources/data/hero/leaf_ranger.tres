@@ -7,8 +7,8 @@
 [ext_resource type="Resource" uid="uid://2lx176dx4l3q" path="res://resources/data/skills/leaf_ranger/arrow_entangle.tres" id="4_n3ekv"]
 [ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="4_si03u"]
 [ext_resource type="Resource" uid="uid://d1n4lod6yi16j" path="res://resources/data/skills/leaf_ranger/arrow_poison.tres" id="5_6k467"]
-[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://addons/godot_gameplay_ability_system/source/ability_cost_resource/health_resource.gd" id="5_mgm5e"]
-[ext_resource type="Script" uid="uid://3piae0t6qrlr" path="res://addons/godot_gameplay_ability_system/source/ability_cost_resource/enery_resource.gd" id="6_3glk2"]
+[ext_resource type="Script" uid="uid://bhe651w8s0xoo" path="res://scripts/systems/ability/ability_cost_resource/health_resource.gd" id="5_mgm5e"]
+[ext_resource type="Script" uid="uid://3piae0t6qrlr" path="res://scripts/systems/ability/ability_cost_resource/enery_resource.gd" id="6_3glk2"]
 [ext_resource type="Resource" uid="uid://dg7ijqp2bi3mr" path="res://resources/data/skills/leaf_ranger/arrow_shower.tres" id="6_sclqm"]
 [ext_resource type="AnimationLibrary" uid="uid://b82bxlch76pwa" path="res://scenes/character/resources/animation/hero/animation_library_leaf_ranger.res" id="7_n3ekv"]
 [ext_resource type="Texture2D" uid="uid://bygyexnnjxflw" path="res://assets/texture/icon/character_profile_picture/leaf_ranger.png" id="8_6k467"]
@@ -22,6 +22,8 @@ attribute_name = &"生命值"
 _base_value = 100.0
 _growth_value = 0.0
 attribute_level = 1
+is_show = true
+is_percentage = false
 
 [sub_resource type="Resource" id="Resource_yxhrg"]
 resource_local_to_scene = true
@@ -31,6 +33,8 @@ attribute_name = &"攻击力"
 _base_value = 10.0
 _growth_value = 0.0
 attribute_level = 1
+is_show = true
+is_percentage = false
 
 [sub_resource type="Resource" id="Resource_hvkvg"]
 resource_local_to_scene = true
@@ -40,6 +44,8 @@ attribute_name = &"防御力"
 _base_value = 5.0
 _growth_value = 0.0
 attribute_level = 1
+is_show = true
+is_percentage = false
 
 [sub_resource type="Resource" id="Resource_uqj3l"]
 resource_local_to_scene = true
@@ -49,6 +55,8 @@ attribute_name = &"速度"
 _base_value = 10.0
 _growth_value = 0.0
 attribute_level = 1
+is_show = true
+is_percentage = false
 
 [sub_resource type="Resource" id="Resource_w4m7k"]
 script = ExtResource("3_t1nq4")
@@ -57,6 +65,8 @@ attribute_name = &"命中率"
 _base_value = 1.0
 _growth_value = 0.0
 attribute_level = 1
+is_show = true
+is_percentage = false
 
 [sub_resource type="Resource" id="Resource_1sug7"]
 script = ExtResource("3_t1nq4")
@@ -65,6 +75,8 @@ attribute_name = &"暴击率"
 _base_value = 0.0
 _growth_value = 0.0
 attribute_level = 1
+is_show = true
+is_percentage = false
 
 [sub_resource type="Resource" id="Resource_bgern"]
 script = ExtResource("5_mgm5e")
