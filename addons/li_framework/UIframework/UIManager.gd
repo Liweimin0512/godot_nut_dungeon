@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 """
 管理和协调所有UI元素和UI界面。

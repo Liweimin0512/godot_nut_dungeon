@@ -5,8 +5,12 @@ class_name ManaResource
 ## 魔法值是一个属性，在属性改变时同时设置当前资源的最大值
 ## 随时间（回合）自然恢复
 
+func _init() -> void:
+	ability_resource_id = "mana"
+	ability_resource_name = "魔法值"
+
 ## 初始化
-func _initialization(attribute_component: AbilityAttributeComponent) -> void:
+func _initialization(_attribute_component: AbilityAttributeComponent) -> void:
 	ability_resource_id = "mana"
 	ability_resource_name = "魔法值"
 

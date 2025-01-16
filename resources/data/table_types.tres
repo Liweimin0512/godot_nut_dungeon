@@ -1,0 +1,95 @@
+[gd_resource type="Resource" script_class="TableTypes" load_steps=22 format=3 uid="uid://cxa4cfh1b3bot"]
+
+[ext_resource type="Script" uid="uid://bfbah5g113d2p" path="res://scripts/resources/table_types.gd" id="1_w7js4"]
+[ext_resource type="Script" uid="uid://bf3cohk1etxvp" path="res://addons/li_data_manager/model_type.gd" id="2_5gbce"]
+[ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="3_5fgkq"]
+[ext_resource type="Script" uid="uid://c65rwndbbr15i" path="res://addons/li_data_manager/table_type.gd" id="3_its6o"]
+[ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://scripts/systems/ability/turn_based_buff_ability.gd" id="5_0gh0e"]
+[ext_resource type="Script" path="res://scripts/resources/ability_attribute_set.gd" id="5_d4ded"]
+[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="6_h04kn"]
+[ext_resource type="Script" uid="uid://bebfj2ga1x7eh" path="res://scripts/resources/combat_model.gd" id="7_y3oj0"]
+[ext_resource type="Script" uid="uid://cr537w1tp0l62" path="res://scripts/systems/ability/turn_based_skill_ability.gd" id="8_ngncl"]
+
+[sub_resource type="Resource" id="Resource_5fgkq"]
+script = ExtResource("3_its6o")
+table_name = &"ability_attribute"
+table_paths = Array[String](["res://datatables/ability_attribute.csv"])
+metadata/_custom_type_script = ExtResource("3_its6o")
+
+[sub_resource type="Resource" id="Resource_0gh0e"]
+script = ExtResource("2_5gbce")
+model_name = &"ability_attribute"
+model_script = ExtResource("3_5fgkq")
+tables = Array[ExtResource("3_its6o")]([SubResource("Resource_5fgkq")])
+metadata/_custom_type_script = ExtResource("2_5gbce")
+
+[sub_resource type="Resource" id="Resource_ihdiy"]
+script = ExtResource("3_its6o")
+table_name = &"attribute_set"
+table_paths = Array[String](["res://datatables/ability_attribute_set.csv"])
+metadata/_custom_type_script = ExtResource("3_its6o")
+
+[sub_resource type="Resource" id="Resource_h04kn"]
+script = ExtResource("2_5gbce")
+model_name = &"ability_attribute_set"
+model_script = ExtResource("5_d4ded")
+tables = Array[ExtResource("3_its6o")]([SubResource("Resource_ihdiy")])
+metadata/_custom_type_script = ExtResource("2_5gbce")
+
+[sub_resource type="Resource" id="Resource_pvgbd"]
+script = ExtResource("3_its6o")
+table_name = &"buff_ability"
+table_paths = Array[String](["res://datatables/buff_ability.csv"])
+metadata/_custom_type_script = ExtResource("3_its6o")
+
+[sub_resource type="Resource" id="Resource_y3oj0"]
+script = ExtResource("2_5gbce")
+model_name = &"buff_ability"
+model_script = ExtResource("5_0gh0e")
+tables = Array[ExtResource("3_its6o")]([SubResource("Resource_pvgbd")])
+metadata/_custom_type_script = ExtResource("2_5gbce")
+
+[sub_resource type="Resource" id="Resource_dvrav"]
+script = ExtResource("3_its6o")
+table_name = &"character"
+table_paths = Array[String](["res://datatables/characters.csv"])
+metadata/_custom_type_script = ExtResource("3_its6o")
+
+[sub_resource type="Resource" id="Resource_ngncl"]
+script = ExtResource("2_5gbce")
+model_name = &"character"
+model_script = ExtResource("6_h04kn")
+tables = Array[ExtResource("3_its6o")]([SubResource("Resource_dvrav")])
+metadata/_custom_type_script = ExtResource("2_5gbce")
+
+[sub_resource type="Resource" id="Resource_j3ik3"]
+script = ExtResource("3_its6o")
+table_name = &"combat"
+table_paths = Array[String](["res://datatables/combat.csv"])
+metadata/_custom_type_script = ExtResource("3_its6o")
+
+[sub_resource type="Resource" id="Resource_d4ded"]
+script = ExtResource("2_5gbce")
+model_name = &"combat"
+model_script = ExtResource("7_y3oj0")
+tables = Array[ExtResource("3_its6o")]([SubResource("Resource_j3ik3")])
+metadata/_custom_type_script = ExtResource("2_5gbce")
+
+[sub_resource type="Resource" id="Resource_0ltoo"]
+script = ExtResource("3_its6o")
+table_name = &"skill_ability"
+table_paths = Array[String](["res://datatables/skill_ability.csv"])
+metadata/_custom_type_script = ExtResource("3_its6o")
+
+[sub_resource type="Resource" id="Resource_xcx7r"]
+script = ExtResource("2_5gbce")
+model_name = &"skill_ability"
+model_script = ExtResource("8_ngncl")
+tables = Array[ExtResource("3_its6o")]([SubResource("Resource_0ltoo")])
+metadata/_custom_type_script = ExtResource("2_5gbce")
+
+[resource]
+script = ExtResource("1_w7js4")
+table_models = Array[ExtResource("2_5gbce")]([SubResource("Resource_0gh0e"), SubResource("Resource_h04kn"), SubResource("Resource_y3oj0"), SubResource("Resource_ngncl"), SubResource("Resource_d4ded"), SubResource("Resource_xcx7r")])
+json_paths = Array[String](["res://resources/data/effects/aqua_shield_effect.json", "res://resources/data/effects/arcane_missile_effect.json", "res://resources/data/effects/arrow_attack_effect.json", "res://resources/data/effects/arrow_beam_effect.json", "res://resources/data/effects/arrow_entangle_effect.json", "res://resources/data/effects/arrow_poison_effect.json", "res://resources/data/effects/arrow_shower_effect.json", "res://resources/data/effects/attack_effect.json", "res://resources/data/effects/battle_cry_buff.json", "res://resources/data/effects/battle_cry_effect.json", "res://resources/data/effects/chain_lightning_effect.json", "res://resources/data/effects/fireball_effect.json", "res://resources/data/effects/healing_spring_effect.json", "res://resources/data/effects/heroic_strike_effect.json", "res://resources/data/effects/ignite_buff.json", "res://resources/data/effects/magic_shield_buff.json", "res://resources/data/effects/magic_shield_effect.json", "res://resources/data/effects/mana_surge_effect.json", "res://resources/data/effects/resolute_effect.json", "res://resources/data/effects/retaliate_effect.json", "res://resources/data/effects/tidal_fury_effect.json", "res://resources/data/effects/torrential_curse_buff.json", "res://resources/data/effects/vortex_bind_effect.json", "res://resources/data/effects/water_blade_slash_effect.json"])
+metadata/_custom_type_script = ExtResource("1_w7js4")

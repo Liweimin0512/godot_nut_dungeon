@@ -16,7 +16,7 @@ var _table_completed: Dictionary = {}
 var _thread: Thread
 
 ## 加载数据表完成
-signal load_completed(datatable_name: String, data: Dictionary)
+signal load_completed(datatable_name: String)
 
 ## 批量加载数据表
 func load_datatables(table_types: Array[TableType]) -> void:

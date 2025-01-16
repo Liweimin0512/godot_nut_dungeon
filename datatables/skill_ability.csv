@@ -1,6 +1,6 @@
 ﻿ID,ability_name,ability_tags,ability_description,icon,is_auto_cast,effect_config_path,target_type,ability_costs,cooldown,is_show
 ID,技能名称,技能标签,技能描述,图标,是否自动释放,效果json文件地址,目标类型,消耗,冷却时间,是否显示
-string,string,string[],string,texture,bool,string,string,string[],float,bool
+string,string,string[],string,resource,bool,string,string,string[],float,bool
 attack,普通攻击,skill,,,0,res://resources/data/effects/attack_effect.json,enemy,,0,0
 battle_cry,战吼,skill,,res://assets/texture/icon/Buffs/critical_boost.png,0,res://resources/data/effects/battle_cry_effect.json,,rage*30,3,1
 heroic_strike,全力一击,skill,,res://assets/texture/icon/Spells/poison_dagger.png,0,res://resources/data/effects/heroic_strike_effect.json,enemy,rage*15,2,1

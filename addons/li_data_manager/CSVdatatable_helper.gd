@@ -51,6 +51,10 @@ func _parse_value(value: String, type: String) -> Variant:
 			if OS.has_feature("release"): push_error(error_info)
 			else: assert(false, error_info)
 			return null
+	elif type == "vector2":
+		if value.is_empty(): return Vector2.ZERO
+		var sarray := value.split(",")
+		return Vector2(float(sarray[0]), float(sarray[1]))
 	else:
 		var error_info : String = "未知的数据类型：" + value
 		if OS.has_feature("release"): push_error(error_info)
