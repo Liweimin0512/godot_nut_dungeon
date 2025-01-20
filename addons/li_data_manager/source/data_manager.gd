@@ -103,15 +103,15 @@ func load_data_table_batch(
 				results.append(table_name)
 				
 				if progress_callback.is_valid():
-					progress_callback.call(shared_data.current, total)
+					call_deferred("_emit_progress", progress_callback, shared_data.current, total)
 				
-				load_completed.emit(table_type.table_name)
+				call_deferred("emit_signal", "load_completed", table_type.table_name)
 				
 				if shared_data.current >= total:
 					print("所有数据表加载完成，结果数：", results.size())
 					if callback.is_valid():
-						callback.call(results)
-					batch_load_completed.emit(results)
+						call_deferred("_emit_callback", callback, results)
+					call_deferred("emit_signal", "batch_load_completed", results)
 			)
 		return results
 	else:
@@ -254,3 +254,13 @@ func _get_file_loader(path: String) -> DataLoader:
 	else:
 		push_error("未找到合适的数据表加载器：%s" % ext)
 	return loader
+
+## 发送进度回调
+func _emit_progress(callback: Callable, current: int, total: int) -> void:
+	if callback.is_valid():
+		callback.call(current, total)
+
+## 发送完成回调
+func _emit_callback(callback: Callable, results: Array) -> void:
+	if callback.is_valid():
+		callback.call(results)
