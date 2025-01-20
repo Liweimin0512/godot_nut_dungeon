@@ -18,11 +18,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 CombatSystem="*res://scripts/systems/combat/combat_system.gd"
-JsonLoader="*res://addons/godot_gameplay_ability_system/source/common/autoload/json_loader.gd"
 EffectNodeFactory="*res://addons/godot_gameplay_ability_system/source/common/factory/ability_effect_node_factory.gd"
-DatatableManager="*res://addons/li_data_manager/data_table_manager.gd"
 EventBus="*res://addons/li_framework/event_bus.gd"
 UIManager="*res://addons/li_framework/UIframework/UImanager.gd"
+DataManager="*res://addons/li_data_manager/source/data_manager.gd"
 
 [display]
 

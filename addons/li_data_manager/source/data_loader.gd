@@ -1,8 +1,4 @@
-extends Resource
-class_name DatatableHelper
-
-## 是否采用异步加载
-@export var is_async := true
+extends RefCounted
 
 ## 加载数据表
 func load_datatable(table_path: StringName) -> Dictionary:
