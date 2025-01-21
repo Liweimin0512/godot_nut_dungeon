@@ -19,36 +19,33 @@ enum UIState { NONE, OPENING, OPENED, CLOSING, CLOSED }
 ## 资源管理器
 var resource_manager : UIResourceManager:
 	get:
-		return _resource_manager
+		return get_module("resource") as UIResourceManager
 	set(value):
 		push_error("resource_manager is read-only")
 ## Widget管理器
 var widget_manager : UIWidgetManager:
 	get:
-		return _widget_manager
+		return get_module("widget") as UIWidgetManager
 	set(value):
 		push_error("widget_manager is read-only")
-## 分组管理器
-var group_manager : UIGroupManager:
+## Scene管理器
+var scene_manager : UISceneManager:
 	get:
-		return _group_manager
+		return get_module("scene") as UISceneManager
 	set(value):
-		push_error("group_manager is read-only")
+		push_error("scene_manager is read-only")
 
-## 资源管理器
-var _resource_manager: UIResourceManager
-## Widget管理器
-var _widget_manager: UIWidgetManager
-## 界面分组管理器
-var _group_manager: UIGroupManager
+## 模块类映射
+var _module_types : Dictionary[StringName, Script] = {
+	"resource": UIResourceManager,
+	"scene": UISceneManager,
+	"widget": UIWidgetManager,
 
+}
+## 模块实例
+var _modules = {}
 ## 界面分组
 var _groups: Dictionary[String, UIGroupComponent] = {}
-
-func _ready() -> void:
-	_resource_manager = UIResourceManager.new()
-	_widget_manager = UIWidgetManager.new()
-	_group_manager = UIGroupManager.new()
 
 ## 设置分组
 func set_group(group_name: StringName, group: UIGroupComponent) -> void:
@@ -84,3 +81,31 @@ func is_group(group: Control) -> bool:
 
 func is_scene(scene: Control) -> bool:
 	return scene.has_node("UISceneComponent")
+
+## 获取模块实例
+func get_module(module_id: String) -> RefCounted:
+	if not is_module_enabled(module_id):
+		push_warning("Attempting to access disabled module: %s" % module_id)
+		return null
+	
+	# 如果模块已创建，直接返回
+	if _modules.has(module_id):
+		return _modules[module_id]
+	
+	# 按需创建模块
+	var module = _create_module(module_id)
+	if module:
+		_modules[module_id] = module
+	
+	return module
+
+## 检查模块是否启用
+func is_module_enabled(module_id: String) -> bool:
+	return ProjectSettings.get_setting("godot_ui_framework/modules/" + module_id + "/enabled", false)
+
+## 创建模块实例
+func _create_module(module_id: StringName) -> RefCounted:
+	if not _module_types.has(module_id):
+		push_error("Unknown module: %s" % module_id)
+		return null
+	return _module_types[module_id].new()
