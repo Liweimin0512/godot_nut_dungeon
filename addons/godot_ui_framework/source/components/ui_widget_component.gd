@@ -14,11 +14,11 @@ signal widget_recycled(widget: Control)
 
 ## 回收控件
 func recycle() -> void:
-    if not reusable:
-        dispose()
-        return
-    
-    if owner.has_method("_on_recycle"):
-        owner.call("_on_recycle")
-    
-    widget_recycled.emit(owner)
+	if not reusable:
+		dispose()
+		return
+	
+	if owner.has_method("_on_recycle"):
+		owner.call("_on_recycle")
+	
+	widget_recycled.emit(owner)
