@@ -1,32 +1,24 @@
-# widget_base.gd
-extends Node
+# ui_widget_component.gd
+extends UIViewComponent
 class_name UIWidgetComponent
 
-## 控件基类组件，表示其父节点是一个控件
-
-# 控件数据模型
-var model: Dictionary = {}
+## 是否可重用
+@export var reusable: bool = true
+## 是否自动回收
+@export var auto_recycle: bool = true
 
 ## 控件准备好
-signal widget_ready
-## 控件被销毁
-signal widget_disposed
+signal widget_ready(widget: Control)
+## 控件被回收
+signal widget_recycled(widget: Control)
 
-## 初始化控件
-func initialize(data: Dictionary = {}) -> void:
-	model = data
-	if owner.has_method("_setup"):
-		owner.call("_setup", model)
-	widget_ready.emit()
-
-## 更新控件数据
-func update_data(data: Dictionary) -> void:
-	model.merge(data, true)
-	if owner.has_method("_refresh"):
-		owner.call("_refresh", model)
-
-## 销毁控件
-func dispose() -> void:
-	if owner.has_method("_cleanup"):
-		owner.has_method("_cleanup")
-	widget_disposed.emit()
+## 回收控件
+func recycle() -> void:
+    if not reusable:
+        dispose()
+        return
+    
+    if owner.has_method("_on_recycle"):
+        owner.call("_on_recycle")
+    
+    widget_recycled.emit(owner)

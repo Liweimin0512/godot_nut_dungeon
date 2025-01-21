@@ -43,23 +43,7 @@ var _widget_manager: UIWidgetManager
 var _group_manager: UIGroupManager
 
 ## 界面分组
-var _group: Dictionary = {}
-## 界面数据
-var _ui_types: Dictionary = {}
-## UI状态追踪
-var _ui_states: Dictionary = {}
-## UI导航历史 (按组存储)
-var _navigation_history: Dictionary = {}
-
-## UI组
-var _group: Dictionary[StringName, UIGroupComponent]
-
-## UI状态改变
-signal ui_state_changed(ui_id: StringName, state: UIState)
-## 过渡动画开始
-signal ui_transition_started(ui_id: StringName)
-## 过渡动画结束
-signal ui_transition_completed(ui_id: StringName)
+var _groups: Dictionary[String, UIGroupComponent] = {}
 
 func _ready() -> void:
 	_resource_manager = UIResourceManager.new()
@@ -67,44 +51,36 @@ func _ready() -> void:
 	_group_manager = UIGroupManager.new()
 
 ## 设置分组
-func set_group(group_name: StringName, control: Node) -> void:
-	_group[group_name] = control
+func set_group(group_name: StringName, group: UIGroupComponent) -> void:
+	_groups[group_name] = group
 
 ## 获取分组
-func get_group(group_name: StringName) -> Node:
-	assert(_group.has(group_name), "不是有效的UI组")
-	return _group[group_name]
+func get_group(group_name: StringName) -> UIGroupComponent:
+	assert(_groups.has(group_name), "不是有效的UI组")
+	return _groups[group_name]
 
 ## 移除分组
 func remove_group(group_name: StringName) -> bool:
-	return _group.erase(group_name)
+	return _groups.erase(group_name)
 
 ## 判断是否存在分组
 func has_group(group_name: StringName) -> bool:
-	return _group.has(group_name)
+	return _groups.has(group_name)
 
-## 更新导航历史
-func _update_navigation_history(groupID: StringName, ui_id: StringName) -> void:
-	if not _navigation_history.has(groupID):
-		_navigation_history[groupID] = []
-	var history: Array = _navigation_history[groupID]
-	history.append(ui_id)
-	# 限制历史记录长度
-	if history.size() > 10:
-		history.pop_front()
+func get_scene_component(scene: Control) -> UISceneComponent:
+	return scene.get_node_or_null("UISceneComponent")
 
-## 导航返回
-func navigate_back(groupID: StringName) -> void:
-	if not _navigation_history.has(groupID):
-		return
-		
-	var history: Array = _navigation_history[groupID]
-	if history.size() < 2:
-		return
-		
-	# 移除当前界面
-	history.pop_back()
-	# 获取上一个界面
-	var previous_ui = history.pop_back()
-	if previous_ui:
-		await show_ui(previous_ui)
+func get_widget_component(widget: Control) -> UIWidgetComponent:
+	return widget.get_node_or_null("UIWidgetComponent")
+
+func get_group_component(group: Control) -> UIGroupComponent:
+	return group.get_node_or_null("UIGroupComponent")
+
+func is_widget(widget: Control) -> bool:
+	return widget.has_node("UIWidgetComponent")
+
+func is_group(group: Control) -> bool:
+	return group.has_node("UIGroupComponent")
+
+func is_scene(scene: Control) -> bool:
+	return scene.has_node("UISceneComponent")

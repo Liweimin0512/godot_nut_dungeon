@@ -11,19 +11,6 @@ class_name UIGroupComponent
 ## 是否启用模态窗口
 @export var enable_modal: bool = true
 
-## 当前界面
-var _current: Control:
-	get:
-		return _current
-	set(value):
-		if value == _current:
-			return
-		if _current:
-			_current.interface_closed.emit(_current)
-		if value:
-			value.interface_opened.emit(value)
-		_current = value
-
 func _enter_tree() -> void:
 	UIManager.set_group(group_name, self)
 

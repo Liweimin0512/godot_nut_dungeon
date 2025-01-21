@@ -1,120 +1,142 @@
 extends RefCounted
 class_name UIResourceManager
 
-## 最大缓存数量
-@export var max_instance_cache_size : int = 10
-## 懒加载时间间隔
-@export var lazy_load_interval : float = 1.0
+## 资源加载模式
+enum LoadMode {
+	IMMEDIATE,  # 立即加载
+	LAZY,       # 延迟加载
+	ON_DEMAND   # 按需加载
+}
+
+## 配置参数
+var max_cache_size: int = 10           # 最大缓存数量
+var lazy_load_interval: float = 1.0    # 延迟加载间隔
+
 ## 资源缓存
-var _resource_cache: Dictionary[StringName, UIWidgetType] = {}
-## 预加载的场景
-var _preloaded_scenes: Dictionary = {}
-## 实例缓存
-var _instance_cache: Dictionary = {}
-## 正在加载的资源
-var _loading_resources: Array[UIWidgetType] = []
+var _scene_cache: Dictionary = {}      # 场景缓存 <path, PackedScene>
+var _instance_cache: Dictionary = {}   # 实例缓存 <id, Array[Node]>
+var _lazy_load_queue: Array = []       # 延迟加载队列 <{path:String, callback:Callable}>
 
-func _ready() -> void:
-	UIManager.create_timer(lazy_load_interval).timeout.connect(_on_idle_timer_timeout)
+## 初始化延迟加载定时器
+func _init() -> void:
+	_start_lazy_load_timer()
 
-## 预加载UI
-func preload_ui(ui_type: UIWidgetType) -> void:
-	if _resource_cache.has(ui_type.ID):
-		push_warning("UI already cached: %s" % ui_type.ID)
-		return
+## 加载场景资源
+## 支持同步和异步加载
+func load_scene(path: String, mode: LoadMode = LoadMode.IMMEDIATE) -> PackedScene:
+	# 1. 检查缓存
+	if _scene_cache.has(path):
+		return _scene_cache[path]
 		
-	if _loading_resources.has(ui_type.ID):
-		push_warning("UI already loading: %s" % ui_type.ID)
-		return
-	_resource_cache[ui_type.ID] = ui_type
-	match ui_type.preload_mode:
-		UIWidgetType.PRELOAD_MODE.PRELOAD:
-			_load_ui_resource(ui_type)
-		UIWidgetType.PRELOAD_MODE.LAZY_LOAD:
-			_loading_resources.append(ui_type)
-		UIWidgetType.PRELOAD_MODE.ON_DEMAND:
-			pass # 按需加载不需要预加载
+	# 2. 根据加载模式处理
+	match mode:
+		LoadMode.IMMEDIATE:
+			return _load_scene_immediate(path)
+		LoadMode.LAZY:
+			_queue_lazy_load(path)
+			return null
+		LoadMode.ON_DEMAND:
+			return null
+	
+	return null
 
-## 卸载UI
-func unload_ui(ui_type: UIWidgetType) -> void:
-	var ui_id = ui_type.ID
-	
-	# 从加载队列中移除
-	_loading_resources.erase(ui_id)
-	
-	# 处理实例缓存
-	if _instance_cache.has(ui_id):
-		var instance = _instance_cache[ui_id]
-		if is_instance_valid(instance):
-			instance.queue_free()
-		_instance_cache.erase(ui_id)
-	
-	# 处理资源缓存
-	if _resource_cache.has(ui_id):
-		# 注意：资源的释放由Godot的引用计数系统处理
-		_resource_cache.erase(ui_id)
+## 立即加载场景
+func _load_scene_immediate(path: String) -> PackedScene:
+	if not ResourceLoader.exists(path):
+		push_error("Scene not found: %s" % path)
+		return null
+		
+	var scene = load(path) as PackedScene
+	if scene:
+		_cache_scene(path, scene)
+	return scene
 
-## 获取UI实例
-func get_ui_instance(ui_type: UIWidgetType) -> Control:
-	var ui_id = ui_type.ID
+## 获取场景实例
+## 如果启用了对象池，会从池中获取实例
+func get_scene_instance(path: String, use_pool: bool = false) -> Node:
+	# 1. 尝试从对象池获取
+	if use_pool and _instance_cache.has(path) and not _instance_cache[path].is_empty():
+		return _instance_cache[path].pop_back()
 	
-	# 检查实例缓存
-	if _instance_cache.has(ui_id) and is_instance_valid(_instance_cache[ui_id]):
-		return _instance_cache[ui_id]
-	
-	# 加载资源
-	var scene = _get_ui_resource(ui_type)
+	# 2. 加载场景并实例化
+	var scene = load_scene(path)
 	if not scene:
 		return null
 	
-	# 实例化
-	var instance = scene.instantiate()
-	
-	# 根据缓存策略处理
-	match ui_type.cache_mode:
-		UIWidgetType.CACHE_MODE.CACHE_IN_MEMORY:
-			_instance_cache[ui_id] = instance
-		UIWidgetType.CACHE_MODE.SMART_CACHE:
-			if _should_cache_instance():
-				_instance_cache[ui_id] = instance
-	
-	return instance
+	return scene.instantiate()
 
-## 获取UI资源
-func _get_ui_resource(ui_type: UIWidgetType) -> PackedScene:
-	var ui_id = ui_type.ID
+## 回收实例到对象池
+func recycle_instance(path: String, instance: Node) -> void:
+	if not _instance_cache.has(path):
+		_instance_cache[path] = []
 	
-	# 检查资源缓存
-	if _resource_cache.has(ui_id):
-		return _resource_cache[ui_id]
-	
-	# 加载资源
-	return _load_ui_resource(ui_type)
-
-## 加载UI资源
-func _load_ui_resource(ui_type: UIWidgetType) -> PackedScene:
-	var ui_id = ui_type.ID
-	
-	if not ui_type.scene:
-		push_error("UI scene is null for %s" % ui_id)
-		return null
-	
-	var scene = ui_type.scene
-	_resource_cache[ui_id] = scene
-	return scene
-
-## 空闲时间处理
-func _on_idle_timer_timeout() -> void:
-	if _loading_resources.is_empty():
+	# 检查缓存大小
+	if _instance_cache[path].size() >= max_cache_size:
+		instance.queue_free()
 		return
-	# 每次处理一个待加载的资源
-	var ui_type = _loading_resources[0]
-	_loading_resources.remove_at(0)
-	_load_ui_resource(ui_type)
-	UIManager.create_timer(lazy_load_interval).timeout.connect(_on_idle_timer_timeout)
+	
+	# 从父节点移除并加入缓存
+	if instance.get_parent():
+		instance.get_parent().remove_child(instance)
+	_instance_cache[path].append(instance)
 
-## 判断是否应该缓存实例
-## 这里可以根据实际需求实现更复杂的判断逻辑
-func _should_cache_instance() -> bool:
-	# 示例：检查当前缓存的实例数量
-	return _instance_cache.size() < max_instance_cache_size  # 最多缓存10个实例
+## 清理资源
+func clear_cache(path: String = "") -> void:
+	if path.is_empty():
+		# 清理所有缓存
+		_scene_cache.clear()
+		_clear_instance_cache()
+	else:
+		# 清理指定路径的缓存
+		_scene_cache.erase(path)
+		_clear_instance_cache(path)
+
+## 缓存场景资源
+func _cache_scene(path: String, scene: PackedScene) -> void:
+	_scene_cache[path] = scene
+	
+	# 如果缓存超出限制，移除最早的缓存
+	if _scene_cache.size() > max_cache_size:
+		var oldest_path = _scene_cache.keys()[0]
+		_scene_cache.erase(oldest_path)
+
+## 清理实例缓存
+func _clear_instance_cache(path: String = "") -> void:
+	if path.is_empty():
+		# 清理所有实例缓存
+		for instances in _instance_cache.values():
+			for instance in instances:
+				instance.queue_free()
+		_instance_cache.clear()
+	else:
+		# 清理指定路径的实例缓存
+		if _instance_cache.has(path):
+			for instance in _instance_cache[path]:
+				instance.queue_free()
+			_instance_cache.erase(path)
+
+## 添加到延迟加载队列
+func _queue_lazy_load(path: String, callback: Callable = Callable()) -> void:
+	_lazy_load_queue.append({
+		"path": path,
+		"callback": callback
+	})
+
+## 处理延迟加载队列
+func _process_lazy_load_queue() -> void:
+	if _lazy_load_queue.is_empty():
+		_start_lazy_load_timer()
+		return
+	
+	var item = _lazy_load_queue.pop_front()
+	var scene = _load_scene_immediate(item.path)
+	
+	if item.callback.is_valid():
+		item.callback.call(scene)
+	
+	_start_lazy_load_timer()
+
+## 开始延迟加载定时器
+func _start_lazy_load_timer() -> void:
+	var timer = UIManager.create_timer(lazy_load_interval)
+	timer.timeout.connect(_process_lazy_load_queue)
