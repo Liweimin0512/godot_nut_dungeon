@@ -5,7 +5,7 @@ extends Node2D
 # 使用示例
 func _ready() -> void:	
 	# 打开UI
-	await UIManager.open_interface("main_menu", {"initial_tab": "inventory"})
+	await UIManager.show_ui("main_menu", {"initial_tab": "inventory"})
 	
 	# 使用导航
 	UIManager.navigate_to("character_status")

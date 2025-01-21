@@ -20,8 +20,7 @@ config/icon="res://icon.svg"
 CombatSystem="*res://scripts/systems/combat/combat_system.gd"
 EffectNodeFactory="*res://addons/godot_gameplay_ability_system/source/common/factory/ability_effect_node_factory.gd"
 EventBus="*res://addons/li_framework/event_bus.gd"
-UIManager="*res://addons/li_framework/UIframework/UImanager.gd"
-DataManager="*res://addons/li_data_manager/source/data_manager.gd"
+DataManager="*res://addons/GDDataForge/source/data_manager.gd"
 
 [display]
 
@@ -33,7 +32,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_gameplay_ability_system/plugin.cfg", "res://addons/godot_ui_framework/plugin.cfg", "res://addons/li_framework/plugin.cfg")
+enabled=PackedStringArray("res://addons/GDDataForge/plugin.cfg", "res://addons/godot_gameplay_ability_system/plugin.cfg", "res://addons/li_framework/plugin.cfg")
 
 [global_group]
 

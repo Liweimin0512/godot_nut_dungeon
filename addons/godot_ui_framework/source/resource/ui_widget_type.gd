@@ -1,7 +1,5 @@
 extends Resource
-class_name UIType
-
-## UI控件数据模型，根据这个模型实例化控件对应的UI场景
+class_name UIWidgetType
 
 ## 加载策略
 enum PRELOAD_MODE {
@@ -20,27 +18,8 @@ enum CACHE_MODE {
 ## ID
 @export var ID : StringName = ""
 ## 场景
-@export var scene : PackedScene = null
-## 分组
-@export var groupID : StringName = ""
-## 隐藏同组其他界面
-@export var hide_others : bool = true
+@export_file("*.tscn") var scene_path : String
 ## 加载策略
 @export var preload_mode: PRELOAD_MODE = PRELOAD_MODE.ON_DEMAND
 ## 缓存策略
 @export var cache_mode: CACHE_MODE = CACHE_MODE.DESTROY_ON_CLOSE
-## 过渡动画
-@export var transition: UITransition
-## 层级
-@export var layer: int = 0
-
-func _init(
-		ID: StringName = "", 
-		scene:PackedScene = null, 
-		groupID: StringName = "", 
-		hide_others: bool = true
-		) -> void:
-	self.ID = ID
-	self.scene = scene
-	self.groupID = groupID
-	self.hide_others = hide_others
