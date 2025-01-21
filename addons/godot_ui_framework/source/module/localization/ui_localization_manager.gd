@@ -1,9 +1,5 @@
-# source/localization/localization_manager.gd
-extends Node
-class_name LocalizationManager
-
-signal locale_changed(new_locale: String)
-signal translation_loaded(locale: String)
+extends RefCounted
+class_name UILocalizationManager
 
 ## 当前语言
 var current_locale: String:
@@ -26,7 +22,10 @@ var _date_formats: Dictionary = {}
 ## 字体映射
 var _font_mappings: Dictionary = {}
 
-func _ready() -> void:
+signal locale_changed(new_locale: String)
+signal translation_loaded(locale: String)
+
+func _init() -> void:
     # 加载默认配置
     load_default_config()
     # 设置初始语言
@@ -85,7 +84,7 @@ func load_translations(locale: String, file_path: String) -> void:
             translation_loaded.emit(locale)
 
 ## 获取翻译文本
-func tr(key: String, params: Dictionary = {}) -> String:
+func get_translation_str(key: String, params: Dictionary = {}) -> String:
     var translation = _get_translation(key)
     if translation:
         return _format_translation(translation, params)
@@ -146,7 +145,7 @@ func _apply_locale(locale: String) -> void:
 
 func _apply_rtl_layout(is_rtl: bool) -> void:
     # 设置UI方向
-    for node in get_tree().get_nodes_in_group("localizable"):
+    for node in UIManager.get_tree().get_nodes_in_group("localizable"):
         if node is Control:
             node.set_layout_direction(
                 Control.LAYOUT_DIRECTION_RTL if is_rtl 
@@ -155,7 +154,7 @@ func _apply_rtl_layout(is_rtl: bool) -> void:
 
 func _apply_fonts(locale: String) -> void:
     var fonts = _font_mappings.get(locale, {})
-    for node in get_tree().get_nodes_in_group("localizable"):
+    for node in UIManager.get_tree().get_nodes_in_group("localizable"):
         if node is Control and "font_key" in node:
             var font = fonts.get(node.font_key)
             if font:

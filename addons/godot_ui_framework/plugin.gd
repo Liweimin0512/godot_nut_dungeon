@@ -23,9 +23,19 @@ const MODULES = {
 		"description": "管理UI主题和样式",
 		"default": true
 	},
-	"debug": {
-		"name": "Debug Tools",
-		"description": "UI调试工具",
+	"transition": {
+		"name": "Transition Manager",
+		"description": "管理UI过渡效果",
+		"default": true
+	},
+	"adaptation": {
+		"name": "Adaptation Manager",
+		"description": "管理UI适配",
+		"default": true
+	},
+	"localization": {
+		"name": "Localization Manager",
+		"description": "管理UI本地化",
 		"default": true
 	}
 }
@@ -62,6 +72,8 @@ func _add_module_settings() -> void:
 				"hint": PROPERTY_HINT_NONE,
 				"hint_string": module.description
 			})
+	if not ProjectSettings.has_setting("project/debug/enable_ui_debugger"):
+		ProjectSettings.set_setting("project/debug/enable_ui_debugger", true)
 
 ## 移除模块设置
 func _remove_module_settings() -> void:
@@ -69,6 +81,8 @@ func _remove_module_settings() -> void:
 		var setting_name = SETTING_PATH + module_id + "/enabled"
 		if ProjectSettings.has_setting(setting_name):
 			ProjectSettings.set_setting(setting_name, null)
+	if ProjectSettings.has_setting("project/debug/enable_ui_debugger"):
+		ProjectSettings.set_setting("project/debug/enable_ui_debugger", null)
 
 ## 确保项目设置中有我们的分类
 func _ensure_project_settings_category() -> void:

@@ -34,13 +34,40 @@ var scene_manager : UISceneManager:
 		return get_module("scene") as UISceneManager
 	set(value):
 		push_error("scene_manager is read-only")
+## Theme管理器
+var theme_manager : UIThemeManager:
+	get:
+		return get_module("theme") as UIThemeManager
+	set(value):
+		push_error("theme_manager is read-only")
+## Transition管理器
+var transition_manager : UITransitionManager:
+	get:
+		return get_module("transition") as UITransitionManager
+	set(value):
+		push_error("transition_manager is read-only")
+## Adaptation管理器
+var adaptation_manager : UIAdaptationManager:
+	get:
+		return get_module("adaptation") as UIAdaptationManager
+	set(value):
+		push_error("adaptation_manager is read-only")
+## Localization管理器
+var localization_manager : UILocalizationManager:
+	get:
+		return get_module("localization") as UILocalizationManager
+	set(value):
+		push_error("localization_manager is read-only")
 
 ## 模块类映射
 var _module_types : Dictionary[StringName, Script] = {
 	"resource": UIResourceManager,
 	"scene": UISceneManager,
 	"widget": UIWidgetManager,
-
+	"theme": UIThemeManager,
+	"transition": UITransitionManager,
+	"adaptation": UIAdaptationManager,
+	"localization": UILocalizationManager,
 }
 ## 模块实例
 var _modules = {}
