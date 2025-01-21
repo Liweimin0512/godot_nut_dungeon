@@ -1,3 +1,6 @@
 [submodule "addons/godot_gameplay_ability_system"]
 	path = addons/godot_gameplay_ability_system
 	url = https://github.com/Liweimin0512/godot_gameplay_ability_system.git
+[submodule "addons/GDDataForge"]
+	path = addons/GDDataForge
+	url = https://github.com/Liweimin0512/GDDataForge.git

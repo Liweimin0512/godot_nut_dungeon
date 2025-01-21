@@ -5,10 +5,31 @@ extends Node
 提供方法来打开、关闭、或切换UI窗口。
 可能还需要管理UI资源和配置，以及处理UI相关的事件和输入。
 """
+
+## UI状态
+enum UI_STATE {
+	NONE,
+	OPENTING,
+	OPENED,
+	CLOSING,
+	CLOSED
+}
+
 ## 界面分组
 var _group: Dictionary = {}
 ## 界面数据
 var _ui_types : Dictionary = {}
+## 初始化# 在UIManager中
+var _resource_manager: UIResourceManager
+
+signal ui_state_changed(ui_id: StringName, state: UI_STATE)
+signal ui_transition_started(ui_id: StringName)
+signal ui_transition_completed(ui_id: StringName)
+
+func _ready() -> void:
+	_resource_manager = UIResourceManager.new()
+    add_child(_resource_manager)
+
 
 #region 分组相关
 
@@ -45,11 +66,9 @@ func create_interface(ID: StringName, data: Dictionary = {}) -> Control:
 	if not _ui_types.has(ID) : return null
 	var _model : UIType = _get_type(ID)
 	assert(_model.scene, "UI场景文件无效！！！")
-	var interface: Control = _model.scene.instantiate()
+	var interface: Control = _resource_manager.get_ui_instance(_model)
 	if is_widget(interface):
 		interface.set("_widget_type", _model)
-	#interface._create(data)
-	#interface.call("_create", data)
 	create_widget(interface, data)
 	return interface
 

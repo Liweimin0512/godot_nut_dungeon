@@ -7,6 +7,16 @@ var _current: Control:
 		if get_child_count() <= 0 :return null
 		return get_child(-1)
 
+## 过度动画支持
+@export var transition : UITransition
+var _active_transition : Array[UITransition]
+
+## 层级管理
+var _layer_order : Dictionary = {}
+
+## 模态支持
+var _modal_stack : Array[Control] = []
+
 signal interface_opened
 signal interface_closed
 
