@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://cubd7cacdcbot"]
+
+[ext_resource type="Script" uid="uid://ckbjgast78dh3" path="res://addons/godot_ui_framework/example/inventory/inventory_slot.gd" id="1_u6k4d"]
+[ext_resource type="Script" uid="uid://1mpayve22prh" path="res://addons/godot_ui_framework/source/core/components/ui_widget_component.gd" id="2_widget"]
+
+[node name="InventorySlot" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_u6k4d")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemCount" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -26.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 2
+
+[node name="UIWidgetComponent" type="Node" parent="."]
+script = ExtResource("2_widget")

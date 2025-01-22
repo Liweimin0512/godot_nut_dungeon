@@ -53,11 +53,10 @@ func close_scene(scene: Control) -> void:
 ## 获取场景父节点
 func _get_scene_parent(scene_type: UISceneType) -> Node:
 	if not scene_type.group_id.is_empty():
-		var group = UIManager.get_group(scene_type.group_id)
+		var group : UIGroupComponent = UIManager.get_group(scene_type.group_id)
 		if group:
-			return group.get_parent()
-	
-	return UIManager.get_ui_root()
+			return group.ui_root
+	return null
 
 ## 将场景压入分组堆栈
 func _push_to_group_stack(group_id: StringName, scene: Control) -> void:
@@ -69,9 +68,10 @@ func _push_to_group_stack(group_id: StringName, scene: Control) -> void:
 	
 	# 如果需要隐藏其他场景
 	if component and component.hide_others:
-		var current = stack.peek()
-		if current:
-			current.hide()
+		if not stack.is_empty: 
+			var current = stack.peek()
+			if current:
+				current.hide()
 	
 	stack.push(scene)
 

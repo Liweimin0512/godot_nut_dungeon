@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="UIWidgetType" load_steps=2 format=3 uid="uid://bsxcnnutc51do"]
+
+[ext_resource type="Script" uid="uid://ccoyeqfqodquq" path="res://addons/godot_ui_framework/source/core/resource/ui_widget_type.gd" id="1_hhbd5"]
+
+[resource]
+script = ExtResource("1_hhbd5")
+reusable = true
+auto_recycle = true
+ID = &"inventory_slot"
+scene_path = "res://addons/godot_ui_framework/example/inventory/inventory_slot.tscn"
+preload_mode = 0
+cache_mode = 0
+layer = 0
+metadata/_custom_type_script = ExtResource("1_hhbd5")

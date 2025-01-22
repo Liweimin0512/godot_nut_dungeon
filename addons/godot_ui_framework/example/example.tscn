@@ -1,6 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvaooh3fh5ek7"]
+[gd_scene load_steps=3 format=3 uid="uid://cvaooh3fh5ek7"]
 
 [ext_resource type="Script" uid="uid://bwbu1v81hjd2n" path="res://addons/godot_ui_framework/example/example.gd" id="1_11hrd"]
+[ext_resource type="Script" uid="uid://drldqlyqnyu6k" path="res://addons/godot_ui_framework/source/core/components/ui_group_component.gd" id="2_3ehna"]
 
-[node name="Example" type="Node2D"]
+[node name="Example" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_11hrd")
+
+[node name="ButtonInventory" type="Button" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 122.0
+offset_bottom = 81.0
+text = "打开背包"
+
+[node name="UIGroupComponent" type="Node" parent="." node_paths=PackedStringArray("ui_root")]
+script = ExtResource("2_3ehna")
+group_name = &"game_window"
+ui_root = NodePath("..")
+metadata/_custom_type_script = ExtResource("2_3ehna")
+
+[connection signal="pressed" from="ButtonInventory" to="." method="_on_button_inventory_pressed"]

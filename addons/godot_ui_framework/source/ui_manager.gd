@@ -60,7 +60,7 @@ var localization_manager : UILocalizationManager:
 		push_error("localization_manager is read-only")
 
 ## 模块类映射
-var _module_types : Dictionary[StringName, Script] = {
+var _module_scripts : Dictionary[StringName, Script] = {
 	"resource": UIResourceManager,
 	"scene": UISceneManager,
 	"widget": UIWidgetManager,
@@ -70,7 +70,7 @@ var _module_types : Dictionary[StringName, Script] = {
 	"localization": UILocalizationManager,
 }
 ## 模块实例
-var _modules = {}
+var _modules: Dictionary[StringName, RefCounted] = {}
 ## 界面分组
 var _groups: Dictionary[String, UIGroupComponent] = {}
 
@@ -109,30 +109,34 @@ func is_group(group: Control) -> bool:
 func is_scene(scene: Control) -> bool:
 	return scene.has_node("UISceneComponent")
 
-## 获取模块实例
+## 获取模块
 func get_module(module_id: String) -> RefCounted:
-	if not is_module_enabled(module_id):
-		push_warning("Attempting to access disabled module: %s" % module_id)
-		return null
-	
-	# 如果模块已创建，直接返回
-	if _modules.has(module_id):
-		return _modules[module_id]
-	
-	# 按需创建模块
-	var module = _create_module(module_id)
-	if module:
-		_modules[module_id] = module
-	
-	return module
+	if not _modules.has(module_id):
+		if is_module_enabled(module_id):
+			_modules[module_id] = _create_module(module_id)
+		else:
+			push_error("模块未启用：" + module_id)
+			return null
+	return _modules[module_id]
 
 ## 检查模块是否启用
 func is_module_enabled(module_id: String) -> bool:
-	return ProjectSettings.get_setting("godot_ui_framework/modules/" + module_id + "/enabled", false)
+	var setting_name = "godot_ui_framework/modules/" + module_id + "/enabled"
+	# 如果设置不存在，默认为启用
+	if not ProjectSettings.has_setting(setting_name):
+		return true
+	return ProjectSettings.get_setting(setting_name, true)
 
 ## 创建模块实例
-func _create_module(module_id: StringName) -> RefCounted:
-	if not _module_types.has(module_id):
-		push_error("Unknown module: %s" % module_id)
+func _create_module(module_id: StringName) -> RefCounted:	
+	var script = _module_scripts[module_id]
+	if not script:
+		push_error("无法加载模块脚本：" + module_id)
 		return null
-	return _module_types[module_id].new()
+	
+	var module = script.new()
+	if not module:
+		push_error("无法创建模块实例：" + module_id)
+		return null
+	
+	return module

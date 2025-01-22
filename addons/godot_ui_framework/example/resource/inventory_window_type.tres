@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="UISceneType" load_steps=2 format=3 uid="uid://8tfbga2nj6bt"]
+
+[ext_resource type="Script" uid="uid://cdtge4wnkvm45" path="res://addons/godot_ui_framework/source/core/resource/ui_scene_type.gd" id="1_3vsqi"]
+
+[resource]
+script = ExtResource("1_3vsqi")
+group_id = &"game_window"
+hide_others = true
+is_modal = false
+block_input = true
+ID = &"inventory_window"
+scene_path = "res://addons/godot_ui_framework/example/inventory/inventory_window.tscn"
+preload_mode = 0
+cache_mode = 0
+layer = 0

@@ -41,39 +41,38 @@ const MODULES = {
 }
 
 func _enter_tree() -> void:
+	# 确保项目设置分类存在
+	_ensure_project_settings_category()
 	# 添加项目设置
 	_add_module_settings()
+	# 保存设置
+	ProjectSettings.save()
+	# 添加自动加载单例
 	add_autoload_singleton("UIManager", "res://addons/godot_ui_framework/source/ui_manager.gd")
-
 
 func _exit_tree() -> void:
 	# 移除项目设置
-	_remove_module_settings()	
+	_remove_module_settings()
+	# 保存设置
+	ProjectSettings.save()
+	# 移除自动加载单例
 	remove_autoload_singleton("UIManager")
 
-## 添加模块设置到项目设置
+## 添加模块设置
 func _add_module_settings() -> void:
-	# 添加模块分类
-	_ensure_project_settings_category()
-	
-	# 为每个模块添加设置
 	for module_id in MODULES:
 		var module = MODULES[module_id]
 		var setting_name = SETTING_PATH + module_id + "/enabled"
-		
 		if not ProjectSettings.has_setting(setting_name):
 			ProjectSettings.set_setting(setting_name, module.default)
-			
-			# 设置属性
-			ProjectSettings.set_initial_value(setting_name, module.default)
 			ProjectSettings.add_property_info({
 				"name": setting_name,
 				"type": TYPE_BOOL,
 				"hint": PROPERTY_HINT_NONE,
 				"hint_string": module.description
 			})
-	if not ProjectSettings.has_setting("project/debug/enable_ui_debugger"):
-		ProjectSettings.set_setting("project/debug/enable_ui_debugger", true)
+	if not ProjectSettings.has_setting("godot_ui_framework/debug/enable_ui_debugger"):
+		ProjectSettings.set_setting("godot_ui_framework/debug/enable_ui_debugger", true)
 
 ## 移除模块设置
 func _remove_module_settings() -> void:
@@ -81,19 +80,17 @@ func _remove_module_settings() -> void:
 		var setting_name = SETTING_PATH + module_id + "/enabled"
 		if ProjectSettings.has_setting(setting_name):
 			ProjectSettings.set_setting(setting_name, null)
-	if ProjectSettings.has_setting("project/debug/enable_ui_debugger"):
-		ProjectSettings.set_setting("project/debug/enable_ui_debugger", null)
+	if ProjectSettings.has_setting("godot_ui_framework/debug/enable_ui_debugger"):
+		ProjectSettings.set_setting("godot_ui_framework/debug/enable_ui_debugger", null)
 
 ## 确保项目设置中有我们的分类
 func _ensure_project_settings_category() -> void:
-	# 添加UI框架分类
-	ProjectSettings.set_setting("godot_ui_framework/", {})
-	ProjectSettings.set_setting("godot_ui_framework/modules/", {})
-	
-	# 设置为可见
-	ProjectSettings.add_property_info({
-		"name": "godot_ui_framework/",
-		"type": TYPE_NIL,
-		"hint": PROPERTY_HINT_NONE,
-		"hint_string": "ui_framework_category"
-	})
+	if not ProjectSettings.has_setting("godot_ui_framework/modules"):
+		ProjectSettings.set_setting("godot_ui_framework/modules", {})
+		ProjectSettings.set_as_basic("godot_ui_framework/modules", true)
+		ProjectSettings.add_property_info({
+			"name": "godot_ui_framework/modules",
+			"type": TYPE_DICTIONARY,
+			"hint": PROPERTY_HINT_NONE,
+			"hint_string": "UI Framework Modules"
+		})

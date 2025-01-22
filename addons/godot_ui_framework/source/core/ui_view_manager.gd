@@ -45,7 +45,8 @@ func create_view(id: StringName, parent: Node, data: Dictionary = {}) -> Control
 		push_error("View type not found: %s" % id)
 		return null
 	
-	var view = UIManager.resource_manager.get_scene_instance(
+	var view = UIManager.resource_manager.get_instance(
+		view_type.scene_path,
 		view_type.scene_path,
 		view_type.cache_mode == UIViewType.CACHE_MODE.CACHE_IN_MEMORY
 	)
@@ -56,9 +57,15 @@ func create_view(id: StringName, parent: Node, data: Dictionary = {}) -> Control
 	if parent:
 		parent.add_child(view)
 	
-	var component = UIManager.get_view_component(view)
+	var component : UIViewComponent
+	if UIManager.is_scene(view):
+		component = UIManager.get_scene_component(view)
+	elif UIManager.is_widget(view):
+		component = UIManager.get_widget_component(view)
 	if component:
 		component.initialize(data)
+	else:
+		push_error("can not found view component in node: {0}".format([view]))
 	
 	return view
 

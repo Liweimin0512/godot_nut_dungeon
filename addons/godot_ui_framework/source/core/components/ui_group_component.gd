@@ -1,3 +1,4 @@
+@tool
 extends Node
 class_name UIGroupComponent
 
@@ -11,7 +12,10 @@ class_name UIGroupComponent
 ## 是否启用模态窗口
 @export var enable_modal: bool = true
 
+@export var ui_root : Node
+
 func _enter_tree() -> void:
+	if not ui_root: ui_root = get_parent()
 	UIManager.set_group(group_name, self)
 
 func _exit_tree() -> void:

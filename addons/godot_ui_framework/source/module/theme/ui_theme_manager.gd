@@ -37,10 +37,10 @@ func load_default_themes() -> void:
 			"text": Color(1.0, 1.0, 1.0),
 			"text_disabled": Color(0.5, 0.5, 0.5)
 		},
-		#"fonts": {
+		"fonts": {
 			#"normal": preload("res://default_font.tres"),
 			#"bold": preload("res://default_font_bold.tres")
-		#},
+		},
 		"metrics": {
 			"margin": 10,
 			"padding": 5,
