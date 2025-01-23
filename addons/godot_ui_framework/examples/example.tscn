@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvaooh3fh5ek7"]
 
-[ext_resource type="Script" uid="uid://bwbu1v81hjd2n" path="res://addons/godot_ui_framework/example/example.gd" id="1_11hrd"]
+[ext_resource type="Script" uid="uid://bwbu1v81hjd2n" path="res://addons/godot_ui_framework/examples/example.gd" id="1_11hrd"]
 [ext_resource type="Script" uid="uid://drldqlyqnyu6k" path="res://addons/godot_ui_framework/source/core/components/ui_group_component.gd" id="2_3ehna"]
 
 [node name="Example" type="Control"]

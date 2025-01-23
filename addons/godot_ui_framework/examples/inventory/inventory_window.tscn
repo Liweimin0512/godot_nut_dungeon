@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2ch865bgnvd1"]
 
-[ext_resource type="Script" uid="uid://c2ln5havfhham" path="res://addons/godot_ui_framework/example/inventory/inventory_window.gd" id="1_d4k2p"]
+[ext_resource type="Script" uid="uid://c2ln5havfhham" path="res://addons/godot_ui_framework/examples/inventory/inventory_window.gd" id="1_d4k2p"]
 [ext_resource type="Script" uid="uid://dod05jn2u0pey" path="res://addons/godot_ui_framework/source/core/components/ui_scene_component.gd" id="2_scene"]
 
 [node name="InventoryWindow" type="Control"]
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 30.0

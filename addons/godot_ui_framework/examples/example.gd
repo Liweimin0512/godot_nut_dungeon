@@ -1,10 +1,10 @@
 extends Control
 
 @export var _ui_scene_types: Array[UISceneType] = [
-	preload("res://addons/godot_ui_framework/example/resource/inventory_window_type.tres")
+	preload("res://addons/godot_ui_framework/examples/resource/inventory_window_type.tres")
 ]
 @export var _ui_widget_types: Array[UIWidgetType] = [
-	preload("res://addons/godot_ui_framework/example/resource/inventory_slot_type.tres"), 
+	preload("res://addons/godot_ui_framework/examples/resource/inventory_slot_type.tres"), 
 ]
 
 # 使用示例

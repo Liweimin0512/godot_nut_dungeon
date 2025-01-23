@@ -44,7 +44,6 @@ Player=""
 [godot_ui_framework]
 
 modules/={}
-={}
 modules={}
 modules/resource/enabled=true
 modules/scene/enabled=true

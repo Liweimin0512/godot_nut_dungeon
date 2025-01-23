@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cubd7cacdcbot"]
 
-[ext_resource type="Script" uid="uid://ckbjgast78dh3" path="res://addons/godot_ui_framework/example/inventory/inventory_slot.gd" id="1_u6k4d"]
+[ext_resource type="Script" uid="uid://ckbjgast78dh3" path="res://addons/godot_ui_framework/examples/inventory/inventory_slot.gd" id="1_u6k4d"]
 [ext_resource type="Script" uid="uid://1mpayve22prh" path="res://addons/godot_ui_framework/source/core/components/ui_widget_component.gd" id="2_widget"]
 
 [node name="InventorySlot" type="Control"]
