@@ -4,3 +4,6 @@
 [submodule "addons/GDDataForge"]
 	path = addons/GDDataForge
 	url = https://github.com/Liweimin0512/GDDataForge.git
+[submodule "addons/GodotUIFramework"]
+	path = addons/GodotUIFramework
+	url = https://github.com/Liweimin0512/GodotUIFramework.git
