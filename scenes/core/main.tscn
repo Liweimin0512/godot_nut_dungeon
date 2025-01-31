@@ -1,11 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcxjfw256ynb5"]
+[gd_scene load_steps=2 format=3 uid="uid://dcxjfw256ynb5"]
 
 [ext_resource type="Script" uid="uid://c3djxdb3f0bkh" path="res://scenes/core/main.gd" id="1_i4sev"]
-[ext_resource type="Script" uid="uid://b1u4b6yojfqq4" path="res://scripts/state_machine/game_state_machine.gd" id="2_i4cec"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_i4sev")
-
-[node name="GameStateMachine" type="Node" parent="."]
-script = ExtResource("2_i4cec")
-metadata/_custom_type_script = ExtResource("2_i4cec")
