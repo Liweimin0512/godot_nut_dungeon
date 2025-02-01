@@ -7,3 +7,6 @@
 [submodule "addons/GodotUIFramework"]
 	path = addons/GodotUIFramework
 	url = https://github.com/Liweimin0512/GodotUIFramework.git
+[submodule "addons/PankuConsole"]
+	path = addons/PankuConsole
+	url = https://github.com/Ark2000/PankuConsole.git
