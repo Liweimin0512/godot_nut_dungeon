@@ -1,0 +1,136 @@
+[gd_scene load_steps=4 format=3 uid="uid://xxxxxxxxxxxx"]
+
+[ext_resource type="Script" path="res://modules/item_system/scripts/ui/enhancement_ui.gd" id="1_xxxxx"]
+[ext_resource type="PackedScene" path="res://modules/item_system/scenes/components/item_slot.tscn" id="2_xxxxx"]
+[ext_resource type="PackedScene" path="res://modules/item_system/scenes/components/item_tip.tscn" id="3_xxxxx"]
+
+[node name="Enhancement" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -250.0
+offset_right = 400.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xxxxx")
+item_tip_scene = ExtResource("3_xxxxx")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.1, 0.1, 0.1, 0.9)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HeaderContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer/HeaderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "强化"
+
+[node name="MoneyLabel" type="Label" parent="MarginContainer/VBoxContainer/HeaderContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+text = "1000 金币"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="EquipmentPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/EquipmentPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/EquipmentPanel/VBoxContainer"]
+layout_mode = 2
+text = "装备列表"
+
+[node name="EquipmentContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/EquipmentPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 5
+
+[node name="ItemSlot" parent="MarginContainer/VBoxContainer/HBoxContainer/EquipmentPanel/VBoxContainer/EquipmentContainer" instance=ExtResource("2_xxxxx")]
+layout_mode = 2
+
+[node name="EnhancementPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel/VBoxContainer"]
+layout_mode = 2
+text = "强化"
+
+[node name="SelectedContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel/VBoxContainer/SelectedContainer"]
+layout_mode = 2
+text = "选中装备:"
+
+[node name="SelectedSlot" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel/VBoxContainer/SelectedContainer" instance=ExtResource("2_xxxxx")]
+layout_mode = 2
+
+[node name="InfoContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="SuccessRateLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel/VBoxContainer/InfoContainer"]
+layout_mode = 2
+text = "成功率: 100%"
+
+[node name="CostLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel/VBoxContainer/InfoContainer"]
+layout_mode = 2
+text = "费用: 100 金币"
+
+[node name="MaterialLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel/VBoxContainer/InfoContainer"]
+layout_mode = 2
+text = "材料: 1/1"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="MaterialContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 5
+
+[node name="ItemSlot" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel/VBoxContainer/MaterialContainer" instance=ExtResource("2_xxxxx")]
+layout_mode = 2
+
+[node name="EnhanceButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/EnhancementPanel/VBoxContainer"]
+layout_mode = 2
+text = "强化"

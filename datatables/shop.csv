@@ -1,0 +1,10 @@
+﻿ID,name,name_zh,description,description_zh,items,buy_rate,sell_rate
+名称,英文名称,中文名称,英文描述,中文描述,商品列表,购买倍率,出售倍率
+string,string,string,string,string,string,float,float
+SHOP_GENERAL,General Store,杂货店,A store that sells various items,出售各种物品的商店,"ITEM_HEALTH_POTION,ITEM_MANA_POTION,ITEM_ANTIDOTE",1,0.5
+SHOP_WEAPON,Weapon Shop,武器店,A store that specializes in weapons,专门出售武器的商店,"ITEM_IRON_SWORD,ITEM_STEEL_SWORD",1.2,0.6
+SHOP_ARMOR,Armor Shop,防具店,A store that specializes in armor,专门出售防具的商店,"ITEM_LEATHER_ARMOR,ITEM_IRON_ARMOR",1.2,0.6
+SHOP_BLACKSMITH,Blacksmith,铁匠铺,A store that forges weapons and armor,打造武器和防具的商店,"ITEM_IRON_SWORD,ITEM_IRON_ARMOR,ITEM_STEEL_SWORD,ITEM_STEEL_ARMOR",1.5,0.7
+SHOP_ALCHEMIST,Alchemist,炼金店,A store that sells potions and materials,出售药水和材料的商店,"ITEM_HEALTH_POTION,ITEM_MANA_POTION,ITEM_ANTIDOTE,ITEM_MAGIC_STONE",1.1,0.55
+SHOP_MATERIAL,Material Shop,材料店,A store that sells crafting materials,出售合成材料的商店,"ITEM_IRON_ORE,ITEM_STEEL_INGOT,ITEM_SILVER_ORE",1,0.5
+SHOP_ENHANCEMENT,Enhancement Shop,强化店,A store that sells enhancement materials,出售强化材料的商店,"ITEM_ENHANCEMENT_STONE,ITEM_MAGIC_STONE",1.3,0.65

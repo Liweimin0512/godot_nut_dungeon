@@ -1,0 +1,14 @@
+﻿ID,name,name_zh,description,description_zh,result_item,result_amount,materials,material_amounts,unlock_condition
+名称,英文名称,中文名称,英文描述,中文描述,产物ID,产物数量,材料列表,材料数量,解锁条件
+string,string,string,string,string,string,int,string,string,string
+RECIPE_IRON_SWORD,Iron Sword Recipe,铁剑配方,Craft an iron sword,制作铁剑,ITEM_IRON_SWORD,1,ITEM_IRON_ORE,2,default
+RECIPE_STEEL_SWORD,Steel Sword Recipe,钢剑配方,Craft a steel sword,制作钢剑,ITEM_STEEL_SWORD,1,ITEM_STEEL_INGOT,2,level_5
+RECIPE_SILVER_SWORD,Silver Sword Recipe,银剑配方,Craft a silver sword,制作银剑,ITEM_SILVER_SWORD,1,ITEM_SILVER_ORE,2,level_10
+RECIPE_LEATHER_ARMOR,Leather Armor Recipe,皮甲配方,Craft leather armor,制作皮甲,ITEM_LEATHER_ARMOR,1,ITEM_IRON_ORE,1,default
+RECIPE_IRON_ARMOR,Iron Armor Recipe,铁甲配方,Craft iron armor,制作铁甲,ITEM_IRON_ARMOR,1,ITEM_IRON_ORE,3,level_5
+RECIPE_STEEL_ARMOR,Steel Armor Recipe,钢甲配方,Craft steel armor,制作钢甲,ITEM_STEEL_ARMOR,1,ITEM_STEEL_INGOT,3,level_10
+RECIPE_HEALTH_POTION,Health Potion Recipe,生命药水配方,Craft a health potion,制作生命药水,ITEM_HEALTH_POTION,1,"ITEM_IRON_ORE,ITEM_MAGIC_STONE","1,1",default
+RECIPE_MANA_POTION,Mana Potion Recipe,魔法药水配方,Craft a mana potion,制作魔法药水,ITEM_MANA_POTION,1,"ITEM_IRON_ORE,ITEM_MAGIC_STONE","1,1",default
+RECIPE_ANTIDOTE,Antidote Recipe,解毒剂配方,Craft an antidote,制作解毒剂,ITEM_ANTIDOTE,1,"ITEM_IRON_ORE,ITEM_MAGIC_STONE","1,1",default
+RECIPE_STEEL_INGOT,Steel Ingot Recipe,钢锭配方,Craft a steel ingot,制作钢锭,ITEM_STEEL_INGOT,1,ITEM_IRON_ORE,2,level_5
+RECIPE_ENHANCEMENT_STONE,Enhancement Stone Recipe,强化石配方,Craft an enhancement stone,制作强化石,ITEM_ENHANCEMENT_STONE,1,"ITEM_IRON_ORE,ITEM_MAGIC_STONE","2,1",level_10

@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://xxxxxxxxxxxx"]
+
+[ext_resource type="Script" path="res://modules/item_system/scripts/ui/item_slot_ui.gd" id="1_xxxxx"]
+
+[node name="ItemSlot" type="PanelContainer"]
+custom_minimum_size = Vector2(64, 64)
+script = ExtResource("1_xxxxx")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.2, 0.2, 0.2, 0.5)
+
+[node name="RarityFrame" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(1, 1, 1, 0.2)
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "99"
+
+[node name="EnhancementLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "+10"

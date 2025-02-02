@@ -1,0 +1,17 @@
+﻿ID,name,name_zh,description,description_zh,icon,type,rarity,stack_size,price,ability_id,effects
+名称,英文名称,中文名称,英文描述,中文描述,图标,类型,稀有度,堆叠上限,价格,技能ID,效果
+string,string,string,string,string,string,int,int,int,int,string,string
+ITEM_HEALTH_POTION,Health Potion,生命药水,Restores 100 HP,恢复100点生命值,res://assets/icons/items/potion_red.png,0,0,99,100,heal_ability,"{""heal"": 100}"
+ITEM_MANA_POTION,Mana Potion,魔法药水,Restores 50 MP,恢复50点魔法值,res://assets/icons/items/potion_blue.png,0,0,99,100,mana_ability,"{""mana"": 50}"
+ITEM_ANTIDOTE,Antidote,解毒剂,Cures poison status,解除中毒状态,res://assets/icons/items/potion_green.png,0,0,99,50,cure_ability,"{""cure"": [""poison""]}"
+ITEM_IRON_SWORD,Iron Sword,铁剑,A basic sword,基础剑,res://assets/icons/items/sword_iron.png,1,0,1,500,,"{""attack"": 10}"
+ITEM_STEEL_SWORD,Steel Sword,钢剑,A better sword,更好的剑,res://assets/icons/items/sword_steel.png,1,1,1,1000,,"{""attack"": 20}"
+ITEM_SILVER_SWORD,Silver Sword,银剑,An excellent sword,优秀的剑,res://assets/icons/items/sword_silver.png,1,2,1,2000,,"{""attack"": 35}"
+ITEM_LEATHER_ARMOR,Leather Armor,皮甲,Basic armor,基础护甲,res://assets/icons/items/armor_leather.png,1,0,1,300,,"{""defense"": 5}"
+ITEM_IRON_ARMOR,Iron Armor,铁甲,Better armor,更好的护甲,res://assets/icons/items/armor_iron.png,1,1,1,800,,"{""defense"": 15}"
+ITEM_STEEL_ARMOR,Steel Armor,钢甲,Excellent armor,优秀的护甲,res://assets/icons/items/armor_steel.png,1,2,1,1500,,"{""defense"": 25}"
+ITEM_IRON_ORE,Iron Ore,铁矿石,Basic crafting material,基础合成材料,res://assets/icons/items/ore_iron.png,2,0,99,50,,{}
+ITEM_STEEL_INGOT,Steel Ingot,钢锭,Advanced crafting material,高级合成材料,res://assets/icons/items/ingot_steel.png,2,1,99,100,,{}
+ITEM_SILVER_ORE,Silver Ore,银矿石,Rare crafting material,稀有合成材料,res://assets/icons/items/ore_silver.png,2,2,99,200,,{}
+ITEM_ENHANCEMENT_STONE,Enhancement Stone,强化石,Used for enhancement,用于强化装备,res://modules/item_system/resource/icons/enhancement_stone.png,2,2,99,100,enhance_ability,{}
+ITEM_MAGIC_STONE,Magic Stone,魔法石,Used for enchantment,用于附魔装备,res://modules/item_system/resource/icons/magic_stone.png,2,2,99,200,enchant_ability,{}
