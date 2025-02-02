@@ -18,14 +18,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 CombatSystem="*res://scripts/systems/combat/combat_system.gd"
+CoreSystem="*res://addons/godot_core_system/source/core_system.gd"
+DataManager="*res://addons/GDDataForge/source/data_manager.gd"
 UIManager="*res://addons/GodotUIFramework/source/ui_manager.gd"
 EffectNodeFactory="*res://addons/godot_gameplay_ability_system/source/common/factory/ability_effect_node_factory.gd"
-EventBus="*res://addons/li_framework/event_bus.gd"
-Console="*res://addons/console/console.gd"
-Data="*res://addons/godot_tfdp/Data.gd"
-SignalLens="*res://addons/signal_lens/autoload/signal_lens_autoload.gd"
-Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
-DataManager="*res://addons/GDDataForge/source/data_manager.gd"
 
 [dialogic]
 
@@ -42,13 +38,28 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GDDataForge/plugin.cfg", "res://addons/GodotUIFramework/plugin.cfg", "res://addons/godot_gameplay_ability_system/plugin.cfg", "res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/GDDataForge/plugin.cfg", "res://addons/GodotUIFramework/plugin.cfg", "res://addons/godot_core_system/plugin.cfg", "res://addons/godot_gameplay_ability_system/plugin.cfg", "res://addons/gut/plugin.cfg")
 
 [global_group]
 
 Enemy=""
 Character=""
 Player=""
+
+[godot_core_system]
+
+modules={}
+modules/event_bus/enabled=true
+modules/logger/enabled=true
+modules/input_manager/enabled=true
+modules/audio_manager/enabled=true
+modules/scene_manager/enabled=true
+modules/time_manager/enabled=true
+modules/resource_manager/enabled=true
+modules/async_io_manager/enabled=true
+modules/save_manager/enabled=true
+modules/config_manager/enabled=true
+modules/state_machine/enabled=true
 
 [godot_ui_framework]
 
