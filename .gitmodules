@@ -10,3 +10,6 @@
 [submodule "addons/PankuConsole"]
 	path = addons/PankuConsole
 	url = https://github.com/Ark2000/PankuConsole.git
+[submodule "addons/godot_core_system"]
+	path = addons/godot_core_system
+	url = https://github.com/Liweimin0512/godot_core_system.git
