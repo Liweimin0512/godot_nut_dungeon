@@ -1,4 +1,4 @@
-extends SceneComponent
+extends MarginContainer
 class_name InventoryUI
 
 ## 背包UI组件
@@ -7,17 +7,13 @@ class_name InventoryUI
 # 导出变量
 @export var inventory: InventoryComponent
 @export var slots_container: GridContainer
-@export var money_label: Label
-@export var item_tip_scene: PackedScene
 
 # 内部变量
 var _item_tip: ItemTipUI
 var _dragging_slot: int = -1
 var _logger = CoreSystem.logger
 
-func _ready() -> void:
-	super._ready()
-	
+func _ready() -> void:	
 	if not inventory:
 		_logger.error("InventoryUI: No inventory component assigned")
 		return

@@ -1,33 +1,25 @@
 extends BaseStateMachine
 class_name GameStateMachine
 
-enum GAME_STATE_TYPE{
-	LAUNCH,
-	INIT,
-	MENU,
-	GAME,
-}
-
 func _ready() -> void:
-	add_state(GAME_STATE_TYPE.LAUNCH, LaunchState.new(self))
-	add_state(GAME_STATE_TYPE.INIT, InitState.new(self))
-	add_state(GAME_STATE_TYPE.MENU, MenuState.new(self))
-	add_state(GAME_STATE_TYPE.GAME, GameState.new(self))
-	launch(GAME_STATE_TYPE.LAUNCH)
+	add_state("launch", LaunchState.new(self))
+	add_state("init", InitState.new(self))
+	add_state("menu", MenuState.new(self))
+	add_state("game", GameState.new(self))
 
 class LaunchState:
 	extends BaseState
 	
-	func enter(_msg: Dictionary = {}):
-		transition_to(GAME_STATE_TYPE.INIT)
+	func _enter(_msg: Dictionary = {}):
+		switch_to("init")
 
 class InitState:
 	extends BaseState
 	
 	var _datatable_state : Dictionary[StringName, bool]
 
-	func enter(_msg : Dictionary = {}):
-		DatatableManager.load_completed.connect(_on_datatable_load_completed)
+	func _enter(_msg : Dictionary = {}) -> void:
+		DataManager.load_completed.connect(_on_datatable_load_completed)
 		for model : ModelType in agent.table_types.table_models:
 			for table : TableType in model.tables:
 				_datatable_state[table.table_name] = false
@@ -45,18 +37,18 @@ class InitState:
 		for state in _datatable_state.values():
 			if state != true:
 				return
-		transition_to(GAME_STATE_TYPE.MENU)
+		switch_to("menu")
 
 class MenuState:
 	extends BaseState
 	
-	func enter(_msg: Dictionary = {}) -> void:
+	func _enter(_msg: Dictionary = {}) -> void:
 		print("进入 menu_state 状态！")
-		transition_to(GAME_STATE_TYPE.GAME)
+		switch_to("game")
 
 class GameState:
 	extends BaseState
 
-	func enter(_msg: Dictionary = {}) -> void:
+	func _enter(_msg: Dictionary = {}) -> void:
 		print("进入 game_state 状态！")
 		agent.play_game()

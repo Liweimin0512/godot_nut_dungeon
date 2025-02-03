@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ModelType" load_steps=2 format=3 uid="uid://dv0il1tuvlo4e"]
+
+[ext_resource type="Script" uid="uid://bf3cohk1etxvp" path="res://addons/GDDataForge/source/resource/model_type.gd" id="1_qncfa"]
+
+[resource]
+script = ExtResource("1_qncfa")
+model_name = &""
+description = ""
+field_mappings = Dictionary[String, String]({})
+default_values = Dictionary[String, Variant]({})
+metadata/_custom_type_script = ExtResource("1_qncfa")

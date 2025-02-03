@@ -5,18 +5,22 @@ class_name InventoryComponent
 ## 负责管理物品栏和物品操作
 
 # 信号
+## 物品添加信号
 signal item_added(item: ItemInstance, slot: int)
+## 物品移除信号
 signal item_removed(item: ItemInstance, slot: int)
+## 物品使用信号
 signal item_used(item: ItemInstance)
+## 背包槽位数量变化信号
 signal slots_changed()
-signal money_changed(new_amount: int)
 
 # 导出变量
-@export var slots_count: int = 20  # 背包槽位数量
-@export var money: int = 0         # 金钱数量
+@export var slots_count: int = 20  ## 背包槽位数量
 
 # 内部变量
+## 槽位数组
 var _slots: Array[ItemInstance] = []
+## 日志
 var _logger = CoreSystem.logger
 
 func _ready() -> void:
@@ -25,7 +29,8 @@ func _ready() -> void:
 	_logger.debug("Inventory initialized with %d slots" % slots_count)
 
 ## 添加物品
-## 返回是否添加成功
+## [param item] 物品实例
+## [return] 是否添加成功
 func add_item(item: ItemInstance) -> bool:
 	if not item:
 		return false
@@ -53,6 +58,9 @@ func add_item(item: ItemInstance) -> bool:
 	return false
 
 ## 移除物品
+## [param slot] 槽位索引
+## [param amount] 移除数量
+## [return] 移除的物品实例
 func remove_item(slot: int, amount: int = 1) -> ItemInstance:
 	if slot < 0 or slot >= slots_count:
 		return null
@@ -73,6 +81,8 @@ func remove_item(slot: int, amount: int = 1) -> ItemInstance:
 		return split_item
 
 ## 使用物品
+## [param slot] 槽位索引
+## [return] 是否使用成功
 func use_item(slot: int) -> bool:
 	var item = get_item(slot)
 	if not item:
@@ -93,12 +103,17 @@ func use_item(slot: int) -> bool:
 	return true
 
 ## 获取物品
+## [param slot] 槽位索引
+## [return] 物品实例
 func get_item(slot: int) -> ItemInstance:
 	if slot < 0 or slot >= slots_count:
 		return null
 	return _slots[slot]
 
 ## 交换物品位置
+## [param from_slot] 从槽位索引
+## [param to_slot] 到槽位索引
+## [return] 是否交换成功
 func swap_items(from_slot: int, to_slot: int) -> bool:
 	if from_slot < 0 or from_slot >= slots_count or to_slot < 0 or to_slot >= slots_count:
 		return false
@@ -111,6 +126,7 @@ func swap_items(from_slot: int, to_slot: int) -> bool:
 	return true
 
 ## 获取所有物品
+## [return] 物品实例数组
 func get_all_items() -> Array[ItemInstance]:
 	var items: Array[ItemInstance] = []
 	for item in _slots:
@@ -124,20 +140,8 @@ func clear() -> void:
 	_slots.resize(slots_count)
 	slots_changed.emit()
 
-## 增加金钱
-func add_money(amount: int) -> void:
-	money += amount
-	money_changed.emit(money)
-
-## 减少金钱
-func remove_money(amount: int) -> bool:
-	if money < amount:
-		return false
-	money -= amount
-	money_changed.emit(money)
-	return true
-
 ## 获取空槽位数量
+## [return] 空槽位数量
 func get_empty_slots_count() -> int:
 	var count = 0
 	for item in _slots:
@@ -146,6 +150,8 @@ func get_empty_slots_count() -> int:
 	return count
 
 ## 是否有足够空间
+## [param item] 物品实例
+## [return] 是否有足够空间
 func has_space_for(item: ItemInstance) -> bool:
 	if not item:
 		return false

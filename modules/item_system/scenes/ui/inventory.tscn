@@ -1,0 +1,160 @@
+[gd_scene load_steps=8 format=3 uid="uid://dyffghwacy4oq"]
+
+[ext_resource type="Script" uid="uid://dnxpvpewn51m2" path="res://modules/item_system/scenes/ui/inventory.gd" id="1_uw11q"]
+[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://modules/item_system/scenes/item_node.tscn" id="2_7wg08"]
+[ext_resource type="Script" uid="uid://dod05jn2u0pey" path="res://addons/GodotUIFramework/source/core/components/ui_scene_component.gd" id="3_03g6g"]
+[ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="4_vnj0j"]
+[ext_resource type="Script" uid="uid://c6ba7chc4lqax" path="res://addons/GodotUIFramework/source/core/data/ui_data_model.gd" id="5_f5miv"]
+
+[sub_resource type="Resource" id="Resource_rfguy"]
+script = ExtResource("4_vnj0j")
+ID = &""
+scene_path = ""
+preload_mode = 0
+cache_mode = 1
+pool_capacity = 10
+
+[sub_resource type="Resource" id="Resource_rgdeq"]
+script = ExtResource("5_f5miv")
+data_paths = Array[String]([])
+_data = {}
+_watchers = Dictionary[String, Array]({})
+
+[node name="Inventory" type="MarginContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -149.0
+offset_right = 168.0
+offset_bottom = 149.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uw11q")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "背包"
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+text = "X"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 5
+
+[node name="ItemSlot" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot2" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot3" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot4" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot5" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot6" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot7" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot8" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot9" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot10" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot11" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot12" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot13" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot14" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot15" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ItemSlot16" parent="MarginContainer/VBoxContainer/MarginContainer2/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_7wg08")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="UISceneComponent" type="Node" parent="."]
+script = ExtResource("3_03g6g")
+config = SubResource("Resource_rfguy")
+data_model = SubResource("Resource_rgdeq")
+metadata/_custom_type_script = ExtResource("3_03g6g")

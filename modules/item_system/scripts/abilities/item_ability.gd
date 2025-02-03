@@ -1,4 +1,4 @@
-extends GameplayAbility
+extends Ability
 class_name ItemAbility
 
 ## 道具技能基类
@@ -35,19 +35,19 @@ func apply_effects(target: Node) -> void:
 				push_warning("Unknown effect: %s" % effect_name)
 
 ## 应用治疗效果
-func _apply_heal_effect(ability_system: AbilitySystemComponent, value: float) -> void:
+func _apply_heal_effect(ability_system: AbilityComponent, value: float) -> void:
 	var health_attribute = ability_system.get_attribute("health")
 	if health_attribute:
 		health_attribute.current_value += value
 
 ## 应用攻击效果
-func _apply_attack_effect(ability_system: AbilitySystemComponent, value: float) -> void:
+func _apply_attack_effect(ability_system: AbilityComponent, value: float) -> void:
 	var attack_attribute = ability_system.get_attribute("attack")
 	if attack_attribute:
 		attack_attribute.base_value += value
 
 ## 应用防御效果
-func _apply_defense_effect(ability_system: AbilitySystemComponent, value: float) -> void:
+func _apply_defense_effect(ability_system: AbilityComponent, value: float) -> void:
 	var defense_attribute = ability_system.get_attribute("defense")
 	if defense_attribute:
 		defense_attribute.base_value += value
