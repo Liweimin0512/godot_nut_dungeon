@@ -1,39 +1,43 @@
 extends Node
-class_name ItemSystem
 
 ## 物品系统
 ## 负责管理物品、商店、配方和强化相关的功能
 
 # 信号
-signal initialized(success: bool)  # 初始化完成信号
-signal item_used(item: ItemInstance, target: Node)  # 物品使用信号
-signal item_crafted(recipe_id: String, result: ItemInstance)  # 物品合成信号
-signal item_enhanced(item: ItemInstance, success: bool)  # 物品强化信号
+## 初始化完成信号
+signal initialized(success: bool)
+## 物品使用信号
+signal item_used(item: ItemInstance, target: Node)
+## 物品合成信号
+signal item_crafted(recipe_id: String, result: ItemInstance)
+## 物品强化信号
+signal item_enhanced(item: ItemInstance, success: bool)  
 
 # 内部变量
 var _logger : CoreSystem.Logger = CoreSystem.logger
 ## 已经初始化
 var _initialized: bool = false
-@export var model_types : Array[ModelType] = [
-	preload("res://modules/item_system/resource/enhancement_model_type.tres"),
-	preload("res://modules/item_system/resource/item_model_type.tres"),
-	preload("res://modules/item_system/resource/recipe_model_type.tres"),
-	preload("res://modules/item_system/resource/shop_model_type.tres"),
+var _model_types : Array[ModelType] = [
+	preload("res://addons/godot_item_system/resource/enhancement_model_type.tres"),
+	preload("res://addons/godot_item_system/resource/item_model_type.tres"),
+	preload("res://addons/godot_item_system/resource/recipe_model_type.tres"),
+	preload("res://addons/godot_item_system/resource/shop_model_type.tres"),
 ]
 
 ## 初始化
-func initialize(completed_callable: Callable) -> void:
+func initialize(model_types: Array[ModelType] = [], completed_callable: Callable = Callable()) -> void:
 	if _initialized:
 		return
 		
 	_logger.info("Initializing ItemSystem...")
-	
+	if not model_types.is_empty():
+		_model_types = model_types
 	# 注册模型类型
 	_register_model_types(completed_callable)
-	
+
 ## 注册模型类型
 func _register_model_types(completed_callable: Callable) -> void:
-	DataManager.load_models(model_types, _on_all_data_loaded.bind(completed_callable), _on_load_progress)
+	DataManager.load_models(_model_types, _on_all_data_loaded.bind(completed_callable), _on_load_progress)
 	_logger.debug("Load Model Types......")
 
 ## 创建物品实例
@@ -121,7 +125,9 @@ func _on_load_progress(current: int, total: int) -> void:
 
 ## 数据加载完成回调
 func _on_all_data_loaded(result: Array[String], completed_callable : Callable) -> void:
+	for r in result:
+		_logger.info("ItemSystem initialized successfully: %s" %r)
+	if completed_callable.is_valid():
+		completed_callable.call(result)
 	_initialized = true
-	_logger.info("ItemSystem initialized successfully: %s" %result)
-	completed_callable.call(result)
 	initialized.emit(true)

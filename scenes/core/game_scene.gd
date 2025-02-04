@@ -10,10 +10,10 @@ const CHARACTER = preload("res://scenes/character/character.tscn")
 
 func _ready() -> void:
 	EffectNodeFactory.register_node_type("move_to_casting_position", "res://scripts/systems/ability/ability_effect_node/move_to_casting_position_effect.gd")
-	var combat_model : CombatModel = DatatableManager.get_data_model("combat", "test")
+	var combat_model : CombatModel = DataManager.get_data_model("combat", "test")
 	var combat : Combat = _create_combat(combat_model)
 	for player in _get_players():
-		var player_model : CharacterModel = DatatableManager.get_data_model("character", "crystal_mauler")
+		var player_model : CharacterModel = DataManager.get_data_model("character", "crystal_mauler")
 		player.setup(player_model)
 	game_form.setup(_get_players())
 	# 因为combat是自动执行的，所以不会发出这个信号！

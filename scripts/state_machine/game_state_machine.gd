@@ -3,48 +3,67 @@ extends BaseStateMachine
 func _ready() -> void:
 	add_state("launch", LaunchState.new(self))
 	add_state("init", InitState.new(self))
+	add_state("change_scene", ChangeSceneState.new(self))
 	add_state("menu", MenuState.new(self))
 	add_state("game", GameState.new(self))
 
+## 启动流程
 class LaunchState:
 	extends BaseState
 	
 	func _enter(_msg: Dictionary = {}):
+		print("进入 launch 状态！")
 		switch_to("init")
 
+## 初始化流程
 class InitState:
 	extends BaseState
-	
-	var _datatable_state : Dictionary[StringName, bool]
+
+	func _ready() -> void:
+		agent.initialized.connect(_on_initialized)
 
 	func _enter(_msg : Dictionary = {}) -> void:
-		DataManager.load_completed.connect(_on_datatable_load_completed)
-		for model : ModelType in agent.table_types.table_models:
-			for table : TableType in model.tables:
-				_datatable_state[table.table_name] = false
-		agent.load_json_batch_async(_on_load_json_complete, _on_load_json_progress)
+		print("进入 init_state 状态！")
+		agent.initialize()
 
-	func _on_load_json_progress(current: int, total: int) -> void:
-		print("JSON加载进度: {0}/{1}".format([current, total]))
+	func _exit() -> void:
+		print("退出 init_state 状态！")
 
-	func _on_load_json_complete(_results: Dictionary) -> void:
-		agent.load_datatables()
+	func _on_initialized() -> void:
+		print("初始化完成！")
+		switch_to("change_scene", {"scene": "game"})
 
-	func _on_datatable_load_completed(datatable_name : String) -> void:
-		print("加载datatable {0} 完成！".format([datatable_name]))
-		_datatable_state[datatable_name] = true
-		for state in _datatable_state.values():
-			if state != true:
-				return
-		switch_to("menu")
+## 切换场景
+class ChangeSceneState:
+	extends BaseState
 
+	var scene_name : StringName
+
+	func _ready() -> void:
+		agent.scene_changed.connect(_on_scene_changed)
+
+	func _enter(msg: Dictionary = {}) -> void:
+		print("进入 change_scene_state 状态！")
+		scene_name = msg.get("scene", &"menu")
+		agent.change_scene(scene_name)
+
+	func _on_scene_changed(old_scene: Node, new_scene: Node) -> void:
+		print("切换场景完成，旧场景：", old_scene, ", 新场景：", new_scene)
+		switch_to(scene_name)
+
+## 菜单状态
 class MenuState:
 	extends BaseState
 	
 	func _enter(_msg: Dictionary = {}) -> void:
 		print("进入 menu_state 状态！")
-		switch_to("game")
+		agent.show_menu()
+		# switch_to("game")
 
+	func _exit() -> void:
+		print("退出 menu_state 状态！")
+
+## 游戏状态
 class GameState:
 	extends BaseState
 

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bq017wq6c0kk4" path="res://assets/texture/background/game_background_1/layers/back_decor.png" id="3_g3nhd"]
 [ext_resource type="Texture2D" uid="uid://o0iacojv61wy" path="res://assets/texture/background/game_background_1/layers/ground_decor.png" id="4_cyvgk"]
 [ext_resource type="Texture2D" uid="uid://b4u5ewpyjas2f" path="res://assets/texture/background/game_background_1/layers/front_decor.png" id="5_mrsyq"]
-[ext_resource type="PackedScene" uid="uid://bgj5fmjvlf8j" path="res://scenes/ui/widget/game_form.tscn" id="6_oc21g"]
+[ext_resource type="PackedScene" uid="uid://bgj5fmjvlf8j" path="res://scenes/ui/game_form.tscn" id="6_oc21g"]
 [ext_resource type="PackedScene" uid="uid://cokqr3cv3dqo6" path="res://scenes/character/character.tscn" id="7_3qv5c"]
 
 [node name="game_scene" type="Node2D"]

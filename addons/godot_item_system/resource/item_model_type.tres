@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="ModelType" load_steps=5 format=3 uid="uid://bx01ui3433l7n"]
 
 [ext_resource type="Script" uid="uid://bf3cohk1etxvp" path="res://addons/GDDataForge/source/resource/model_type.gd" id="1_plxqs"]
-[ext_resource type="Script" path="res://modules/item_system/scripts/resources/item_data.gd" id="2_q8e5c"]
 [ext_resource type="Script" uid="uid://c65rwndbbr15i" path="res://addons/GDDataForge/source/resource/table_type.gd" id="3_txt74"]
+
+[sub_resource type="Resource" id="Resource_1ejj4"]
+metadata/__load_path__ = "res://modules/item_system/scripts/resources/item_data.gd"
 
 [sub_resource type="Resource" id="Resource_2dnex"]
 script = ExtResource("3_txt74")
@@ -19,7 +21,7 @@ metadata/_custom_type_script = ExtResource("3_txt74")
 [resource]
 script = ExtResource("1_plxqs")
 model_name = &"item"
-model_script = ExtResource("2_q8e5c")
+model_script = SubResource("Resource_1ejj4")
 table = SubResource("Resource_2dnex")
 description = ""
 field_mappings = Dictionary[String, String]({})

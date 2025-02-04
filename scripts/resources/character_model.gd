@@ -26,9 +26,9 @@ var ability_resource_script: Dictionary[StringName, Script] = {
 }
 
 func _ready(config: Dictionary) -> void:
-	ability_attributes = DatatableManager.get_data_model("ability_attribute_set", config.ability_attributes).attributes
+	ability_attributes = DataManager.get_data_model("ability_attribute_set", config.ability_attributes).attributes
 	for ability_id in config.abilities:
-		var ability : TurnBasedSkillAbility = DatatableManager.get_data_model("skill_ability", ability_id)
+		var ability : TurnBasedSkillAbility = DataManager.get_data_model("skill_ability", ability_id)
 		if ability:
 			abilities.append(ability)
 		else:

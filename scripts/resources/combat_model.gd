@@ -23,5 +23,5 @@ func _append_enemy(enemy_id : StringName) -> void:
 	if enemy_id.is_empty():
 		enemies.append(null)
 	else:
-		var character : CharacterModel = DatatableManager.get_data_model("character", enemy_id)
+		var character : CharacterModel = DataManager.get_data_model("character", enemy_id)
 		enemies.append(character)
