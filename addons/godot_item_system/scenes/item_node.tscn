@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://xxxxxxxxxxxx"]
 
-[ext_resource type="Script" uid="uid://5n45qllchs6w" path="res://modules/item_system/scenes/item_node.gd" id="1_xxxxx"]
+[ext_resource type="Script" uid="uid://5n45qllchs6w" path="res://addons/godot_item_system/scenes/item_node.gd" id="1_xxxxx"]
 
 [node name="ItemNode" type="Node2D"]
 script = ExtResource("1_xxxxx")

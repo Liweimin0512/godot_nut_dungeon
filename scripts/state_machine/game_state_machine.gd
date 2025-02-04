@@ -1,5 +1,4 @@
 extends BaseStateMachine
-class_name GameStateMachine
 
 func _ready() -> void:
 	add_state("launch", LaunchState.new(self))

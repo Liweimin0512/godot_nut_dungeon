@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://xxxxxxxxxxxx"]
 
-[ext_resource type="Script" uid="uid://dyw4qav2n7ykn" path="res://modules/item_system/scenes/ui/widgets/item_tip.gd" id="1_xxxxx"]
+[ext_resource type="Script" uid="uid://dyw4qav2n7ykn" path="res://addons/godot_item_system/scenes/ui/widgets/item_tip.gd" id="1_xxxxx"]
 
 [node name="ItemTip" type="PanelContainer"]
 offset_right = 140.0

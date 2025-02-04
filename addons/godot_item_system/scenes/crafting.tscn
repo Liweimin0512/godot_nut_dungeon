@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://xxxxxxxxxxxx"]
 
-[ext_resource type="Script" uid="uid://b0uakc4pdkopv" path="res://modules/item_system/scenes/crafting.gd" id="1_xxxxx"]
-[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://modules/item_system/scenes/item_node.tscn" id="2_xxxxx"]
-[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://modules/item_system/scenes/item_node.tscn" id="3_5kx53"]
+[ext_resource type="Script" uid="uid://b0uakc4pdkopv" path="res://addons/godot_item_system/scenes/crafting.gd" id="1_xxxxx"]
+[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://addons/godot_item_system/scenes/shop.tscn" id="2_xxxxx"]
+[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://addons/godot_item_system/scenes/shop.tscn" id="3_5kx53"]
 
 [node name="Crafting" type="PanelContainer"]
 anchors_preset = 15

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://xxxxxxxxxxxx"]
 
-[ext_resource type="Script" uid="uid://dhlchqksgpe1o" path="res://modules/item_system/scenes/ui/widgets/item_slot.gd" id="1_xxxxx"]
-[ext_resource type="PackedScene" uid="uid://ddbw8h12y4mf2" path="res://modules/item_system/scenes/ui/widgets/item_tile.tscn" id="2_rbgq6"]
+[ext_resource type="Script" uid="uid://dhlchqksgpe1o" path="res://addons/godot_item_system/scenes/ui/widgets/item_slot.gd" id="1_xxxxx"]
+[ext_resource type="PackedScene" uid="uid://ddbw8h12y4mf2" path="res://addons/godot_item_system/scenes/ui/widgets/item_tile.tscn" id="2_rbgq6"]
 [ext_resource type="Script" uid="uid://1mpayve22prh" path="res://addons/GodotUIFramework/source/core/components/ui_widget_component.gd" id="3_0e7fe"]
 [ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="4_02gjc"]
 [ext_resource type="Script" uid="uid://c6ba7chc4lqax" path="res://addons/GodotUIFramework/source/core/data/ui_data_model.gd" id="5_b1b35"]

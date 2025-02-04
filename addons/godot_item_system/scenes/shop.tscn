@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://xxxxxxxxxxxx"]
 
-[ext_resource type="Script" uid="uid://dsqu0ttv4lmym" path="res://modules/item_system/scenes/shop.gd" id="1_xxxxx"]
-[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://modules/item_system/scenes/item_node.tscn" id="2_xxxxx"]
-[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://modules/item_system/scenes/item_node.tscn" id="3_48n5m"]
+[ext_resource type="Script" uid="uid://dsqu0ttv4lmym" path="res://addons/godot_item_system/scenes/shop.gd" id="1_xxxxx"]
+[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://addons/godot_item_system/scenes/shop.tscn" id="2_xxxxx"]
+[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://addons/godot_item_system/scenes/shop.tscn" id="3_48n5m"]
 
 [node name="Shop" type="PanelContainer"]
 anchors_preset = 15

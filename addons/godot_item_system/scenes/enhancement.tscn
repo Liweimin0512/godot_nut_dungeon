@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://xxxxxxxxxxxx"]
 
 [ext_resource type="Script" path="res://modules/item_system/scenes/enhancement_ui.gd" id="1_xxxxx"]
-[ext_resource type="Script" uid="uid://dyw4qav2n7ykn" path="res://modules/item_system/scenes/ui/widgets/item_tip.gd" id="2_r2wpk"]
-[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://modules/item_system/scenes/item_node.tscn" id="3_r2wpk"]
+[ext_resource type="Script" uid="uid://dyw4qav2n7ykn" path="res://addons/godot_item_system/scenes/ui/widgets/item_tip.gd" id="2_r2wpk"]
+[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://addons/godot_item_system/scenes/shop.tscn" id="3_r2wpk"]
 
 [sub_resource type="PackedScene" id="PackedScene_m81f6"]
 _bundled = {

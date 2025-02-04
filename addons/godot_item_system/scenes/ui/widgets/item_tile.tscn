@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddbw8h12y4mf2"]
 
-[ext_resource type="Script" uid="uid://bhmjyo6rvbyca" path="res://modules/item_system/scenes/ui/widgets/item_tile.gd" id="1_xxxxx"]
+[ext_resource type="Script" uid="uid://bhmjyo6rvbyca" path="res://addons/godot_item_system/scenes/ui/widgets/item_tile.gd" id="1_xxxxx"]
 [ext_resource type="Texture2D" uid="uid://3ymffvd3aevf" path="res://icon.svg" id="2_cqq2w"]
 
 [node name="ItemTile" type="MarginContainer"]
