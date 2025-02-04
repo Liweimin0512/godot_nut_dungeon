@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgj5fmjvlf8j"]
 
 [ext_resource type="PackedScene" uid="uid://cbbx8idrk5q7h" path="res://scenes/ui/widget/w_hero_info.tscn" id="1_kkeyv"]
-[ext_resource type="Script" uid="uid://cmx7unvv6cxui" path="res://scenes/ui/game_form.gd" id="1_r6315"]
+[ext_resource type="Script" uid="uid://cmx7unvv6cxui" path="res://scenes/ui/ui_game_scene.gd" id="1_r6315"]
 
 [node name="GameForm" type="Control"]
 layout_mode = 3
