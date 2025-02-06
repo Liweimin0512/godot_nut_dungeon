@@ -12,11 +12,22 @@ class_name CombatModel
 ## 是否实时
 @export var is_real_time : bool = true
 
-func _ready(config : Dictionary) -> void:
+func _init(
+		enemy_models : Array[CharacterModel] = [],
+		is_auto : bool = true,
+		is_real_time : bool = true,
+		max_turn_count : int = 99
+	) -> void:
+	self.enemies = enemy_models
+	self.is_auto = is_auto
+	self.is_real_time = is_real_time
+	self.max_turn_count = max_turn_count
+
+func _init_from_data(data : Dictionary) -> void:
 	var index := 0
-	for key : String in config:
+	for key : String in data:
 		if key.begins_with("enemy_"):
-			_append_enemy(config["enemy_" + str(index + 1)])
+			_append_enemy(data["enemy_" + str(index + 1)])
 			index += 1
 
 func _append_enemy(enemy_id : StringName) -> void:

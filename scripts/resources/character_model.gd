@@ -25,15 +25,15 @@ var ability_resource_script: Dictionary[StringName, Script] = {
 	"rage": preload("res://scripts/systems/ability/ability_cost_resource/rage_resource.gd")
 }
 
-func _ready(config: Dictionary) -> void:
-	ability_attributes = DataManager.get_data_model("ability_attribute_set", config.ability_attributes).attributes
-	for ability_id in config.abilities:
+func _init_from_data(data: Dictionary) -> void:
+	ability_attributes = DataManager.get_data_model("ability_attribute_set", data.ability_attributes).attributes
+	for ability_id in data.abilities:
 		var ability : TurnBasedSkillAbility = DataManager.get_data_model("skill_ability", ability_id)
 		if ability:
 			abilities.append(ability)
 		else:
 			printerr("can not found ability : {0}".format([ability_id]))
-	for ability_res_id in config.ability_resources:
+	for ability_res_id in data.ability_resources:
 		var script : Script = ability_resource_script.get(ability_res_id, null)
 		if script:
 			ability_resources.append(script.new())

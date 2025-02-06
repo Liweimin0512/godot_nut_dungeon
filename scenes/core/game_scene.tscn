@@ -1,8 +1,10 @@
-[gd_scene load_steps=24 format=4 uid="uid://dy2bea7qxhthr"]
+[gd_scene load_steps=27 format=4 uid="uid://dy2bea7qxhthr"]
 
 [ext_resource type="Script" uid="uid://d05iln8nlewpf" path="res://scenes/core/game_scene.gd" id="1_u6vx"]
 [ext_resource type="Texture2D" uid="uid://pp7mi550xwrq" path="res://assets/sprites/tilesets/plains.png" id="2_lo25h"]
+[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="2_y7bqf"]
 [ext_resource type="Texture2D" uid="uid://hlj2bl3ok2do" path="res://assets/sprites/tilesets/decor_16x16.png" id="3_kl3m2"]
+[ext_resource type="Script" uid="uid://bebfj2ga1x7eh" path="res://scripts/resources/combat_model.gd" id="3_nxrit"]
 [ext_resource type="PackedScene" uid="uid://cueqgn2tpdvdq" path="res://scenes/character/field_player.tscn" id="4_p2q8r"]
 [ext_resource type="Texture2D" uid="uid://8ftuqqusibxg" path="res://assets/sprites/tilesets/grass.png" id="4_ttkny"]
 [ext_resource type="Texture2D" uid="uid://g6uxn7b1n7hb" path="res://assets/sprites/tilesets/floors/wooden.png" id="5_1jhbl"]
@@ -11,6 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://owpk7iwyrf4m" path="res://assets/sprites/tilesets/walls/walls.png" id="8_g6p0b"]
 [ext_resource type="Texture2D" uid="uid://cltndkf8lm76a" path="res://assets/sprites/tilesets/walls/wooden_door_b.png" id="9_y7bqf"]
 [ext_resource type="Texture2D" uid="uid://bluc5y2hl8286" path="res://assets/sprites/tilesets/floors/flooring.png" id="10_nxrit"]
+
+[sub_resource type="Resource" id="Resource_ltr46"]
+script = ExtResource("3_nxrit")
+max_turn_count = 99
+enemies = Array[ExtResource("2_y7bqf")]([null])
+is_auto = true
+is_real_time = true
+metadata/_custom_type_script = ExtResource("3_nxrit")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1"]
 texture = ExtResource("2_lo25h")
@@ -478,6 +488,7 @@ sources/5 = SubResource("TileSetAtlasSource_raq42")
 [node name="GameScene" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_u6vx")
+test_combat = SubResource("Resource_ltr46")
 
 [node name="World" type="Node2D" parent="."]
 y_sort_enabled = true

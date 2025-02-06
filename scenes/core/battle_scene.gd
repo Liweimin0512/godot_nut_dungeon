@@ -1,7 +1,6 @@
 extends Node2D
 
 const CHARACTER = preload("res://scenes/character/character.tscn")
-const GameplayStateMachine = preload("res://scripts/state_machine/gameplay_state_machine.gd")
 
 @onready var enemy_markers: Node2D = $EnemyMarkers
 @onready var marker_action: Marker2D = %MarkerAction
@@ -12,10 +11,17 @@ const GameplayStateMachine = preload("res://scripts/state_machine/gameplay_state
 var _state_machine_manager: CoreSystem.StateMachineManager = CoreSystem.state_machine_manager
 var _logger: CoreSystem.Logger = CoreSystem.logger
 
+var _combat_info: CombatModel = null
+
+# 初始化状态，在ready之前执行
+func init_state(data: Dictionary) -> void:
+	_combat_info = data.get("combat_info", null)
+
 func _ready() -> void:
 	_state_machine_manager.register_state_machine(
 		"gameplay",
-		GameplayStateMachine.new(null, self),
+		BattleStateMachine.new(),
+		self,
 		"explore"  # 默认从探索状态开始
 	)
 	EffectNodeFactory.register_node_type("move_to_casting_position", "res://scripts/systems/ability/ability_effect_node/move_to_casting_position_effect.gd")
@@ -68,6 +74,7 @@ func _ready() -> void:
 				# rich_text_label.text += "{0} 释放 {1} 技能！\n".format([c_combat, ability])
 				game_form.handle_game_event("combat_ability_cast", {"owner": c_combat.owner, "ability": ability})
 		)
+
 
 ## 创建战斗
 func _create_combat(combat_model: CombatModel) -> Combat:

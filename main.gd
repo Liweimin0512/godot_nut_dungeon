@@ -10,6 +10,9 @@ var _scene_manager : CoreSystem.SceneManager
 	&"menu": "res://scenes/core/menu_scene.tscn",
 	&"game": "res://scenes/core/game_scene.tscn"
 }
+@export var _action_table_type : TableType
+@export var _ability_model_types : Array[ModelType]
+@export var _model_types : Array[ModelType]
 
 ## 初始化完成信号
 signal initialized
@@ -19,11 +22,13 @@ signal scene_changed(old_scene: Node, new_scene: Node)
 func _ready() -> void:
 	_state_machine_manager.register_state_machine(
 		"game_state_machine",
-		GameStateMachine.new(null, self),
+		GameStateMachine.new(),
+		self,
 		"launch"
 	)
 	_scene_manager = CoreSystem.scene_manager
-	ItemSystem.initialized.connect(_on_ItemSystem_initialized)
+	ItemSystem.initialized.connect(_on_item_system_initialized)
+	AbilitySystem.initialized.connect(_on_ability_system_initialized)
 	_scene_manager.scene_changed.connect(_on_scene_changed)
 
 func initialize() -> void:
@@ -45,11 +50,30 @@ func play_game() -> void:
 	pass
 
 ## ItemSystem 初始化完成
-func _on_ItemSystem_initialized(success: bool) -> void:
+func _on_item_system_initialized(success: bool) -> void:
 	if not success:
 		_logger.error("ItemSystem initialized failed")
 		return
-	_initialize_scene()
+	AbilitySystem.initialize(
+		_ability_model_types,
+		_action_table_type,
+	)
+
+## AbilitySystem 初始化完成
+func _on_ability_system_initialized(success: bool) -> void:
+	if not success:
+		_logger.error("AbilitySystem initialized failed")
+		return
+	_initialize_data_model()
+
+## 初始化数据模型
+func _initialize_data_model() -> void:
+	DataManager.load_models(
+		_model_types, 
+		func(result: Array[String]) -> void:
+			_logger.info("Load Model Types Completed")
+			_initialize_scene()
+			)
 
 ## 初始化场景
 func _initialize_scene() -> void:

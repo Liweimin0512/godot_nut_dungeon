@@ -1,14 +1,16 @@
 extends BaseStateMachine
 class_name BattleStateMachine
 
+## 战斗状态机
+
 func _ready() -> void:
-	add_state("init", InitState.new(self))
-	add_state("turn_prepare", TurnPrepareState.new(self))
-	add_state("turn_start", TurnStartState.new(self))
-	add_state("action_select", ActionSelectState.new(self))
-	add_state("action_execute", ActionExecuteState.new(self))
-	add_state("turn_end", TurnEndState.new(self))
-	add_state("battle_end", BattleEndState.new(self))
+	add_state("init", InitState.new())
+	add_state("turn_prepare", TurnPrepareState.new())
+	add_state("turn_start", TurnStartState.new())
+	add_state("action_select", ActionSelectState.new())
+	add_state("action_execute", ActionExecuteState.new())
+	add_state("turn_end", TurnEndState.new())
+	add_state("battle_end", BattleEndState.new())
 
 ## 初始化状态
 class InitState:
