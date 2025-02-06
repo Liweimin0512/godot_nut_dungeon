@@ -27,7 +27,6 @@ metadata/_custom_type_script = ExtResource("9_0nv8r")
 
 [node name="BattleScene" type="Node2D"]
 script = ExtResource("1_bvdft")
-combat_test_id = null
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -128

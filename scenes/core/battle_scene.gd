@@ -1,4 +1,5 @@
 extends Node2D
+class_name BattleScene
 
 const CHARACTER = preload("res://scenes/character/character.tscn")
 
@@ -11,72 +12,88 @@ const CHARACTER = preload("res://scenes/character/character.tscn")
 var _state_machine_manager: CoreSystem.StateMachineManager = CoreSystem.state_machine_manager
 var _logger: CoreSystem.Logger = CoreSystem.logger
 
-var _combat_info: CombatModel = null
+var _combat_info: CombatModel
+var _combat : Combat
 
 # 初始化状态，在ready之前执行
 func init_state(data: Dictionary) -> void:
-	_combat_info = data.get("combat_info", null)
+	_combat_info = data.get("combat_info", _combat_info)
+	if not _combat_info:
+		_logger.error("战斗数据为空！尝试加载测试数据")
+		_combat_info = DataManager.get_data_model("combat", "test")
+	
+	if not _combat_info:
+		_logger.error("无法加载测试战斗数据")
+		return
+
+	_combat = _create_combat(_combat_info)
+	_combat.initialize(_combat_info)
+
+	_setup_scene()
+	_setup_ui()
+	_connect_combat_signals()
 
 func _ready() -> void:
 	_state_machine_manager.register_state_machine(
-		"gameplay",
+		"battle_state_machine",
 		BattleStateMachine.new(),
 		self,
-		"explore"  # 默认从探索状态开始
+		"init"
 	)
-	EffectNodeFactory.register_node_type("move_to_casting_position", "res://scripts/systems/ability/ability_effect_node/move_to_casting_position_effect.gd")
-	var combat_model : CombatModel = DataManager.get_data_model("combat", "test")
-	var combat : Combat = _create_combat(combat_model)
-	for player in _get_players():
-		var player_model : CharacterModel = DataManager.get_data_model("character", "crystal_mauler")
-		player.setup(player_model)
-	game_form.setup(_get_players())
-	# 因为combat是自动执行的，所以不会发出这个信号！
-	combat.combat_started.connect(
-		func() -> void:
-			# rich_text_label.text += "战斗开始\n"
-			game_form.handle_game_event("game_start")
-	)
-	combat.turn_started.connect(
-		func(turn_count: int) -> void:
-			# rich_text_label.text += "{0}回合开始\n".format([turn_count,])
-			game_form.handle_game_event("turn_start", {"turn_count": turn_count}
-			)
-	)
-	combat.turn_ended.connect(
-		func() -> void:
-			# rich_text_label.text += "回合结束\n"
-			game_form.handle_game_event("turn_end")
-	)
-	combat.combat_finished.connect(
-		func() -> void:
-			# rich_text_label.text += "战斗胜利\n"
-			game_form.handle_game_event("combat_win")
-	)
-	combat.combat_defeated.connect(
-		func() -> void:
-			# rich_text_label.text += "战斗失败\n"
-			game_form.handle_game_event("combat_defeated")
-	)
-	for c_combat in combat.combats:
-		c_combat.hited.connect(
-			func(target: CombatComponent) -> void:
-				# rich_text_label.text += "{0} 攻击 {1}\n".format([c_combat.owner, target.owner])
-				game_form.handle_game_event("combat_hit", {"owner": c_combat.owner, "target": target.owner})
-		)
-		c_combat.hurted.connect(
-			func(damage: int) -> void:
-				# rich_text_label.text += "{0} 受到{1}点伤害！\n".format([c_combat.owner, damage])
-				game_form.handle_game_event("combat_hurt", {"owner": c_combat.owner, "damage": damage})
-		)
-		c_combat.ability_component.ability_cast_finished.connect(
-			func(ability: Ability, _context: Dictionary) -> void:
-				# rich_text_label.text += "{0} 释放 {1} 技能！\n".format([c_combat, ability])
-				game_form.handle_game_event("combat_ability_cast", {"owner": c_combat.owner, "ability": ability})
-		)
 
+## 准备下回合
+func prepare_turn() -> void:
+	_combat.prepare_turn()
+
+func start_turn() -> void:
+	_combat.start_turn()
+
+func has_next_action_unit() -> bool:
+	return _combat.get_next_actor() != null
+
+func show_action_selection() -> void:
+	game_form.show_action_menu(_combat.current_combat)
+
+func execute_action(action_data: Dictionary) -> void:
+	await _combat.execute_action(action_data)
+
+func end_turn() -> void:
+	await _combat.end_turn()
+
+func is_max_turns_reached() -> bool:
+	return _combat.is_max_turns_reached()
+
+func is_battle_ended() -> bool:
+	return _combat.check_battle_end().is_ended
+
+func get_battle_result() -> String:
+	return _combat.check_battle_end().outcome
+
+func end_battle(result: String) -> void:
+	_cleanup_battle()
+	# 处理战斗结束后的场景转换
+	back_to_explore()
+
+func _setup_scene() -> void:
+	pass
+
+func _setup_ui() -> void:
+	game_form.setup(_get_players())
+
+func _connect_combat_signals() -> void:
+	_combat.combat_started.connect(_on_combat_started)
+	_combat.turn_started.connect(_on_turn_started)
+	_combat.turn_ended.connect(_on_turn_ended)
+	_combat.action_ready.connect(_on_action_ready)
+
+func _cleanup_battle() -> void:
+	_combat_info = null
+	_combat = null
 
 ## 创建战斗
+## TODO 增加战斗加载功能
+## [param combat_model] 战斗数据
+## [return] 战斗实例
 func _create_combat(combat_model: CombatModel) -> Combat:
 	var enemy_combats : Array[CombatComponent]
 	var index := -1
@@ -107,6 +124,8 @@ func _create_combat(combat_model: CombatModel) -> Combat:
 	return combat
 
 ## 创建角色
+## [param character_model] 角色数据
+## [return] 角色实例
 func _spawn_character(character_model: CharacterModel) -> Character:
 	if not character_model: return null
 	var character : Character = CHARACTER.instantiate()
@@ -114,24 +133,25 @@ func _spawn_character(character_model: CharacterModel) -> Character:
 	return character
 
 ## 获取玩家角色
+## [return] 玩家角色数组
 func _get_players() -> Array[Character]:
 	var players: Array[Character]
 	for player in get_tree().get_nodes_in_group("Player"):
 		players.append(player)
 	return players
 
-## 进入战斗
-func enter_battle(battle_config: Dictionary = {}) -> void:
-	_state_machine_manager.get_state_machine("gameplay").switch_to("battle", battle_config)
-
-## 开始对话
-func start_dialogue(dialogue_config: Dictionary = {}) -> void:
-	_state_machine_manager.get_state_machine("gameplay").switch_to("dialogue", dialogue_config)
-
-## 打开菜单
-func open_menu() -> void:
-	_state_machine_manager.get_state_machine("gameplay").switch_to("menu")
-
 ## 返回探索
 func back_to_explore() -> void:
-	_state_machine_manager.get_state_machine("gameplay").switch_to("explore")
+	_state_machine_manager.get_state_machine("gameplay").switch("explore")
+
+func _on_combat_started() -> void:
+	game_form.handle_game_event("combat_started")
+
+func _on_turn_started() -> void:
+	game_form.handle_game_event("turn_started")
+
+func _on_turn_ended() -> void:
+	game_form.handle_game_event("turn_ended")
+
+func _on_action_ready(unit: CombatComponent) -> void:
+	game_form.handle_game_event("action_ready", {"unit": unit})

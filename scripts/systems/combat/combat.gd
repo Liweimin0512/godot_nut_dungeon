@@ -13,7 +13,7 @@ class_name Combat
 @export var start_time: float = 0.5
 
 ## 当前回合计数
-var _turn_count : int = 0
+var _current_turn : int = 0
 ## 参战单位的CombatComponent数组
 var combats : Array[CombatComponent]:
 	get:
@@ -26,11 +26,15 @@ var enemy_combats: Array[CombatComponent]
 var is_stop := false
 ## 行动位置
 var action_marker : Marker2D
+## 当前行动顺序
+var _action_order : Array[CombatComponent]
+var current_combat : CombatComponent
+var _config : CombatModel
 
 ## 战斗开始，自动开始的战斗不会发射此信号
 signal combat_started
 ## 回合开始
-signal turn_started
+signal turn_started(turn_count : int)
 ## 回合结束
 signal turn_ended
 ## 战斗胜利
@@ -39,23 +43,50 @@ signal combat_finished
 signal combat_defeated
 ## 战斗结束
 signal combat_ended
+## 行动准备
+signal action_ready(unit: CombatComponent)
 
-func _init(
-		players: Array[CombatComponent] = [], 
-		enemies : Array[CombatComponent] = [],
-		p_max_turn_count: int = 99,
-		p_is_auto : bool = true,
-		p_is_real_time: bool = true,
-		marker_action : Marker2D = null,
-		) -> void:
-	player_combats = players
-	enemy_combats = enemies
-	max_turn_count = p_max_turn_count
-	is_auto = p_is_auto
-	is_real_time = p_is_real_time
-	action_marker = marker_action
-	if is_auto:
-		_combat_start()
+## 初始化
+## [param conmbat_model] 战斗配置	
+func initialize(conmbat_model: CombatModel) -> void:
+	_config = conmbat_model
+	_setup_combat_units()
+	emit_signal("combat_started")
+
+## 
+func prepare_turn() -> void:
+	_current_turn += 1
+	_calculate_action_order()
+	combat_started.emit()
+
+func start_turn() -> void:
+	turn_started.emit(_current_turn)
+	_prepare_next_action()
+
+func get_next_actor() -> CombatComponent:
+	if _action_order.is_empty(): return null
+	current_combat = _action_order.pop_front()
+	return current_combat
+
+func execute_action(action: Dictionary) -> void:
+	if not current_combat: return
+	await current_combat.execute_action(action)
+	_prepare_next_action()
+
+func end_turn() -> void:
+	turn_ended.emit()
+
+func is_max_turns_reached() -> bool:
+	return _current_turn >= max_turn_count
+
+func check_battle_end() -> Dictionary:
+	var result : Dictionary = _calculate_combat_result()
+	if result.is_ended:
+		match result.outcome:
+			"victory": combat_finished.emit()
+			"defeat": combat_defeated.emit()
+		combat_ended.emit()
+	return result
 
 ## 获取随机敌方单位(的战斗组件）
 func get_random_enemy(cha: CombatComponent) -> CombatComponent:
@@ -82,87 +113,31 @@ func get_all_allies(cha: CombatComponent) -> Array[CombatComponent]:
 		return enemy_combats
 	return []
 
-## 手动开始战斗
-func start_combat() -> void:
-	_combat_start()
+## 设置战斗单位
+func _setup_combat_units() -> void:
+	#TODO 设置战斗单位
+	pass
 
-## 手动停止战斗
-func stop() -> void:
-	is_stop = true
-
-## 战斗开始
-func _combat_start() -> void:
-	await CombatSystem.get_tree().create_timer(start_time).timeout
-	print("战斗开始！")
-	combat_started.emit()
-	for combat in combats:
-		combat.died.connect(
-			func() -> void:
-				if combat.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER:
-					player_combats.erase(combat)
-				elif combat.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
-					enemy_combats.erase(combat)
-				if player_combats.is_empty():
-					_combat_defeat()
-				elif enemy_combats.is_empty():
-					_combat_finish()
-		)
-		combat.combat_start(self)
-	await _turn_start()
-
-## 回合开始
-func _turn_start() -> void:
-	if is_stop: return
-	_turn_count += 1
-	print(_turn_count, "========回合开始===================")
-	turn_started.emit(_turn_count)
-	var cs := combats.duplicate()
-	cs.shuffle()
-	cs.sort_custom(
+## 设置行动顺序
+func _calculate_action_order() -> Array[CombatComponent]:
+	_action_order.clear()
+	_action_order = combats.filter(func(combat: CombatComponent) -> bool: return combat.can_action())
+	_action_order.sort_custom(
 		func(a: CombatComponent, b: CombatComponent) -> bool:
-			if not a or not b: return false
 			return a.speed > b.speed
 	)
-	for combat in cs:
-		combat.pre_turn_start()
-	for combat in cs:
-		if not is_instance_valid(combat): continue
-		if not combat.is_alive: continue
-		if is_real_time:
-			await combat.turn_start()
-		else:
-			combat.turn_start()
-	await _turn_end()
+	return _action_order
 
-## 回合结束
-func _turn_end() -> void:
-	if is_stop: return
-	if _turn_count >= max_turn_count:
-		print("回合数耗尽")
-		_combat_defeat()
-	for combat in combats:
-		if not is_instance_valid(combat): continue
-		combat.turn_end()
-	print("回合结束===================")
-	turn_ended.emit()
-	await _turn_start()
+## 准备下一个行动
+func _prepare_next_action() -> void:
+	var next_actor := get_next_actor()
+	if next_actor:
+		action_ready.emit(next_actor)
 
-## 战斗胜利
-func _combat_finish() -> void:
-	print("===== 战斗胜利 =====, 回合数： ", _turn_count)
-	combat_finished.emit()
-	_combat_end()
-
-## 战斗失败
-func _combat_defeat() -> void:
-	print("===== 战斗失败 =====, 回合数： ", _turn_count)
-	combat_defeated.emit()
-	_combat_end()
-	
-## 战斗结束
-func _combat_end() -> void:
-	for combat in combats:
-		if not combat : continue
-		combat.combat_end()
-	is_stop = true
-	combat_ended.emit()
+## 计算战斗结果
+func _calculate_combat_result() -> Dictionary:
+	return {
+		"is_ended": false,
+		"outcome": "",
+		"rewards": {}
+	}

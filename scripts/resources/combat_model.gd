@@ -23,6 +23,8 @@ func _init(
 	self.is_real_time = p_is_real_time
 	self.max_turn_count = p_max_turn_count
 
+## 从数据字典初始化
+## [param data] 数据字典
 func _init_from_data(data : Dictionary) -> void:
 	var index := 0
 	for key : String in data:
@@ -30,6 +32,8 @@ func _init_from_data(data : Dictionary) -> void:
 			_append_enemy(data["enemy_" + str(index + 1)])
 			index += 1
 
+## 添加敌人
+## [param enemy_id] 敌人ID
 func _append_enemy(enemy_id : StringName) -> void:
 	if enemy_id.is_empty():
 		enemies.append(null)

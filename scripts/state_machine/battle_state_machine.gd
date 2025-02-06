@@ -17,20 +17,17 @@ class InitState:
 	extends BaseState
 	
 	func _enter(msg: Dictionary = {}) -> void:
-		print("战斗初始化")
-		# TODO: 初始化战斗场景
-		# TODO: 创建战斗单位
-		# TODO: 播放开场动画
-		switch_to("turn_prepare", msg)
+		var battle_scene := agent as BattleScene
+		battle_scene.initialize_battle(msg)
+		switch_to("turn_prepare")
 
 ## 回合准备状态
 class TurnPrepareState:
 	extends BaseState
 	
 	func _enter(_msg: Dictionary = {}) -> void:
-		print("回合准备")
-		# TODO: 计算行动顺序
-		# TODO: 获取下一个行动单位
+		var battle_scene := agent as BattleScene
+		battle_scene.prepare_turn()
 		switch_to("turn_start")
 
 ## 回合开始状态
@@ -38,8 +35,8 @@ class TurnStartState:
 	extends BaseState
 	
 	func _enter(_msg: Dictionary = {}) -> void:
-		print("回合开始")
-		# TODO: 触发回合开始效果
+		var battle_scene := agent as BattleScene
+		battle_scene.start_turn()
 		switch_to("action_select")
 
 ## 行动选择状态
@@ -47,9 +44,11 @@ class ActionSelectState:
 	extends BaseState
 	
 	func _enter(_msg: Dictionary = {}) -> void:
-		print("选择行动")
-		# TODO: 显示行动菜单
-		# TODO: 等待玩家选择行动
+		var battle_scene := agent as BattleScene
+		if battle_scene.has_next_action_unit():
+			battle_scene.show_action_selection()
+		else:
+			switch_to("turn_end")
 	
 	func _on_action_selected(action: Dictionary) -> void:
 		switch_to("action_execute", action)
@@ -59,35 +58,35 @@ class ActionExecuteState:
 	extends BaseState
 	
 	func _enter(msg: Dictionary = {}) -> void:
-		print("执行行动")
-		# TODO: 执行选择的行动
-		# TODO: 播放动画和效果
-		# TODO: 检查战斗是否结束
-		if _is_battle_end():
-			switch_to("battle_end")
+		var battle_scene := agent as BattleScene
+		await battle_scene.execute_action(msg)
+		if battle_scene.if_battle_ended():
+			switch_to("battle_end", {
+				"result": battle_scene.get_battle_result()
+			})
 		else:
-			switch_to("turn_end")
-	
-	func _is_battle_end() -> bool:
-		# TODO: 检查战斗结束条件
-		return false
+			switch_to("action_select")
 
 ## 回合结束状态
 class TurnEndState:
 	extends BaseState
 	
 	func _enter(_msg: Dictionary = {}) -> void:
-		print("回合结束")
-		# TODO: 触发回合结束效果
-		switch_to("turn_prepare")
+		var battle_scene := agent as BattleScene
+		battle_scene.end_turn()
+		
+		if battle_scene.is_max_turns_reached():
+			switch_to("battle_end", {
+				# 结算结果, 超出回合数战斗失败
+				"result": "defeat"
+			})
+		else:
+			switch_to("turn_prepare")
 
 ## 战斗结束状态
 class BattleEndState:
 	extends BaseState
 	
 	func _enter(_msg: Dictionary = {}) -> void:
-		print("战斗结束")
-		# TODO: 结算战斗结果
-		# TODO: 显示战斗结算UI
-		# TODO: 通知游戏场景战斗结束
-		agent.battle_finished.emit()
+		var battle_scene := agent as BattleScene
+		battle_scene.end_battle(_msg["result"])
