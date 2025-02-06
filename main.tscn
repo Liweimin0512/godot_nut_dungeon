@@ -13,7 +13,7 @@
 [sub_resource type="Resource" id="Resource_4c57u"]
 script = ExtResource("2_kek77")
 table_name = &"ability_action"
-table_paths = Array[String](["res://datatables/effects/aqua_shield_effect.json", "res://datatables/effects/arcane_missile_effect.json", "res://datatables/effects/arrow_attack_effect.json", "res://datatables/effects/arrow_beam_effect.json", "res://datatables/effects/arrow_entangle_effect.json", "res://datatables/effects/arrow_poison_effect.json", "res://datatables/effects/arrow_shower_effect.json", "res://datatables/effects/attack_effect.json", "res://datatables/effects/battle_cry_buff.json", "res://datatables/effects/battle_cry_effect.json", "res://datatables/effects/chain_lightning_effect.json", "res://datatables/effects/fireball_effect.json", "res://datatables/effects/healing_spring_effect.json", "res://datatables/effects/heroic_strike_effect.json", "res://datatables/effects/ignite_buff.json", "res://datatables/effects/magic_shield_buff.json", "res://datatables/effects/magic_shield_effect.json", "res://datatables/effects/mana_surge_effect.json", "res://datatables/effects/resolute_effect.json", "res://datatables/effects/retaliate_effect.json", "res://datatables/effects/stun_buff.json", "res://datatables/effects/tidal_fury_effect.json", "res://datatables/effects/torrential_curse_buff.json", "res://datatables/effects/vortex_bind_effect.json", "res://datatables/effects/water_blade_slash_effect.json", ""])
+table_paths = Array[String](["res://datatables/ability_action.json"])
 description = ""
 primary_key = "ID"
 enable_cache = true

@@ -54,23 +54,20 @@ func _on_item_system_initialized(success: bool) -> void:
 	if not success:
 		_logger.error("ItemSystem initialized failed")
 		return
-	AbilitySystem.initialize(
-		_ability_model_types,
-		_action_table_type,
-	)
+	AbilitySystem.initialize(_ability_model_types, _action_table_type)
 
 ## AbilitySystem 初始化完成
 func _on_ability_system_initialized(success: bool) -> void:
 	if not success:
 		_logger.error("AbilitySystem initialized failed")
 		return
-	_initialize_data_model()
+	_initialize_scene()
 
 ## 初始化数据模型
 func _initialize_data_model() -> void:
 	DataManager.load_models(
 		_model_types, 
-		func(result: Array[String]) -> void:
+		func(_result: Array[String]) -> void:
 			_logger.info("Load Model Types Completed")
 			_initialize_scene()
 			)

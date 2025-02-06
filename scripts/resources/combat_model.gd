@@ -14,14 +14,14 @@ class_name CombatModel
 
 func _init(
 		enemy_models : Array[CharacterModel] = [],
-		is_auto : bool = true,
-		is_real_time : bool = true,
-		max_turn_count : int = 99
+		p_is_auto : bool = true,
+		p_is_real_time : bool = true,
+		p_max_turn_count : int = 99
 	) -> void:
 	self.enemies = enemy_models
-	self.is_auto = is_auto
-	self.is_real_time = is_real_time
-	self.max_turn_count = max_turn_count
+	self.is_auto = p_is_auto
+	self.is_real_time = p_is_real_time
+	self.max_turn_count = p_max_turn_count
 
 func _init_from_data(data : Dictionary) -> void:
 	var index := 0
