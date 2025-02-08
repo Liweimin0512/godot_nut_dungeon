@@ -11,7 +11,7 @@ var _players : Array[Character]
 func _ready() -> void:
 	rich_text_label.text = ""
 
-func setup(players: Array[Character]) -> void:
+func setup(players: Array[Character] = []) -> void:
 	_players = players
 	w_hero_info_container.remove_child(w_hero_info_container.get_child(0))
 	for player in _players:

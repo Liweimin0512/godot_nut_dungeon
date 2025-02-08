@@ -19,15 +19,14 @@ class LaunchState:
 class InitState:
 	extends BaseState
 
-	func _ready() -> void:
-		agent.initialized.connect(_on_initialized)
-
 	func _enter(_msg : Dictionary = {}) -> void:
 		print("进入 init_state 状态！")
+		agent.initialized.connect(_on_initialized)
 		agent.initialize()
 
 	func _exit() -> void:
 		print("退出 init_state 状态！")
+		agent.initialized.disconnect(_on_initialized)
 
 	func _on_initialized() -> void:
 		print("初始化完成！")
@@ -39,16 +38,15 @@ class ChangeSceneState:
 
 	var scene_name : StringName
 
-	func _ready() -> void:
-		agent.scene_changed.connect(_on_scene_changed)
-
 	func _enter(msg: Dictionary = {}) -> void:
 		print("进入 change_scene_state 状态！")
+		agent.scene_changed.connect(_on_scene_changed)
 		scene_name = msg.get("scene", &"menu")
 		agent.change_scene(scene_name)
 
 	func _on_scene_changed(old_scene: Node, new_scene: Node) -> void:
 		print("切换场景完成，旧场景：", old_scene, ", 新场景：", new_scene)
+		agent.scene_changed.disconnect(_on_scene_changed)
 		switch_to(scene_name)
 
 ## 菜单状态

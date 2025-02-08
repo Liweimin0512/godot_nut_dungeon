@@ -17,6 +17,7 @@ var _state_machine_manager: CoreSystem.StateMachineManager:
 		push_error("state_machine_manager is read-only")
 
 func _ready() -> void:
+	test_combat = DataManager.get_data_model(&"combat", "test")
 	_state_machine_manager.register_state_machine(
 			"gameplay", 
 			GameplayStateMachine.new(),

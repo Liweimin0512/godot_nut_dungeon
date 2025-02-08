@@ -7,10 +7,6 @@ class_name EneryResource
 ## 每次回复的值
 @export var per_regain: int
 
-func _init() -> void:
-	ability_resource_id = "energy"
-	ability_resource_name = "能量值"
-
 func _initialization(_attribute_component: AbilityAttributeComponent) -> void:
 	ability_resource_id = "energy"
 	ability_resource_name = "能量值"

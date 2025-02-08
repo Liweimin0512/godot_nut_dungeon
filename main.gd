@@ -47,7 +47,6 @@ func show_menu() -> void:
 
 ## 开始游戏
 func play_game() -> void:
-	# change_scene(&"game")
 	PartySystem.initialize()
 
 ## ItemSystem 初始化完成
