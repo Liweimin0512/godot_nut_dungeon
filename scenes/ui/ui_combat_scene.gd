@@ -1,5 +1,5 @@
 extends Control
-class_name GameForm
+class_name UICombatScene
 
 const W_HERO_INFO = preload("res://scenes/ui/widget/w_hero_info.tscn")
 

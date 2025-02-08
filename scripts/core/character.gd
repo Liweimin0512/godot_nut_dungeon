@@ -20,11 +20,6 @@ class_name Character
 var character_name : String = ""
 
 func _ready() -> void:
-	pass
-
-func setup(model: CharacterModel = null) -> void:
-	if model:
-		character_model = model
 	if character_model:
 		character_name = character_model.character_name
 		ability_attribute_component.initialization(character_model.ability_attributes)
@@ -44,6 +39,10 @@ func setup(model: CharacterModel = null) -> void:
 	if character_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
 		$Sprite2D.flip_h = true
 	w_status.setup(self)
+
+func setup(model: CharacterModel = null) -> void:
+	if model:
+		character_model = model
 
 func _animation_player_setup() -> void:
 	animation_player.remove_animation_library("")

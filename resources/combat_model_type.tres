@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_fp2sd"]
 script = ExtResource("3_pn65d")
 table_name = &"combat"
-table_paths = Array[String](["res://datatables/combat.csv"])
+table_paths = Array[String](["res://data/tables/combat.csv"])
 description = ""
 primary_key = "ID"
 enable_cache = true

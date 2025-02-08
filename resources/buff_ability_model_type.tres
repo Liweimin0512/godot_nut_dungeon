@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="ModelType" load_steps=5 format=3 uid="uid://bwank5pet3h4l"]
 
 [ext_resource type="Script" uid="uid://bf3cohk1etxvp" path="res://addons/GDDataForge/source/resource/model_type.gd" id="1_ydpqy"]
-[ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://scripts/systems/ability/turn_based_buff_ability.gd" id="2_bf0hg"]
+[ext_resource type="Script" uid="uid://cn0b7rlcyjf0j" path="res://scripts/systems/ability_system/turn_based_buff_ability.gd" id="2_bf0hg"]
 [ext_resource type="Script" uid="uid://c65rwndbbr15i" path="res://addons/GDDataForge/source/resource/table_type.gd" id="3_wwipg"]
 
 [sub_resource type="Resource" id="Resource_p14ki"]
 script = ExtResource("3_wwipg")
 table_name = &"buff_ability"
-table_paths = Array[String](["res://datatables/buff_ability.csv"])
+table_paths = Array[String](["res://data/tables/buff_ability.csv"])
 description = ""
 primary_key = "ID"
 enable_cache = true

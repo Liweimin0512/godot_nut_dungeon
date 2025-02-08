@@ -9,7 +9,7 @@ metadata/__load_path__ = "res://modules/item_system/scripts/resources/recipe_dat
 [sub_resource type="Resource" id="Resource_kbyud"]
 script = ExtResource("3_cwdv6")
 table_name = &"recipe"
-table_paths = Array[String](["res://datatables/recipes.csv"])
+table_paths = Array[String](["res://data/tables/recipes.csv"])
 description = ""
 primary_key = "ID"
 enable_cache = true

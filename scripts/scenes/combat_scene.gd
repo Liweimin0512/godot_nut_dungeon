@@ -1,23 +1,22 @@
 extends Node2D
-class_name BattleScene
+class_name CombatScene
 
 const CHARACTER = preload("res://scenes/character/character.tscn")
 
 @onready var enemy_markers: Node2D = $EnemyMarkers
-@onready var marker_action: Marker2D = %MarkerAction
-@onready var game_form: GameForm = $UILayer/GameForm
+@onready var ui_combat_scene: UICombatScene = $UILayer/UICombatScene
 
 @export var combat_test_id : StringName
 
 var _state_machine_manager: CoreSystem.StateMachineManager = CoreSystem.state_machine_manager
 var _logger: CoreSystem.Logger = CoreSystem.logger
 
-var _combat_info: CombatModel
 var _combat : Combat
+var _combat_info : CombatModel
 
 # 初始化状态，在ready之前执行
 func init_state(data: Dictionary) -> void:
-	_combat_info = data.get("combat_info", _combat_info)
+	_combat_info = data.get("combat_info", null)
 	if not _combat_info:
 		_logger.error("战斗数据为空！尝试加载测试数据")
 		_combat_info = DataManager.get_data_model("combat", "test")
@@ -26,20 +25,19 @@ func init_state(data: Dictionary) -> void:
 		_logger.error("无法加载测试战斗数据")
 		return
 
-	_combat = _create_combat(_combat_info)
-	_combat.initialize(_combat_info)
-
-	_setup_scene()
-	_setup_ui()
-	_connect_combat_signals()
-
 func _ready() -> void:
 	_state_machine_manager.register_state_machine(
 		"battle_state_machine",
-		BattleStateMachine.new(),
+		CombatStateMachine.new(),
 		self,
 		"init"
 	)
+
+func initialize_battle(_msg: Dictionary) -> void:
+	_combat = _create_combat()
+	_connect_combat_signals()
+	_setup_scene()
+	_setup_ui()
 
 ## 准备下回合
 func prepare_turn() -> void:
@@ -52,7 +50,7 @@ func has_next_action_unit() -> bool:
 	return _combat.get_next_actor() != null
 
 func show_action_selection() -> void:
-	game_form.show_action_menu(_combat.current_combat)
+	ui_combat_scene.show_action_menu(_combat.current_combat)
 
 func execute_action(action_data: Dictionary) -> void:
 	await _combat.execute_action(action_data)
@@ -75,10 +73,15 @@ func end_battle(result: String) -> void:
 	back_to_explore()
 
 func _setup_scene() -> void:
-	pass
+	# 从PartySystem获取当前队伍
+	var party = PartySystem.get_active_party()
+	for hero in party:
+		# 将英雄添加到场景
+		add_child(hero)
+		# 设置英雄位置等
 
 func _setup_ui() -> void:
-	game_form.setup(_get_players())
+	ui_combat_scene.setup(_get_players())
 
 func _connect_combat_signals() -> void:
 	_combat.combat_started.connect(_on_combat_started)
@@ -87,17 +90,15 @@ func _connect_combat_signals() -> void:
 	_combat.action_ready.connect(_on_action_ready)
 
 func _cleanup_battle() -> void:
-	_combat_info = null
 	_combat = null
 
 ## 创建战斗
 ## TODO 增加战斗加载功能
-## [param combat_model] 战斗数据
 ## [return] 战斗实例
-func _create_combat(combat_model: CombatModel) -> Combat:
+func _create_combat() -> Combat:
 	var enemy_combats : Array[CombatComponent]
 	var index := -1
-	for enemy_model in combat_model.enemies:
+	for enemy_model in _combat_info.enemies:
 		index += 1
 		if not enemy_model: continue
 		var enemy = _spawn_character(enemy_model)
@@ -108,19 +109,16 @@ func _create_combat(combat_model: CombatModel) -> Combat:
 		enemy_combats.append(enemy.combat_component)
 		enemy.setup()
 	var player_combats: Array[CombatComponent]
-	for player : Character in _get_players():
+	for player : Character in PartySystem.get_active_party():
 		player_combats.append(player.combat_component)
 	## 假设我们在开始时创建一场战斗，并将其作为当前存在的唯一战斗
 	var combat : Combat = CombatSystem.create_combat(
 		player_combats,
 		enemy_combats,
-		combat_model.max_turn_count,
-		combat_model.is_auto,
-		combat_model.is_real_time,
-		%MarkerAction,
+		_combat_info
 	)
 	if combat.is_auto:
-		game_form.handle_game_event("game_start")
+		ui_combat_scene.handle_game_event("game_start")
 	return combat
 
 ## 创建角色
@@ -145,13 +143,13 @@ func back_to_explore() -> void:
 	_state_machine_manager.get_state_machine("gameplay").switch("explore")
 
 func _on_combat_started() -> void:
-	game_form.handle_game_event("combat_started")
+	ui_combat_scene.handle_game_event("combat_started")
 
 func _on_turn_started() -> void:
-	game_form.handle_game_event("turn_started")
+	ui_combat_scene.handle_game_event("turn_started")
 
 func _on_turn_ended() -> void:
-	game_form.handle_game_event("turn_ended")
+	ui_combat_scene.handle_game_event("turn_ended")
 
 func _on_action_ready(unit: CombatComponent) -> void:
-	game_form.handle_game_event("action_ready", {"unit": unit})
+	ui_combat_scene.handle_game_event("action_ready", {"unit": unit})

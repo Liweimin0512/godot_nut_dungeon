@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_8j5be"]
 script = ExtResource("2_jnxqb")
 table_name = &"ability_attribute_set"
-table_paths = Array[String](["res://datatables/ability_attribute_set.csv"])
+table_paths = Array[String](["res://data/tables/ability_attribute_set.csv"])
 description = ""
 primary_key = "ID"
 enable_cache = true

@@ -33,7 +33,7 @@
 		  "probability": 0.3,
 		  "child": {
 			"type": "apply_ability",
-			"ability": "@resource://resources/data/abilities/buffs/ignite.tres",
+			"ability": "ignite",
 			"duration": 3
 		  }
 		}

@@ -161,6 +161,9 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 			await _move_from_action()
 		_die()
 
+func can_action() -> bool:
+	return _can_action()
+
 ## 获取施法位置
 func get_cast_position(position_type: String) -> Vector2:
 	var marker : Marker2D = cast_position_dict.get(position_type)

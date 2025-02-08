@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ctf6tss6po6ce"]
 
-[ext_resource type="Script" uid="uid://d2ci7s0wgvuxl" path="res://scenes/core/menu_scene.gd" id="1_wv2wf"]
+[ext_resource type="Script" uid="uid://d2ci7s0wgvuxl" path="res://scripts/scenes/menu_scene.gd" id="1_wv2wf"]
 [ext_resource type="Script" uid="uid://drldqlyqnyu6k" path="res://addons/GodotUIFramework/source/core/components/ui_group_component.gd" id="2_aauao"]
 [ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="3_8pw2l"]
 [ext_resource type="Script" uid="uid://cdtge4wnkvm45" path="res://addons/GodotUIFramework/source/core/resource/ui_scene_type.gd" id="4_vinai"]

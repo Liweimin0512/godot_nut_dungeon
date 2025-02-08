@@ -34,7 +34,7 @@
 			"probability": 0.2,
 			"child": {
 			  "type": "apply_ability",
-			  "ability": "@resource://resources/data/abilities/buffs/stun.tres",
+			  "ability": "stun",
 			  "duration": 2
 			}
 		  }

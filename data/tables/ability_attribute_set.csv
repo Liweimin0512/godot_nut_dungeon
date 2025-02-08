@@ -1,5 +1,5 @@
 ﻿ID,character_name,health,attack,defense,speed,hit_rate,crie_rate
-ID,角色名,生命值,攻击力,防御力,速度,命中率,暴击率
+ID,角色名|required,生命值|min:100,攻击力,防御力,速度,命中率,暴击率
 string,string,float,float,float,float,float,float
 crystal_mauler,战士,100,10,5,5,1,0
 leaf_ranger,游侠,100,10,5,5,1,0

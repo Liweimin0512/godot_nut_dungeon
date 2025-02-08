@@ -34,7 +34,7 @@
                         },
                         {
                             "type": "apply_ability",
-                            "ability": "@resource://resources/data/buffs/stun.tres",
+                            "ability": "stun.tres",
                             "pre_delay": 1
                         }
                     ]

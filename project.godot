@@ -17,11 +17,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-CombatSystem="*res://scripts/systems/combat/combat_system.gd"
-CoreSystem="*res://addons/godot_core_system/source/core_system.gd"
-ItemSystem="*res://addons/godot_item_system/scripts/item_system.gd"
 Panku="*res://addons/panku_console/console.tscn"
+CoreSystem="*res://addons/godot_core_system/source/core_system.gd"
 AbilitySystem="*res://addons/godot_gameplay_ability_system/source/ability_system.gd"
+ItemSystem="*res://addons/godot_item_system/scripts/item_system.gd"
+PartySystem="*res://scripts/systems/party_system/party_system.gd"
+CombatSystem="*res://scripts/systems/combat_system/combat_system.gd"
+GameSystem="*res://scripts/systems/game_system.gd"
 DataManager="*res://addons/GDDataForge/source/data_manager.gd"
 UIManager="*res://addons/GodotUIFramework/source/ui_manager.gd"
 

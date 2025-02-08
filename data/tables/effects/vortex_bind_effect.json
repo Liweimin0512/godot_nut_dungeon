@@ -19,7 +19,7 @@
 		  "target_count": 3,
 		  "child": {
 			"type": "apply_ability",
-			"ability": "@resource://resources/data/buffs/torrential_curse.tres",
+			"ability": "torrential_curse",
 			"pre_delay": 1.2,
 			"post_delay": 2
 		  }

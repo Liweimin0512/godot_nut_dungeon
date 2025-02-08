@@ -9,7 +9,7 @@ metadata/__load_path__ = "res://modules/item_system/scripts/resources/item_data.
 [sub_resource type="Resource" id="Resource_2dnex"]
 script = ExtResource("3_txt74")
 table_name = &"item"
-table_paths = Array[String](["res://datatables/items.csv"])
+table_paths = Array[String](["res://data/tables/items.csv"])
 description = ""
 primary_key = "ID"
 enable_cache = true

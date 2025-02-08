@@ -30,6 +30,7 @@ func _ready() -> void:
 	ItemSystem.initialized.connect(_on_item_system_initialized)
 	AbilitySystem.initialized.connect(_on_ability_system_initialized)
 	_scene_manager.scene_changed.connect(_on_scene_changed)
+	_initialize_scene()
 
 func initialize() -> void:
 	# 初始化子模块
@@ -47,7 +48,7 @@ func show_menu() -> void:
 ## 开始游戏
 func play_game() -> void:
 	# change_scene(&"game")
-	pass
+	PartySystem.initialize()
 
 ## ItemSystem 初始化完成
 func _on_item_system_initialized(success: bool) -> void:
@@ -61,15 +62,18 @@ func _on_ability_system_initialized(success: bool) -> void:
 	if not success:
 		_logger.error("AbilitySystem initialized failed")
 		return
-	_initialize_scene()
+	_initialize_data_model()
 
 ## 初始化数据模型
 func _initialize_data_model() -> void:
+	_logger.info("Start to load model types")
 	DataManager.load_models(
-		_model_types, 
-		func(_result: Array[String]) -> void:
-			_logger.info("Load Model Types Completed")
-			_initialize_scene()
+		_model_types,
+		func(result: Array[String]) -> void:
+			for model_name in result:
+				_logger.info("Load Model Type: %s Completed" % model_name)
+			_logger.info("Load Model Types Completed!@")
+			initialized.emit()
 			)
 
 ## 初始化场景
@@ -77,7 +81,6 @@ func _initialize_scene() -> void:
 	for key in scenes.keys():
 		var scene_path = scenes[key]
 		_scene_manager.preload_scene(scene_path)
-	initialized.emit()
 
 ## 场景切换回调
 func _on_scene_changed(old_scene: Node, new_scene: Node) -> void:

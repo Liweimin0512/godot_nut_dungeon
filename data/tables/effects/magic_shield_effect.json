@@ -11,7 +11,7 @@
     },
     {
       "type": "apply_ability",
-      "ability": "@resource://resources/data/abilities/buffs/magic_shield.tres",
+      "ability": "magic_shield",
       "pre_delay": 0.2
     }
   ]

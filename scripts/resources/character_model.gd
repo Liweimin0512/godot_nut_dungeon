@@ -19,10 +19,10 @@ class_name CharacterModel
 @export var sprite_position : Vector2
 
 var ability_resource_script: Dictionary[StringName, Script] = {
-	"enery": preload("res://scripts/systems/ability/ability_cost_resource/enery_resource.gd"), 
-	"health": preload("res://scripts/systems/ability/ability_cost_resource/health_resource.gd"), 
-	"mana": preload("res://scripts/systems/ability/ability_cost_resource/mana_resource.gd"), 
-	"rage": preload("res://scripts/systems/ability/ability_cost_resource/rage_resource.gd")
+	"enery": preload("res://scripts/systems/ability_system/ability_cost_resource/enery_resource.gd"), 
+	"health": preload("res://scripts/systems/ability_system/ability_cost_resource/health_resource.gd"), 
+	"mana": preload("res://scripts/systems/ability_system/ability_cost_resource/mana_resource.gd"), 
+	"rage": preload("res://scripts/systems/ability_system/ability_cost_resource/rage_resource.gd")
 }
 
 func _init_from_data(data: Dictionary) -> void:

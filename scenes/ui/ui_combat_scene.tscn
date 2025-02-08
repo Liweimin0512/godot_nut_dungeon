@@ -1,9 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgj5fmjvlf8j"]
+[gd_scene load_steps=8 format=3 uid="uid://bgj5fmjvlf8j"]
 
-[ext_resource type="PackedScene" uid="uid://cbbx8idrk5q7h" path="res://scenes/ui/widget/w_hero_info.tscn" id="1_kkeyv"]
-[ext_resource type="Script" uid="uid://cmx7unvv6cxui" path="res://scenes/ui/ui_game_scene.gd" id="1_r6315"]
+[ext_resource type="Script" uid="uid://cmx7unvv6cxui" path="res://scenes/ui/ui_combat_scene.gd" id="1_td8j5"]
+[ext_resource type="PackedScene" uid="uid://cbbx8idrk5q7h" path="res://scenes/ui/widget/w_hero_info.tscn" id="2_ybyyd"]
+[ext_resource type="Script" uid="uid://dod05jn2u0pey" path="res://addons/GodotUIFramework/source/core/components/ui_scene_component.gd" id="3_uvyqa"]
+[ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="4_btpwd"]
+[ext_resource type="Script" uid="uid://c6ba7chc4lqax" path="res://addons/GodotUIFramework/source/core/data/ui_data_model.gd" id="5_qu55d"]
 
-[node name="GameForm" type="Control"]
+[sub_resource type="Resource" id="Resource_kipig"]
+script = ExtResource("4_btpwd")
+ID = &""
+scene_path = ""
+preload_mode = 0
+cache_mode = 1
+pool_capacity = 10
+
+[sub_resource type="Resource" id="Resource_uioob"]
+script = ExtResource("5_qu55d")
+data_paths = Array[String]([])
+_data = {}
+_watchers = Dictionary[String, Array]({})
+
+[node name="UICombatScene" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +29,7 @@ offset_left = -1.0
 offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_r6315")
+script = ExtResource("1_td8j5")
 metadata/_edit_lock_ = true
 
 [node name="Panel" type="PanelContainer" parent="."]
@@ -39,7 +56,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="W_HeroInfo" parent="Panel/MarginContainer/W_HeroInfoContainer" instance=ExtResource("1_kkeyv")]
+[node name="W_HeroInfo" parent="Panel/MarginContainer/W_HeroInfoContainer" instance=ExtResource("2_ybyyd")]
 layout_mode = 2
 size_flags_horizontal = 2
 
@@ -75,3 +92,9 @@ text = "测试日志~~~
 测试日志~~~~~~！!!"
 scroll_active = false
 scroll_following = true
+
+[node name="UISceneComponent" type="Node" parent="."]
+script = ExtResource("3_uvyqa")
+config = SubResource("Resource_kipig")
+data_model = SubResource("Resource_uioob")
+metadata/_custom_type_script = ExtResource("3_uvyqa")

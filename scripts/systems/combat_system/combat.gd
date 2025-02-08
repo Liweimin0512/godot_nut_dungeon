@@ -53,12 +53,13 @@ func initialize(conmbat_model: CombatModel) -> void:
 	_setup_combat_units()
 	emit_signal("combat_started")
 
-## 
+## 回合开始前
 func prepare_turn() -> void:
 	_current_turn += 1
 	_calculate_action_order()
 	combat_started.emit()
 
+## 开始回合
 func start_turn() -> void:
 	turn_started.emit(_current_turn)
 	_prepare_next_action()
@@ -121,7 +122,11 @@ func _setup_combat_units() -> void:
 ## 设置行动顺序
 func _calculate_action_order() -> Array[CombatComponent]:
 	_action_order.clear()
-	_action_order = combats.filter(func(combat: CombatComponent) -> bool: return combat.can_action())
+	_action_order = combats.filter(
+		func(combat: CombatComponent) -> bool: 
+			if combat == null:
+				return false
+			return combat.can_action())
 	_action_order.sort_custom(
 		func(a: CombatComponent, b: CombatComponent) -> bool:
 			return a.speed > b.speed

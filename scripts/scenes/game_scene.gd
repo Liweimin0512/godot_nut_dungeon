@@ -1,6 +1,7 @@
 extends Node2D
 
-@export var battle_scene_path: String = "res://scenes/core/battle_scene.tscn"
+const combat_scene_path: String = "res://scenes/core/combat_scene.tscn"
+
 @export var test_combat: CombatModel
 
 var _scene_manager: CoreSystem.SceneManager:
@@ -28,12 +29,13 @@ func _ready() -> void:
 
 ## 初始化战斗
 func initialize_battle() -> void:
-	_scene_manager.preload_scene(battle_scene_path)
+	#_scene_manager.preload_scene(battle_scene_path)
+	pass
 
 ## 进入战斗
 func enter_battle(data: Dictionary = {}) -> void:
 	_scene_manager.change_scene_async(
-		battle_scene_path, 
+		combat_scene_path, 
 		data,
 		true,
 		_scene_manager.TransitionEffect.FADE,
