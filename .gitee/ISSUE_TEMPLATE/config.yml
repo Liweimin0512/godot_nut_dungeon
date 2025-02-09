@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: 项目讨论区
-    url: https://gitee.com/organizations/giab/projects
+    url: https://discord.com/channels/1255664864593186889/1338011218018832414
     about: 请在这里讨论项目相关话题
   - name: 项目文档
-    url: https://gitee.com/giab/godot-nut-dungeon/wikis
+    url: https://gitee.com/Giab/godot_nut_dungeon/wikis
     about: 查看项目文档

@@ -26,9 +26,9 @@ var _current_combat: CombatManager
 var _is_actioning: bool = false
 
 ## 依赖组件
-@export var ability_component: AbilityComponent
-@export var ability_resource_component: AbilityResourceComponent
-@export var ability_attribute_component: AbilityAttributeComponent
+var ability_component: AbilityComponent
+var ability_resource_component: AbilityResourceComponent
+var ability_attribute_component: AbilityAttributeComponent
 
 ## 战斗信号
 signal died
