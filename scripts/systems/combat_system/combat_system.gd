@@ -14,7 +14,9 @@ const DEFAULT_COMBAT_CONFIG := {
 ## 当前活跃的战斗管理器实例
 var active_combat_manager: CombatManager
 ## 状态机管理器
-var _state_machine_manager: CoreSystem.StateMachineManager = CoreSystem.state_machine_manager
+var _state_machine_manager: CoreSystem.StateMachineManager:
+	get:
+		return CoreSystem.state_machine_manager
 var _initialized : bool = false
 
 ## 战斗相关信号

@@ -14,7 +14,7 @@ script = ExtResource("1_qu267")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -128)
-scale = Vector2(2, 2)
+scale = Vector2(1.7, 1.7)
 texture = ExtResource("2_f8hpl")
 hframes = 10
 
@@ -76,16 +76,17 @@ ability_resource_colors = Dictionary[StringName, Color]({
 &"rage": Color(0.545098, 0, 0, 1)
 })
 
-[node name="CharacterLogic" type="Node" parent="."]
-script = ExtResource("5_f8hpl")
-
-[node name="Label" type="Label" parent="."]
-offset_left = -19.0
-offset_top = -110.0
-offset_right = 21.0
-offset_bottom = -87.0
+[node name="LabelSelector" type="Label" parent="."]
+visible = false
+offset_left = -16.0
+offset_top = -120.0
+offset_right = 24.0
+offset_bottom = -97.0
 text = "选中"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CharacterLogic" type="Node" parent="."]
+script = ExtResource("5_f8hpl")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

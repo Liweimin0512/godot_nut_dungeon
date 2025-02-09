@@ -15,11 +15,11 @@ class_name CombatComponent
 ## 战斗属性
 var is_alive: bool:
 	get:
-		return ability_resource_component.get_resource_value("生命值") > 0
+		return ability_resource_component.get_resource_value("health") > 0
 
 var speed: float:
 	get:
-		return ability_attribute_component.get_attribute_value("速度")
+		return ability_attribute_component.get_attribute_value("speed")
 
 ## 战斗状态
 var _current_combat: CombatManager

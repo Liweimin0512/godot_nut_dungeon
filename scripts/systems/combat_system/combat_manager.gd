@@ -80,6 +80,11 @@ func end_combat() -> void:
 
 ## 准备回合
 func turn_prepare() -> void:
+	current_turn += 1
+	if current_turn > max_turn_count:
+		end_combat()
+		return
+	
 	action_order = _sort_units_by_speed()
 	for unit : CombatComponent in action_order:
 		unit.turn_prepare()
@@ -90,10 +95,6 @@ func start_turn() -> void:
 	if not is_combat_active:
 		return
 	
-	current_turn += 1
-	if current_turn > max_turn_count:
-		end_combat()
-		return
 	
 	# 通知所有单位回合开始
 	for unit in player_combats + enemy_combats:
