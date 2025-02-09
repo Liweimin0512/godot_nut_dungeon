@@ -1,27 +1,61 @@
----
 name: 故事提案
-about: 创建一个故事提案以帮助我们改进
+description: 创建一个故事提案以丰富游戏内容
 title: '[故事] '
-labels: story
-assignees: ''
----
-### 故事标题
-[如"与哲学螳螂的下午茶"]
+labels: ['story']
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您的故事提案。请确保故事内容符合项目的世界观设定。
 
-### 故事类型
-- [ ] 随机事件  
-- [ ] 角色背景  
-- [ ] 环境叙事  
+  - type: input
+    attributes:
+      label: 故事标题
+      description: 为您的故事起一个引人入胜的标题
+      placeholder: 如"与哲学螳螂的下午茶"
+    validations:
+      required: true
 
-### 触发条件
-- 必须特质："存在主义倾向"
-- 环境要求：秋季/雨天
-- 物品携带：≥3颗葵花籽
+  - type: checkboxes
+    attributes:
+      label: 故事类型
+      description: 选择故事的类型（可多选）
+      options:
+        - label: 随机事件
+          required: false
+        - label: 角色背景
+          required: false
+        - label: 环境叙事
+          required: false
 
-### 影响因子
-| 因子类型 | 变动值 | 阈值检测 |  
-|----------|--------|----------|  
-| 盐渍值   | +15    | >50时触发额外选项 |  
-| 杀戮快感 | -10    | 若<20获得隐藏成就 |  
+  - type: textarea
+    attributes:
+      label: 触发条件
+      description: 描述触发这个故事的条件
+      value: |
+        - 必须特质："存在主义倾向"
+        - 环境要求：秋季/雨天
+        - 物品携带：≥3颗葵花籽
+    validations:
+      required: true
 
-### 剧本内容
+  - type: textarea
+    attributes:
+      label: 影响因子
+      description: 描述故事对游戏状态的影响
+      value: |
+        | 因子类型 | 变动值 | 阈值检测 |
+        |----------|--------|----------|
+        | 盐渍值   | +15    | >50时触发额外选项 |
+        | 杀戮快感 | -10    | 若<20获得隐藏成就 |
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 剧本内容
+      description: 请编写完整的故事剧本
+      placeholder: 在此处编写您的故事内容...
+    validations:
+      required: true

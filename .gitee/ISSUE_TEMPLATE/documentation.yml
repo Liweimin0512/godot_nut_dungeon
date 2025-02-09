@@ -1,16 +1,57 @@
----
 name: 文档改进
-about: 帮助我们改进文档
-title: '[DOCS] '
-labels: documentation
-assignees: ''
----
+description: 帮助我们改进项目文档
+title: '[文档] '
+labels: ['documentation']
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您帮助我们改进文档。清晰的文档对项目的发展至关重要。
 
-## 📚 文档问题
-<!-- 描述文档中需要改进的地方 -->
+  - type: input
+    attributes:
+      label: 文档位置
+      description: 指出需要改进的文档位置
+      placeholder: 例如：README.md 的安装说明部分
+    validations:
+      required: true
 
-## 📝 建议的改进
-<!-- 描述你的改进建议 -->
+  - type: dropdown
+    attributes:
+      label: 改进类型
+      description: 选择文档改进的类型
+      options:
+        - 错误修正
+        - 内容补充
+        - 格式优化
+        - 翻译改进
+        - 示例添加
+        - 其他
+    validations:
+      required: true
 
-## 📎 补充信息
-<!-- 添加任何其他相关信息 -->
+  - type: textarea
+    attributes:
+      label: 现有问题
+      description: 描述当前文档存在的问题
+      placeholder: 例如：安装说明缺少某些重要步骤...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 改进建议
+      description: 提供具体的改进建议
+      placeholder: 建议添加/修改的具体内容...
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: 确认事项
+      options:
+        - label: 我已确认这不是重复的建议
+          required: true
+        - label: 我愿意协助实施这些改进
+          required: false

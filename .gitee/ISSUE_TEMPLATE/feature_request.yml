@@ -1,19 +1,54 @@
----
-name: 功能建议
-about: 为这个项目提出一个想法
-title: '[FEATURE] '
-labels: enhancement
-assignees: ''
----
+name: 功能请求
+description: 建议一个新功能或改进
+title: '[功能] '
+labels: ['enhancement']
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您的功能建议。请确保您的建议符合项目的发展方向。
 
-## 🚀 功能描述
-<!-- 清晰简洁地描述你想要的功能 -->
+  - type: textarea
+    attributes:
+      label: 相关问题
+      description: 这个功能是否与某个问题相关？请描述。
+      placeholder: 例如：当我...的时候，总是感觉很不方便...
+    validations:
+      required: true
 
-## 💡 解决方案
-<!-- 描述你想到的实现方案 -->
+  - type: textarea
+    attributes:
+      label: 解决方案
+      description: 描述您期望的解决方案
+      placeholder: 希望能够添加...功能来解决这个问题
+    validations:
+      required: true
 
-## 🔄 替代方案
-<!-- 描述你考虑过的替代解决方案 -->
+  - type: textarea
+    attributes:
+      label: 替代方案
+      description: 描述您考虑过的替代解决方案
+      placeholder: 也可以通过...方式来解决，但是...
 
-## 📎 补充信息
-<!-- 添加任何其他相关信息或截图 -->
+  - type: checkboxes
+    attributes:
+      label: 功能类型
+      description: 这个功能属于哪些类别？
+      options:
+        - label: UI/UX改进
+          required: false
+        - label: 性能优化
+          required: false
+        - label: 新玩法机制
+          required: false
+        - label: Bug修复
+          required: false
+        - label: 其他
+          required: false
+
+  - type: textarea
+    attributes:
+      label: 补充信息
+      description: 添加任何其他相关的信息
+      placeholder: 例如：参考截图、相似游戏的实现等
