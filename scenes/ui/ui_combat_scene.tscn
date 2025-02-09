@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bgj5fmjvlf8j"]
+[gd_scene load_steps=10 format=3 uid="uid://bgj5fmjvlf8j"]
 
 [ext_resource type="Script" uid="uid://cmx7unvv6cxui" path="res://scenes/ui/ui_combat_scene.gd" id="1_td8j5"]
-[ext_resource type="PackedScene" uid="uid://cbbx8idrk5q7h" path="res://scenes/ui/widget/w_hero_info.tscn" id="2_ybyyd"]
+[ext_resource type="PackedScene" uid="uid://ctcmiyu7lmj7m" path="res://scenes/ui/widget/hero_info.tscn" id="2_qu55d"]
+[ext_resource type="PackedScene" uid="uid://ds8sko3goeli8" path="res://scenes/ui/widget/turn_status.tscn" id="3_btpwd"]
+[ext_resource type="PackedScene" uid="uid://chldkjcevj3gx" path="res://scenes/ui/widget/enemy_info.tscn" id="3_kipig"]
 [ext_resource type="Script" uid="uid://dod05jn2u0pey" path="res://addons/GodotUIFramework/source/core/components/ui_scene_component.gd" id="3_uvyqa"]
 [ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="4_btpwd"]
 [ext_resource type="Script" uid="uid://c6ba7chc4lqax" path="res://addons/GodotUIFramework/source/core/data/ui_data_model.gd" id="5_qu55d"]
@@ -29,6 +31,7 @@ offset_left = -1.0
 offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_td8j5")
 metadata/_edit_lock_ = true
 
@@ -56,11 +59,22 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="W_HeroInfo" parent="Panel/MarginContainer/W_HeroInfoContainer" instance=ExtResource("2_ybyyd")]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 2
+
+[node name="HeroInfo" parent="Panel/MarginContainer/HBoxContainer" instance=ExtResource("2_qu55d")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="EnemyInfo" parent="Panel/MarginContainer/HBoxContainer" instance=ExtResource("3_kipig")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 offset_right = 245.0
 offset_bottom = 36.0
@@ -92,6 +106,12 @@ text = "测试日志~~~
 测试日志~~~~~~！!!"
 scroll_active = false
 scroll_following = true
+
+[node name="TurnStatus" parent="." instance=ExtResource("3_btpwd")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -220.0
+offset_bottom = 42.0
 
 [node name="UISceneComponent" type="Node" parent="."]
 script = ExtResource("3_uvyqa")

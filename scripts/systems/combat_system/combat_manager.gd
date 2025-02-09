@@ -8,15 +8,6 @@ class_name CombatManager
 ## 3. 目标选择系统
 ## 4. 战斗行动的执行
 
-## 战斗相关信号
-signal combat_started
-signal combat_ended
-signal turn_started(turn_count: int)
-signal turn_ended
-signal combat_finished
-signal combat_defeated
-signal action_ready(unit: CombatComponent)
-
 # 战斗配置
 ## 最大回合数
 var max_turn_count: int = 99
@@ -38,6 +29,19 @@ var current_acting_unit: CombatComponent
 var player_combats: Array[CombatComponent] = []
 ## 敌人单位
 var enemy_combats: Array[CombatComponent] = []
+## 角色行动顺序
+var action_order: Array[CombatComponent] = []
+
+
+## 战斗相关信号
+signal combat_started
+signal combat_ended
+signal turn_prepared
+signal turn_started(turn_count: int)
+signal turn_ended
+signal combat_finished
+signal combat_defeated
+signal action_ready(unit: CombatComponent)
 
 ## 初始化战斗
 func initialize(combat_info: CombatModel) -> void:
@@ -76,7 +80,10 @@ func end_combat() -> void:
 
 ## 准备回合
 func turn_prepare() -> void:
-	pass
+	action_order = _sort_units_by_speed()
+	for unit : CombatComponent in action_order:
+		unit.turn_prepare()
+	turn_prepared.emit()
 
 ## 开始新回合
 func start_turn() -> void:
@@ -206,7 +213,13 @@ func get_all_allies(unit: CombatComponent) -> Array[CombatComponent]:
 		return player_combats
 	return enemy_combats
 
-## 内部方法
+## 角色行动顺序排序
+func _sort_units_by_speed() -> Array[CombatComponent]:
+	var order : Array[CombatComponent] = player_combats + enemy_combats
+	order.shuffle()
+	order.sort_custom(func(a, b): return a.speed > b.speed)
+	return order
+
 func _get_active_units() -> Array[CombatComponent]:
 	var units = []
 	for unit in player_combats + enemy_combats:

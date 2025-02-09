@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://nlvud16b6bsq"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_e8vkj"]
+
+[node name="HeroAbilityResource" type="MarginContainer"]
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_right = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("PlaceholderTexture2D_e8vkj")
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 8
+text = "28/32"

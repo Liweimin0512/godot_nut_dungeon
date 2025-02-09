@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://r6b37yp547h6"]
+
+[ext_resource type="Script" uid="uid://imj6ktgmfh1q" path="res://scenes/ui/widget/character_icon.gd" id="1_l2ohn"]
+[ext_resource type="Texture2D" uid="uid://dawdthb5ao5sm" path="res://assets/texture/icon/character_profile_picture/metal_bladekeeper.png" id="1_sehmb"]
+[ext_resource type="Script" uid="uid://1mpayve22prh" path="res://addons/GodotUIFramework/source/core/components/ui_widget_component.gd" id="3_fmmp5"]
+[ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="4_u4sb5"]
+[ext_resource type="Script" uid="uid://c6ba7chc4lqax" path="res://addons/GodotUIFramework/source/core/data/ui_data_model.gd" id="5_ux5hb"]
+
+[sub_resource type="Resource" id="Resource_iidib"]
+script = ExtResource("4_u4sb5")
+ID = &""
+scene_path = ""
+preload_mode = 0
+cache_mode = 1
+pool_capacity = 10
+
+[sub_resource type="Resource" id="Resource_g3uyf"]
+script = ExtResource("5_ux5hb")
+data_paths = Array[String]([])
+_data = {}
+_watchers = Dictionary[String, Array]({})
+
+[node name="CharacterIcon" type="MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_l2ohn")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_sehmb")
+expand_mode = 1
+
+[node name="UIWidgetComponent" type="Node" parent="."]
+script = ExtResource("3_fmmp5")
+config = SubResource("Resource_iidib")
+data_model = SubResource("Resource_g3uyf")
+metadata/_custom_type_script = ExtResource("3_fmmp5")

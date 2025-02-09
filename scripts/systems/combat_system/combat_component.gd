@@ -34,14 +34,17 @@ var _is_actioning: bool = false
 signal died
 signal combat_started
 signal combat_ended
+signal turn_prepared
 signal turn_started
 signal turn_ended
 signal hited(target: CombatComponent)
 signal hurted(damage: int)
 
 func _on_data_updated(data: Dictionary) -> void:
-	var camp : CombatDefinition.COMBAT_CAMP_TYPE = data.get("combat_camp", CombatDefinition.COMBAT_CAMP_TYPE.PLAYER)
-	combat_camp = camp
+	combat_camp = data.get("combat_camp", CombatDefinition.COMBAT_CAMP_TYPE.PLAYER)
+	ability_component = data.get("ability_component", null)
+	ability_resource_component = data.get("ability_resource_component", null)
+	ability_attribute_component = data.get("ability_attribute_component", null)
 
 ## 战斗开始
 func combat_start(combat: CombatManager) -> void:
@@ -50,8 +53,9 @@ func combat_start(combat: CombatManager) -> void:
 	combat_started.emit()
 
 ## 回合开始前
-func pre_turn_start() -> void:
+func turn_prepare() -> void:
 	ability_component.handle_game_event("on_pre_turn_start")
+	turn_prepared.emit()
 
 ## 回合开始
 func turn_start() -> void:

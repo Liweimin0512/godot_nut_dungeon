@@ -117,6 +117,7 @@ func _connect_combat_signals() -> void:
 		return
 		
 	combat_manager.combat_started.connect(_on_combat_started)
+	combat_manager.turn_prepared.connect(_on_turn_prepared)
 	combat_manager.turn_started.connect(_on_turn_started)
 	combat_manager.turn_ended.connect(_on_turn_ended)
 	combat_manager.combat_finished.connect(_on_combat_finished)
@@ -150,15 +151,16 @@ func _on_combat_started() -> void:
 	# 处理战斗开始的表现效果
 	pass
 
+## 回合准备回调
+func _on_turn_prepared() -> void:
+	pass
+
 ## 回合开始回调
 func _on_turn_started(turn_count: int) -> void:
-	# 显示回合数
-	if ui_combat_scene:
-		ui_combat_scene.show_turn_count(turn_count)
+	pass
 
 ## 回合结束回调
 func _on_turn_ended() -> void:
-	# 处理回合结束的表现效果
 	pass
 
 ## 战斗胜利回调

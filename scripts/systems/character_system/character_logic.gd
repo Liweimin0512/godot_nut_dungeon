@@ -82,4 +82,9 @@ func _update_components() -> void:
 		"ability_component": get_component("ability_component"),
 		"ability_attribute_component": get_component("ability_attribute_component"),
 	})
-	update_component("combat_component", {"combat_camp": character_camp})
+	update_component("combat_component", {
+		"combat_camp": character_camp,
+		"ability_component": get_component("ability_component"),
+		"ability_resource_component": get_component("ability_resource_component"),
+		"ability_attribute_component": get_component("ability_attribute_component"),
+	})

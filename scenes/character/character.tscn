@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
-[ext_resource type="Texture2D" uid="uid://6sd1tikuk4pn" path="res://assets/sprites/characters/heros/leaf_ranger/attack_2.png" id="2_q52vl"]
+[ext_resource type="Texture2D" uid="uid://owisfhc7c3bb" path="res://assets/sprites/characters/heros/leaf_ranger/attack_1.png" id="2_f8hpl"]
 [ext_resource type="AnimationLibrary" uid="uid://b82bxlch76pwa" path="res://scenes/character/resources/animation/hero/animation_library_leaf_ranger.res" id="4_l884r"]
 [ext_resource type="Script" uid="uid://dtc1rg7uprgl4" path="res://scripts/systems/character_system/character_logic.gd" id="5_f8hpl"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
@@ -13,11 +13,10 @@ size = Vector2(151, 154)
 script = ExtResource("1_qu267")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -96)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("2_q52vl")
-hframes = 15
-frame = 10
+position = Vector2(0, -128)
+scale = Vector2(2, 2)
+texture = ExtResource("2_f8hpl")
+hframes = 10
 
 [node name="cast_points" type="Node2D" parent="."]
 
@@ -66,9 +65,9 @@ theme_override_constants/outline_size = 5
 text = "技能名称"
 
 [node name="W_Status" parent="." instance=ExtResource("6_cj4oh")]
-offset_left = -28.0
-offset_top = 4.0
-offset_right = 28.0
+offset_left = -27.0
+offset_top = -20.0
+offset_right = 29.0
 offset_bottom = 14.0
 ability_resource_colors = Dictionary[StringName, Color]({
 &"energy": Color(1, 1, 0, 1),
@@ -79,5 +78,14 @@ ability_resource_colors = Dictionary[StringName, Color]({
 
 [node name="CharacterLogic" type="Node" parent="."]
 script = ExtResource("5_f8hpl")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -110.0
+offset_right = 21.0
+offset_bottom = -87.0
+text = "选中"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
