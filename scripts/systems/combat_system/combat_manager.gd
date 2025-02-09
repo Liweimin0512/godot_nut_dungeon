@@ -97,29 +97,6 @@ func start_turn() -> void:
 	# 开始行动循环
 	await process_turn()
 
-## 目标选择
-func action_select() -> void:
-	
-	if not current_acting_unit or not current_acting_unit.is_alive:
-		# switch_to("turn_end")
-		return
-	
-	# 通知UI有单位准备行动
-	action_ready.emit(current_acting_unit)
-	
-	# 如果是敌方单位，执行AI行动选择
-	if current_acting_unit.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
-		select_ai_action(current_acting_unit)
-		# switch_to("action_execute")
-	# 如果是自动战斗，也执行AI行动选择
-	elif is_auto:
-		select_ai_action(current_acting_unit)
-		# switch_to("action_execute")
-	# 否则等待玩家选择行动
-	else:
-		# 状态机会保持在当前状态，等待外部消息触发状态切换
-		pass
-
 ## 处理回合
 func process_turn() -> void:
 	# 获取所有存活单位
@@ -149,6 +126,29 @@ func process_turn() -> void:
 	
 	# 回合结束
 	end_turn()
+
+## 目标选择
+func action_select() -> void:
+	
+	if not current_acting_unit or not current_acting_unit.is_alive:
+		# switch_to("turn_end")
+		return
+	
+	# 通知UI有单位准备行动
+	action_ready.emit(current_acting_unit)
+	
+	# 如果是敌方单位，执行AI行动选择
+	if current_acting_unit.combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
+		select_ai_action(current_acting_unit)
+		# switch_to("action_execute")
+	# 如果是自动战斗，也执行AI行动选择
+	elif is_auto:
+		select_ai_action(current_acting_unit)
+		# switch_to("action_execute")
+	# 否则等待玩家选择行动
+	else:
+		# 状态机会保持在当前状态，等待外部消息触发状态切换
+		pass
 
 ## 结束回合
 func end_turn() -> void:

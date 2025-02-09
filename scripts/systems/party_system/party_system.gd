@@ -61,6 +61,8 @@ func get_available_heroes() -> Array[Character]:
 ## 开发阶段：加载测试英雄
 func _load_test_heroes() -> void:
 	for hero_id in TEST_HEROES:
+		if not hero_id:
+			continue
 		var hero = CharacterSystem.create_character(hero_id, null)
 		if not hero:
 			return

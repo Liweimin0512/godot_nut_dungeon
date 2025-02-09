@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ModelType" load_steps=5 format=3 uid="uid://cmledmbevpejf"]
 
 [ext_resource type="Script" uid="uid://bf3cohk1etxvp" path="res://addons/GDDataForge/source/resource/model_type.gd" id="1_x8a3x"]
-[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="2_21hmb"]
+[ext_resource type="Script" uid="uid://c0fburwyerk5p" path="res://scripts/systems/character_system/resources/character_model.gd" id="2_21hmb"]
 [ext_resource type="Script" uid="uid://c65rwndbbr15i" path="res://addons/GDDataForge/source/resource/table_type.gd" id="3_wwya7"]
 
 [sub_resource type="Resource" id="Resource_lm6mc"]

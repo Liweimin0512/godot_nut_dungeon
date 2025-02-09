@@ -1,4 +1,4 @@
-extends "res://addons/godot_core_system/source/manager_base.gd"
+extends Node
 
 ## 角色系统
 ## 负责管理角色的生命周期、加载和创建
@@ -48,7 +48,7 @@ func initialize(character_model_type: ModelType) -> bool:
 	DataManager.load_model(character_model_type,
 		func(result: Variant):
 			print(result)
-			_entity_manager.load_entity(CHARACTER, CHARACTER_SCENE_PATH, CoreSystem.ResourceManager.LOAD_MODE.LAZY)
+			_entity_manager.load_entity(CHARACTER, CHARACTER_SCENE_PATH, CoreSystem.ResourceManager.LOAD_MODE.IMMEDIATE)
 			_initialized = true
 			initialized.emit(_initialized)
 	)
@@ -67,7 +67,7 @@ func create_character(character_id: StringName, parent: Node = null) -> Node:
 	if "character_logic" in character:
 		character.character_logic.initialize({
 			"character_config": character_config,
-			"character_camp": character_config.character_camp,
+			"character_camp": character_config.camp,
 		})
 	return character
 

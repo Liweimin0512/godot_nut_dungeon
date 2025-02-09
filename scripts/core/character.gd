@@ -10,14 +10,18 @@ class_name Character
 ## 组件引用
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var w_status: W_Status = $W_Status
-@onready var character_logic : CharacterLogic = $CharacterLogic
+@onready var character_logic : CharacterLogic = $CharacterLogic:
+	get:
+		if character_logic:
+			return character_logic
+		return $CharacterLogic
 
 ## 角色数据
 @export var _character_config: CharacterModel
 ## 角色阵营
 @export var character_camp: CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.PLAYER:
-	set(value):
-		character_camp = value
+	get:
+		return _character_config.camp
 @export var character_icon: Texture2D
 
 ## 角色名称

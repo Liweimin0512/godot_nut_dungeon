@@ -55,7 +55,7 @@ class TurnStartState:
 		var combat_manager := agent as CombatManager
 		# 由战斗管理器处理回合开始逻辑
 		combat_manager.start_turn()
-		switch_to("action_select")
+		# switch_to("action_select")
 
 ## 动作选择状态
 class ActionSelectState:

@@ -86,11 +86,11 @@ func _setup_enemy_units(combat_info: CombatModel) -> Array[Character]:
 	var units: Array[Character] = []
 	
 	for i in range(combat_info.enemy_data.size()):
-		var enemy_model = combat_info.enemy_data[i]
-		if not enemy_model:
+		var entityID : StringName = combat_info.enemy_data[i]
+		if entityID.is_empty():
 			continue
 		
-		var character: Character = CharacterSystem.create_character(enemy_model)
+		var character: Character = CharacterSystem.create_character(entityID)
 		# 设置位置
 		if enemy_markers and enemy_markers.get_child_count() > i:
 			var marker = enemy_markers.get_child(i)

@@ -95,15 +95,15 @@ metadata/_custom_type_script = ExtResource("7_aweq8")
 unique_name_in_owner = true
 
 [node name="Marker2D" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(256, 144)
+position = Vector2(232, 144)
 
 [node name="PlayerCharacter" parent="PlayerMarkers/Marker2D" groups=["Character", "Player"] instance=ExtResource("10_w25t6")]
 
 [node name="Marker2D2" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(192, 144)
+position = Vector2(176, 144)
 
 [node name="Marker2D3" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(128, 144)
+position = Vector2(120, 144)
 
 [node name="Marker2D4" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(64, 144)
@@ -112,15 +112,15 @@ position = Vector2(64, 144)
 unique_name_in_owner = true
 
 [node name="Marker2D" type="Marker2D" parent="EnemyMarkers"]
-position = Vector2(336, 144)
+position = Vector2(360, 144)
 gizmo_extents = 128.0
 
 [node name="Marker2D2" type="Marker2D" parent="EnemyMarkers"]
-position = Vector2(400, 144)
+position = Vector2(416, 144)
 gizmo_extents = 128.0
 
 [node name="Marker2D3" type="Marker2D" parent="EnemyMarkers"]
-position = Vector2(464, 144)
+position = Vector2(472, 144)
 gizmo_extents = 128.0
 
 [node name="Marker2D4" type="Marker2D" parent="EnemyMarkers"]
