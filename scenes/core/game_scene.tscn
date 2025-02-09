@@ -1,15 +1,12 @@
-[gd_scene load_steps=31 format=4 uid="uid://dy2bea7qxhthr"]
+[gd_scene load_steps=27 format=4 uid="uid://dy2bea7qxhthr"]
 
 [ext_resource type="Script" uid="uid://d05iln8nlewpf" path="res://scripts/scenes/game_scene.gd" id="1_u6vx"]
 [ext_resource type="Texture2D" uid="uid://pp7mi550xwrq" path="res://assets/sprites/tilesets/plains.png" id="2_lo25h"]
-[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="2_y7bqf"]
-[ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="3_ip71y"]
+[ext_resource type="Script" uid="uid://c0fburwyerk5p" path="res://scripts/systems/character_system/resources/character_model.gd" id="2_y7bqf"]
 [ext_resource type="Texture2D" uid="uid://hlj2bl3ok2do" path="res://assets/sprites/tilesets/decor_16x16.png" id="3_kl3m2"]
 [ext_resource type="Script" uid="uid://bebfj2ga1x7eh" path="res://scripts/resources/combat_model.gd" id="3_nxrit"]
-[ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="4_7vsvo"]
 [ext_resource type="PackedScene" uid="uid://cueqgn2tpdvdq" path="res://scenes/character/field_player.tscn" id="4_p2q8r"]
 [ext_resource type="Texture2D" uid="uid://8ftuqqusibxg" path="res://assets/sprites/tilesets/grass.png" id="4_ttkny"]
-[ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="5_0xfb3"]
 [ext_resource type="Texture2D" uid="uid://g6uxn7b1n7hb" path="res://assets/sprites/tilesets/floors/wooden.png" id="5_1jhbl"]
 [ext_resource type="Texture2D" uid="uid://bqw2b4mu521gg" path="res://assets/sprites/objects/objects.png" id="5_vvs44"]
 [ext_resource type="Texture2D" uid="uid://dh1cruilbgbk1" path="res://assets/sprites/objects/chest_01.png" id="6_xfdvh"]
@@ -17,19 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://cltndkf8lm76a" path="res://assets/sprites/tilesets/walls/wooden_door_b.png" id="9_y7bqf"]
 [ext_resource type="Texture2D" uid="uid://bluc5y2hl8286" path="res://assets/sprites/tilesets/floors/flooring.png" id="10_nxrit"]
 
-[sub_resource type="Resource" id="Resource_raq42"]
-script = ExtResource("2_y7bqf")
-character_name = &""
-ability_attributes = Array[ExtResource("4_7vsvo")]([])
-abilities = Array[ExtResource("3_ip71y")]([])
-ability_resources = Array[ExtResource("5_0xfb3")]([])
-sprite_position = Vector2(0, 0)
-metadata/_custom_type_script = ExtResource("2_y7bqf")
-
 [sub_resource type="Resource" id="Resource_ltr46"]
 script = ExtResource("3_nxrit")
 max_turn_count = 99
-enemy_data = Array[ExtResource("2_y7bqf")]([SubResource("Resource_raq42")])
+enemy_data = Array[ExtResource("2_y7bqf")]([])
 is_auto = true
 is_real_time = true
 metadata/_custom_type_script = ExtResource("3_nxrit")

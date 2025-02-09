@@ -61,20 +61,9 @@ func get_available_heroes() -> Array[Character]:
 ## 开发阶段：加载测试英雄
 func _load_test_heroes() -> void:
 	for hero_id in TEST_HEROES:
-		if hero_id == null:
-			continue
-		var hero_model : CharacterModel = DataManager.get_data_model("character", hero_id)
-		if not hero_model:
-			_logger.error("can not found hero model: {0}".format([hero_id]))
-			continue
-		if hero_model:
-			var hero = _create_hero(hero_model)
-			heroes[hero_id] = hero
-			# 开发阶段：自动添加到队伍
-			add_to_party(hero_id)
-
-## 创建英雄实例
-func _create_hero(hero_model: CharacterModel) -> Character:
-	var hero = CHARACTER_SCENE.instantiate()
-	hero.setup(hero_model)
-	return hero
+		var hero = CharacterSystem.create_character(hero_id, null)
+		if not hero:
+			return
+		heroes[hero_id] = hero
+		# 开发阶段：自动添加到队伍
+		add_to_party(hero_id)

@@ -12,7 +12,9 @@ var _scene_manager : CoreSystem.SceneManager
 }
 @export var _action_table_type : TableType
 @export var _ability_model_types : Array[ModelType]
-@export var _model_types : Array[ModelType]
+@export var _character_model_type : ModelType = load("res://resources/character_model_type.tres")
+@export var _combat_model_type : ModelType = load("res://resources/combat_model_type.tres")
+var _initialized : bool = false
 
 ## 初始化完成信号
 signal initialized
@@ -20,21 +22,40 @@ signal initialized
 signal scene_changed(old_scene: Node, new_scene: Node)
 
 func _ready() -> void:
+	_scene_manager = CoreSystem.scene_manager
+	AbilitySystem.initialized.connect(
+		func(success: bool):
+			ItemSystem.initialize()
+	)
+	ItemSystem.initialized.connect(
+		func(success: bool):
+			CharacterSystem.initialize(_character_model_type)
+	)
+	CharacterSystem.initialized.connect(
+		func(initialized: bool):
+			CombatSystem.initialize(_combat_model_type)
+	)
+	CombatSystem.initialized.connect(
+		func(is_initialized: bool):
+			# _initialize_data_model()
+			_initialized = true
+			initialized.emit()
+	)
+	_scene_manager.scene_changed.connect(_on_scene_changed)
+	_initialize_scene()
 	_state_machine_manager.register_state_machine(
 		"game_state_machine",
 		GameStateMachine.new(),
 		self,
 		"launch"
 	)
-	_scene_manager = CoreSystem.scene_manager
-	ItemSystem.initialized.connect(_on_item_system_initialized)
-	AbilitySystem.initialized.connect(_on_ability_system_initialized)
-	_scene_manager.scene_changed.connect(_on_scene_changed)
-	_initialize_scene()
 
 func initialize() -> void:
+	if _initialized:
+		_logger.error("Game is already initialized")
+		return
 	# 初始化子模块
-	ItemSystem.initialize()
+	AbilitySystem.initialize(_ability_model_types, _action_table_type)
 
 ## 切换场景
 func change_scene(scene_name : StringName) -> void:
@@ -48,32 +69,6 @@ func show_menu() -> void:
 ## 开始游戏
 func play_game() -> void:
 	PartySystem.initialize()
-
-## ItemSystem 初始化完成
-func _on_item_system_initialized(success: bool) -> void:
-	if not success:
-		_logger.error("ItemSystem initialized failed")
-		return
-	AbilitySystem.initialize(_ability_model_types, _action_table_type)
-
-## AbilitySystem 初始化完成
-func _on_ability_system_initialized(success: bool) -> void:
-	if not success:
-		_logger.error("AbilitySystem initialized failed")
-		return
-	_initialize_data_model()
-
-## 初始化数据模型
-func _initialize_data_model() -> void:
-	_logger.info("Start to load model types")
-	DataManager.load_models(
-		_model_types,
-		func(result: Array[String]) -> void:
-			for model_name in result:
-				_logger.info("Load Model Type: %s Completed" % model_name)
-			_logger.info("Load Model Types Completed!@")
-			initialized.emit()
-			)
 
 ## 初始化场景
 func _initialize_scene() -> void:

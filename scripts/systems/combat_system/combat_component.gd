@@ -1,4 +1,4 @@
-extends Node
+extends LogicComponent
 class_name CombatComponent
 
 ## 战斗组件，负责单个单位的战斗行为
@@ -10,7 +10,6 @@ class_name CombatComponent
 
 ## 战斗配置
 @export var combat_camp: CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.PLAYER
-@export var cast_position_dict: Dictionary = {}
 @export var return_action_time: float = 0.2
 
 ## 战斗属性
@@ -24,7 +23,6 @@ var speed: float:
 
 ## 战斗状态
 var _current_combat: CombatManager
-var _combat_position: Vector2 = Vector2.ZERO
 var _is_actioning: bool = false
 
 ## 依赖组件
@@ -41,10 +39,9 @@ signal turn_ended
 signal hited(target: CombatComponent)
 signal hurted(damage: int)
 
-## 设置战斗组件数据
-func set_model_data(camp: CombatDefinition.COMBAT_CAMP_TYPE) -> void:
+func _on_data_updated(data: Dictionary) -> void:
+	var camp : CombatDefinition.COMBAT_CAMP_TYPE = data.get("combat_camp", CombatDefinition.COMBAT_CAMP_TYPE.PLAYER)
 	combat_camp = camp
-	_combat_position = owner.global_position
 
 ## 战斗开始
 func combat_start(combat: CombatManager) -> void:
@@ -84,7 +81,7 @@ func action() -> void:
 		"caster": self,
 		"target": target,
 		"ability": ability,
-		"tree": get_tree(),
+		"tree": owner.get_tree(),
 		"casting_point": _current_combat.action_marker.global_position if _current_combat else Vector2.ZERO,
 		"resource_component": ability_resource_component,
 		"attribute_component": ability_attribute_component
@@ -148,19 +145,9 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 func can_action() -> bool:
 	return _can_action()
 
-## 获取施法位置
-func get_cast_position(position_type: String) -> Vector2:
-	var marker := cast_position_dict.get(position_type) as Marker2D
-	if marker:
-		var point := marker.position
-		if combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
-			point.x *= -1
-		return point
-	return Vector2.ZERO
-
 ## 内部方法
 func _can_action() -> bool:
-	return is_alive and not _is_actioning and not is_in_group("stunned")
+	return is_alive and not _is_actioning and not owner.is_in_group("stunned")
 
 func _get_ability_target(ability: Ability) -> CombatComponent:
 	if not _current_combat or ability.target_type.is_empty():
@@ -182,7 +169,7 @@ func _get_available_abilities() -> Array[Ability]:
 func _pre_action(ability_context: Dictionary) -> void:
 	owner.z_index = 10
 	ability_component.handle_game_event("on_action_started", ability_context)
-	await get_tree().create_timer(0.2).timeout
+	await owner.get_tree().create_timer(0.2).timeout
 
 func _post_action(ability_context: Dictionary) -> void:
 	owner.z_index = 0
@@ -190,8 +177,8 @@ func _post_action(ability_context: Dictionary) -> void:
 	await _move_from_action()
 
 func _move_from_action() -> void:
-	var tween := get_tree().create_tween()
-	tween.tween_property(owner, "global_position", _combat_position, return_action_time)
+	var tween := owner.get_tree().create_tween()
+	# tween.tween_property(owner, "global_position", _combat_position, return_action_time)
 	await tween.finished
 
 func _die() -> void:

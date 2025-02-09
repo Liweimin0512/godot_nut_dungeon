@@ -15,17 +15,30 @@ const DEFAULT_COMBAT_CONFIG := {
 var active_combat_manager: CombatManager
 ## 状态机管理器
 var _state_machine_manager: CoreSystem.StateMachineManager = CoreSystem.state_machine_manager
+var _initialized : bool = false
 
 ## 战斗相关信号
 signal combat_created(combat_manager: CombatManager)
 signal combat_started(combat_manager: CombatManager)
 signal combat_ended(combat_manager: CombatManager)
+signal initialized(success: bool)
 
 ## 初始化战斗系统
-func initialize() -> void:
+func initialize(combat_model_type: ModelType) -> bool:
+	if _initialized:
+		return true
 	# 初始化战斗相关的子系统
 	# 例如：技能系统、效果系统、AI系统等
 	_init_subsystems()
+
+	# 检查依赖关系是否满足
+	DataManager.load_model(combat_model_type,
+		func(result: Variant):
+			print(result)
+			_initialized = true
+			initialized.emit(_initialized)
+	)
+	return true
 
 ## 创建新的战斗实例
 func create_combat(
