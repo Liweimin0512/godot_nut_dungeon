@@ -1,0 +1,10 @@
+﻿ID,attribute_name,_base_value,_growth_value,attribute_level,is_show,is_percentage
+ID,属性名,属性基础值,属性成长值,属性等级,是否显示,是否为百分比显示
+string,string,float,float,int,bool,bool
+health,生命值,100,0,1,1,0
+mana,魔法值,50,0,1,1,1
+attack,攻击力,10,0,1,1,0
+defense,防御力,5,0,1,1,0
+speed,速度,10,0,1,1,0
+hit_rate,命中率,1,0,1,1,1
+crie_rate,暴击率,0,0,1,1,1

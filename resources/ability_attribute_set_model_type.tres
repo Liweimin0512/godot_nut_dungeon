@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ModelType" load_steps=5 format=3 uid="uid://byewhave3n7l0"]
+
+[ext_resource type="Script" uid="uid://bf3cohk1etxvp" path="res://addons/GDDataForge/source/resource/model_type.gd" id="1_icobi"]
+[ext_resource type="Script" uid="uid://dwdcgpddqfuvi" path="res://scripts/resources/ability_attribute_set.gd" id="2_8j5be"]
+[ext_resource type="Script" uid="uid://c65rwndbbr15i" path="res://addons/GDDataForge/source/resource/table_type.gd" id="2_jnxqb"]
+
+[sub_resource type="Resource" id="Resource_8j5be"]
+script = ExtResource("2_jnxqb")
+table_name = &"ability_attribute_set"
+table_paths = Array[String](["res://data/tables/ability_attribute_set.csv"])
+description = ""
+primary_key = "ID"
+enable_cache = true
+validation_rules = {}
+cache = {}
+is_loaded = false
+metadata/_custom_type_script = ExtResource("2_jnxqb")
+
+[resource]
+script = ExtResource("1_icobi")
+model_name = &"ability_attribute_set"
+model_script = ExtResource("2_8j5be")
+table = SubResource("Resource_8j5be")
+description = ""
+field_mappings = Dictionary[String, String]({})
+default_values = Dictionary[String, Variant]({})
+metadata/_custom_type_script = ExtResource("1_icobi")

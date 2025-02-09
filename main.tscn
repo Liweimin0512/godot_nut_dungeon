@@ -1,0 +1,34 @@
+[gd_scene load_steps=11 format=3 uid="uid://dcxjfw256ynb5"]
+
+[ext_resource type="Script" uid="uid://c3djxdb3f0bkh" path="res://main.gd" id="1_i4sev"]
+[ext_resource type="Script" uid="uid://bf3cohk1etxvp" path="res://addons/GDDataForge/source/resource/model_type.gd" id="2_7mycd"]
+[ext_resource type="Script" uid="uid://c65rwndbbr15i" path="res://addons/GDDataForge/source/resource/table_type.gd" id="2_kek77"]
+[ext_resource type="Resource" uid="uid://b2jul0fvw7o7p" path="res://resources/ability_attribute_model_type.tres" id="3_272bh"]
+[ext_resource type="Resource" uid="uid://byewhave3n7l0" path="res://resources/ability_attribute_set_model_type.tres" id="4_5vw27"]
+[ext_resource type="Resource" uid="uid://bwank5pet3h4l" path="res://resources/buff_ability_model_type.tres" id="5_kek77"]
+[ext_resource type="Resource" uid="uid://d1a8i5fh1lg6e" path="res://resources/skill_ability_model_type.tres" id="6_4c57u"]
+[ext_resource type="Resource" uid="uid://cmledmbevpejf" path="res://resources/character_model_type.tres" id="7_5vw27"]
+[ext_resource type="Resource" uid="uid://b1pp0ugu0204k" path="res://resources/combat_model_type.tres" id="8_5vw27"]
+
+[sub_resource type="Resource" id="Resource_4c57u"]
+script = ExtResource("2_kek77")
+table_name = &"ability_action"
+table_paths = Array[String](["res://data/tables/ability_action.json"])
+description = ""
+primary_key = "ID"
+enable_cache = true
+validation_rules = {}
+cache = {}
+is_loaded = false
+metadata/_custom_type_script = ExtResource("2_kek77")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_i4sev")
+scenes = Dictionary[StringName, String]({
+&"combat": "res://scenes/core/combat_scene.tscn",
+&"game": "res://scenes/core/game_scene.tscn",
+&"menu": "res://scenes/core/menu_scene.tscn"
+})
+_action_table_type = SubResource("Resource_4c57u")
+_ability_model_types = Array[ExtResource("2_7mycd")]([ExtResource("3_272bh"), ExtResource("4_5vw27"), ExtResource("5_kek77"), ExtResource("6_4c57u")])
+_model_types = Array[ExtResource("2_7mycd")]([ExtResource("7_5vw27"), ExtResource("8_5vw27")])

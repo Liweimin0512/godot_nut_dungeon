@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3 uid="uid://xxxxxxxxxxxxx"]
+
+[ext_resource type="Script" path="res://addons/godot_plugin_manager/scripts/plugin_manager.gd" id="1_xxxxx"]
+
+[node name="PluginManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xxxxx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ToolBar" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="CheckDependenciesButton" type="Button" parent="VBoxContainer/ToolBar"]
+layout_mode = 2
+text = "Check Dependencies"
+
+[node name="InstallDependenciesButton" type="Button" parent="VBoxContainer/ToolBar"]
+layout_mode = 2
+text = "Install Dependencies"
+
+[node name="CheckUpdatesButton" type="Button" parent="VBoxContainer/ToolBar"]
+layout_mode = 2
+text = "Check Updates"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PluginList" type="ItemList" parent="VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PluginDetails" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/HSplitContainer/PluginDetails"]
+layout_mode = 2
+text = "Plugin Name"
+
+[node name="VersionLabel" type="Label" parent="VBoxContainer/HSplitContainer/PluginDetails"]
+layout_mode = 2
+text = "Version"
+
+[node name="AuthorLabel" type="Label" parent="VBoxContainer/HSplitContainer/PluginDetails"]
+layout_mode = 2
+text = "Author"
+
+[node name="DependenciesLabel" type="Label" parent="VBoxContainer/HSplitContainer/PluginDetails"]
+layout_mode = 2
+text = "Dependencies"
+
+[node name="DependenciesList" type="ItemList" parent="VBoxContainer/HSplitContainer/PluginDetails"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatusBar" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer/StatusBar"]
+layout_mode = 2
+text = "Ready"
+
+[connection signal="pressed" from="VBoxContainer/ToolBar/CheckDependenciesButton" to="." method="_on_check_dependencies_pressed"]
+[connection signal="pressed" from="VBoxContainer/ToolBar/InstallDependenciesButton" to="." method="_on_install_dependencies_pressed"]
+[connection signal="item_selected" from="VBoxContainer/HSplitContainer/PluginList" to="." method="_on_plugin_list_item_selected"]

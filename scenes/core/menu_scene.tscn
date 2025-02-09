@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctf6tss6po6ce"]
+
+[ext_resource type="Script" uid="uid://d2ci7s0wgvuxl" path="res://scripts/scenes/menu_scene.gd" id="1_wv2wf"]
+[ext_resource type="Script" uid="uid://drldqlyqnyu6k" path="res://addons/GodotUIFramework/source/core/components/ui_group_component.gd" id="2_aauao"]
+[ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="3_8pw2l"]
+[ext_resource type="Script" uid="uid://cdtge4wnkvm45" path="res://addons/GodotUIFramework/source/core/resource/ui_scene_type.gd" id="4_vinai"]
+
+[sub_resource type="Resource" id="Resource_31bp2"]
+script = ExtResource("4_vinai")
+group_id = &"menu_scene"
+layer = 0
+transition_name = &""
+hide_others = true
+modal = false
+ID = &"ui_menu_scene"
+scene_path = "uid://dpbx52gorcl2g"
+preload_mode = 1
+cache_mode = 0
+pool_capacity = 10
+metadata/_custom_type_script = ExtResource("4_vinai")
+
+[node name="menu_scene" type="Node2D"]
+script = ExtResource("1_wv2wf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIGroupComponent" type="Node" parent="CanvasLayer"]
+unique_name_in_owner = true
+script = ExtResource("2_aauao")
+group_name = &"menu_scene"
+view_types = Array[ExtResource("3_8pw2l")]([SubResource("Resource_31bp2")])
+metadata/_custom_type_script = ExtResource("2_aauao")

@@ -1,0 +1,142 @@
+[gd_scene load_steps=18 format=3 uid="uid://thbunqfboaq0"]
+
+[ext_resource type="Script" uid="uid://bhgmxo52mu66j" path="res://scripts/scenes/combat_scene.gd" id="1_hxvc4"]
+[ext_resource type="Texture2D" uid="uid://bltisnnddxogx" path="res://assets/texture/background/game_background_1/layers/battleground.png" id="2_6kgbk"]
+[ext_resource type="Texture2D" uid="uid://ts74dkhjm30l" path="res://assets/texture/background/game_background_1/layers/back_land.png" id="3_x2yey"]
+[ext_resource type="Texture2D" uid="uid://bq017wq6c0kk4" path="res://assets/texture/background/game_background_1/layers/back_decor.png" id="4_s4ntn"]
+[ext_resource type="Texture2D" uid="uid://o0iacojv61wy" path="res://assets/texture/background/game_background_1/layers/ground_decor.png" id="5_nkdg0"]
+[ext_resource type="Texture2D" uid="uid://b4u5ewpyjas2f" path="res://assets/texture/background/game_background_1/layers/front_decor.png" id="6_gvreh"]
+[ext_resource type="PackedScene" uid="uid://bgj5fmjvlf8j" path="res://scenes/ui/ui_combat_scene.tscn" id="7_6kgbk"]
+[ext_resource type="Script" uid="uid://drldqlyqnyu6k" path="res://addons/GodotUIFramework/source/core/components/ui_group_component.gd" id="7_aweq8"]
+[ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="8_p16ct"]
+[ext_resource type="Script" uid="uid://cdtge4wnkvm45" path="res://addons/GodotUIFramework/source/core/resource/ui_scene_type.gd" id="9_1nl3e"]
+[ext_resource type="PackedScene" uid="uid://cokqr3cv3dqo6" path="res://scenes/character/character.tscn" id="10_w25t6"]
+[ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="12_gvreh"]
+[ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="13_aweq8"]
+[ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="14_p16ct"]
+[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="15_1nl3e"]
+
+[sub_resource type="Resource" id="Resource_y7bqf"]
+script = ExtResource("9_1nl3e")
+group_id = &"game_scene"
+layer = 0
+transition_name = &""
+hide_others = false
+modal = false
+ID = &"ui_game_scene"
+scene_path = "uid://bgj5fmjvlf8j"
+preload_mode = 1
+cache_mode = 0
+pool_capacity = 10
+metadata/_custom_type_script = ExtResource("9_1nl3e")
+
+[sub_resource type="Resource" id="Resource_w25t6"]
+script = ExtResource("15_1nl3e")
+character_name = &"测试"
+ability_attributes = Array[ExtResource("13_aweq8")]([])
+abilities = Array[ExtResource("12_gvreh")]([])
+ability_resources = Array[ExtResource("14_p16ct")]([])
+sprite_position = Vector2(0, 0)
+metadata/_custom_type_script = ExtResource("15_1nl3e")
+
+[node name="CombatScene" type="Node2D"]
+script = ExtResource("1_hxvc4")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -128
+
+[node name="Parallax2D3" type="Parallax2D" parent="BackgroundLayer"]
+repeat_size = Vector2(576, 0)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundLayer/Parallax2D3"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_6kgbk")
+centered = false
+
+[node name="Parallax2D2" type="Parallax2D" parent="BackgroundLayer"]
+repeat_size = Vector2(576, 0)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundLayer/Parallax2D2"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("3_x2yey")
+centered = false
+
+[node name="Parallax2D" type="Parallax2D" parent="BackgroundLayer"]
+repeat_size = Vector2(576, 0)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundLayer/Parallax2D"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("4_s4ntn")
+centered = false
+
+[node name="Parallax2D5" type="Parallax2D" parent="BackgroundLayer"]
+repeat_size = Vector2(576, 0)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundLayer/Parallax2D5"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("5_nkdg0")
+centered = false
+
+[node name="ProspectsLayer" type="CanvasLayer" parent="."]
+layer = 64
+
+[node name="Parallax2D4" type="Parallax2D" parent="ProspectsLayer"]
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ProspectsLayer/Parallax2D4"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("6_gvreh")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="UICombatScene" parent="UILayer" instance=ExtResource("7_6kgbk")]
+
+[node name="UIGroupComponent" type="Node" parent="UILayer"]
+script = ExtResource("7_aweq8")
+group_name = &"game_scene"
+view_types = Array[ExtResource("8_p16ct")]([SubResource("Resource_y7bqf")])
+metadata/_custom_type_script = ExtResource("7_aweq8")
+
+[node name="PlayerMarkers" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Marker2D" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(216, 144)
+
+[node name="PlayerCharacter" parent="PlayerMarkers/Marker2D" groups=["Character", "Player"] instance=ExtResource("10_w25t6")]
+_character_config = SubResource("Resource_w25t6")
+
+[node name="Marker2D2" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(180, 168)
+
+[node name="Marker2D3" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(132, 144)
+
+[node name="Marker2D4" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(96, 168)
+
+[node name="EnemyMarkers" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Marker2D" type="Marker2D" parent="EnemyMarkers"]
+position = Vector2(356, 144)
+gizmo_extents = 128.0
+
+[node name="Marker2D2" type="Marker2D" parent="EnemyMarkers"]
+position = Vector2(404, 168)
+gizmo_extents = 128.0
+
+[node name="Marker2D3" type="Marker2D" parent="EnemyMarkers"]
+position = Vector2(440, 144)
+gizmo_extents = 128.0
+
+[node name="Marker2D4" type="Marker2D" parent="EnemyMarkers"]
+position = Vector2(488, 168)
+gizmo_extents = 128.0

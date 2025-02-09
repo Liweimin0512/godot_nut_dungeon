@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://xxxxxxxxxxxx"]
+
+[ext_resource type="Script" uid="uid://dnxpvpewn51m2" path="res://addons/godot_item_system/scenes/ui/inventory.gd" id="1_xxxxx"]
+[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://addons/godot_item_system/scenes/shop.tscn" id="2_xxxxx"]
+[ext_resource type="PackedScene" uid="uid://xxxxxxxxxxxx" path="res://addons/godot_item_system/scenes/shop.tscn" id="3_hf68q"]
+
+[node name="Inventory" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 62.0
+offset_top = 17.0
+offset_right = -57.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xxxxx")
+item_tip_scene = ExtResource("2_xxxxx")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.1, 0.1, 0.1, 0.9)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HeaderContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer/HeaderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "背包"
+
+[node name="MoneyLabel" type="Label" parent="MarginContainer/VBoxContainer/HeaderContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+text = "1000 金币"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SlotsContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 5
+
+[node name="ItemSlot" parent="MarginContainer/VBoxContainer/SlotsContainer" instance=ExtResource("3_hf68q")]
+layout_mode = 2

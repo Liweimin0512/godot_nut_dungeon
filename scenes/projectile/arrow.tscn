@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://nk3qqok7ctfq"]
+
+[ext_resource type="Texture2D" uid="uid://b58n5a36qrbtt" path="res://assets/sprites/characters/heros/leaf_ranger/projectiles_and_effects/arrow_.png" id="1_16qm4"]
+[ext_resource type="Texture2D" uid="uid://7n66wkpeem36" path="res://assets/sprites/characters/heros/leaf_ranger/projectiles_and_effects/arrow_hit.png" id="2_16qm4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btfbg"]
+atlas = ExtResource("1_16qm4")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jre8l"]
+atlas = ExtResource("2_16qm4")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xe4qn"]
+atlas = ExtResource("2_16qm4")
+region = Rect2(256, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm4xe"]
+atlas = ExtResource("2_16qm4")
+region = Rect2(512, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8dgc"]
+atlas = ExtResource("2_16qm4")
+region = Rect2(768, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey82w"]
+atlas = ExtResource("2_16qm4")
+region = Rect2(1024, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t17e"]
+atlas = ExtResource("2_16qm4")
+region = Rect2(1280, 0, 256, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_55j4t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btfbg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jre8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xe4qn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm4xe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8dgc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ey82w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5t17e")
+}],
+"loop": true,
+"name": &"on_hit",
+"speed": 5.0
+}]
+
+[node name="arrow_poison" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_55j4t")
+animation = &"on_hit"
+frame_progress = 0.951743

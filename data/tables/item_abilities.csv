@@ -1,0 +1,6 @@
+﻿ID,name,name_zh,description,description_zh,ability_class,cost_type,cost_value,cooldown,target_type,effects
+名称,名称,中文名称,描述,中文描述,技能类,消耗类型,消耗值,冷却时间,目标类型,效果
+string,string,string,string,string,string,string,float,float,string,string
+heal,Heal,治疗,Restore HP,恢复生命值,res://modules/item_system/scripts/abilities/heal_ability.gd,item,1,0,self,"{""heal"": 100}"
+attack_boost,Attack Boost,攻击提升,Increase attack,提升攻击力,res://modules/item_system/scripts/abilities/buff_ability.gd,item,1,0,self,"{""attack"": 10}"
+defense_boost,Defense Boost,防御提升,Increase defense,提升防御力,res://modules/item_system/scripts/abilities/buff_ability.gd,item,1,0,self,"{""defense"": 5}"
