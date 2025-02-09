@@ -17,6 +17,8 @@ class_name CharacterModel
 @export var animation_library : AnimationLibrary
 ## 精灵位置
 @export var sprite_position : Vector2
+## 所属阵营
+@export_storage var camp : CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.PLAYER
 
 var ability_resource_script: Dictionary[StringName, Script] = {
 	"enery": preload("res://scripts/systems/ability_system/ability_cost_resource/enery_resource.gd"), 

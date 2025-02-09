@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://thbunqfboaq0"]
+[gd_scene load_steps=13 format=3 uid="uid://thbunqfboaq0"]
 
 [ext_resource type="Script" uid="uid://bhgmxo52mu66j" path="res://scripts/scenes/combat_scene.gd" id="1_hxvc4"]
 [ext_resource type="Texture2D" uid="uid://bltisnnddxogx" path="res://assets/texture/background/game_background_1/layers/battleground.png" id="2_6kgbk"]
@@ -11,10 +11,6 @@
 [ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="8_p16ct"]
 [ext_resource type="Script" uid="uid://cdtge4wnkvm45" path="res://addons/GodotUIFramework/source/core/resource/ui_scene_type.gd" id="9_1nl3e"]
 [ext_resource type="PackedScene" uid="uid://cokqr3cv3dqo6" path="res://scenes/character/character.tscn" id="10_w25t6"]
-[ext_resource type="Script" uid="uid://3vewp25p5xy7" path="res://addons/godot_gameplay_ability_system/source/core/ability.gd" id="12_gvreh"]
-[ext_resource type="Script" uid="uid://ddbunl810nhrb" path="res://addons/godot_gameplay_ability_system/source/core/ability_attribute.gd" id="13_aweq8"]
-[ext_resource type="Script" uid="uid://cgm13esctfhto" path="res://addons/godot_gameplay_ability_system/source/core/ability_resource.gd" id="14_p16ct"]
-[ext_resource type="Script" uid="uid://y7e57jl00jdj" path="res://scripts/resources/character_model.gd" id="15_1nl3e"]
 
 [sub_resource type="Resource" id="Resource_y7bqf"]
 script = ExtResource("9_1nl3e")
@@ -29,15 +25,6 @@ preload_mode = 1
 cache_mode = 0
 pool_capacity = 10
 metadata/_custom_type_script = ExtResource("9_1nl3e")
-
-[sub_resource type="Resource" id="Resource_w25t6"]
-script = ExtResource("15_1nl3e")
-character_name = &"测试"
-ability_attributes = Array[ExtResource("13_aweq8")]([])
-abilities = Array[ExtResource("12_gvreh")]([])
-ability_resources = Array[ExtResource("14_p16ct")]([])
-sprite_position = Vector2(0, 0)
-metadata/_custom_type_script = ExtResource("15_1nl3e")
 
 [node name="CombatScene" type="Node2D"]
 script = ExtResource("1_hxvc4")
@@ -108,35 +95,34 @@ metadata/_custom_type_script = ExtResource("7_aweq8")
 unique_name_in_owner = true
 
 [node name="Marker2D" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(216, 144)
+position = Vector2(256, 144)
 
 [node name="PlayerCharacter" parent="PlayerMarkers/Marker2D" groups=["Character", "Player"] instance=ExtResource("10_w25t6")]
-_character_config = SubResource("Resource_w25t6")
 
 [node name="Marker2D2" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(180, 168)
+position = Vector2(192, 144)
 
 [node name="Marker2D3" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(132, 144)
+position = Vector2(128, 144)
 
 [node name="Marker2D4" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(96, 168)
+position = Vector2(64, 144)
 
 [node name="EnemyMarkers" type="Node2D" parent="."]
 unique_name_in_owner = true
 
 [node name="Marker2D" type="Marker2D" parent="EnemyMarkers"]
-position = Vector2(356, 144)
+position = Vector2(336, 144)
 gizmo_extents = 128.0
 
 [node name="Marker2D2" type="Marker2D" parent="EnemyMarkers"]
-position = Vector2(404, 168)
+position = Vector2(400, 144)
 gizmo_extents = 128.0
 
 [node name="Marker2D3" type="Marker2D" parent="EnemyMarkers"]
-position = Vector2(440, 144)
+position = Vector2(464, 144)
 gizmo_extents = 128.0
 
 [node name="Marker2D4" type="Marker2D" parent="EnemyMarkers"]
-position = Vector2(488, 168)
+position = Vector2(528, 144)
 gizmo_extents = 128.0

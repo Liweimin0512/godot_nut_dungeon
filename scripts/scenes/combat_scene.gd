@@ -39,6 +39,7 @@ func init_state(data: Dictionary) -> void:
 	# 初始化战斗
 	_initialize_combat(combat_info)
 
+## 初始化战斗
 func _initialize_combat(combat_info: CombatModel) -> void:
 	if not is_node_ready():
 		await ready
@@ -50,11 +51,13 @@ func _initialize_combat(combat_info: CombatModel) -> void:
 	var enemy_combats : Array[CombatComponent] = []
 
 	for player_unit in player_units:
-		var combat_component : CombatComponent = player_unit.combat_component
+		var player_logic: CharacterLogic = player_unit.character_logic
+		var combat_component : CombatComponent = player_logic.get_component("combat_component")
 		player_combats.append(combat_component)
 
 	for enemy_unit in enemy_units:
-		var combat_component : CombatComponent = enemy_unit.combat_component
+		var entity_logic: CharacterLogic = enemy_unit.character_logic
+		var combat_component : CombatComponent = entity_logic.get_component("combat_component")
 		enemy_combats.append(combat_component)
 
 	# 2. 创建战斗管理器
@@ -86,12 +89,8 @@ func _setup_enemy_units(combat_info: CombatModel) -> Array[Character]:
 		var enemy_model = combat_info.enemy_data[i]
 		if not enemy_model:
 			continue
-			
-		var character = _create_character(
-			enemy_model,
-			CombatDefinition.COMBAT_CAMP_TYPE.ENEMY
-		)
 		
+		var character: Character = CharacterSystem.create_character(enemy_model)
 		# 设置位置
 		if enemy_markers and enemy_markers.get_child_count() > i:
 			var marker = enemy_markers.get_child(i)
@@ -101,27 +100,11 @@ func _setup_enemy_units(combat_info: CombatModel) -> Array[Character]:
 			# 3. 连接角色信号
 			_connect_character_signals(character)
 		units.append(character)
-	
 	return units
-
-## 创建角色
-func _create_character(character_config: CharacterModel, camp: CombatDefinition.COMBAT_CAMP_TYPE) -> Character:
-	# 1. 实例化角色场景
-	var character: Character = CHARACTER.instantiate()
-	character.setup(character_config)
-	
-	# 2. 设置角色属性
-	character.character_camp = camp
-	#add_child(character)
-	
-	return character
 
 ## 连接角色信号
 func _connect_character_signals(character: Character) -> void:
-	# 连接角色相关的信号
-	if character.combat_component:
-		character.combat_component.died.connect(
-			func(): _on_character_died(character))
+	pass
 
 ## 角色死亡回调
 func _on_character_died(character: Character) -> void:
