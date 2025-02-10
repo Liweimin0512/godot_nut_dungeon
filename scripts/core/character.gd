@@ -33,9 +33,13 @@ var character_name: String:
 	set(value):
 		push_error("character_name is read-only")
 
+var _event_bus : CoreSystem.EventBus:
+	get:
+		return CoreSystem.event_bus
+
 ## 角色信号
 signal animation_finished(anim_name: StringName)
-signal attribute_changed(name: String, old_value: float, new_value: float)
+# signal attribute_changed(name: String, old_value: float, new_value: float)
 # signal resource_changed(resource_name: String, old_value: float, new_value: float)
 
 func _ready() -> void:
@@ -44,7 +48,8 @@ func _ready() -> void:
 		get_parent().remove_child(self)
 		queue_free()
 		return
-		
+	_event_bus.subscribe("character_turn_prepared", _on_character_turn_prepared)
+	
 	# 设置外观
 	_setup_appearance()
 
@@ -59,7 +64,8 @@ func play_animation(anim_name: StringName, blend_time: float = 0.0, custom_speed
 	if animation_player:
 		animation_player.play(anim_name, blend_time, custom_speed)
 
-## 内部方法
+# 内部方法
+
 func _setup_appearance() -> void:
 	# 设置图标
 	character_icon = _character_config.character_icon
@@ -86,6 +92,13 @@ func _setup_status() -> void:
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	animation_finished.emit(anim_name)
+
+func _on_character_turn_prepared(combat: CombatComponent) -> void:
+	if combat != character_logic.combat_component:
+		return
+	print("character turn prepared")
+	# combat.turn_prepare_end()
+	_event_bus.push_event("character_turn_prepare_end", self)
 
 func _to_string() -> String:
 	return character_name if character_name else super.to_string()

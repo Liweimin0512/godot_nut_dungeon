@@ -57,10 +57,13 @@ func create_combat(
 	_connect_combat_signals(active_combat_manager)
 	active_combat_manager.player_combats = player_combats
 	active_combat_manager.enemy_combats = enemy_combats
-	_state_machine_manager.register_state_machine(COMBAT_STATE_MACHINE, CombatStateMachine.new(), active_combat_manager, &"init", {"combat_info": combat_info})
+	_state_machine_manager.register_state_machine(COMBAT_STATE_MACHINE, CombatStateMachine.new(), active_combat_manager)
 	
 	combat_created.emit(active_combat_manager)
 	return active_combat_manager
+
+func start_combat(_combat_manager : CombatManager, combat_info : CombatModel) -> void:
+	_state_machine_manager.start_state_machine(COMBAT_STATE_MACHINE, &"init", {"combat_info": combat_info})
 
 ## 结束当前战斗
 func end_combat() -> void:

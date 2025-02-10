@@ -21,8 +21,6 @@ var is_real_time: bool = false
 var current_turn: int = 0
 ## 是否战斗中
 var is_combat_active: bool = false
-## 当前行动单位
-var current_acting_unit: CombatComponent
 
 # 战斗单位
 ## 玩家单位
@@ -31,20 +29,30 @@ var player_combats: Array[CombatComponent] = []
 var enemy_combats: Array[CombatComponent] = []
 ## 角色行动顺序
 var action_order: Array[CombatComponent] = []
+var prepared_units : int = 0
 
+var _event_bus : CoreSystem.EventBus:
+	get:
+		return CoreSystem.event_bus
 
 ## 战斗相关信号
 signal combat_started
 signal combat_ended
 signal turn_prepared
+signal turn_prepare_ended
 signal turn_started(turn_count: int)
 signal turn_ended
 signal combat_finished
 signal combat_defeated
 signal action_ready(unit: CombatComponent)
 
+signal skill_selected(unit: CombatComponent, skill: TurnBasedSkillAbility)
+signal target_selected(unit: CombatComponent, targets: Array[CombatComponent])
+
 ## 初始化战斗
 func initialize(combat_info: CombatModel) -> void:
+	_event_bus.subscribe("character_turn_prepare_end", _on_character_turn_prepare_end)
+	_event_bus.subscribe("character_target_selected", _on_character_target_selected)
 	max_turn_count = combat_info.max_turn_count
 	is_auto = combat_info.is_auto
 	is_real_time = combat_info.is_real_time
@@ -52,7 +60,6 @@ func initialize(combat_info: CombatModel) -> void:
 	# 初始化战斗状态
 	current_turn = 0
 	is_combat_active = false
-	current_acting_unit = null
 
 ## 开始战斗
 func start_combat() -> void:
@@ -61,7 +68,7 @@ func start_combat() -> void:
 	
 	is_combat_active = true
 	combat_started.emit()
-	
+
 	# 开始第一个回合
 	await start_turn()
 
@@ -94,46 +101,13 @@ func turn_prepare() -> void:
 func start_turn() -> void:
 	if not is_combat_active:
 		return
-	
-	
-	# 通知所有单位回合开始
-	for unit in player_combats + enemy_combats:
-		unit.turn_start()
-	
+
 	turn_started.emit(current_turn)
 	
 	# 开始行动循环
-	await process_turn()
+	var unit : CombatComponent = action_order.pop_front()
+	unit.turn_start()
 
-## 处理回合
-func process_turn() -> void:
-	# 获取所有存活单位
-	var active_units = _get_active_units()
-	
-	# 按速度排序
-	active_units.sort_custom(func(a, b): return a.speed > b.speed)
-	
-	# 依次执行行动
-	for unit in active_units:
-		if not is_combat_active:
-			return
-		
-		current_acting_unit = unit
-		
-		# 通知UI有单位准备行动
-		action_ready.emit(unit)
-		
-		# 如果是自动战斗，直接执行AI行动
-		if is_auto:
-			await _execute_ai_action(unit)
-		else:
-			# 等待玩家选择行动
-			await _wait_for_player_action(unit)
-		
-		current_acting_unit = null
-	
-	# 回合结束
-	end_turn()
 
 ## 目标选择
 func action_select() -> void:
@@ -214,6 +188,38 @@ func get_all_allies(unit: CombatComponent) -> Array[CombatComponent]:
 		return player_combats
 	return enemy_combats
 
+func get_available_skills(unit: CombatComponent) -> Array[TurnBasedSkillAbility]:
+	var position = get_unit_position(unit)
+	var skills = []
+	for skill in unit.ability_component.get_abilities():
+		if not skill is TurnBasedSkillAbility:
+			continue
+		if skill.can_use_at_position(position):
+			skills.append(skill)
+	return skills
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 角色行动顺序排序
 func _sort_units_by_speed() -> Array[CombatComponent]:
 	var order : Array[CombatComponent] = player_combats + enemy_combats
@@ -222,7 +228,7 @@ func _sort_units_by_speed() -> Array[CombatComponent]:
 	return order
 
 func _get_active_units() -> Array[CombatComponent]:
-	var units = []
+	var units : Array[CombatComponent] = []
 	for unit in player_combats + enemy_combats:
 		if unit.is_alive and unit.can_action():
 			units.append(unit)
@@ -344,3 +350,14 @@ func _score_ability_target(unit: CombatComponent, ability: Ability, target: Comb
 	score += randf_range(-0.2, 0.2)
 	
 	return score
+
+func _on_character_turn_prepare_end(_unit: CombatComponent) -> void:
+	var units = player_combats + enemy_combats
+	prepared_units += 1
+	if prepared_units >= units.size():
+		prepared_units = 0
+		turn_prepare_ended.emit()
+
+func _on_character_target_selected(_unit: CombatComponent, _target: CombatComponent) -> void:
+	# 选中目标后执行方法
+	pass

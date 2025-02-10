@@ -62,6 +62,7 @@ func _initialize_combat(combat_info: CombatModel) -> void:
 	_connect_combat_signals()
 	_setup_scene()
 	_setup_ui()
+	CombatSystem.start_combat(combat_manager, combat_info)
 
 ## 创建玩家单位
 func _setup_player_units() -> Array[Character]:
@@ -184,4 +185,5 @@ func _on_combat_ended() -> void:
 func _on_action_ready(unit: CombatComponent) -> void:
 	# 显示行动选择UI
 	if ui_combat_scene:
-		ui_combat_scene.show_action_selection(unit)
+		#ui_combat_scene.show_action_selection(unit)
+		pass
