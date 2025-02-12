@@ -22,6 +22,8 @@ class_name Character
 	get:
 		return _character_config.camp
 @export var character_icon: Texture2D
+## 所在战斗位置
+var combat_point : int = -1
 
 ## 角色名称
 var character_name: String:
@@ -70,7 +72,7 @@ func _setup_components() -> void:
 	ability_attribute_component.setup(_character_config.ability_attributes)
 	ability_component.setup(_character_config.abilities, {})
 	ability_resource_component.setup(_character_config.ability_resources, ability_component, ability_attribute_component)
-	combat_component.setup(character_camp)
+	combat_component.setup(character_camp, combat_point)
 
 func _setup_appearance() -> void:
 	# 设置图标
@@ -98,6 +100,14 @@ func _setup_status() -> void:
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	animation_finished.emit(anim_name)
+
+## 战斗开始
+func _on_character_combat_started() -> void:
+	pass
+
+## 回合开始
+func _on_character_turn_started() -> void:
+	pass
 
 func _on_character_turn_prepared(combat: CombatComponent) -> void:
 	if combat_component != combat:
