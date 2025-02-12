@@ -1,16 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://cokqr3cv3dqo6"]
+[gd_scene load_steps=10 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
 [ext_resource type="Texture2D" uid="uid://owisfhc7c3bb" path="res://assets/sprites/characters/heros/leaf_ranger/attack_1.png" id="2_f8hpl"]
 [ext_resource type="AnimationLibrary" uid="uid://b82bxlch76pwa" path="res://scenes/character/resources/animation/hero/animation_library_leaf_ranger.res" id="4_l884r"]
-[ext_resource type="Script" uid="uid://dtc1rg7uprgl4" path="res://scripts/systems/character_system/character_logic.gd" id="5_f8hpl"]
+[ext_resource type="Script" uid="uid://cchps1pajt3jv" path="res://addons/godot_gameplay_ability_system/source/ability_attribute_component.gd" id="5_bblvu"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
+[ext_resource type="Script" uid="uid://n67wyu14blxx" path="res://addons/godot_gameplay_ability_system/source/ability_component.gd" id="6_q52vl"]
+[ext_resource type="Script" uid="uid://dy54mfe63g1mx" path="res://addons/godot_gameplay_ability_system/source/ability_resource_component.gd" id="7_l884r"]
+[ext_resource type="Script" uid="uid://y1mgjyqenlv7" path="res://scripts/systems/combat_system/combat_component.gd" id="8_0rlhq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnpp6"]
 size = Vector2(151, 154)
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_qu267")
+character_camp = null
+components = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -128)
@@ -86,7 +91,20 @@ text = "选中"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CharacterLogic" type="Node" parent="."]
-script = ExtResource("5_f8hpl")
+[node name="AbilityAttributeComponent" type="Node" parent="."]
+script = ExtResource("5_bblvu")
+metadata/_custom_type_script = ExtResource("5_bblvu")
+
+[node name="AbilityComponent" type="Node" parent="."]
+script = ExtResource("6_q52vl")
+metadata/_custom_type_script = ExtResource("6_q52vl")
+
+[node name="AbilityResourceComponent" type="Node" parent="."]
+script = ExtResource("7_l884r")
+metadata/_custom_type_script = ExtResource("7_l884r")
+
+[node name="CombatComponent" type="Node" parent="."]
+script = ExtResource("8_0rlhq")
+metadata/_custom_type_script = ExtResource("8_0rlhq")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

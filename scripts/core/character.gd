@@ -10,11 +10,6 @@ class_name Character
 ## 组件引用
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var w_status: W_Status = $W_Status
-@onready var character_logic : CharacterLogic = $CharacterLogic:
-	get:
-		if character_logic:
-			return character_logic
-		return $CharacterLogic
 
 ## 角色数据
 @export var _character_config: CharacterModel
@@ -87,14 +82,19 @@ func _setup_animations() -> void:
 		animation_player.animation_finished.connect(_on_animation_finished)
 
 func _setup_status() -> void:
+	var ability_component : AbilityComponent = components.get("ability_component", null)
+	var ability_resource_component : AbilityResourceComponent = components.get("ability_resource_component", null)
 	if w_status:
-		w_status.setup(character_logic.ability_component, character_logic.ability_resource_component)
+		w_status.setup(ability_component, ability_resource_component)
 
 func _on_animation_finished(anim_name: StringName) -> void:
 	animation_finished.emit(anim_name)
 
 func _on_character_turn_prepared(combat: CombatComponent) -> void:
-	if combat != character_logic.combat_component:
+	var combat_component : CombatComponent = components.get("combat_component", null)
+	if combat_component != combat:
+		return
+	if combat != combat_component:
 		return
 	print("character turn prepared")
 	# combat.turn_prepare_end()

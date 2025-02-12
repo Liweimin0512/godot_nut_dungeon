@@ -1,4 +1,4 @@
-extends LogicComponent
+extends Node
 class_name CombatComponent
 
 ## 战斗组件，负责单个单位的战斗行为
