@@ -15,15 +15,18 @@ class_name CombatComponent
 ## 战斗属性
 var is_alive: bool:
 	get:
-		return ability_resource_component.get_resource_value("生命值") > 0
+		return ability_resource_component.get_resource_value("health") > 0
 
 var speed: float:
 	get:
-		return ability_attribute_component.get_attribute_value("速度")
+		return ability_attribute_component.get_attribute_value("speed")
 
 ## 战斗状态
 var _current_combat: CombatManager
 var _is_actioning: bool = false
+var _event_bus : CoreSystem.EventBus:
+	get:
+		return CoreSystem.event_bus
 
 ## 依赖组件
 var ability_component: AbilityComponent
@@ -34,7 +37,6 @@ var ability_attribute_component: AbilityAttributeComponent
 signal died
 signal combat_started
 signal combat_ended
-signal turn_prepared
 signal turn_started
 signal turn_ended
 signal hited(target: CombatComponent)
@@ -49,19 +51,21 @@ func _on_data_updated(data: Dictionary) -> void:
 ## 战斗开始
 func combat_start(combat: CombatManager) -> void:
 	_current_combat = combat
+	_event_bus.push_event("character_combat_started", self)
 	ability_component.handle_game_event("on_combat_start")
 	combat_started.emit()
 
-## 回合开始前
+## 回合开始前准备阶段
 func turn_prepare() -> void:
+	_event_bus.push_event("character_turn_prepared", self)
 	ability_component.handle_game_event("on_pre_turn_start")
-	turn_prepared.emit()
 
 ## 回合开始
 func turn_start() -> void:
 	if not _current_combat:
 		return
 	turn_started.emit()
+	_event_bus.push_event("character_turn_started", self)
 	ability_component.handle_game_event("on_turn_start")
 
 ## 执行行动
@@ -104,12 +108,14 @@ func turn_end() -> void:
 	if not _current_combat:
 		return
 	await ability_component.handle_game_event("on_turn_end")
+	_event_bus.push_event("character_turn_ended", self)
 	turn_ended.emit()
 
 ## 战斗结束
 func combat_end() -> void:
 	_current_combat = null
 	await ability_component.handle_game_event("on_combat_end")
+	_event_bus.push_event("character_combat_ended", self)
 	combat_ended.emit()
 
 ## 攻击
@@ -121,6 +127,7 @@ func hit(damage: AbilityDamage) -> void:
 	await ability_component.handle_game_event("on_pre_hit", {"damage": damage})
 	await target.hurt(self, damage)
 	hited.emit(target)
+	_event_bus.push_event("character_hited", target)
 	await ability_component.handle_game_event("on_post_hit", {"damage": damage})
 
 ## 受击
@@ -137,7 +144,7 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 	await ability_component.handle_game_event("on_pre_hurt", ability_context)
 	ability_resource_component.apply_damage(damage)
 	hurted.emit(damage.damage_value)
-	
+	_event_bus.push_event("character_hurted", self)	
 	if not is_alive:
 		if _is_actioning:
 			await _move_from_action()

@@ -14,7 +14,9 @@ const DEFAULT_COMBAT_CONFIG := {
 ## 当前活跃的战斗管理器实例
 var active_combat_manager: CombatManager
 ## 状态机管理器
-var _state_machine_manager: CoreSystem.StateMachineManager = CoreSystem.state_machine_manager
+var _state_machine_manager: CoreSystem.StateMachineManager:
+	get:
+		return CoreSystem.state_machine_manager
 var _initialized : bool = false
 
 ## 战斗相关信号
@@ -55,10 +57,13 @@ func create_combat(
 	_connect_combat_signals(active_combat_manager)
 	active_combat_manager.player_combats = player_combats
 	active_combat_manager.enemy_combats = enemy_combats
-	_state_machine_manager.register_state_machine(COMBAT_STATE_MACHINE, CombatStateMachine.new(), active_combat_manager, &"init", {"combat_info": combat_info})
+	_state_machine_manager.register_state_machine(COMBAT_STATE_MACHINE, CombatStateMachine.new(), active_combat_manager)
 	
 	combat_created.emit(active_combat_manager)
 	return active_combat_manager
+
+func start_combat(_combat_manager : CombatManager, combat_info : CombatModel) -> void:
+	_state_machine_manager.start_state_machine(COMBAT_STATE_MACHINE, &"init", {"combat_info": combat_info})
 
 ## 结束当前战斗
 func end_combat() -> void:

@@ -21,9 +21,6 @@ func _ready() -> void:
 	var player_character = get_node(^"PlayerMarkers/Marker2D/PlayerCharacter")
 	player_character.get_parent().remove_child(player_character)
 	player_character.queue_free()
-	_connect_combat_signals()
-	_setup_scene()
-	_setup_ui()
 
 # 初始化状态，在ready之前执行
 func init_state(data: Dictionary) -> void:
@@ -62,6 +59,10 @@ func _initialize_combat(combat_info: CombatModel) -> void:
 
 	# 2. 创建战斗管理器
 	combat_manager = CombatSystem.create_combat(player_combats, enemy_combats, combat_info)
+	_connect_combat_signals()
+	_setup_scene()
+	_setup_ui()
+	CombatSystem.start_combat(combat_manager, combat_info)
 
 ## 创建玩家单位
 func _setup_player_units() -> Array[Character]:
@@ -144,7 +145,7 @@ func _setup_camera() -> void:
 ## 设置UI
 func _setup_ui() -> void:
 	if ui_combat_scene:
-		ui_combat_scene.setup()
+		ui_combat_scene.setup(combat_manager)
 
 ## 战斗开始回调
 func _on_combat_started() -> void:
@@ -184,4 +185,5 @@ func _on_combat_ended() -> void:
 func _on_action_ready(unit: CombatComponent) -> void:
 	# 显示行动选择UI
 	if ui_combat_scene:
-		ui_combat_scene.show_action_selection(unit)
+		#ui_combat_scene.show_action_selection(unit)
+		pass

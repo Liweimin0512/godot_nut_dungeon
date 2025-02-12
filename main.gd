@@ -24,19 +24,19 @@ signal scene_changed(old_scene: Node, new_scene: Node)
 func _ready() -> void:
 	_scene_manager = CoreSystem.scene_manager
 	AbilitySystem.initialized.connect(
-		func(success: bool):
+		func(_success: bool):
 			ItemSystem.initialize()
 	)
 	ItemSystem.initialized.connect(
-		func(success: bool):
+		func(_success: bool):
 			CharacterSystem.initialize(_character_model_type)
 	)
 	CharacterSystem.initialized.connect(
-		func(initialized: bool):
+		func(_initialized: bool):
 			CombatSystem.initialize(_combat_model_type)
 	)
 	CombatSystem.initialized.connect(
-		func(is_initialized: bool):
+		func(_is_initialized: bool):
 			# _initialize_data_model()
 			_initialized = true
 			initialized.emit()
