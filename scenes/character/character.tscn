@@ -14,8 +14,6 @@ size = Vector2(151, 154)
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_qu267")
-character_camp = null
-components = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -128)
@@ -99,12 +97,17 @@ metadata/_custom_type_script = ExtResource("5_bblvu")
 script = ExtResource("6_q52vl")
 metadata/_custom_type_script = ExtResource("6_q52vl")
 
-[node name="AbilityResourceComponent" type="Node" parent="."]
+[node name="AbilityResourceComponent" type="Node" parent="." node_paths=PackedStringArray("_ability_component", "_attribute_component")]
 script = ExtResource("7_l884r")
+_ability_component = NodePath("../AbilityComponent")
+_attribute_component = NodePath("../AbilityAttributeComponent")
 metadata/_custom_type_script = ExtResource("7_l884r")
 
-[node name="CombatComponent" type="Node" parent="."]
+[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("_ability_component", "_ability_resource_component", "_ability_attribute_component")]
 script = ExtResource("8_0rlhq")
+_ability_component = NodePath("../AbilityComponent")
+_ability_resource_component = NodePath("../AbilityResourceComponent")
+_ability_attribute_component = NodePath("../AbilityAttributeComponent")
 metadata/_custom_type_script = ExtResource("8_0rlhq")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

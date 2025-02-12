@@ -10,6 +10,10 @@ class_name Character
 ## 组件引用
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var w_status: W_Status = $W_Status
+@onready var ability_attribute_component: AbilityAttributeComponent = $AbilityAttributeComponent
+@onready var ability_resource_component: AbilityResourceComponent = $AbilityResourceComponent
+@onready var ability_component: AbilityComponent = $AbilityComponent
+@onready var combat_component: CombatComponent = $CombatComponent
 
 ## 角色数据
 @export var _character_config: CharacterModel
@@ -37,7 +41,8 @@ signal animation_finished(anim_name: StringName)
 # signal attribute_changed(name: String, old_value: float, new_value: float)
 # signal resource_changed(resource_name: String, old_value: float, new_value: float)
 
-func _ready() -> void:
+func initialize(config: CharacterModel) -> void:
+	_character_config = config
 	if not _character_config:
 		push_error("character config is null")
 		get_parent().remove_child(self)
@@ -45,14 +50,14 @@ func _ready() -> void:
 		return
 	_event_bus.subscribe("character_turn_prepared", _on_character_turn_prepared)
 	
+	# 设置组件
+	_setup_components()
+
 	# 设置外观
 	_setup_appearance()
 
 	# 设置状态栏
 	_setup_status()
-
-func initialize(config: CharacterModel) -> void:
-	_character_config = config
 
 ## 播放动画
 func play_animation(anim_name: StringName, blend_time: float = 0.0, custom_speed: float = 1.0) -> void:
@@ -60,6 +65,12 @@ func play_animation(anim_name: StringName, blend_time: float = 0.0, custom_speed
 		animation_player.play(anim_name, blend_time, custom_speed)
 
 # 内部方法
+
+func _setup_components() -> void:
+	ability_attribute_component.setup(_character_config.ability_attributes)
+	ability_component.setup(_character_config.abilities, {})
+	ability_resource_component.setup(_character_config.ability_resources, ability_component, ability_attribute_component)
+	combat_component.setup(character_camp)
 
 func _setup_appearance() -> void:
 	# 设置图标
@@ -82,8 +93,6 @@ func _setup_animations() -> void:
 		animation_player.animation_finished.connect(_on_animation_finished)
 
 func _setup_status() -> void:
-	var ability_component : AbilityComponent = components.get("ability_component", null)
-	var ability_resource_component : AbilityResourceComponent = components.get("ability_resource_component", null)
 	if w_status:
 		w_status.setup(ability_component, ability_resource_component)
 
@@ -91,7 +100,6 @@ func _on_animation_finished(anim_name: StringName) -> void:
 	animation_finished.emit(anim_name)
 
 func _on_character_turn_prepared(combat: CombatComponent) -> void:
-	var combat_component : CombatComponent = components.get("combat_component", null)
 	if combat_component != combat:
 		return
 	if combat != combat_component:

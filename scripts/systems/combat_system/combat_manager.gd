@@ -191,7 +191,7 @@ func get_all_allies(unit: CombatComponent) -> Array[CombatComponent]:
 func get_available_skills(unit: CombatComponent) -> Array[TurnBasedSkillAbility]:
 	var position = get_unit_position(unit)
 	var skills = []
-	for skill in unit.ability_component.get_abilities():
+	for skill in unit._ability_component.get_abilities():
 		if not skill is TurnBasedSkillAbility:
 			continue
 		if skill.can_use_at_position(position):

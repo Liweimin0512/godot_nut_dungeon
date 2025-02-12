@@ -15,11 +15,11 @@ class_name CombatComponent
 ## 战斗属性
 var is_alive: bool:
 	get:
-		return ability_resource_component.get_resource_value("health") > 0
+		return _ability_resource_component.get_resource_value("health") > 0
 
 var speed: float:
 	get:
-		return ability_attribute_component.get_attribute_value("speed")
+		return _ability_attribute_component.get_attribute_value("speed")
 
 ## 战斗状态
 var _current_combat: CombatManager
@@ -29,9 +29,9 @@ var _event_bus : CoreSystem.EventBus:
 		return CoreSystem.event_bus
 
 ## 依赖组件
-var ability_component: AbilityComponent
-var ability_resource_component: AbilityResourceComponent
-var ability_attribute_component: AbilityAttributeComponent
+@export var _ability_component: AbilityComponent
+@export var _ability_resource_component: AbilityResourceComponent
+@export var _ability_attribute_component: AbilityAttributeComponent
 
 ## 战斗信号
 signal died
@@ -42,23 +42,31 @@ signal turn_ended
 signal hited(target: CombatComponent)
 signal hurted(damage: int)
 
-func _on_data_updated(data: Dictionary) -> void:
-	combat_camp = data.get("combat_camp", CombatDefinition.COMBAT_CAMP_TYPE.PLAYER)
-	ability_component = data.get("ability_component", null)
-	ability_resource_component = data.get("ability_resource_component", null)
-	ability_attribute_component = data.get("ability_attribute_component", null)
+func setup(
+			p_camp : CombatDefinition.COMBAT_CAMP_TYPE,
+			p_ability_component: AbilityComponent = null,
+			p_ability_attribute_component: AbilityAttributeComponent = null,
+			p_ability_resource_component: AbilityResourceComponent = null,
+		) -> void:
+	combat_camp = p_camp
+	if p_ability_component:
+		_ability_component = p_ability_component
+	if p_ability_attribute_component:
+		_ability_attribute_component = p_ability_attribute_component
+	if p_ability_resource_component:
+		_ability_resource_component = p_ability_resource_component
 
 ## 战斗开始
 func combat_start(combat: CombatManager) -> void:
 	_current_combat = combat
 	_event_bus.push_event("character_combat_started", self)
-	ability_component.handle_game_event("on_combat_start")
+	_ability_component.handle_game_event("on_combat_start")
 	combat_started.emit()
 
 ## 回合开始前准备阶段
 func turn_prepare() -> void:
 	_event_bus.push_event("character_turn_prepared", self)
-	ability_component.handle_game_event("on_pre_turn_start")
+	_ability_component.handle_game_event("on_pre_turn_start")
 
 ## 回合开始
 func turn_start() -> void:
@@ -66,7 +74,7 @@ func turn_start() -> void:
 		return
 	turn_started.emit()
 	_event_bus.push_event("character_turn_started", self)
-	ability_component.handle_game_event("on_turn_start")
+	_ability_component.handle_game_event("on_turn_start")
 
 ## 执行行动
 func action() -> void:
@@ -91,13 +99,13 @@ func action() -> void:
 		"ability": ability,
 		"tree": owner.get_tree(),
 		"casting_point": _current_combat.action_marker.global_position if _current_combat else Vector2.ZERO,
-		"resource_component": ability_resource_component,
-		"attribute_component": ability_attribute_component
+		"resource_component": _ability_resource_component,
+		"attribute_component": _ability_attribute_component
 	}
 	
 	_is_actioning = true
 	await _pre_action(ability_context)
-	var ok := await ability_component.try_cast_ability(ability, ability_context)
+	var ok := await _ability_component.try_cast_ability(ability, ability_context)
 	if not ok:
 		_print("释放技能失败")
 	await _post_action(ability_context)
@@ -107,14 +115,14 @@ func action() -> void:
 func turn_end() -> void:
 	if not _current_combat:
 		return
-	await ability_component.handle_game_event("on_turn_end")
+	await _ability_component.handle_game_event("on_turn_end")
 	_event_bus.push_event("character_turn_ended", self)
 	turn_ended.emit()
 
 ## 战斗结束
 func combat_end() -> void:
 	_current_combat = null
-	await ability_component.handle_game_event("on_combat_end")
+	await _ability_component.handle_game_event("on_combat_end")
 	_event_bus.push_event("character_combat_ended", self)
 	combat_ended.emit()
 
@@ -124,11 +132,11 @@ func hit(damage: AbilityDamage) -> void:
 	if not target:
 		return
 		
-	await ability_component.handle_game_event("on_pre_hit", {"damage": damage})
+	await _ability_component.handle_game_event("on_pre_hit", {"damage": damage})
 	await target.hurt(self, damage)
 	hited.emit(target)
 	_event_bus.push_event("character_hited", target)
-	await ability_component.handle_game_event("on_post_hit", {"damage": damage})
+	await _ability_component.handle_game_event("on_post_hit", {"damage": damage})
 
 ## 受击
 func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
@@ -141,8 +149,8 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 		"target": damage.attacker
 	}
 	
-	await ability_component.handle_game_event("on_pre_hurt", ability_context)
-	ability_resource_component.apply_damage(damage)
+	await _ability_component.handle_game_event("on_pre_hurt", ability_context)
+	_ability_resource_component.apply_damage(damage)
 	hurted.emit(damage.damage_value)
 	_event_bus.push_event("character_hurted", self)	
 	if not is_alive:
@@ -150,7 +158,7 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 			await _move_from_action()
 		_die()
 		
-	await ability_component.handle_game_event("on_post_hurt", ability_context)
+	await _ability_component.handle_game_event("on_post_hurt", ability_context)
 
 ## 能否行动
 func can_action() -> bool:
@@ -172,19 +180,19 @@ func _get_ability_target(ability: Ability) -> CombatComponent:
 
 func _get_available_abilities() -> Array[Ability]:
 	var available_abilities: Array[Ability] = []
-	for ability in ability_component.get_abilities():
+	for ability in _ability_component.get_abilities():
 		if ability is SkillAbility and ability.is_available:
 			available_abilities.append(ability)
 	return available_abilities
 
 func _pre_action(ability_context: Dictionary) -> void:
 	owner.z_index = 10
-	ability_component.handle_game_event("on_action_started", ability_context)
+	_ability_component.handle_game_event("on_action_started", ability_context)
 	await owner.get_tree().create_timer(0.2).timeout
 
 func _post_action(ability_context: Dictionary) -> void:
 	owner.z_index = 0
-	ability_component.handle_game_event("on_action_completed", ability_context)
+	_ability_component.handle_game_event("on_action_completed", ability_context)
 	await _move_from_action()
 
 func _move_from_action() -> void:
@@ -193,7 +201,7 @@ func _move_from_action() -> void:
 	await tween.finished
 
 func _die() -> void:
-	ability_component.handle_game_event("on_die")
+	_ability_component.handle_game_event("on_die")
 	died.emit()
 
 func _print(s: String) -> void:
