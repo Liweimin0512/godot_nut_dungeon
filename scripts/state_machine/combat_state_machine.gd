@@ -105,12 +105,10 @@ class TurnExecuteState:
 			print("退出动作准备状态！")
 			CombatSystem.combat_action_started.unsubscribe(_on_action_started)
 		
-		func _on_action_started(combat: CombatManager) -> void:
+		func _on_action_started(_action: CombatAction) -> void:
 			if state_machine.current_state != self:
 				return
-			if combat_manager != combat:
-				return
-			print("动作开始！{0}".format([combat._current_action_unit]))
+			print("动作开始！{0}".format([_action.actor]))
 			switch_to("action_execute")
 	
 	class ActionExecuteState:
@@ -127,7 +125,7 @@ class TurnExecuteState:
 			print("退出动作执行状态！")
 			CombatSystem.combat_action_executed.unsubscribe(_on_action_executed)
 
-		func _on_action_executed() -> void:
+		func _on_action_executed(_action: CombatAction) -> void:
 			if state_machine.current_state != self:
 				return
 			switch_to("action_end")

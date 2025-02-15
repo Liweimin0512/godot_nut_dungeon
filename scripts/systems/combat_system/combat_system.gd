@@ -110,7 +110,7 @@ class CombatEvent:
 		_event_name = "CombatSystem." + p_event_name
 
 	## 发送事件
-	func push(payload : Variant) -> void:
+	func push(payload : Variant = []) -> void:
 		_event_bus.push_event(_event_name, payload)
 
 	## 订阅事件

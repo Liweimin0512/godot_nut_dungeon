@@ -27,6 +27,7 @@ enum TARGET_RANGE{
 var left_count : int = 0:
 	get:
 		return use_count - available_count
+@export var is_melee : bool = false
 
 func _ready(config: Dictionary) -> void:
 	for i in range(0, config.ability_costs.size(), 2):

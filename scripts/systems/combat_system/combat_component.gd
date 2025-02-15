@@ -24,10 +24,8 @@ var speed: float:
 @export var _combat_camp: CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.PLAYER
 ## 当前所在位置
 @export_range(1, 4) var current_point: int = -1
-## 当前选中的技能
-@export_storage var _selected_ability: TurnBasedSkillAbility = null
-## 当前选中的目标
-@export_storage var _selected_targets: Array[CombatComponent] = []
+## 当前行动
+var current_action: CombatAction
 
 signal hited
 signal hurted
@@ -72,33 +70,38 @@ func turn_start() -> void:
 ## [param enemy_combats] 敌人控制角色
 func action_start(player_combats: Array[CombatComponent], enemy_combats: Array[CombatComponent]) -> void:
 	# 选择合适的技能
-	_selecte_ai_ability()
+	var ability := _selecte_ai_ability()
 	# 选择合适的目标
-	_selecte_ai_targets(player_combats, enemy_combats)
+	var targets := _selecte_ai_targets(player_combats, enemy_combats)
+
+	current_action = create_combat_action(targets, ability)
+
 	await _notify_owner_turn_timing("_on_action_start")
 
 ## 行动执行
 func action_execute(player_combats: Array[CombatComponent], enemy_combats: Array[CombatComponent]) -> void:
 	if not _can_action():
 		return
+	if not current_action:
+		push_error("没有行动, 请检查是否调用了 action_start!")
+		return
 
 	var ability_context := {
 		"caster": self,
-		"targets": _selected_targets,
-		"ability": _selected_ability,
+		"targets": current_action.targets,
+		"ability": current_action.ability,
 		"tree": owner.get_tree(),
 		"resource_component": ability_resource_component,
 		"attribute_component": ability_attribute_component,
 		"enemies": enemy_combats if _combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else player_combats,
 		"allies": player_combats if _combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else enemy_combats,
 	}
-	await ability_component.try_cast_ability(_selected_ability, ability_context)
+	await ability_component.try_cast_ability(current_action.ability, ability_context)
 	await _notify_owner_turn_timing("_on_action_execute")
 
 ## 行动结束
 func action_end() -> void:
-	_selected_ability = null
-	_selected_targets = []
+	current_action = null
 	ability_component.handle_game_event("on_action_end")
 	await _notify_owner_turn_timing("_on_action_end")
 
@@ -113,6 +116,20 @@ func combat_end() -> void:
 	await _notify_owner_turn_timing("_on_combat_end")
 
 #endregion 战斗流程处理
+
+
+## 创建战斗行动
+func create_combat_action(targets: Array[CombatComponent], ability: TurnBasedSkillAbility = null) -> CombatAction:
+	var target_nodes: Array[Node2D] = []
+	for target in targets:
+		target_nodes.append(target.get_parent())
+	
+	return CombatAction.new(
+		get_parent(),  # 行动者节点
+		target_nodes,  # 目标节点数组
+		ability       # 技能
+	)
+
 
 ## 攻击
 func hit(damage: AbilityDamage) -> void:
@@ -175,27 +192,28 @@ func _selecte_ai_ability() -> TurnBasedSkillAbility:
 	# 获取可用技能
 	var abilities := _get_available_abilities()
 	# 随机选择一个技能
-	_selected_ability = abilities.pick_random()
+	var selected_ability : TurnBasedSkillAbility = abilities.pick_random()
 	# 完成选择技能
-	CombatSystem.action_ability_selected.push([self, _selected_ability])
-	return _selected_ability
+	CombatSystem.action_ability_selected.push([self, selected_ability])
+	return selected_ability
 
 ## 选择AI目标
 func _selecte_ai_targets(player_combats: Array[CombatComponent], enemy_combats: Array[CombatComponent]) -> Array[CombatComponent]:
-	if not _selected_ability:
+	if not current_action:
 		# 没有选择技能，返回空数组
 		push_error("没有选择技能，无法选择目标")
 		return []
 		
 	# 获取可用的目标位置
-	var available_positions := _selected_ability.get_available_positions(current_point)
+	var available_positions := current_action.ability.get_available_positions(current_point)
 	if available_positions.is_empty():
 		push_error("选择的技能无法在当前位置使用")
 		return []
 
+	var selected_targets : Array[CombatComponent] = []
 	# 处理自身目标
-	if _selected_ability.target_range == TurnBasedSkillAbility.TARGET_RANGE.SELF:
-		_selected_targets = [self]
+	if current_action.ability.target_range == TurnBasedSkillAbility.TARGET_RANGE.SELF:
+		selected_targets = [self]
 	else:
 		# 获取目标阵营的单位
 		var target_units : Array[CombatComponent] = _get_target_units(player_combats, enemy_combats)
@@ -204,13 +222,13 @@ func _selecte_ai_targets(player_combats: Array[CombatComponent], enemy_combats: 
 			push_error("没有目标单位，无法执行技能")
 			return []
 		# 根据技能类型选择目标
-		_selected_targets = _select_targets_by_range(target_units, available_positions)
-	CombatSystem.action_target_set.push([self, _selected_targets])
-	return _selected_targets
+		selected_targets = _select_targets_by_range(target_units, available_positions)
+	CombatSystem.action_target_set.push([self, selected_targets])
+	return selected_targets
 
 ## 获取目标阵营的有效单位
 func _get_target_units(player_combats: Array[CombatComponent], enemy_combats: Array[CombatComponent]) -> Array[CombatComponent]:
-	match _selected_ability.target_range:
+	match current_action.ability.target_range:
 		TurnBasedSkillAbility.TARGET_RANGE.SINGLE_ENEMY, TurnBasedSkillAbility.TARGET_RANGE.ALL_ENEMY:
 			return enemy_combats if _combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else player_combats
 		TurnBasedSkillAbility.TARGET_RANGE.SINGLE_ALLY, TurnBasedSkillAbility.TARGET_RANGE.ALL_ALLY:
@@ -222,7 +240,7 @@ func _select_targets_by_range(
 		target_units: Array[CombatComponent], available_positions: Array) -> Array[CombatComponent]:
 	var selected_targets: Array[CombatComponent] = []
 	
-	match _selected_ability.target_range:
+	match current_action.ability.target_range:
 		TurnBasedSkillAbility.TARGET_RANGE.SINGLE_ENEMY:
 			# 单体敌人技能：选择一个最优目标
 			var target := _select_best_enemy_target(target_units, available_positions)

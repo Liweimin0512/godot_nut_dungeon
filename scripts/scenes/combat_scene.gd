@@ -9,8 +9,11 @@ const CHARACTER = preload("res://scenes/character/character.tscn")
 @onready var enemy_markers: Node2D = %EnemyMarkers
 @onready var player_markers: Node2D = %PlayerMarkers
 @onready var ui_combat_scene: UICombatScene = $UILayer/UICombatScene
+@onready var action_layer: CanvasLayer = $ActionLayer
+@onready var camera_2d: Camera2D = $Camera2D
 
 @export var combat_test_id : StringName
+@export var action_position_y : float = 240.0
 
 var _logger: CoreSystem.Logger = CoreSystem.logger
 

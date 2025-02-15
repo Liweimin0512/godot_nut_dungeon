@@ -79,21 +79,21 @@ func action_start() -> void:
 	# 取出下一个行动的角色
 	_current_action_unit = action_order.pop_front()
 	await _current_action_unit.action_start(player_combats, enemy_combats)
-	CombatSystem.combat_action_started.push(self)
+	CombatSystem.combat_action_started.push(_current_action_unit.current_action)
 
 ## 执行行动
 func action_execute() -> void:
 	if not is_combat_active:
 		return
 	await _current_action_unit.action_execute(player_combats, enemy_combats)
-	CombatSystem.combat_action_executed.push(_current_action_unit)
+	CombatSystem.combat_action_executed.push(_current_action_unit.current_action)
 
 ## 结束行动
 func action_end() -> void:
 	if not is_combat_active:
 		return
 	await _current_action_unit.action_end()
-	CombatSystem.combat_action_ended.push(_current_action_unit)
+	CombatSystem.combat_action_ended.push()
 
 ## 结束回合
 func turn_end() -> void:

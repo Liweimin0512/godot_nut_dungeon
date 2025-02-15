@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://thbunqfboaq0"]
+[gd_scene load_steps=17 format=3 uid="uid://thbunqfboaq0"]
 
 [ext_resource type="Script" uid="uid://bhgmxo52mu66j" path="res://scripts/scenes/combat_scene.gd" id="1_hxvc4"]
 [ext_resource type="Texture2D" uid="uid://bltisnnddxogx" path="res://assets/texture/background/game_background_1/layers/battleground.png" id="2_6kgbk"]
@@ -8,9 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://b4u5ewpyjas2f" path="res://assets/texture/background/game_background_1/layers/front_decor.png" id="6_gvreh"]
 [ext_resource type="PackedScene" uid="uid://bgj5fmjvlf8j" path="res://scenes/ui/ui_combat_scene.tscn" id="7_6kgbk"]
 [ext_resource type="Script" uid="uid://drldqlyqnyu6k" path="res://addons/GodotUIFramework/source/core/components/ui_group_component.gd" id="7_aweq8"]
+[ext_resource type="Shader" uid="uid://cypl0brnqofsn" path="res://resources/shader/combat_post_process.gdshader" id="7_x2yey"]
 [ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="8_p16ct"]
 [ext_resource type="Script" uid="uid://cdtge4wnkvm45" path="res://addons/GodotUIFramework/source/core/resource/ui_scene_type.gd" id="9_1nl3e"]
 [ext_resource type="PackedScene" uid="uid://cokqr3cv3dqo6" path="res://scenes/character/character.tscn" id="10_w25t6"]
+[ext_resource type="Script" uid="uid://c6pginvp3p1fm" path="res://scripts/systems/camera/shake_camera_2d.gd" id="13_nkdg0"]
+[ext_resource type="Script" uid="uid://di6tblgxc8tmd" path="res://scripts/systems/combat_system/combat_presenter.gd" id="13_s4ntn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nkdg0"]
+shader = ExtResource("7_x2yey")
+shader_parameter/blur_amount = 0.0
+shader_parameter/vignette_intensity = 0.0
+shader_parameter/brightness = 1.0
 
 [sub_resource type="Resource" id="Resource_y7bqf"]
 script = ExtResource("9_1nl3e")
@@ -80,6 +89,21 @@ texture = ExtResource("6_gvreh")
 centered = false
 metadata/_edit_lock_ = true
 
+[node name="PostProcessLayer" type="CanvasLayer" parent="."]
+layer = 16
+
+[node name="ColorRect" type="ColorRect" parent="PostProcessLayer"]
+material = SubResource("ShaderMaterial_nkdg0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ActionLayer" type="CanvasLayer" parent="."]
+layer = 64
+
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 128
 
@@ -126,3 +150,14 @@ gizmo_extents = 128.0
 [node name="Marker2D4" type="Marker2D" parent="EnemyMarkers"]
 position = Vector2(528, 180)
 gizmo_extents = 128.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(288, 162)
+script = ExtResource("13_nkdg0")
+
+[node name="CombatPresenter" type="Node" parent="." node_paths=PackedStringArray("action_layer", "camera", "post_process")]
+script = ExtResource("13_s4ntn")
+action_layer = NodePath("../ActionLayer")
+camera = NodePath("../Camera2D")
+post_process = NodePath("../PostProcessLayer/ColorRect")
+metadata/_custom_type_script = ExtResource("13_s4ntn")
