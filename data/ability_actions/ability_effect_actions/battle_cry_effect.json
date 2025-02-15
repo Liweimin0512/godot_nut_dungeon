@@ -1,0 +1,25 @@
+{
+  "type": "sequence",
+  "children": [
+	{
+	  "type": "parallel",
+	  "children": [
+		{
+		  "type": "play_animation",
+		  "animation_name": "defend"
+		},
+		{
+		  "type": "target_selector",
+		  "target_type": "ally",
+		  "select_type": "all",
+		  "child": {
+			"type": "apply_ability",
+			"ability": "battle_cry",
+			"pre_delay": 0.4,
+			"post_delay": 0.5
+		  }
+		}
+	  ]
+	}
+  ]
+}

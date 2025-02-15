@@ -21,7 +21,13 @@ class_name Character
 @export var character_camp: CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.PLAYER:
 	get:
 		return _character_config.camp
-@export var character_icon: Texture2D
+## 角色头像
+@export var character_icon: Texture2D:
+	get:
+		return _character_config.character_icon
+	set(_value):
+		assert(false, "character_icon 是只读属性不允许赋值")
+
 ## 所在战斗位置
 var combat_point : int = -1
 
@@ -44,6 +50,10 @@ signal animation_finished(anim_name: StringName)
 # signal resource_changed(resource_name: String, old_value: float, new_value: float)
 
 func initialize(config: CharacterModel) -> void:
+	if not is_node_ready():
+		# 如果没有成ready则等待ready完成后在继续执行
+		await ready
+	
 	_character_config = config
 	if not _character_config:
 		push_error("character config is null")
@@ -70,14 +80,11 @@ func play_animation(anim_name: StringName, blend_time: float = 0.0, custom_speed
 
 func _setup_components() -> void:
 	ability_attribute_component.setup(_character_config.ability_attributes)
-	ability_component.setup(_character_config.abilities, {})
+	ability_component.setup(_character_config.abilities, {"caster": combat_component})
 	ability_resource_component.setup(_character_config.ability_resources, ability_component, ability_attribute_component)
 	combat_component.setup(character_camp, combat_point)
 
-func _setup_appearance() -> void:
-	# 设置图标
-	character_icon = _character_config.character_icon
-	
+func _setup_appearance() -> void:	
 	# 设置精灵位置
 	$Sprite2D.position = _character_config.sprite_position
 	if character_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:

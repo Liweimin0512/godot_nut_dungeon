@@ -53,19 +53,23 @@ class CombatStartState:
 class TurnStartState:
 	extends BaseState
 
+	var combat_manager: CombatManager
+
 	func _enter(_msg: Dictionary = {}) -> void:
 		print("进入回合开始状态！")
-		CombatSystem.turn_started.subscribe(_on_turn_started)
-		var combat_manager := agent as CombatManager
-		combat_manager.turn_start()
+		CombatSystem.combat_turn_started.subscribe(_on_turn_started)
+		combat_manager = agent as CombatManager
+		combat_manager.start_turn()
 
 	func _exit() -> void:
-		CombatSystem.turn_started.unsubscribe(_on_turn_started)
+		CombatSystem.combat_turn_started.unsubscribe(_on_turn_started)
 		print("退出回合开始状态！")
 
 	## 回合开始
-	func _on_turn_started() -> void:
+	func _on_turn_started(combat: CombatManager) -> void:
 		if state_machine.current_state != self:
+			return
+		if combat_manager != combat:
 			return
 		switch_to("turn_execute")
 
@@ -89,19 +93,24 @@ class TurnExecuteState:
 	class ActionStartState:
 		extends BaseState
 
+		var combat_manager: CombatManager
+
 		func _enter(_msg: Dictionary = {}) -> void:
 			print("进入动作准备状态！")
-			CoreSystem.action_started.subscribe(_on_action_started)
-			var combat_manager := agent as CombatManager
+			CombatSystem.combat_action_started.subscribe(_on_action_started)
+			combat_manager = agent as CombatManager
 			combat_manager.action_start()
 
 		func _exit() -> void:
 			print("退出动作准备状态！")
-			CoreSystem.action_started.unsubscribe(_on_action_started)
+			CombatSystem.combat_action_started.unsubscribe(_on_action_started)
 		
-		func _on_action_started() -> void:
+		func _on_action_started(combat: CombatManager) -> void:
 			if state_machine.current_state != self:
 				return
+			if combat_manager != combat:
+				return
+			print("动作开始！{0}".format([combat._current_action_unit]))
 			switch_to("action_execute")
 	
 	class ActionExecuteState:
@@ -109,14 +118,14 @@ class TurnExecuteState:
 		
 		func _enter(_msg: Dictionary = {}) -> void:
 			print("进入动作执行状态！")
-			CoreSystem.action_executed.subscribe(_on_action_executed)
+			CombatSystem.combat_action_executed.subscribe(_on_action_executed)
 			var combat_manager := agent as CombatManager
 			# 由战斗管理器处理动作执行逻辑
 			combat_manager.action_execute()
 
 		func _exit() -> void:
 			print("退出动作执行状态！")
-			CoreSystem.action_executed.unsubscribe(_on_action_executed)
+			CombatSystem.combat_action_executed.unsubscribe(_on_action_executed)
 
 		func _on_action_executed() -> void:
 			if state_machine.current_state != self:
@@ -128,12 +137,12 @@ class TurnExecuteState:
 		
 		func _enter(_msg: Dictionary = {}) -> void:
 			print("进入动作结束状态！")
-			CoreSystem.action_ended.subscribe(_on_action_ended)
+			CombatSystem.combat_action_ended.subscribe(_on_action_ended)
 			var combat_manager := agent as CombatManager
 			combat_manager.action_end()
 
 		func _exit() -> void:
-			CoreSystem.action_ended.unsubscribe(_on_action_ended)
+			CombatSystem.combat_action_ended.unsubscribe(_on_action_ended)
 			print("退出动作结束状态！")
 		
 		func _on_action_ended() -> void:

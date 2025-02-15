@@ -14,14 +14,14 @@ func _ready() -> void:
 func setup(combat_manager: CombatManager) -> void:
 	_combat_manager = combat_manager
 	
-	_combat_manager.combat_started.connect(_on_combat_started)
-	_combat_manager.turn_prepared.connect(_on_turn_prepared)
-	_combat_manager.turn_started.connect(_on_turn_started)
-	_combat_manager.turn_ended.connect(_on_turn_ended)
-	_combat_manager.combat_finished.connect(_on_combat_finished)
-	_combat_manager.combat_defeated.connect(_on_combat_defeated)
-	_combat_manager.combat_ended.connect(_on_combat_ended)
-	_combat_manager.action_ready.connect(_on_action_ready)
+	CombatSystem.combat_started.subscribe(_on_combat_started)
+	CombatSystem.combat_turn_started.subscribe(_on_turn_started)
+	CombatSystem.combat_action_started.subscribe(_on_action_ready)
+	CombatSystem.combat_turn_ended.subscribe(_on_turn_ended)
+	#TODO
+	#CombatSystem.combat_finished.subscribe(_on_combat_finished)
+	#CombatSystem.combat_defeated.subscribe(_on_combat_defeated)
+	CombatSystem.combat_ended.subscribe(_on_combat_ended)
 
 	ui_scene_component.update({
 		"combat_manager": combat_manager
@@ -37,7 +37,7 @@ func _on_turn_prepared() -> void:
 	pass
 
 ## 回合开始回调
-func _on_turn_started(_turn_count: int) -> void:
+func _on_turn_started(_combat: CombatManager) -> void:
 	pass
 
 ## 回合结束回调

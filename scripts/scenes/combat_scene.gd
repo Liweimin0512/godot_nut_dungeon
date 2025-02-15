@@ -81,20 +81,14 @@ func _setup_player_units() -> Array[Character]:
 		var character = party[i]
 		if not character:
 			continue
-		
-		# 设置位置
-		if player_markers and player_markers.get_child_count() > i:
-			var marker = player_markers.get_child(i)
-			# character.global_position = marker.global_position
-			marker.add_child(character)
-	
+		_setup_character(character, i, CombatDefinition.COMBAT_CAMP_TYPE.PLAYER)
 	return party
 
 ## 创建敌人单位
 func _setup_enemy_units(combat_id: StringName) -> Array[Character]:
 	var units: Array[Character] = []
 
-	var combat_info : CombatModel = CombatSystem.get_combat_info(combat_id)
+	var combat_info : CombatModel = CombatSystem.get_combat_config(combat_id)
 	
 	for i in range(combat_info.enemy_data.size()):
 		var entityID : StringName = combat_info.enemy_data[i]
@@ -102,14 +96,18 @@ func _setup_enemy_units(combat_id: StringName) -> Array[Character]:
 			continue
 		
 		var character: Character = CharacterSystem.create_character(entityID)
-		# 设置位置
-		if enemy_markers and enemy_markers.get_child_count() > i:
-			var marker = enemy_markers.get_child(i)
-			# character.global_position = marker.global_position
-			marker.add_child(character)
-
+		_setup_character(character, i, CombatDefinition.COMBAT_CAMP_TYPE.ENEMY)
 		units.append(character)
 	return units
+
+func _setup_character(character : Character, index : int, character_camp : CombatDefinition.COMBAT_CAMP_TYPE) -> void:
+	# 战斗点位设置
+	character.combat_point = index + 1
+	# 显示位置设置
+	var markers : Node2D = enemy_markers if character_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY else player_markers
+	if markers and markers.get_child_count() > index:
+		var marker : Marker2D = markers.get_child(index)
+		marker.add_child(character)
 
 ## 设置场景
 func _setup_scene() -> void:

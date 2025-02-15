@@ -74,11 +74,8 @@ func create_combat(
 		player_combats,
 		enemy_combats
 	)
-	# 连接信号
-	_connect_combat_signals(active_combat_manager)
 	_state_machine_manager.register_state_machine(COMBAT_STATE_MACHINE, CombatStateMachine.new(), active_combat_manager)
-	
-	combat_created.emit(active_combat_manager)
+	combat_created.push(active_combat_manager)
 	return active_combat_manager
 
 ## 开始当前战斗
@@ -100,13 +97,6 @@ func get_active_combat() -> CombatManager:
 func _init_subsystems() -> void:
 	# TODO: 初始化各个子系统
 	pass
-
-## 连接战斗信号
-func _connect_combat_signals(combat_manager: CombatManager) -> void:
-	combat_manager.combat_started.connect(
-		func(): combat_started.emit(combat_manager))
-	combat_manager.combat_ended.connect(
-		func(): combat_ended.emit(combat_manager))
 
 class CombatEvent:
 	extends RefCounted

@@ -1,4 +1,4 @@
 ﻿ID,context,max_turn_count,enemy_1,enemy_2,enemy_3,enemy_4,enemy_5,is_auto,is_real_time
 ID,注释,最大回合数,敌人1,敌人2,敌人3,敌人4,敌人5,是否自动,是否真实时间？
 string,string,int,string,string,string,string,string,bool,bool
-test,测试战斗,99,goblin,,,,,1,1
+test,测试战斗,99,goblin,goblin,mushroom,,,1,1

@@ -27,12 +27,7 @@ var player_combats: Array[CombatComponent] = []
 var enemy_combats: Array[CombatComponent] = []
 ## 角色行动顺序
 var action_order: Array[CombatComponent] = []
-var prepared_units : int = 0
-
-## 所有信号通过事件总线推送
-var _event_bus : CoreSystem.EventBus:
-	get:
-		return CoreSystem.event_bus
+## 战斗数据配置
 var _combat_config : CombatModel
 
 ## 当前行动的角色
@@ -84,12 +79,13 @@ func action_start() -> void:
 	# 取出下一个行动的角色
 	_current_action_unit = action_order.pop_front()
 	await _current_action_unit.action_start(player_combats, enemy_combats)
+	CombatSystem.combat_action_started.push(self)
 
 ## 执行行动
 func action_execute() -> void:
 	if not is_combat_active:
 		return
-	await _current_action_unit.action()
+	await _current_action_unit.action_execute(player_combats, enemy_combats)
 	CombatSystem.combat_action_executed.push(_current_action_unit)
 
 ## 结束行动
@@ -150,19 +146,25 @@ func get_all_allies(unit: CombatComponent) -> Array[CombatComponent]:
 	return enemy_combats
 
 ## 是否达到最大回合数
+## [return] 如果已达到最大回合数，则返回 true
 func is_max_turn_count_reached() -> bool:
 	return current_turn >= _combat_config.max_turn_count
 
 ## 是否全部执行完毕
+## [return] 如果没有单位在行动，则返回 true
 func is_all_units_executed() -> bool:
 	return action_order.is_empty()
 
+## 检查敌方是否全部死亡
+## [return] 如果敌方全部死亡，则返回 true
 func check_victory_condition() -> bool:
 	for enemy : CombatComponent in enemy_combats:
 		if enemy.is_alive:
 			return false
 	return true
 
+## 检查玩家是否全部死亡
+## [return] 如果玩家全部死亡，则返回 true
 func check_defeat_condition() -> bool:
 	for player : CombatComponent in player_combats:
 		if player.is_alive:
@@ -171,11 +173,13 @@ func check_defeat_condition() -> bool:
 
 ## 战斗胜利
 func combat_victory() -> void:
-	pass
+	print("combat_victory")
 
 ## 战斗失败
 func combat_defeat() -> void:
-	pass
+	print("combat_defeat")
+
+# 内部函数
 
 ## 角色行动顺序排序
 func _sort_units_by_speed() -> Array[CombatComponent]:

@@ -1,0 +1,18 @@
+{
+  "type": "sequence",
+  "children": [
+	{
+	  "type": "modify_attribute",
+	  "attribute_id": "attack",
+	  "modify_type": "percentage",
+	  "value": 0.2
+	},
+	{
+	  "type": "spawn_vfx",
+	  "vfx_scene": "@scene://scenes/vfx/battle_cry_buff_vfx.tscn",
+	  "attach_to_target": true,
+	  "mount_target_type": "target",
+	  "mount_point_type": "body"
+	}
+  ]
+}

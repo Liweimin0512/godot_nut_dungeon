@@ -1,0 +1,26 @@
+{
+  "type": "sequence",
+  "children": [
+	{
+	  "type": "parallel",
+	  "children": [
+		{
+		  "type": "play_animation",
+		  "animation_name": "attack_sp"
+		},
+		{
+		  "type": "target_selector",
+		  "target_type": "enemy",
+		  "select_type": "random",
+		  "random_amount": 3,
+		  "child": {
+			"type": "apply_ability",
+			"ability": "torrential_curse",
+			"pre_delay": 1.2,
+			"post_delay": 2
+		  }
+		}
+	  ]
+	}
+  ]
+}

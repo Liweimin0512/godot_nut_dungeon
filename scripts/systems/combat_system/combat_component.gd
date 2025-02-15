@@ -10,29 +10,35 @@ class_name CombatComponent
 ## 当前战斗单位是否存活
 var is_alive: bool:
 	get:
-		return _ability_resource_component.get_resource_value("health") > 0
+		return ability_resource_component.get_resource_value("health") > 0
 ## 行动速度
 var speed: float:
 	get:
-		return _ability_attribute_component.get_attribute_value("speed")
+		return ability_attribute_component.get_attribute_value("speed")
 
 # 依赖组件
-@export var _ability_component: AbilityComponent
-@export var _ability_resource_component: AbilityResourceComponent
-@export var _ability_attribute_component: AbilityAttributeComponent
+@export var ability_component: AbilityComponent
+@export var ability_resource_component: AbilityResourceComponent
+@export var ability_attribute_component: AbilityAttributeComponent
 ## 战斗阵营
 @export var _combat_camp: CombatDefinition.COMBAT_CAMP_TYPE = CombatDefinition.COMBAT_CAMP_TYPE.PLAYER
 ## 当前所在位置
-@export_range(1, 4) var _current_point: int = -1
+@export_range(1, 4) var current_point: int = -1
 ## 当前选中的技能
-@export var _selected_ability: TurnBasedSkillAbility = null
+@export_storage var _selected_ability: TurnBasedSkillAbility = null
 ## 当前选中的目标
-@export var _selected_targets: Array[CombatComponent] = []
+@export_storage var _selected_targets: Array[CombatComponent] = []
 
 signal hited
 signal hurted
 signal died
 
+## 设置组件依赖
+## [param p_camp] 战斗阵营
+## [param p_point] 当前位置
+## [param p_ability_component] 技能组件
+## [param p_ability_attribute_component] 属性组件
+## [param p_ability_resource_component] 资源组件
 func setup(
 			p_camp : CombatDefinition.COMBAT_CAMP_TYPE,
 			p_point: int,
@@ -41,25 +47,25 @@ func setup(
 			p_ability_resource_component: AbilityResourceComponent = null,
 		) -> void:
 	_combat_camp = p_camp
-	_current_point = p_point
+	current_point = p_point
 	if p_ability_component:
-		_ability_component = p_ability_component
+		ability_component = p_ability_component
 	if p_ability_attribute_component:
-		_ability_attribute_component = p_ability_attribute_component
+		ability_attribute_component = p_ability_attribute_component
 	if p_ability_resource_component:
-		_ability_resource_component = p_ability_resource_component
+		ability_resource_component = p_ability_resource_component
+
+#region 战斗流程处理
 
 ## 战斗开始
 func combat_start() -> void:
-	if get_parent().has_method("_on_combat_start"):
-		await get_parent().call("_on_combat_start")
-	_ability_component.handle_game_event("on_combat_start")
+	await _notify_owner_turn_timing("_on_combat_start")
+	ability_component.handle_game_event("on_combat_start")
 
 ## 回合开始
 func turn_start() -> void:
-	if get_parent().has_method("_on_turn_start"):
-		await get_parent().call("_on_turn_start")
-	_ability_component.handle_game_event("on_turn_start")
+	await _notify_owner_turn_timing("_on_turn_start")
+	ability_component.handle_game_event("on_turn_start")
 
 ## 行动开始
 ## [param player_combats] 玩家控制角色
@@ -69,9 +75,10 @@ func action_start(player_combats: Array[CombatComponent], enemy_combats: Array[C
 	_selecte_ai_ability()
 	# 选择合适的目标
 	_selecte_ai_targets(player_combats, enemy_combats)
+	await _notify_owner_turn_timing("_on_action_start")
 
 ## 行动执行
-func action_execute() -> void:
+func action_execute(player_combats: Array[CombatComponent], enemy_combats: Array[CombatComponent]) -> void:
 	if not _can_action():
 		return
 
@@ -80,26 +87,32 @@ func action_execute() -> void:
 		"targets": _selected_targets,
 		"ability": _selected_ability,
 		"tree": owner.get_tree(),
-		"resource_component": _ability_resource_component,
-		"attribute_component": _ability_attribute_component
+		"resource_component": ability_resource_component,
+		"attribute_component": ability_attribute_component,
+		"enemies": enemy_combats if _combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else player_combats,
+		"allies": player_combats if _combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else enemy_combats,
 	}
-	await _ability_component.try_cast_ability(_selected_ability, ability_context)
+	await ability_component.try_cast_ability(_selected_ability, ability_context)
+	await _notify_owner_turn_timing("_on_action_execute")
 
 ## 行动结束
 func action_end() -> void:
-	pass
+	_selected_ability = null
+	_selected_targets = []
+	ability_component.handle_game_event("on_action_end")
+	await _notify_owner_turn_timing("_on_action_end")
 
 ## 回合结束
 func turn_end() -> void:
-	if get_parent().has_method("_on_turn_end"):
-		await get_parent().call("_on_turn_end")
-	_ability_component.handle_game_event("on_turn_end")
+	ability_component.handle_game_event("on_turn_end")
+	await _notify_owner_turn_timing("_on_turn_end")
 
 ## 战斗结束
 func combat_end() -> void:
-	if get_parent().has_method("_on_combat_end"):
-		await get_parent().call("_on_combat_end")
-	_ability_component.handle_game_event("on_combat_end")
+	ability_component.handle_game_event("on_combat_end")
+	await _notify_owner_turn_timing("_on_combat_end")
+
+#endregion 战斗流程处理
 
 ## 攻击
 func hit(damage: AbilityDamage) -> void:
@@ -107,10 +120,10 @@ func hit(damage: AbilityDamage) -> void:
 	if not target:
 		return
 		
-	await _ability_component.handle_game_event("on_pre_hit", {"damage": damage})
+	await ability_component.handle_game_event("on_pre_hit", {"damage": damage})
 	await target.hurt(self, damage)
 	hited.emit(target)
-	await _ability_component.handle_game_event("on_post_hit", {"damage": damage})
+	await ability_component.handle_game_event("on_post_hit", {"damage": damage})
 
 ## 受击
 func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
@@ -123,72 +136,79 @@ func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
 		"target": damage.attacker
 	}
 	
-	await _ability_component.handle_game_event("on_pre_hurt", ability_context)
-	_ability_resource_component.apply_damage(damage)
+	await ability_component.handle_game_event("on_pre_hurt", ability_context)
+	ability_resource_component.apply_damage(damage)
 	hurted.emit(damage.damage_value)
 	if not is_alive:
 		_die()
 		
-	await _ability_component.handle_game_event("on_post_hurt", ability_context)
+	await ability_component.handle_game_event("on_post_hurt", ability_context)
 
 ## 能否行动
 func can_action() -> bool:
 	return _can_action()
 
-## 获取可用技能
-func get_available_abilities() -> Array[Ability]:
-	var available_abilities: Array[Ability] = []
-	for ability in _ability_component.get_abilities():
-		if ability is TurnBasedSkillAbility and ability.can_use_at_position(_current_point):
-			available_abilities.append(ability)
-	return available_abilities
-
-# 内部方法
+#region 内部方法
 
 ## 检查能否行动
 func _can_action() -> bool:
 	return is_alive and not owner.is_in_group("stunned")
 
+## 死亡
 func _die() -> void:
-	_ability_component.handle_game_event("on_die")
+	ability_component.handle_game_event("on_die")
 	died.emit()
+
+## 获取可用技能
+func _get_available_abilities() -> Array[Ability]:
+	var available_abilities: Array[Ability] = []
+	for ability in ability_component.get_abilities():
+		if ability is TurnBasedSkillAbility and ability.can_use_at_position(current_point):
+			available_abilities.append(ability)
+	return available_abilities
 
 ## 选择AI技能
 func _selecte_ai_ability() -> TurnBasedSkillAbility:
 	if not CombatSystem.active_combat_manager.is_auto and _combat_camp != CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
+		# 非自动战斗且不是敌方，不选择技能
 		return
-	var abilities := get_available_abilities()
+	# 获取可用技能
+	var abilities := _get_available_abilities()
+	# 随机选择一个技能
 	_selected_ability = abilities.pick_random()
+	# 完成选择技能
 	CombatSystem.action_ability_selected.push([self, _selected_ability])
 	return _selected_ability
 
 ## 选择AI目标
 func _selecte_ai_targets(player_combats: Array[CombatComponent], enemy_combats: Array[CombatComponent]) -> Array[CombatComponent]:
 	if not _selected_ability:
+		# 没有选择技能，返回空数组
+		push_error("没有选择技能，无法选择目标")
 		return []
 		
 	# 获取可用的目标位置
-	var available_positions := _selected_ability.get_available_positions(_current_point)
+	var available_positions := _selected_ability.get_available_positions(current_point)
 	if available_positions.is_empty():
+		push_error("选择的技能无法在当前位置使用")
 		return []
-		
+
 	# 处理自身目标
 	if _selected_ability.target_range == TurnBasedSkillAbility.TARGET_RANGE.SELF:
 		_selected_targets = [self]
-		CombatSystem.action_target_set.push([self, _selected_targets])
-		return _selected_targets
-	
-	# 获取目标阵营的单位
-	var target_units := _get_target_units(player_combats, enemy_combats)
-	if target_units.is_empty():
-		return []
-	
-	# 根据技能类型选择目标
-	_selected_targets = _select_targets_by_range(target_units, available_positions)
+	else:
+		# 获取目标阵营的单位
+		var target_units : Array[CombatComponent] = _get_target_units(player_combats, enemy_combats)
+		if target_units.is_empty():
+			# 没有目标单位，返回空数组
+			push_error("没有目标单位，无法执行技能")
+			return []
+		# 根据技能类型选择目标
+		_selected_targets = _select_targets_by_range(target_units, available_positions)
 	CombatSystem.action_target_set.push([self, _selected_targets])
 	return _selected_targets
 
-## 获取目标阵营的单位
+## 获取目标阵营的有效单位
 func _get_target_units(player_combats: Array[CombatComponent], enemy_combats: Array[CombatComponent]) -> Array[CombatComponent]:
 	match _selected_ability.target_range:
 		TurnBasedSkillAbility.TARGET_RANGE.SINGLE_ENEMY, TurnBasedSkillAbility.TARGET_RANGE.ALL_ENEMY:
@@ -198,7 +218,8 @@ func _get_target_units(player_combats: Array[CombatComponent], enemy_combats: Ar
 	return []
 
 ## 根据技能范围选择目标
-func _select_targets_by_range(target_units: Array[CombatComponent], available_positions: Array) -> Array[CombatComponent]:
+func _select_targets_by_range(
+		target_units: Array[CombatComponent], available_positions: Array) -> Array[CombatComponent]:
 	var selected_targets: Array[CombatComponent] = []
 	
 	match _selected_ability.target_range:
@@ -225,9 +246,10 @@ func _select_best_enemy_target(targets: Array[CombatComponent], valid_positions:
 	var scored_targets := []
 	
 	for target in targets:
-		if not target.is_alive or not target._current_point in valid_positions:
+		if not target.is_alive or not target.current_point in valid_positions:
+			# 不满足目标条件的单位不计算, 目标死亡，位置不合适
 			continue
-			
+		# 计算目标分数
 		var score := _calculate_enemy_target_score(target)
 		scored_targets.append({"target": target, "score": score})
 	
@@ -237,17 +259,20 @@ func _select_best_enemy_target(targets: Array[CombatComponent], valid_positions:
 	# 按分数排序
 	scored_targets.sort_custom(func(a, b): return a.score > b.score)
 	
-	# 从前3个目标中随机选择一个（如果有的话）
-	var top_n := mini(3, scored_targets.size())
-	var random_index := randi() % top_n
-	return scored_targets[random_index].target
+	# 从前2个目标中随机选择一个（如果有的话）
+	var top_n := mini(2, scored_targets.size())
+	if top_n > 0:
+		var random_index := randi() % top_n
+		return scored_targets[random_index].target
+	else:
+		return null
 
 ## 选择最优的友军目标
 func _select_best_ally_target(targets: Array[CombatComponent], valid_positions: Array) -> CombatComponent:
 	var scored_targets := []
 	
 	for target in targets:
-		if not target.is_alive or not target._current_point in valid_positions:
+		if not target.is_alive or not target.current_point in valid_positions:
 			continue
 			
 		var score := _calculate_ally_target_score(target)
@@ -264,29 +289,32 @@ func _select_best_ally_target(targets: Array[CombatComponent], valid_positions: 
 
 ## 选择范围内的所有目标
 func _select_area_targets(targets: Array[CombatComponent], valid_positions: Array) -> Array[CombatComponent]:
-	var selected := []
+	var selected : Array[CombatComponent] = []
 	for target in targets:
-		if target.is_alive and target._current_point in valid_positions:
+		if target.is_alive and target.current_point in valid_positions:
 			selected.append(target)
 	return selected
 
 ## 计算敌方目标分数
+## 生命值低的目标优先级提高
+## 嘲讽和标记的单位优先级提高
+## 隐身单位和闪避状态的单位优先级降低
 func _calculate_enemy_target_score(target: CombatComponent) -> float:
 	var score := 100.0
 	
 	# 生命值低的目标优先级提高
-	var health_percent := target._ability_resource_component.get_resource_percent("health")
+	var health_percent := target.ability_resource_component.get_resource_percent("health")
 	if health_percent < 0.3:
 		score *= 2.0
 	
 	# 检查目标效果
-	if target._ability_component.has_effect("taunt"):
+	if target.ability_component.has_ability_tag("taunt"):
 		score *= 3.0  # 嘲讽单位优先级最高
-	if target._ability_component.has_effect("marked"):
+	if target.ability_component.has_ability_tag("marked"):
 		score *= 2.0  # 被标记的单位优先级提高
-	if target._ability_component.has_effect("stealth"):
+	if target.ability_component.has_ability_tag("stealth"):
 		score *= 0.5  # 隐身单位优先级降低
-	if target._ability_component.has_effect("dodge"):
+	if target.ability_component.has_ability_tag("dodge"):
 		score *= 0.7  # 闪避状态的单位优先级降低
 	
 	# 添加随机因素
@@ -295,25 +323,38 @@ func _calculate_enemy_target_score(target: CombatComponent) -> float:
 	return score
 
 ## 计算友军目标分数
+## 生命值低的友军优先级提高
+## 保护者和被控制的单位优先级提高
+## 中毒和流血的单位优先级提高
 func _calculate_ally_target_score(target: CombatComponent) -> float:
 	var score := 100.0
 	
 	# 生命值低的友军优先级提高
-	var health_percent := target._ability_resource_component.get_resource_percent("health")
+	var health_percent := target.ability_resource_component.get_resource_percent("health")
 	if health_percent < 0.5:
 		score *= (2.0 + (0.5 - health_percent) * 4.0)
 	
 	# 检查目标效果
-	if target._ability_component.has_effect("protect"):
+	if target.ability_component.has_ability_tag("protect"):
 		score *= 1.5  # 保护者优先级提高
-	if target._ability_component.has_effect("stun"):
+	if target.ability_component.has_ability_tag("stun"):
 		score *= 2.0  # 被控制的单位优先级提高
-	if target._ability_component.has_effect("poison"):
+	if target.ability_component.has_ability_tag("poison"):
 		score *= 1.8  # 中毒的单位优先级提高
-	if target._ability_component.has_effect("bleed"):
+	if target.ability_component.has_ability_tag("bleed"):
 		score *= 1.8  # 流血的单位优先级提高
 	
 	# 添加随机因素（对友军目标的随机性较小）
 	score *= randf_range(0.95, 1.05)
 	
 	return score
+
+## 通知所有者回合时间点，并等待所有者执行完成
+func _notify_owner_turn_timing(method_name: StringName) -> void:
+	if get_parent().has_method(method_name):
+		await get_parent().call(method_name)
+
+#endregion
+
+func _to_string() -> String:
+	return "CombatComponent" + get_parent().to_string()

@@ -97,17 +97,15 @@ metadata/_custom_type_script = ExtResource("5_bblvu")
 script = ExtResource("6_q52vl")
 metadata/_custom_type_script = ExtResource("6_q52vl")
 
-[node name="AbilityResourceComponent" type="Node" parent="." node_paths=PackedStringArray("_ability_component", "_attribute_component")]
+[node name="AbilityResourceComponent" type="Node" parent="."]
 script = ExtResource("7_l884r")
-_ability_component = NodePath("../AbilityComponent")
-_attribute_component = NodePath("../AbilityAttributeComponent")
 metadata/_custom_type_script = ExtResource("7_l884r")
 
-[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("_ability_component", "_ability_resource_component", "_ability_attribute_component")]
+[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("ability_component", "ability_resource_component", "ability_attribute_component")]
 script = ExtResource("8_0rlhq")
-_ability_component = NodePath("../AbilityComponent")
-_ability_resource_component = NodePath("../AbilityResourceComponent")
-_ability_attribute_component = NodePath("../AbilityAttributeComponent")
+ability_component = NodePath("../AbilityComponent")
+ability_resource_component = NodePath("../AbilityResourceComponent")
+ability_attribute_component = NodePath("../AbilityAttributeComponent")
 metadata/_custom_type_script = ExtResource("8_0rlhq")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

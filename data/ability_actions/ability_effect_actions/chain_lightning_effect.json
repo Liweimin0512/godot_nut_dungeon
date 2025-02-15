@@ -1,0 +1,60 @@
+{
+  "type": "sequence",
+  "children": [
+	{
+	  "type": "spawn_projectile",
+	  "projectile_scene": "@scene://scenes/projectile/lightning_projectile.tscn",
+	  "speed": 500,
+	  "start_position_type": "hand",
+	  "target_position_type": "body"
+	},
+	{
+	  "type": "apply_damage",
+	  "damage_type": "magic",
+	  "damage_multiplier": 1.2
+	},
+	{
+	  "type": "spawn_vfx",
+	  "vfx_scene": "@scene://scenes/vfx/lightning_hit_vfx.tscn",
+	  "attach_to_target": true,
+	  "mount_target_type": "target",
+	  "mount_point_type": "body",
+	  "auto_free": true
+	},
+	{
+	  "type": "target_selector",
+	  "target_type": "enemy",
+	  "select_type": "random",
+	  "random_amount": 2,
+	  "child": {
+		"type": "sequence",
+		"children": [
+		  {
+			"type": "spawn_projectile",
+			"projectile_scene": "@scene://scenes/projectile/lightning_chain_projectile.tscn",
+			"speed": 600,
+			"spawn_from_last_target": true,
+			"start_position_type": "body",
+			"target_position_type": "body"
+		  },
+		  {
+			"type": "apply_damage",
+			"damage_type": "magic",
+			"damage_multiplier_array": [
+			  1,
+			  0.8
+			]
+		  },
+		  {
+			"type": "spawn_vfx",
+			"vfx_scene": "@scene://scenes/vfx/lightning_chain_hit_vfx.tscn",
+			"attach_to_target": true,
+			"mount_target_type": "target",
+			"mount_point_type": "body",
+			"auto_free": true
+		  }
+		]
+	  }
+	}
+  ]
+}

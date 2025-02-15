@@ -1,8 +1,8 @@
-﻿ID,ability_name,ability_tags,ability_description,icon,effect_config_path,buff_type,is_permanent,value,can_stack
-ID,技能名称,技能标签,技能描述,图标,效果json文件地址,buff类型,是否永久,,能否堆叠
+﻿ID,ability_name,ability_tags,ability_description,icon,effect_id,buff_type,is_permanent,value,can_stack
+ID,技能名称,技能标签,技能描述,图标,效果ID,buff类型,是否永久,,能否堆叠
 string,string,string[],string,resource,string,string,bool,int,bool
-battle_cry,战吼,buff,,res://assets/texture/icon/Buffs/element_boost.png,res://resources/data/effects/battle_cry_buff.json,duration,0,2,1
-ignite,点燃,buff,,res://assets/texture/icon/Spells/lightning_spell.png,res://resources/data/effects/ignite_buff.json,duration,0,2,1
-magic_shield,魔法盾,buff,,res://assets/texture/icon/Buffs/magic_amplification.png,res://resources/data/effects/magic_shield_buff.json,value,1,2,1
-stun,眩晕,buff,,res://assets/texture/icon/Debuffs/sleeping.png,res://resources/data/effects/stun_buff.json,duration,0,2,1
-torrential_curse,漩涡约束,buff,,res://assets/texture/icon/Debuffs/slowed.png,res://resources/data/effects/torrential_curse_buff.js,duration,0,2,1
+battle_cry,战吼,buff,,res://assets/texture/icon/Buffs/element_boost.png,battle_cry_buff,duration,0,2,1
+ignite,点燃,buff,,res://assets/texture/icon/Spells/lightning_spell.png,ignite_buff,duration,0,2,1
+magic_shield,魔法盾,buff,,res://assets/texture/icon/Buffs/magic_amplification.png,magic_shield_buff,value,1,2,1
+stun,眩晕,buff,,res://assets/texture/icon/Debuffs/sleeping.png,stun_buff,duration,0,2,1
+torrential_curse,漩涡约束,buff,,res://assets/texture/icon/Debuffs/slowed.png,torrential_curse_buff,duration,0,2,1

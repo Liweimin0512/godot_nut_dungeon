@@ -1,0 +1,20 @@
+{
+  "type": "decorator_trigger",
+  "trigger_type": "on_post_hurt",
+  "persistent": true,
+  "child": {
+	"type": "decorator_probability",
+	"probability": 0.3,
+	"child": {
+	  "type": "sequence",
+	  "children": [
+		{
+		  "type": "modify_ability_resource",
+		  "ability_resource_id": "rage",
+		  "ability_resource_amount": 10,
+		  "modify_type": "value"
+		}
+	  ]
+	}
+  }
+}

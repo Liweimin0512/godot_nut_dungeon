@@ -1,0 +1,41 @@
+{
+    "type": "sequence",
+    "children": [
+        {
+            "type":"parallel",
+            "children":[
+                {
+                    "type":"sequence",
+                    "children":[
+                        {
+                            "type": "play_animation",
+                            "animation_name": "attack_2"
+                        },
+                        {
+                            "type": "spawn_projectile",
+                            "projectile_scene": "@scene://scenes/projectile/arrow_entangle.tscn",
+                            "speed": 500,
+                            "pre_delay": 0.7
+                        }
+                    ]
+                },
+                {
+                    "type": "parallel",
+                    "children":[
+                        {
+                            "type": "apply_damage",
+                            "damage_type": 0,
+                            "damage_multiplier": 1,
+                            "pre_delay": 1
+                        },
+                        {
+                            "type": "apply_ability",
+                            "ability": "stun.tres",
+                            "pre_delay": 1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -13,14 +13,11 @@ const ANIMATION_DURATION = 0.3  		## 动画持续时间
 @onready var ui_widget_component: UIWidgetComponent = $UIWidgetComponent
 
 ## 当前战斗管理器，由外部注入
-var _current_combat_manager: CombatManager:
-	set(value):
-		if _current_combat_manager != null:
-			_current_combat_manager.turn_prepared.disconnect(_on_turn_prepared)
-		_current_combat_manager = value
-		if _current_combat_manager != null:
-			_current_combat_manager.turn_prepared.connect(_on_turn_prepared)
+var _current_combat_manager: CombatManager
 var _current_units : Array[CombatComponent]
+
+func _ready() -> void:
+	CombatSystem.combat_turn_started.subscribe(_on_turn_started)
 
 ## 私有方法
 
@@ -111,7 +108,7 @@ func _highlight_current_unit(icon: Node) -> void:
 	tween.tween_property(icon, "modulate:v", 1.0, 0.5)
 
 ## 当回合准备好时调用
-func _on_turn_prepared() -> void:
+func _on_turn_started(_combat: CombatManager) -> void:
 	_update_display()
 
 func _on_ui_widget_component_initialized(data: Dictionary) -> void:
