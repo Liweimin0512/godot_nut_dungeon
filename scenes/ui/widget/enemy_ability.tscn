@@ -15,18 +15,18 @@ layout_mode = 2
 alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 4
 texture = SubResource("PlaceholderTexture2D_btpwd")
 
 [node name="TextureRect2" type="TextureRect" parent="HBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(8, 8)
+custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 4
 texture = SubResource("PlaceholderTexture2D_btpwd")
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "技能名称六字"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
-[ext_resource type="Texture2D" uid="uid://owisfhc7c3bb" path="res://assets/sprites/characters/heros/leaf_ranger/attack_1.png" id="2_f8hpl"]
+[ext_resource type="Texture2D" uid="uid://dih1buwvj8i2b" path="res://assets/sprites/characters/heros/leaf_ranger/idle.png" id="2_bblvu"]
 [ext_resource type="AnimationLibrary" uid="uid://b82bxlch76pwa" path="res://scenes/character/resources/animation/hero/animation_library_leaf_ranger.res" id="4_l884r"]
 [ext_resource type="Script" uid="uid://cchps1pajt3jv" path="res://addons/godot_gameplay_ability_system/source/ability_attribute_component.gd" id="5_bblvu"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
@@ -16,10 +16,11 @@ size = Vector2(107.5, 125)
 script = ExtResource("1_qu267")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -128)
-scale = Vector2(1.7, 1.7)
-texture = ExtResource("2_f8hpl")
-hframes = 10
+position = Vector2(0, -192)
+scale = Vector2(3, 3)
+texture = ExtResource("2_bblvu")
+hframes = 12
+frame = 7
 
 [node name="cast_points" type="Node2D" parent="."]
 position = Vector2(-1, 0)
@@ -50,7 +51,8 @@ autoplay = "idle"
 position = Vector2(0, -96)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 40)
+visible = false
+position = Vector2(0, 32)
 shape = SubResource("RectangleShape2D_gnpp6")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
@@ -68,10 +70,10 @@ theme_override_constants/outline_size = 5
 text = "技能名称"
 
 [node name="W_Status" parent="." instance=ExtResource("6_cj4oh")]
-offset_left = -27.0
-offset_top = -20.0
-offset_right = 29.0
-offset_bottom = 14.0
+offset_left = -44.0
+offset_top = -8.0
+offset_right = 44.0
+offset_bottom = 26.0
 ability_resource_colors = Dictionary[StringName, Color]({
 &"energy": Color(1, 1, 0, 1),
 &"health": Color(1, 0, 0, 1),

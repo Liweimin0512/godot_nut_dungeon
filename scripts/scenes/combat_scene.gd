@@ -22,10 +22,7 @@ var combat_manager: CombatManager
 
 func _ready() -> void:
 	# 移除测试数据
-	var player_character = get_node(^"PlayerMarkers/Marker2D/PlayerCharacter")
-	if player_character:
-		player_character.get_parent().remove_child(player_character)
-		player_character.queue_free()
+	_remove_test_characters()
 
 # 初始化状态，在ready之前执行
 func init_state(data: Dictionary) -> void:
@@ -132,5 +129,15 @@ func _setup_camera() -> void:
 func _setup_ui() -> void:
 	if ui_combat_scene:
 		ui_combat_scene.setup(combat_manager)
+
+## 移除测试角色
+func _remove_test_characters() -> void:
+	for marker in player_markers.get_children() + enemy_markers.get_children():
+		for child in marker.get_children():
+			marker.remove_child(child)
+			child.queue_free()
+	for child in action_layer.get_children():
+		action_layer.remove_child(child)
+		child.queue_free()
 
 #endregion

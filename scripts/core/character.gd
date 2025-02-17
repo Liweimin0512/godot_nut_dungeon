@@ -50,11 +50,14 @@ signal animation_finished(anim_name: StringName)
 # signal resource_changed(resource_name: String, old_value: float, new_value: float)
 
 func initialize(config: CharacterModel) -> void:
+	_character_config = config
+	# 设置外观
+	_setup_appearance()
+
 	if not is_node_ready():
 		# 如果没有成ready则等待ready完成后在继续执行
 		await ready
 	
-	_character_config = config
 	if not _character_config:
 		push_error("character config is null")
 		get_parent().remove_child(self)
@@ -65,8 +68,6 @@ func initialize(config: CharacterModel) -> void:
 	# 设置组件
 	_setup_components()
 
-	# 设置外观
-	_setup_appearance()
 
 	# 设置状态栏
 	_setup_status()
@@ -95,12 +96,15 @@ func _setup_appearance() -> void:
 
 func _setup_animations() -> void:
 	if not animation_player:
-		return
+		animation_player = $AnimationPlayer
+	
+	# 设置动画库
 	animation_player.remove_animation_library("")
 	animation_player.add_animation_library("", _character_config.animation_library)
 	if not animation_player.animation_finished.is_connected(_on_animation_finished):
 		animation_player.animation_finished.connect(_on_animation_finished)
-
+	animation_player.play(&"idle")
+	
 func _setup_status() -> void:
 	if w_status:
 		w_status.setup(ability_component, ability_resource_component)

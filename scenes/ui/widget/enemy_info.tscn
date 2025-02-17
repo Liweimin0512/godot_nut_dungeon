@@ -10,10 +10,10 @@ metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -28,13 +28,17 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 20
 text = "敌人名称最多八字"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 20
 text = "生命：999/999"
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
@@ -43,73 +47,96 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = -2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "野兽"
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "邪恶"
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer2"]
 layout_mode = 2
 theme_override_constants/separation = -2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "闪避：0"
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "速度：3"
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer2"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer2/MarginContainer2"]
 layout_mode = 2
 theme_override_constants/separation = -2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer2/MarginContainer2/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 12
 text = "命中率：90%"
 horizontal_alignment = 2
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer2/MarginContainer2/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 12
 text = "暴击率：11.0%"
 horizontal_alignment = 2
 
-[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer2/MarginContainer2/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 6
+theme_override_font_sizes/font_size = 12
 text = "伤害：8 - 15"
 horizontal_alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -117,54 +144,26 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer3"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "抗性"
-horizontal_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="ResistanceAttribute" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_qpex1")]
-layout_mode = 2
-
-[node name="ResistanceAttribute2" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_qpex1")]
-layout_mode = 2
-
-[node name="ResistanceAttribute3" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_qpex1")]
-layout_mode = 2
-
-[node name="ResistanceAttribute4" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_qpex1")]
-layout_mode = 2
-
-[node name="ResistanceAttribute5" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_qpex1")]
-layout_mode = 2
-
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "技能"
+theme_override_font_sizes/font_size = 24
+text = "抗性"
 horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
@@ -172,5 +171,51 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="EnemyAbility" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("2_ndfmg")]
+[node name="ResistanceAttribute" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_qpex1")]
+layout_mode = 2
+
+[node name="ResistanceAttribute2" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_qpex1")]
+layout_mode = 2
+
+[node name="ResistanceAttribute3" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_qpex1")]
+layout_mode = 2
+
+[node name="ResistanceAttribute4" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_qpex1")]
+layout_mode = 2
+
+[node name="ResistanceAttribute5" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("1_qpex1")]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "技能"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer3/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="EnemyAbility" parent="MarginContainer/VBoxContainer/MarginContainer3/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("2_ndfmg")]
 layout_mode = 2

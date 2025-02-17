@@ -14,31 +14,46 @@ var actor: Node2D                  ## 行动者
 var targets: Array[Node2D] = []    ## 目标数组
 var ability: TurnBasedSkillAbility ## 技能
 var action_type: ActionType        ## 行动类型
-var duration: float = 0.3          ## 动作持续时间
+
+var start_duration: float = 0.1
+var execute_duration: float = 0.5
+var end_duration: float = 0.2
 
 func _init(
 		p_actor: Node2D, 
 		p_targets: Array[Node2D], 
-		p_ability = null
+		p_ability = null,
+		p_start_duration = 0.1,
+		p_execute_duration = 0.5,
+		p_end_duration = 0.2
 		) -> void:
 	actor = p_actor
 	targets = p_targets
 	ability = p_ability
-	_determine_action_type()
+	start_duration = p_start_duration
+	execute_duration = p_execute_duration
+	end_duration = p_end_duration
+	action_type = _determine_action_type(actor, targets, ability)
 
 ## 确定行动类型
-func _determine_action_type() -> void:
-	if not ability:
-		action_type = ActionType.MELEE
-		return
+func _determine_action_type(p_actor: Node2D, 
+		p_targets: Array[Node2D], p_ability: TurnBasedSkillAbility) -> ActionType:
+	var _action_type : ActionType
+	if not p_ability:
+		_action_type = ActionType.MELEE
+		return _action_type
 		
-	match ability.target_range:
+	match p_ability.target_range:
 		TurnBasedSkillAbility.TARGET_RANGE.SELF:
-			action_type = ActionType.SELF
+			_action_type = ActionType.SELF
 		TurnBasedSkillAbility.TARGET_RANGE.SINGLE_ALLY, TurnBasedSkillAbility.TARGET_RANGE.ALL_ALLY:
-			action_type = ActionType.ALLY
+			if p_targets.size() == 1 and p_targets[0] == p_actor:
+				_action_type = ActionType.SELF
+			else:
+				_action_type = ActionType.ALLY
 		_:
-			action_type = ActionType.MELEE if ability.is_melee else ActionType.RANGED
+			_action_type = ActionType.MELEE if p_ability.is_melee else ActionType.RANGED
+	return _action_type
 
 ## 获取字符串形式的行动类型
 func get_type_string() -> String:

@@ -3,11 +3,11 @@ class_name ShakeCamera2D
 
 ## 带震动效果的2D摄像机
 
-@export_range(0, 1) var decay_rate: float = 0.3         ## 震动衰减速率
-@export_range(0, 100) var max_offset: float = 10.0      ## 最大偏移量
-@export_range(0, 1) var max_roll: float = 0.1           ## 最大旋转角度
-@export var target_offset := Vector2.ZERO				## 跟随目标偏移
-@export var target: Node								## 跟随目标
+@export_range(0, 1) var decay_rate: float = 0.15        ## 降低衰减速率使震动持续更长
+@export_range(0, 100) var max_offset: float = 30.0      ## 增加最大偏移量使震动更明显
+@export_range(0, 1) var max_roll: float = 0.15          ## 增加最大旋转角度
+@export var target_offset := Vector2.ZERO               ## 跟随目标偏移
+@export var target: Node                                ## 跟随目标
 
 var trauma: float = 0.0                                 ## 当前震动强度
 var time: float = 0.0                                   ## 时间累积
@@ -20,7 +20,7 @@ func _ready() -> void:
 	# 初始化噪声生成器
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	noise.seed = randi()
-	noise.frequency = 2.0
+	noise.frequency = 4.0  # 增加频率使震动更快
 
 func _physics_process(delta: float) -> void:
 	if target:

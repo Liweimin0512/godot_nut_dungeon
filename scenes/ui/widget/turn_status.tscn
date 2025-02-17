@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://ds8sko3goeli8"]
+[gd_scene load_steps=10 format=3 uid="uid://ds8sko3goeli8"]
 
 [ext_resource type="Script" uid="uid://bsleungau7ju1" path="res://scenes/ui/widget/turn_status.gd" id="1_qsv13"]
+[ext_resource type="PackedScene" uid="uid://r6b37yp547h6" path="res://scenes/ui/widget/character_icon.tscn" id="2_4q6do"]
 [ext_resource type="Script" uid="uid://1mpayve22prh" path="res://addons/GodotUIFramework/source/core/components/ui_widget_component.gd" id="3_ld0po"]
 [ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="4_4q6do"]
 [ext_resource type="Script" uid="uid://ccoyeqfqodquq" path="res://addons/GodotUIFramework/source/core/resource/ui_widget_type.gd" id="5_4q6do"]
@@ -62,6 +63,18 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 2
+
+[node name="CharacterIcon" parent="MarginContainer/HBoxContainer/MarginContainer/OrderContainer" instance=ExtResource("2_4q6do")]
+layout_mode = 2
+
+[node name="CharacterIcon2" parent="MarginContainer/HBoxContainer/MarginContainer/OrderContainer" instance=ExtResource("2_4q6do")]
+layout_mode = 2
+
+[node name="CharacterIcon3" parent="MarginContainer/HBoxContainer/MarginContainer/OrderContainer" instance=ExtResource("2_4q6do")]
+layout_mode = 2
+
+[node name="CharacterIcon4" parent="MarginContainer/HBoxContainer/MarginContainer/OrderContainer" instance=ExtResource("2_4q6do")]
+layout_mode = 2
 
 [node name="UIWidgetComponent" type="Node" parent="."]
 script = ExtResource("3_ld0po")

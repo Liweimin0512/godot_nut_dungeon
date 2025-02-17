@@ -26,6 +26,7 @@ class InitState:
 		print("进入初始化状态！")
 		var combat_manager := agent as CombatManager
 		combat_manager.initialize()
+		await CombatSystem.get_tree().process_frame
 		switch_to("combat_start")
 
 ## 战斗开始状态
@@ -47,6 +48,7 @@ class CombatStartState:
 	func _on_combat_started() -> void:
 		if state_machine.current_state != self:
 			return
+		await CombatSystem.get_tree().create_timer(0.5).timeout
 		switch_to("turn_start")
 
 ## 回合开始状态
@@ -71,6 +73,7 @@ class TurnStartState:
 			return
 		if combat_manager != combat:
 			return
+		await CombatSystem.get_tree().create_timer(0.5).timeout
 		switch_to("turn_execute")
 
 ## 回合执行状态
@@ -105,10 +108,11 @@ class TurnExecuteState:
 			print("退出动作准备状态！")
 			CombatSystem.combat_action_started.unsubscribe(_on_action_started)
 		
-		func _on_action_started(_action: CombatAction) -> void:
+		func _on_action_started(action: CombatAction) -> void:
 			if state_machine.current_state != self:
 				return
-			print("动作开始！{0}".format([_action.actor]))
+			print("动作开始！{0}".format([action.actor]))
+			await CombatSystem.get_tree().create_timer(action.start_duration).timeout
 			switch_to("action_execute")
 	
 	class ActionExecuteState:
@@ -125,10 +129,11 @@ class TurnExecuteState:
 			print("退出动作执行状态！")
 			CombatSystem.combat_action_executed.unsubscribe(_on_action_executed)
 
-		func _on_action_executed(_action: CombatAction) -> void:
+		func _on_action_executed(action: CombatAction) -> void:
 			if state_machine.current_state != self:
 				return
-			switch_to("action_end")
+			await CombatSystem.get_tree().create_timer(action.execute_duration).timeout
+			#switch_to("action_end")
 
 	class ActionEndState:
 		extends BaseState
@@ -143,7 +148,8 @@ class TurnExecuteState:
 			CombatSystem.combat_action_ended.unsubscribe(_on_action_ended)
 			print("退出动作结束状态！")
 		
-		func _on_action_ended() -> void:
+		func _on_action_ended(action: CombatAction) -> void:
+			await CombatSystem.get_tree().create_timer(action.end_duration).timeout
 			var combat_manager := agent as CombatManager
 			if combat_manager.check_victory_condition():
 				# 胜利条件判断

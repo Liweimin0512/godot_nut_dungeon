@@ -1,7 +1,7 @@
 extends MarginContainer
 class_name CharacterIcon
 
-@onready var texture_rect: TextureRect = $TextureRect
+@onready var texture_rect: TextureRect = %TextureRect
 @onready var ui_widget_component: UIWidgetComponent = $UIWidgetComponent
 
 func setup(unit: CombatComponent) -> void:

@@ -31,7 +31,7 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(18, 18)
+custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -44,14 +44,14 @@ layout_mode = 2
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 20
 text = "英雄名"
 horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "英雄职业"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -148,46 +148,57 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "武器"
 horizontal_alignment = 1
 
-[node name="EquipSlot" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_u43bt")]
+[node name="EquipSlot" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_u43bt")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer/MarginContainer2/VBoxContainer/MarginContainer"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer/MarginContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "防具"
 horizontal_alignment = 1
 
-[node name="EquipSlot" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/VBoxContainer" instance=ExtResource("4_u43bt")]
+[node name="EquipSlot" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer4/VBoxContainer/MarginContainer2/VBoxContainer" instance=ExtResource("4_u43bt")]
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3"]
 layout_mode = 2
@@ -197,7 +208,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer/MarginContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 16
 text = "饰品"
 horizontal_alignment = 1
 
@@ -208,6 +219,8 @@ theme_override_constants/separation = 0
 
 [node name="EquipSlot3" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer" instance=ExtResource("4_u43bt")]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="EquipSlot4" parent="MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer" instance=ExtResource("4_u43bt")]
 layout_mode = 2
+size_flags_horizontal = 3

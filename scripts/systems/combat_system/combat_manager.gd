@@ -93,7 +93,7 @@ func action_end() -> void:
 	if not is_combat_active:
 		return
 	await _current_action_unit.action_end()
-	CombatSystem.combat_action_ended.push()
+	CombatSystem.combat_action_ended.push(_current_action_unit.current_action)
 
 ## 结束回合
 func turn_end() -> void:

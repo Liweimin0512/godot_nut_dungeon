@@ -23,6 +23,7 @@ signal scene_changed(old_scene: Node, new_scene: Node)
 
 func _ready() -> void:
 	_scene_manager = CoreSystem.scene_manager
+
 	AbilitySystem.initialized.connect(
 		func(_success: bool):
 			ItemSystem.initialize()

@@ -72,9 +72,9 @@ func action_start(player_combats: Array[CombatComponent], enemy_combats: Array[C
 	# 选择合适的技能
 	var ability := _selecte_ai_ability()
 	# 选择合适的目标
-	var targets := _selecte_ai_targets(player_combats, enemy_combats)
+	var targets := _selecte_ai_targets(ability, player_combats, enemy_combats)
 
-	current_action = create_combat_action(targets, ability)
+	current_action = _create_combat_action(targets, ability)
 
 	await _notify_owner_turn_timing("_on_action_start")
 
@@ -119,7 +119,11 @@ func combat_end() -> void:
 
 
 ## 创建战斗行动
-func create_combat_action(targets: Array[CombatComponent], ability: TurnBasedSkillAbility = null) -> CombatAction:
+## [param targets] 目标
+## [param ability] 技能
+## [param delay] 延时
+## [return] 战斗行动
+func _create_combat_action(targets: Array[CombatComponent], ability: TurnBasedSkillAbility = null, delay: float = 0.2) -> CombatAction:
 	var target_nodes: Array[Node2D] = []
 	for target in targets:
 		target_nodes.append(target.get_parent())
@@ -127,9 +131,9 @@ func create_combat_action(targets: Array[CombatComponent], ability: TurnBasedSki
 	return CombatAction.new(
 		get_parent(),  # 行动者节点
 		target_nodes,  # 目标节点数组
-		ability       # 技能
+		ability,       # 技能
+		delay          # 延时
 	)
-
 
 ## 攻击
 func hit(damage: AbilityDamage) -> void:
@@ -198,37 +202,34 @@ func _selecte_ai_ability() -> TurnBasedSkillAbility:
 	return selected_ability
 
 ## 选择AI目标
-func _selecte_ai_targets(player_combats: Array[CombatComponent], enemy_combats: Array[CombatComponent]) -> Array[CombatComponent]:
-	if not current_action:
-		# 没有选择技能，返回空数组
-		push_error("没有选择技能，无法选择目标")
-		return []
-		
+func _selecte_ai_targets(ability : TurnBasedSkillAbility, 
+		player_combats: Array[CombatComponent], 
+		enemy_combats: Array[CombatComponent]) -> Array[CombatComponent]:
 	# 获取可用的目标位置
-	var available_positions := current_action.ability.get_available_positions(current_point)
+	var available_positions := ability.get_available_positions(current_point)
 	if available_positions.is_empty():
 		push_error("选择的技能无法在当前位置使用")
 		return []
 
 	var selected_targets : Array[CombatComponent] = []
 	# 处理自身目标
-	if current_action.ability.target_range == TurnBasedSkillAbility.TARGET_RANGE.SELF:
+	if ability.target_range == TurnBasedSkillAbility.TARGET_RANGE.SELF:
 		selected_targets = [self]
 	else:
 		# 获取目标阵营的单位
-		var target_units : Array[CombatComponent] = _get_target_units(player_combats, enemy_combats)
+		var target_units : Array[CombatComponent] = _get_target_units(ability, player_combats, enemy_combats)
 		if target_units.is_empty():
 			# 没有目标单位，返回空数组
 			push_error("没有目标单位，无法执行技能")
 			return []
 		# 根据技能类型选择目标
-		selected_targets = _select_targets_by_range(target_units, available_positions)
+		selected_targets = _select_targets_by_range(ability, target_units, available_positions)
 	CombatSystem.action_target_set.push([self, selected_targets])
 	return selected_targets
 
 ## 获取目标阵营的有效单位
-func _get_target_units(player_combats: Array[CombatComponent], enemy_combats: Array[CombatComponent]) -> Array[CombatComponent]:
-	match current_action.ability.target_range:
+func _get_target_units(ability: TurnBasedSkillAbility, player_combats: Array[CombatComponent], enemy_combats: Array[CombatComponent]) -> Array[CombatComponent]:
+	match ability.target_range:
 		TurnBasedSkillAbility.TARGET_RANGE.SINGLE_ENEMY, TurnBasedSkillAbility.TARGET_RANGE.ALL_ENEMY:
 			return enemy_combats if _combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else player_combats
 		TurnBasedSkillAbility.TARGET_RANGE.SINGLE_ALLY, TurnBasedSkillAbility.TARGET_RANGE.ALL_ALLY:
@@ -236,11 +237,11 @@ func _get_target_units(player_combats: Array[CombatComponent], enemy_combats: Ar
 	return []
 
 ## 根据技能范围选择目标
-func _select_targets_by_range(
+func _select_targets_by_range(ability: TurnBasedSkillAbility,
 		target_units: Array[CombatComponent], available_positions: Array) -> Array[CombatComponent]:
 	var selected_targets: Array[CombatComponent] = []
 	
-	match current_action.ability.target_range:
+	match ability.target_range:
 		TurnBasedSkillAbility.TARGET_RANGE.SINGLE_ENEMY:
 			# 单体敌人技能：选择一个最优目标
 			var target := _select_best_enemy_target(target_units, available_positions)

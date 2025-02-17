@@ -1,7 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ks5bblbjbqe4"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kipig"]
-size = Vector2(32, 32)
 
 [node name="HeroAction" type="MarginContainer"]
 offset_right = 20.0
@@ -18,7 +17,7 @@ layout_mode = 2
 theme_override_constants/separation = -1
 
 [node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -28,7 +27,7 @@ stretch_mode = 0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 4
+theme_override_font_sizes/font_size = 8
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
