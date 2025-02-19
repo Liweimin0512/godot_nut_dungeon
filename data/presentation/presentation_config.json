@@ -123,11 +123,20 @@
   },
   "arrow_attack":{
     "events": {
-      "damage_start": {
+      "ability_executing": {
         "animations": [
           {
             "target": "actor",
             "animation": "attack_2"
+          }
+        ]
+      },
+      "damage_completed": {
+        "animations": [
+          {
+            "target": "target",
+            "animation": "hit",
+            "wait": false
           }
         ]
       }

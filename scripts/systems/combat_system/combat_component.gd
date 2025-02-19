@@ -27,8 +27,6 @@ var speed: float:
 ## 当前行动
 var current_action: CombatAction
 
-signal hited
-signal hurted
 signal died
 
 ## 设置组件依赖
@@ -52,6 +50,7 @@ func setup(
 		ability_attribute_component = p_ability_attribute_component
 	if p_ability_resource_component:
 		ability_resource_component = p_ability_resource_component
+	ability_resource_component.resource_current_value_changed.connect(_on_resource_current_value_changed)
 
 #region 战斗流程处理
 
@@ -89,7 +88,7 @@ func action_execute(player_combats: Array[CombatComponent], enemy_combats: Array
 		return
 
 	var ability_context := {
-		"caster": self,
+		"caster": current_action.actor,
 		"targets": current_action.targets,
 		"ability": current_action.ability,
 		"tree": owner.get_tree(),
@@ -137,35 +136,6 @@ func _create_combat_action(targets: Array[CombatComponent], ability: TurnBasedSk
 		delay          # 延时
 	)
 
-## 攻击
-func hit(damage: AbilityDamage) -> void:
-	var target := damage.defender
-	if not target:
-		return
-		
-	await ability_component.handle_game_event("on_pre_hit", {"damage": damage})
-	await target.hurt(self, damage)
-	hited.emit(target)
-	await ability_component.handle_game_event("on_post_hit", {"damage": damage})
-
-## 受击
-func hurt(damage_source: CombatComponent, damage: AbilityDamage) -> void:
-	if not damage_source:
-		return
-		
-	var ability_context := {
-		"damage": damage,
-		"caster": self,
-		"target": damage.attacker
-	}
-	
-	await ability_component.handle_game_event("on_pre_hurt", ability_context)
-	ability_resource_component.apply_damage(damage)
-	hurted.emit(damage.damage_value)
-	if not is_alive:
-		_die()
-		
-	await ability_component.handle_game_event("on_post_hurt", ability_context)
 
 ## 能否行动
 func can_action() -> bool:
@@ -376,6 +346,12 @@ func _notify_owner_turn_timing(method_name: StringName) -> void:
 		await get_parent().call(method_name)
 
 #endregion
+
+func _on_resource_current_value_changed(res_id: StringName, value: float) -> void:
+	if res_id == "health":
+		if value <= 0.0:
+			_die()
+
 
 func _to_string() -> String:
 	return "CombatComponent" + get_parent().to_string()
