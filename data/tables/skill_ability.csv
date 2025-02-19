@@ -1,4 +1,4 @@
-﻿ID,ability_name,ability_tags,ability_description,target_range,valid_positions,target_positions,icon,is_auto_cast,effect_id,ability_costs,cooldown,is_show,is_melee,use_count
+﻿ID,ability_name,ability_tags,ability_description,target_range,valid_positions,target_positions,icon,is_auto_cast,action_tree_id,ability_costs,cooldown,is_show,is_melee,use_count
 ID,技能名称,技能标签,技能描述,"目标范围&#10;0 NONE,   ## 无目标&#10;1 SINGLE_ENEMY, ## 敌方单个&#10;2 SINGLE_ALLY, ## 友方单个&#10;3 ALL_ENEMY,  ## 全体敌方目标位置&#10;4 ALL_ALLY,  ## 全体友方目标位置&#10;5 SELF,   ## 自己",有效位置,目标位置,图标,是否自动释放,效果ID,消耗,冷却时间,是否显示,是否为近战技能,可用次数，0表示不限次数
 string,string,string[],string,int,int[],int[],resource,bool,string,string[],float,bool,bool,int
 attack,普通攻击,skill,,1,1*2*3*4,1*2*3*4,,0,attack_effect,,0,0,1,0

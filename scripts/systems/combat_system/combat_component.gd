@@ -58,12 +58,14 @@ func setup(
 ## 战斗开始
 func combat_start() -> void:
 	await _notify_owner_turn_timing("_on_combat_start")
-	ability_component.handle_game_event("on_combat_start")
+	AbilitySystem.push_ability_event("combat_start")
+
 
 ## 回合开始
 func turn_start() -> void:
 	await _notify_owner_turn_timing("_on_turn_start")
-	ability_component.handle_game_event("on_turn_start")
+	AbilitySystem.push_ability_event("turn_start")
+
 
 ## 行动开始
 ## [param player_combats] 玩家控制角色

@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
-[ext_resource type="Texture2D" uid="uid://dih1buwvj8i2b" path="res://assets/sprites/characters/heros/leaf_ranger/idle.png" id="2_bblvu"]
-[ext_resource type="AnimationLibrary" uid="uid://b82bxlch76pwa" path="res://scenes/character/resources/animation/hero/animation_library_leaf_ranger.res" id="4_l884r"]
-[ext_resource type="Script" uid="uid://cchps1pajt3jv" path="res://addons/godot_gameplay_ability_system/source/ability_attribute_component.gd" id="5_bblvu"]
+[ext_resource type="Texture2D" uid="uid://d2444c4t2hu45" path="res://assets/sprites/characters/heros/warrior/Idle.png" id="2_bblvu"]
+[ext_resource type="AnimationLibrary" uid="uid://2n54xto66wk1" path="res://scenes/character/resources/animation/enemy/animation_library_flying_eye.res" id="3_bblvu"]
+[ext_resource type="Script" uid="uid://biv22xhanhpl6" path="res://addons/godot_gameplay_ability_system/source/components/ability_attribute_component.gd" id="5_bblvu"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
-[ext_resource type="Script" uid="uid://n67wyu14blxx" path="res://addons/godot_gameplay_ability_system/source/ability_component.gd" id="6_q52vl"]
-[ext_resource type="Script" uid="uid://dy54mfe63g1mx" path="res://addons/godot_gameplay_ability_system/source/ability_resource_component.gd" id="7_l884r"]
+[ext_resource type="Script" uid="uid://bc5cfn0f8y3pk" path="res://addons/godot_gameplay_ability_system/source/components/ability_component.gd" id="6_q52vl"]
+[ext_resource type="Script" uid="uid://sn8hrtwx8y1k" path="res://addons/godot_gameplay_ability_system/source/components/ability_resource_component.gd" id="7_l884r"]
 [ext_resource type="Script" uid="uid://y1mgjyqenlv7" path="res://scripts/systems/combat_system/combat_component.gd" id="8_0rlhq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnpp6"]
@@ -19,31 +19,30 @@ script = ExtResource("1_qu267")
 position = Vector2(0, -192)
 scale = Vector2(3, 3)
 texture = ExtResource("2_bblvu")
-hframes = 12
-frame = 7
+hframes = 6
 
 [node name="cast_points" type="Node2D" parent="."]
 position = Vector2(-1, 0)
 
 [node name="head" type="Marker2D" parent="cast_points"]
 unique_name_in_owner = true
-position = Vector2(0, -36)
+position = Vector2(77, -103)
 
 [node name="body" type="Marker2D" parent="cast_points"]
 unique_name_in_owner = true
-position = Vector2(0, -18)
+position = Vector2(0, -67)
 
 [node name="feet" type="Marker2D" parent="cast_points"]
 unique_name_in_owner = true
 
 [node name="hand" type="Marker2D" parent="cast_points"]
 unique_name_in_owner = true
-position = Vector2(17, -32)
+position = Vector2(0, -120)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-&"": ExtResource("4_l884r")
+&"": ExtResource("3_bblvu")
 }
 autoplay = "idle"
 
@@ -93,21 +92,23 @@ vertical_alignment = 1
 
 [node name="AbilityAttributeComponent" type="Node" parent="."]
 script = ExtResource("5_bblvu")
-metadata/_custom_type_script = ExtResource("5_bblvu")
+metadata/_custom_type_script = "uid://biv22xhanhpl6"
 
 [node name="AbilityComponent" type="Node" parent="."]
 script = ExtResource("6_q52vl")
-metadata/_custom_type_script = ExtResource("6_q52vl")
+metadata/_custom_type_script = "uid://bc5cfn0f8y3pk"
 
-[node name="AbilityResourceComponent" type="Node" parent="."]
+[node name="AbilityResourceComponent" type="Node" parent="." node_paths=PackedStringArray("_ability_component", "_attribute_component")]
 script = ExtResource("7_l884r")
-metadata/_custom_type_script = ExtResource("7_l884r")
+_ability_component = NodePath("../AbilityComponent")
+_attribute_component = NodePath("../AbilityAttributeComponent")
+metadata/_custom_type_script = "uid://sn8hrtwx8y1k"
 
 [node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("ability_component", "ability_resource_component", "ability_attribute_component")]
 script = ExtResource("8_0rlhq")
 ability_component = NodePath("../AbilityComponent")
 ability_resource_component = NodePath("../AbilityResourceComponent")
 ability_attribute_component = NodePath("../AbilityAttributeComponent")
-metadata/_custom_type_script = ExtResource("8_0rlhq")
+metadata/_custom_type_script = "uid://y1mgjyqenlv7"
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

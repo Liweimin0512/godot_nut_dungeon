@@ -16,10 +16,6 @@ var heroes: Dictionary = {}
 var active_party: Array[Character] = []
 var is_initialized: bool = false
 
-var _logger: CoreSystem.Logger:
-	get:
-		return CoreSystem.logger
-
 ## 初始化系统
 func initialize() -> void:
 	if is_initialized:

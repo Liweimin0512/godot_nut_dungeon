@@ -1,4 +1,4 @@
-extends SkillAbility
+extends Ability
 class_name TurnBasedSkillAbility
 
 ## 回合制技能
@@ -29,17 +29,8 @@ var left_count : int = 0:
 		return use_count - available_count
 @export var is_melee : bool = false
 
-func _ready(config: Dictionary) -> void:
-	for i in range(0, config.ability_costs.size(), 2):
-		var cost_id : StringName = config.ability_costs[i]
-		var cost_amount : int = int(config.ability_costs[i + 1])
-		var _cost : AbilityResourceCost = AbilityResourceCost.new(cost_id, cost_amount)
-		ability_costs.append(_cost)
-
 ## 判断能否在指定位置使用
 func can_use_at_position(position: int) -> bool:
-	if not is_available:
-		return false
 	return valid_positions.is_empty() or position in valid_positions
 
 ## 获取可选择的目标位置
@@ -51,7 +42,3 @@ func get_available_positions(position: int) -> Array:
 	elif target_range == TARGET_RANGE.ALL_ENEMY or target_range == TARGET_RANGE.ALL_ALLY:
 		return valid_positions
 	return target_positions
-
-## 回合开始前, 更新技能冷却
-func on_pre_turn_start(_data: Dictionary = {}) -> void:
-	_update_cooldown(1)

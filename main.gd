@@ -12,6 +12,7 @@ var _scene_manager : CoreSystem.SceneManager
 }
 @export var _action_table_type : TableType
 @export var _ability_model_types : Array[ModelType]
+@export var _presentation_table_type : TableType
 @export var _character_model_type : ModelType = load("res://resources/character_model_type.tres")
 @export var _combat_model_type : ModelType = load("res://resources/combat_model_type.tres")
 var _initialized : bool = false
@@ -23,7 +24,6 @@ signal scene_changed(old_scene: Node, new_scene: Node)
 
 func _ready() -> void:
 	_scene_manager = CoreSystem.scene_manager
-
 	AbilitySystem.initialized.connect(
 		func(_success: bool):
 			ItemSystem.initialize()
@@ -33,7 +33,7 @@ func _ready() -> void:
 			CharacterSystem.initialize(_character_model_type)
 	)
 	CharacterSystem.initialized.connect(
-		func(_initialized: bool):
+		func(_is_initialized: bool):
 			CombatSystem.initialize(_combat_model_type)
 	)
 	CombatSystem.initialized.connect(
@@ -56,7 +56,7 @@ func initialize() -> void:
 		_logger.error("Game is already initialized")
 		return
 	# 初始化子模块
-	AbilitySystem.initialize(_ability_model_types, _action_table_type)
+	AbilitySystem.initialize(_ability_model_types, _action_table_type, _presentation_table_type)
 
 ## 切换场景
 func change_scene(scene_name : StringName) -> void:

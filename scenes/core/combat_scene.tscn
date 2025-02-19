@@ -120,7 +120,7 @@ layer = 128
 script = ExtResource("7_aweq8")
 group_name = &"game_scene"
 view_types = Array[ExtResource("8_p16ct")]([SubResource("Resource_y7bqf")])
-metadata/_custom_type_script = ExtResource("7_aweq8")
+metadata/_custom_type_script = "uid://drldqlyqnyu6k"
 
 [node name="PlayerMarkers" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -189,4 +189,4 @@ camera = NodePath("../Camera2D")
 post_process = NodePath("../PostProcessLayer/ColorRect")
 y_offset = 400.0
 range_offset = 220.0
-metadata/_custom_type_script = ExtResource("13_s4ntn")
+metadata/_custom_type_script = "uid://di6tblgxc8tmd"
