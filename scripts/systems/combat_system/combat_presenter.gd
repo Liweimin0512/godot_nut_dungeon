@@ -277,33 +277,6 @@ func _apply_post_process_effect(enable: bool, duration: float) -> void:
 		tween.tween_property(post_process.material, "shader_parameter/brightness", 1.0, duration)
 
 
-## 播放音效
-func _play_sound(sound_resource: AudioStream) -> void:
-	var audio_player = AudioStreamPlayer.new()
-	add_child(audio_player)
-	audio_player.stream = sound_resource
-	audio_player.play()
-	await audio_player.finished
-	audio_player.queue_free()
-
-
-## 播放特效
-func _spawn_effect(effect_scene: PackedScene, position: Vector2) -> void:
-	var effect = effect_scene.instantiate()
-	action_layer.add_child(effect)
-	effect.global_position = position
-	
-	if effect.has_method("play"):
-		effect.play()
-	
-	if effect.has_signal("finished"):
-		await effect.finished
-	else:
-		await get_tree().create_timer(2.0).timeout
-	
-	effect.queue_free()
-
-
 func _on_combat_action_started(action: CombatAction) -> void:
 	_current_action = action
 	
