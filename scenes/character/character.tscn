@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
-[ext_resource type="Texture2D" uid="uid://d2444c4t2hu45" path="res://assets/sprites/characters/heros/warrior/Idle.png" id="2_bblvu"]
-[ext_resource type="AnimationLibrary" uid="uid://2n54xto66wk1" path="res://scenes/character/resources/animation/enemy/animation_library_flying_eye.res" id="3_bblvu"]
+[ext_resource type="Texture2D" uid="uid://6sd1tikuk4pn" path="res://assets/sprites/characters/heros/leaf_ranger/attack_2.png" id="2_bblvu"]
+[ext_resource type="AnimationLibrary" uid="uid://b82bxlch76pwa" path="res://scenes/character/resources/animation/hero/animation_library_leaf_ranger.res" id="3_q52vl"]
 [ext_resource type="Script" uid="uid://biv22xhanhpl6" path="res://addons/godot_gameplay_ability_system/source/components/ability_attribute_component.gd" id="5_bblvu"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
 [ext_resource type="Script" uid="uid://bc5cfn0f8y3pk" path="res://addons/godot_gameplay_ability_system/source/components/ability_component.gd" id="6_q52vl"]
@@ -16,10 +16,10 @@ size = Vector2(107.5, 125)
 script = ExtResource("1_qu267")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -192)
+position = Vector2(0, -188)
 scale = Vector2(3, 3)
 texture = ExtResource("2_bblvu")
-hframes = 6
+hframes = 15
 
 [node name="cast_points" type="Node2D" parent="."]
 position = Vector2(-1, 0)
@@ -30,21 +30,15 @@ position = Vector2(77, -103)
 
 [node name="body" type="Marker2D" parent="cast_points"]
 unique_name_in_owner = true
-position = Vector2(0, -67)
+position = Vector2(5, -40)
 
 [node name="feet" type="Marker2D" parent="cast_points"]
 unique_name_in_owner = true
+position = Vector2(1, 0)
 
 [node name="hand" type="Marker2D" parent="cast_points"]
 unique_name_in_owner = true
-position = Vector2(0, -120)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-libraries = {
-&"": ExtResource("3_bblvu")
-}
-autoplay = "idle"
+position = Vector2(5, -110)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -96)
@@ -56,9 +50,9 @@ shape = SubResource("RectangleShape2D_gnpp6")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 offset_left = -32.0
-offset_top = -77.0
+offset_top = -180.0
 offset_right = 32.0
-offset_bottom = -37.0
+offset_bottom = -140.0
 
 [node name="LabelAbility" type="Label" parent="MarginContainer2"]
 unique_name_in_owner = true
@@ -89,6 +83,13 @@ offset_bottom = -97.0
 text = "选中"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": ExtResource("3_q52vl")
+}
+autoplay = "idle"
 
 [node name="AbilityAttributeComponent" type="Node" parent="."]
 script = ExtResource("5_bblvu")

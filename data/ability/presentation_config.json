@@ -1,0 +1,5 @@
+{
+  "attack": "@json://data/ability/presentation/attack.json",
+  "chain_lightning": "@json://data/ability/presentation/chain_lightning.json",
+  "arrow_attack": "@json://data/ability/presentation/arrow_attack.json"
+}

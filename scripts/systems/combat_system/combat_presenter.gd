@@ -46,6 +46,9 @@ var _original_scales: Dictionary = {}					## 原始缩放
 var _current_action: CombatAction = null				## 当前行动
 var _screen_center : Vector2 = Vector2.ZERO				## 屏幕中心位置
 
+## 效果处理器映射
+var _action_handlers: Dictionary
+
 # 系统引用
 @onready var _time_manager : CoreSystem.TimeManager:
 	get:
@@ -58,6 +61,7 @@ func _ready() -> void:
 	# CombatSystem.combat_action_ended.subscribe(_on_combat_action_ended)
 	
 	## 订阅技能系统事件
+	AbilitySystem.presentation_manager.presentation_requested.connect(_on_presentation_requested)
 
 	# 创建后处理shader
 	post_process.material = ShaderMaterial.new()
@@ -69,6 +73,14 @@ func _ready() -> void:
 	
 	_screen_center = Vector2(camera.get_viewport_rect().size.x / 2, 0)
 
+	_setup_action_handlers()
+
+func _setup_action_handlers() -> void:
+	_action_handlers["animation"] = AnimationHandler.new()
+	_action_handlers["projectile"] = ProjectileHandler.new()
+	_action_handlers["particle"] = ParticleHandler.new()
+	_action_handlers["sound"] = SoundHandler.new()
+	_action_handlers["camera"] = CameraHandler.new(camera)
 
 ## 创建后处理shader
 func _setup_post_process() -> void:
@@ -327,3 +339,14 @@ func _on_combat_action_ended(action: CombatAction) -> void:
 	
 	# 4. 恢复时间速度
 	_time_manager.set_time_scale(1.0)
+
+## 处理技能表现效果
+func _on_presentation_requested(type: StringName, config: Dictionary, context: Dictionary) -> void:
+	if type == "effect":
+		type = config.get("type", "effect")
+	if not _action_handlers.has(type):
+		GASLogger.error("Invalid effect type: " + type)
+		return
+	var handler = _action_handlers[type]
+	if handler.has_method("handle_effect"):
+		handler.handle_effect(config, context)

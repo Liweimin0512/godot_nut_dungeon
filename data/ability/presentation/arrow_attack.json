@@ -1,0 +1,32 @@
+{
+    "events": {
+      "ability_executing": {
+        "animations": [
+          {
+            "target": "actor",
+            "animation": "attack_2",
+            "custom_speed": 1.5
+          }
+        ],
+        "effects": [
+          {
+            "type": "projectile",
+            "scene": "@scene://scenes/projectile/arrow.tscn",
+            "start_attachment_type": "hand",
+            "target_attachment_type": "body",
+            "pre_delay": 0.7,
+            "duration": 0.5
+          }
+        ]
+      },
+      "damage_completed": {
+        "animations": [
+          {
+            "target": "target",
+            "animation": "hit",
+            "wait": false
+          }
+        ]
+      }
+    }
+  }

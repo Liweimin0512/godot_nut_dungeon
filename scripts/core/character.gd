@@ -14,6 +14,12 @@ class_name Character
 @onready var ability_resource_component: AbilityResourceComponent = $AbilityResourceComponent
 @onready var ability_component: AbilityComponent = $AbilityComponent
 @onready var combat_component: CombatComponent = $CombatComponent
+@onready var _attachment_types: Dictionary[StringName, Marker2D] = {
+	"head" : %head,
+	"body" : %body,
+	"feet" : %feet,
+	"hand" : %hand,
+}
 
 ## 角色数据
 @export var _character_config: CharacterModel
@@ -27,6 +33,7 @@ class_name Character
 		return _character_config.character_icon
 	set(_value):
 		assert(false, "character_icon 是只读属性不允许赋值")
+
 
 ## 所在战斗位置
 var combat_point : int = -1
@@ -68,7 +75,6 @@ func initialize(config: CharacterModel) -> void:
 	# 设置组件
 	_setup_components()
 
-
 	# 设置状态栏
 	_setup_status()
 
@@ -76,6 +82,12 @@ func initialize(config: CharacterModel) -> void:
 func play_animation(anim_name: StringName, blend_time: float = 0.0, custom_speed: float = 1.0) -> void:
 	if animation_player:
 		animation_player.play(anim_name, blend_time, custom_speed)
+
+## 获取粒子附着点
+func get_attachment_node(attachment_name : StringName) -> Marker2D:
+	if attachment_name.is_empty():
+		return null
+	return _attachment_types.get(attachment_name, null)
 
 # 内部方法
 
@@ -110,6 +122,8 @@ func _setup_status() -> void:
 		w_status.setup(ability_component, ability_resource_component)
 
 func _on_animation_finished(anim_name: StringName) -> void:
+	if anim_name != &"die":
+		play_animation(&"idle")
 	animation_finished.emit(anim_name)
 
 ## 战斗开始
