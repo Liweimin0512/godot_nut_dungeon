@@ -13,10 +13,6 @@ enum TARGET_RANGE{
 	SELF,			## 自己
 }
 
-## 有效位置
-@export var valid_positions : Array = [1, 2, 3, 4]
-## 目标位置
-@export var target_positions: Array = [1, 2, 3, 4]
 ## 目标范围
 @export var target_range: TARGET_RANGE = TARGET_RANGE.SELF
 ## 使用次数, 0代表不限次数
@@ -29,9 +25,17 @@ var left_count : int = 0:
 		return use_count - available_count
 @export var is_melee : bool = false
 
-## 判断能否在指定位置使用
-func can_use_at_position(position: int) -> bool:
-	return valid_positions.is_empty() or position in valid_positions
+func _init() -> void:
+	# 添加使用次数限制
+	add_restriction(UsageCountRestriction.new({
+		"max_count": use_count
+	}))
+	
+	# 添加位置限制
+	add_restriction(PositionRestriction.new({
+		"valid_positions": valid_positions,
+		"target_positions": target_positions
+	}))
 
 ## 获取可选择的目标位置
 func get_available_positions(position: int) -> Array:

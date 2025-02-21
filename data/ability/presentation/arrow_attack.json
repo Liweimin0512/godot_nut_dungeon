@@ -9,24 +9,15 @@
           }
         ],
         "effects": [
-          {
-            "type": "projectile",
-            "scene": "@scene://scenes/projectile/arrow.tscn",
-            "start_attachment_type": "hand",
-            "target_attachment_type": "body",
-            "pre_delay": 0.7,
-            "duration": 0.5
-          }
-        ]
-      },
-      "damage_completed": {
-        "animations": [
-          {
-            "target": "target",
-            "animation": "hit",
-            "wait": false
-          }
-        ]
+            {
+              "type": "projectile",
+              "scene": "@scene://scenes/projectile/arrow.tscn",
+              "start_attachment_type": "hand",
+              "target_attachment_type": "body",
+              "pre_delay": 0.7,
+              "duration": 0.5
+            }
+          ]
       }
     }
-  }
+}

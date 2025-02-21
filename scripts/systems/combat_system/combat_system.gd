@@ -25,6 +25,7 @@ var combat_created : CombatEvent = CombatEvent.new(&"combat_created")						## �
 var combat_started : CombatEvent = CombatEvent.new(&"combat_started")						## 战斗开始事件
 var combat_turn_started : CombatEvent = CombatEvent.new(&"combat_turn_started")				## 战斗回合开始事件
 var combat_action_started : CombatEvent = CombatEvent.new(&"combat_action_started")			## 战斗动作开始事件
+var combat_action_executing : CombatEvent = CombatEvent.new(&"combat_action_executing")		## 战斗动作执行开始事件
 var combat_action_executed : CombatEvent = CombatEvent.new(&"combat_action_executed")		## 战斗动作执行事件
 var combat_action_ended : CombatEvent = CombatEvent.new(&"combat_action_ended")				## 战斗动作结束事件
 var combat_turn_executed : CombatEvent = CombatEvent.new(&"combat_turn_executed")			## 战斗回合执行事件

@@ -1,13 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cokqr3cv3dqo6"]
+[gd_scene load_steps=8 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
-[ext_resource type="Texture2D" uid="uid://6sd1tikuk4pn" path="res://assets/sprites/characters/heros/leaf_ranger/attack_2.png" id="2_bblvu"]
-[ext_resource type="AnimationLibrary" uid="uid://b82bxlch76pwa" path="res://scenes/character/resources/animation/hero/animation_library_leaf_ranger.res" id="3_q52vl"]
-[ext_resource type="Script" uid="uid://biv22xhanhpl6" path="res://addons/godot_gameplay_ability_system/source/components/ability_attribute_component.gd" id="5_bblvu"]
+[ext_resource type="Texture2D" uid="uid://chw4fofu6gtjx" path="res://assets/sprites/characters/heros/water_priestess/death.png" id="2_bblvu"]
+[ext_resource type="AnimationLibrary" uid="uid://br30iodn51mob" path="res://scenes/character/resources/animation/hero/animation_library_water_priestess.res" id="4_q52vl"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
-[ext_resource type="Script" uid="uid://bc5cfn0f8y3pk" path="res://addons/godot_gameplay_ability_system/source/components/ability_component.gd" id="6_q52vl"]
-[ext_resource type="Script" uid="uid://sn8hrtwx8y1k" path="res://addons/godot_gameplay_ability_system/source/components/ability_resource_component.gd" id="7_l884r"]
 [ext_resource type="Script" uid="uid://y1mgjyqenlv7" path="res://scripts/systems/combat_system/combat_component.gd" id="8_0rlhq"]
+[ext_resource type="Texture2D" uid="uid://uoekuryfvt5m" path="res://assets/texture/selector.png" id="9_q52vl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnpp6"]
 size = Vector2(107.5, 125)
@@ -19,7 +17,8 @@ script = ExtResource("1_qu267")
 position = Vector2(0, -188)
 scale = Vector2(3, 3)
 texture = ExtResource("2_bblvu")
-hframes = 15
+hframes = 14
+frame = 5
 
 [node name="cast_points" type="Node2D" parent="."]
 position = Vector2(-1, 0)
@@ -84,25 +83,35 @@ text = "选中"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Selector" type="TextureRect" parent="."]
+self_modulate = Color(0.87451, 0.576471, 0.156863, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.5
+offset_top = -32.0
+offset_right = 54.5
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_q52vl")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-&"": ExtResource("3_q52vl")
+&"": ExtResource("4_q52vl")
 }
 autoplay = "idle"
 
 [node name="AbilityAttributeComponent" type="Node" parent="."]
-script = ExtResource("5_bblvu")
 metadata/_custom_type_script = "uid://biv22xhanhpl6"
 
 [node name="AbilityComponent" type="Node" parent="."]
-script = ExtResource("6_q52vl")
 metadata/_custom_type_script = "uid://bc5cfn0f8y3pk"
 
-[node name="AbilityResourceComponent" type="Node" parent="." node_paths=PackedStringArray("_ability_component", "_attribute_component")]
-script = ExtResource("7_l884r")
-_ability_component = NodePath("../AbilityComponent")
-_attribute_component = NodePath("../AbilityAttributeComponent")
+[node name="AbilityResourceComponent" type="Node" parent="."]
 metadata/_custom_type_script = "uid://sn8hrtwx8y1k"
 
 [node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("ability_component", "ability_resource_component", "ability_attribute_component")]

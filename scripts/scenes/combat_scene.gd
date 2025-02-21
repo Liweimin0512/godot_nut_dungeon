@@ -65,6 +65,9 @@ func _initialize_combat(combat_id: StringName) -> void:
 
 	# 2. 创建战斗管理器
 	combat_manager = CombatSystem.create_combat(combat_id, player_combats, enemy_combats)
+	# TODO 测试修改
+	combat_manager._combat_config.is_auto = false
+	
 	_setup_scene()
 	_setup_camera()
 	_setup_ui()

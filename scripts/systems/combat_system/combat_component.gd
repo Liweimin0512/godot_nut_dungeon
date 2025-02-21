@@ -28,6 +28,14 @@ var speed: float:
 var current_action: CombatAction
 
 signal died
+signal combat_started
+signal turn_started
+signal action_started
+signal action_executing
+signal action_executed
+signal action_ended
+signal turn_ended
+signal combat_ended
 
 ## 设置组件依赖
 ## [param p_camp] 战斗阵营
@@ -56,28 +64,48 @@ func setup(
 
 ## 战斗开始
 func combat_start() -> void:
-	await _notify_owner_turn_timing("_on_combat_start")
-	AbilitySystem.push_ability_event("combat_start")
+	AbilitySystem.trigger_manager.trigger("combat_start", {"caster": get_parent()})
+	combat_started.emit()
 
 
 ## 回合开始
 func turn_start() -> void:
-	await _notify_owner_turn_timing("_on_turn_start")
-	AbilitySystem.push_ability_event("turn_start")
+	AbilitySystem.trigger_manager.trigger("turn_start", {"caster": get_parent()})
+	turn_started.emit()
 
 
 ## 行动开始
 ## [param player_combats] 玩家控制角色
 ## [param enemy_combats] 敌人控制角色
 func action_start(player_combats: Array[CombatComponent], enemy_combats: Array[CombatComponent]) -> void:
-	# 选择合适的技能
+	if not CombatSystem.active_combat_manager.is_auto and _combat_camp != CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
+		# 非自动战斗且不是敌方，不选择技能
+		return
+		
+	# AI选择技能和目标
 	var ability := _selecte_ai_ability()
-	# 选择合适的目标
+	if not ability:
+		return
+		
 	var targets := _selecte_ai_targets(ability, player_combats, enemy_combats)
+	if targets.is_empty():
+		return
 
 	current_action = _create_combat_action(targets, ability)
-
-	await _notify_owner_turn_timing("_on_action_start")
+	AbilitySystem.trigger_manager.trigger("action_start", {"caster": get_parent(), "targets": targets, "ability": ability})
+	action_started.emit()
+	
+## 手动选择技能和目标
+## [param ability] 选择的技能
+## [param targets] 选择的目标
+func manual_action_start(ability: TurnBasedSkillAbility, targets: Array[CombatComponent]) -> void:
+	if not ability or targets.is_empty():
+		return
+		
+	current_action = _create_combat_action(targets, ability)
+	AbilitySystem.trigger_manager.trigger("action_start", {"caster": get_parent(), "targets": targets, "ability": ability})
+	action_started.emit()
+	CombatSystem.combat_action_started.push(current_action)
 
 ## 行动执行
 func action_execute(player_combats: Array[CombatComponent], enemy_combats: Array[CombatComponent]) -> void:
@@ -92,29 +120,33 @@ func action_execute(player_combats: Array[CombatComponent], enemy_combats: Array
 		"targets": current_action.targets,
 		"ability": current_action.ability,
 		"tree": owner.get_tree(),
-		"resource_component": ability_resource_component,
-		"attribute_component": ability_attribute_component,
 		"enemies": enemy_combats if _combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else player_combats,
 		"allies": player_combats if _combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else enemy_combats,
 	}
+	AbilitySystem.trigger_manager.trigger("action_executing", {"caster": get_parent(), "targets": current_action.targets, "ability": current_action.ability})
+	action_executing.emit()
 	await ability_component.try_cast_ability(current_action.ability, ability_context)
-	await _notify_owner_turn_timing("_on_action_execute")
+	AbilitySystem.trigger_manager.trigger("action_executed", {"caster": get_parent(), "targets": current_action.targets, "ability": current_action.ability})
+	action_executed.emit()
+
 
 ## 行动结束
 func action_end() -> void:
-	current_action = null
-	ability_component.handle_game_event("on_action_end")
-	await _notify_owner_turn_timing("_on_action_end")
+	AbilitySystem.trigger_manager.trigger("action_ended", {"caster": get_parent(), "targets": current_action.targets, "ability": current_action.ability})
+	action_ended.emit()
+
 
 ## 回合结束
 func turn_end() -> void:
-	ability_component.handle_game_event("on_turn_end")
-	await _notify_owner_turn_timing("_on_turn_end")
+	AbilitySystem.trigger_manager.trigger("turn_ended", {"caster": get_parent()})
+	turn_ended.emit()
+
 
 ## 战斗结束
 func combat_end() -> void:
-	ability_component.handle_game_event("on_combat_end")
-	await _notify_owner_turn_timing("_on_combat_end")
+	AbilitySystem.trigger_manager.trigger("combat_ended", {"caster": get_parent()})
+	combat_ended.emit()
+
 
 #endregion 战斗流程处理
 
@@ -162,9 +194,6 @@ func _get_available_abilities() -> Array[Ability]:
 
 ## 选择AI技能
 func _selecte_ai_ability() -> TurnBasedSkillAbility:
-	if not CombatSystem.active_combat_manager.is_auto and _combat_camp != CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
-		# 非自动战斗且不是敌方，不选择技能
-		return
 	# 获取可用技能
 	var abilities := _get_available_abilities()
 	# 随机选择一个技能
@@ -340,10 +369,6 @@ func _calculate_ally_target_score(target: CombatComponent) -> float:
 	
 	return score
 
-## 通知所有者回合时间点，并等待所有者执行完成
-func _notify_owner_turn_timing(method_name: StringName) -> void:
-	if get_parent().has_method(method_name):
-		await get_parent().call(method_name)
 
 #endregion
 

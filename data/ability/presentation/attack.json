@@ -1,43 +1,13 @@
 {
     "events": {
-      "ABILITY_START": {
+      "ability_executing": {
         "animations": [
           {
             "target": "actor",
             "animation": "attack",
             "wait": true
           }
-        ],
-        "effects": [
-          {
-            "type": "swing_effect",
-            "target": "actor",
-            "offset": {"x": 50, "y": 0},
-            "delay": 0.2
-          }
-        ]
-      },
-      "DAMAGE_APPLIED": {
-        "animations": [
-          {
-            "target": "target",
-            "animation": "hit",
-            "wait": false
-          }
-        ],
-        "effects": [
-          {
-            "type": "hit_effect",
-            "target": "target",
-            "delay": 0
-          }
-        ],
-        "camera_effects": [
-          {
-            "type": "shake",
-            "trauma": 0.4
-          }
         ]
       }
     }
-  }
+}

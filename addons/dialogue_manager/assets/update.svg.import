@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crjiho0nratg"
-path="res://.godot/imported/slime.png-a3f8ad08e9951dcfc89db77a5b728bd5.ctex"
+uid="uid://d3baj6rygkb3f"
+path="res://.godot/imported/update.svg-f1628866ed4eb2e13e3b81f75443687e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/slime.png"
-dest_files=["res://.godot/imported/slime.png-a3f8ad08e9951dcfc89db77a5b728bd5.ctex"]
+source_file="res://addons/dialogue_manager/assets/update.svg"
+dest_files=["res://.godot/imported/update.svg-f1628866ed4eb2e13e3b81f75443687e.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

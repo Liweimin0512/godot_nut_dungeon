@@ -78,13 +78,21 @@ func action_start() -> void:
 		return
 	# 取出下一个行动的角色
 	_current_action_unit = action_order.pop_front()
-	await _current_action_unit.action_start(player_combats, enemy_combats)
-	CombatSystem.combat_action_started.push(_current_action_unit.current_action)
+	
+	# 如果是自动战斗或者是敌方单位，自动选择技能和目标
+	if is_auto or _current_action_unit._combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY:
+		await _current_action_unit.action_start(player_combats, enemy_combats)
+		if _current_action_unit.current_action:
+			CombatSystem.combat_action_started.push(_current_action_unit.current_action)
+	else:
+		# 非自动战斗且是玩家控制角色，等待玩家输入
+		CombatSystem.combat_action_selecting.push(_current_action_unit)
 
 ## 执行行动
 func action_execute() -> void:
 	if not is_combat_active:
 		return
+	CombatSystem.combat_action_executing.push(_current_action_unit.current_action)
 	await _current_action_unit.action_execute(player_combats, enemy_combats)
 	CombatSystem.combat_action_executed.push(_current_action_unit.current_action)
 
@@ -96,7 +104,7 @@ func action_end() -> void:
 	CombatSystem.combat_action_ended.push(_current_action_unit.current_action)
 
 ## 结束回合
-func turn_end() -> void:
+func end_turn() -> void:
 	if not is_combat_active:
 		return
 	_current_action_unit = null

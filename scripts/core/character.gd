@@ -56,6 +56,18 @@ signal animation_finished(anim_name: StringName)
 # signal attribute_changed(name: String, old_value: float, new_value: float)
 # signal resource_changed(resource_name: String, old_value: float, new_value: float)
 
+
+func _ready() -> void:
+	combat_component.action_started.connect(
+		func() -> void:
+			w_status.hide()
+	)
+	combat_component.action_ended.connect(
+		func() -> void:
+			w_status.show()
+	)
+
+
 func initialize(config: CharacterModel) -> void:
 	_character_config = config
 	# 设置外观
@@ -70,7 +82,6 @@ func initialize(config: CharacterModel) -> void:
 		get_parent().remove_child(self)
 		queue_free()
 		return
-	_event_bus.subscribe("character_turn_prepared", _on_character_turn_prepared)
 	
 	# 设置组件
 	_setup_components()
@@ -78,6 +89,8 @@ func initialize(config: CharacterModel) -> void:
 	# 设置状态栏
 	_setup_status()
 
+	AbilitySystem.subscribe_ability_event("damage_completed", _on_damage_completed)
+	
 ## 播放动画
 func play_animation(anim_name: StringName, blend_time: float = 0.0, custom_speed: float = 1.0) -> void:
 	if animation_player:
@@ -126,22 +139,13 @@ func _on_animation_finished(anim_name: StringName) -> void:
 		play_animation(&"idle")
 	animation_finished.emit(anim_name)
 
-## 战斗开始
-func _on_character_combat_started() -> void:
-	pass
-
-## 回合开始
-func _on_character_turn_started() -> void:
-	pass
-
-func _on_character_turn_prepared(combat: CombatComponent) -> void:
-	if combat_component != combat:
+## 受击动作
+func _on_damage_completed(damage_context: Dictionary) -> void:
+	var damage_target : Node2D = damage_context.get("target", null)
+	if not damage_target or damage_target != self:
 		return
-	if combat != combat_component:
-		return
-	print("character turn prepared")
-	# combat.turn_prepare_end()
-	_event_bus.push_event("character_turn_prepare_end", self)
+	
+	play_animation(&"hit")
 
 func _to_string() -> String:
 	return character_name if character_name else super.to_string()

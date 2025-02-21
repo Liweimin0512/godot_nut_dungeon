@@ -133,7 +133,7 @@ class TurnExecuteState:
 			if state_machine.current_state != self:
 				return
 			await CombatSystem.get_tree().create_timer(action.execute_duration).timeout
-			#switch_to("action_end")
+			switch_to("action_end")
 
 	class ActionEndState:
 		extends BaseState
@@ -151,6 +151,7 @@ class TurnExecuteState:
 		func _on_action_ended(action: CombatAction) -> void:
 			await CombatSystem.get_tree().create_timer(action.end_duration).timeout
 			var combat_manager := agent as CombatManager
+			await CombatSystem.get_tree().create_timer(action.end_duration).timeout
 			if combat_manager.check_victory_condition():
 				# 胜利条件判断
 				combat_manager.combat_victory()
@@ -172,7 +173,7 @@ class TurnEndState:
 	
 	func _enter(_msg: Dictionary = {}) -> void:
 		print("进入回合结束状态！")
-		CombatSystem.turn_ended.subscribe(_on_turn_ended)
+		CombatSystem.combat_turn_ended.subscribe(_on_turn_ended)
 		var combat_manager := agent as CombatManager
 		# 由战斗管理器处理回合结束逻辑
 		combat_manager.end_turn()
@@ -182,7 +183,7 @@ class TurnEndState:
 			switch_to("turn_start")
 
 	func _exit() -> void:
-		CombatSystem.turn_ended.unsubscribe(_on_turn_ended)
+		CombatSystem.combat_turn_ended.unsubscribe(_on_turn_ended)
 		print("退出回合结束状态！")
 	
 	func _on_turn_ended() -> void:

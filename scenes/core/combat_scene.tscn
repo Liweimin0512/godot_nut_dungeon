@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://thbunqfboaq0"]
+[gd_scene load_steps=17 format=3 uid="uid://thbunqfboaq0"]
 
 [ext_resource type="Script" uid="uid://bhgmxo52mu66j" path="res://scripts/scenes/combat_scene.gd" id="1_hxvc4"]
 [ext_resource type="Texture2D" uid="uid://bltisnnddxogx" path="res://assets/texture/background/game_background_1/layers/battleground.png" id="2_6kgbk"]
@@ -11,7 +11,6 @@
 [ext_resource type="Shader" uid="uid://cypl0brnqofsn" path="res://resources/shader/combat_post_process.gdshader" id="7_x2yey"]
 [ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="8_p16ct"]
 [ext_resource type="Script" uid="uid://cdtge4wnkvm45" path="res://addons/GodotUIFramework/source/core/resource/ui_scene_type.gd" id="9_1nl3e"]
-[ext_resource type="PackedScene" uid="uid://nk3qqok7ctfq" path="res://scenes/projectile/arrow.tscn" id="9_gvreh"]
 [ext_resource type="PackedScene" uid="uid://cokqr3cv3dqo6" path="res://scenes/character/character.tscn" id="10_w25t6"]
 [ext_resource type="Script" uid="uid://c6pginvp3p1fm" path="res://scripts/systems/camera/shake_camera_2d.gd" id="13_nkdg0"]
 [ext_resource type="Script" uid="uid://di6tblgxc8tmd" path="res://scripts/systems/combat_system/combat_presenter.gd" id="13_s4ntn"]
@@ -111,9 +110,6 @@ scale = Vector2(1.8, 1.8)
 [node name="Character2" parent="ActionLayer" instance=ExtResource("10_w25t6")]
 position = Vector2(836, 440)
 scale = Vector2(1.8, 1.8)
-
-[node name="arrow_poison" parent="ActionLayer" instance=ExtResource("9_gvreh")]
-position = Vector2(796, 400)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 128

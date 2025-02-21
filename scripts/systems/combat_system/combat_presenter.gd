@@ -57,8 +57,9 @@ var _action_handlers: Dictionary
 func _ready() -> void:
 	# 订阅战斗系统事件
 	CombatSystem.combat_action_started.subscribe(_on_combat_action_started)
+	CombatSystem.combat_action_executing.subscribe(_on_combat_action_executing)
 	CombatSystem.combat_action_executed.subscribe(_on_combat_action_executed)
-	# CombatSystem.combat_action_ended.subscribe(_on_combat_action_ended)
+	CombatSystem.combat_action_ended.subscribe(_on_combat_action_ended)
 	
 	## 订阅技能系统事件
 	AbilitySystem.presentation_manager.presentation_requested.connect(_on_presentation_requested)
@@ -295,10 +296,13 @@ func _on_combat_action_started(action: CombatAction) -> void:
 	# 5. 应用后处理效果
 	_apply_post_process_effect(true, action.start_duration)
 
-
-func _on_combat_action_executed(action: CombatAction) -> void:
+func _on_combat_action_executing(action: CombatAction) -> void:
 	# 先执行战斗动作
 	_execute_combat_action(action, action.execute_duration)
+
+
+func _on_combat_action_executed(action: CombatAction) -> void:
+	pass
 
 func _on_combat_action_ended(action: CombatAction) -> void:
 	# 1. 恢复单位位置
