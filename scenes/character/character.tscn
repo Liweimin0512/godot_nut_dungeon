@@ -1,16 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://cokqr3cv3dqo6"]
+[gd_scene load_steps=11 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
 [ext_resource type="Texture2D" uid="uid://chw4fofu6gtjx" path="res://assets/sprites/characters/heros/water_priestess/death.png" id="2_bblvu"]
 [ext_resource type="AnimationLibrary" uid="uid://br30iodn51mob" path="res://scenes/character/resources/animation/hero/animation_library_water_priestess.res" id="4_q52vl"]
+[ext_resource type="Script" uid="uid://cchy5ydvupvgo" path="res://addons/godot_gameplay_ability_system/source/ability_attributes/ability_attribute_component.gd" id="6_bix7t"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
+[ext_resource type="Script" uid="uid://dqwgu51235tst" path="res://addons/godot_gameplay_ability_system/source/core/ability_component.gd" id="7_bblvu"]
 [ext_resource type="Script" uid="uid://y1mgjyqenlv7" path="res://scripts/systems/combat_system/combat_component.gd" id="8_0rlhq"]
+[ext_resource type="Script" uid="uid://dbahbya6g3qa0" path="res://addons/godot_gameplay_ability_system/source/ability_resources/ability_resource_component.gd" id="8_q52vl"]
 [ext_resource type="Texture2D" uid="uid://uoekuryfvt5m" path="res://assets/texture/selector.png" id="9_q52vl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnpp6"]
 size = Vector2(107.5, 125)
 
 [node name="Character" type="Node2D"]
+position = Vector2(-1, 0)
 script = ExtResource("1_qu267")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -106,12 +110,17 @@ libraries = {
 autoplay = "idle"
 
 [node name="AbilityAttributeComponent" type="Node" parent="."]
+script = ExtResource("6_bix7t")
 metadata/_custom_type_script = "uid://biv22xhanhpl6"
 
 [node name="AbilityComponent" type="Node" parent="."]
+script = ExtResource("7_bblvu")
 metadata/_custom_type_script = "uid://bc5cfn0f8y3pk"
 
-[node name="AbilityResourceComponent" type="Node" parent="."]
+[node name="AbilityResourceComponent" type="Node" parent="." node_paths=PackedStringArray("_ability_component", "_attribute_component")]
+script = ExtResource("8_q52vl")
+_ability_component = NodePath("../AbilityComponent")
+_attribute_component = NodePath("../AbilityAttributeComponent")
 metadata/_custom_type_script = "uid://sn8hrtwx8y1k"
 
 [node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("ability_component", "ability_resource_component", "ability_attribute_component")]

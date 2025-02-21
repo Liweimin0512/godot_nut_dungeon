@@ -17,9 +17,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nkdg0"]
 shader = ExtResource("7_x2yey")
-shader_parameter/blur_amount = 3.0
-shader_parameter/vignette_intensity = 0.5
-shader_parameter/brightness = 0.7
+shader_parameter/blur_amount = 0.0
+shader_parameter/vignette_intensity = 0.0
+shader_parameter/brightness = 1.0
 
 [sub_resource type="Resource" id="Resource_y7bqf"]
 script = ExtResource("9_1nl3e")
@@ -104,10 +104,12 @@ grow_vertical = 2
 layer = 32
 
 [node name="Character" parent="ActionLayer" instance=ExtResource("10_w25t6")]
+visible = false
 position = Vector2(316, 400)
 scale = Vector2(1.8, 1.8)
 
 [node name="Character2" parent="ActionLayer" instance=ExtResource("10_w25t6")]
+visible = false
 position = Vector2(836, 440)
 scale = Vector2(1.8, 1.8)
 
@@ -129,7 +131,7 @@ metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="Marker2D" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(100, 420)
+position = Vector2(99, 420)
 
 [node name="PlayerCharacter" parent="PlayerMarkers/Marker2D" groups=["Character", "Player"] instance=ExtResource("10_w25t6")]
 

@@ -14,8 +14,8 @@ func _init(config: Dictionary = {}) -> void:
 
 func can_use(context: Dictionary) -> bool:
 	var position = context.get("position", -1)
-	return _can_use_at_position(position)
+	return can_use_at_position(position)
 
 ## 判断能否在指定位置使用
-func _can_use_at_position(position: int) -> bool:
+func can_use_at_position(position: int) -> bool:
 	return valid_positions.is_empty() or position in valid_positions

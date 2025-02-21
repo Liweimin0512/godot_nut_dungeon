@@ -28,7 +28,7 @@ func setup(combat_manager: CombatManager) -> void:
 	})
 
 ## 战斗开始回调
-func _on_combat_started() -> void:
+func _on_combat_started(_args : Array) -> void:
 	# 处理战斗开始的表现效果
 	pass
 

@@ -64,13 +64,13 @@ func setup(
 
 ## 战斗开始
 func combat_start() -> void:
-	AbilitySystem.trigger_manager.trigger("combat_start", {"caster": get_parent()})
+	AbilitySystem.handle_game_event("combat_start", {"caster": get_parent()})
 	combat_started.emit()
 
 
 ## 回合开始
 func turn_start() -> void:
-	AbilitySystem.trigger_manager.trigger("turn_start", {"caster": get_parent()})
+	AbilitySystem.handle_game_event("turn_start", {"caster": get_parent()})
 	turn_started.emit()
 
 
@@ -92,7 +92,7 @@ func action_start(player_combats: Array[CombatComponent], enemy_combats: Array[C
 		return
 
 	current_action = _create_combat_action(targets, ability)
-	AbilitySystem.trigger_manager.trigger("action_start", {"caster": get_parent(), "targets": targets, "ability": ability})
+	AbilitySystem.handle_game_event("action_start", {"caster": get_parent(), "targets": targets, "ability": ability})
 	action_started.emit()
 	
 ## 手动选择技能和目标
@@ -103,7 +103,7 @@ func manual_action_start(ability: TurnBasedSkillAbility, targets: Array[CombatCo
 		return
 		
 	current_action = _create_combat_action(targets, ability)
-	AbilitySystem.trigger_manager.trigger("action_start", {"caster": get_parent(), "targets": targets, "ability": ability})
+	AbilitySystem.handle_game_event("action_start", {"caster": get_parent(), "targets": targets, "ability": ability})
 	action_started.emit()
 	CombatSystem.combat_action_started.push(current_action)
 
@@ -123,28 +123,28 @@ func action_execute(player_combats: Array[CombatComponent], enemy_combats: Array
 		"enemies": enemy_combats if _combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else player_combats,
 		"allies": player_combats if _combat_camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER else enemy_combats,
 	}
-	AbilitySystem.trigger_manager.trigger("action_executing", {"caster": get_parent(), "targets": current_action.targets, "ability": current_action.ability})
+	AbilitySystem.handle_game_event("action_executing", {"caster": get_parent(), "targets": current_action.targets, "ability": current_action.ability})
 	action_executing.emit()
 	await ability_component.try_execute_ability(current_action.ability, ability_context)
-	AbilitySystem.trigger_manager.trigger("action_executed", {"caster": get_parent(), "targets": current_action.targets, "ability": current_action.ability})
+	AbilitySystem.handle_game_event("action_executed", {"caster": get_parent(), "targets": current_action.targets, "ability": current_action.ability})
 	action_executed.emit()
 
 
 ## 行动结束
 func action_end() -> void:
-	AbilitySystem.trigger_manager.trigger("action_ended", {"caster": get_parent(), "targets": current_action.targets, "ability": current_action.ability})
+	AbilitySystem.handle_game_event("action_ended", {"caster": get_parent(), "targets": current_action.targets, "ability": current_action.ability})
 	action_ended.emit()
 
 
 ## 回合结束
 func turn_end() -> void:
-	AbilitySystem.trigger_manager.trigger("turn_ended", {"caster": get_parent()})
+	AbilitySystem.handle_game_event("turn_ended", {"caster": get_parent()})
 	turn_ended.emit()
 
 
 ## 战斗结束
 func combat_end() -> void:
-	AbilitySystem.trigger_manager.trigger("combat_ended", {"caster": get_parent()})
+	AbilitySystem.handle_game_event("combat_ended", {"caster": get_parent()})
 	combat_ended.emit()
 
 

@@ -40,6 +40,8 @@ func _init() -> void:
 		"target_positions": target_positions
 	}))
 
+func can_use_at_position(position : int) -> bool:
+	return position_restriction.can_use_at_position(position)
 
 ## 获取可选择的目标位置
 func get_available_positions(position: int) -> Array:
