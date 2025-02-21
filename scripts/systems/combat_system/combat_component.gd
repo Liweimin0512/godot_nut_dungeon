@@ -125,7 +125,7 @@ func action_execute(player_combats: Array[CombatComponent], enemy_combats: Array
 	}
 	AbilitySystem.trigger_manager.trigger("action_executing", {"caster": get_parent(), "targets": current_action.targets, "ability": current_action.ability})
 	action_executing.emit()
-	await ability_component.try_cast_ability(current_action.ability, ability_context)
+	await ability_component.try_execute_ability(current_action.ability, ability_context)
 	AbilitySystem.trigger_manager.trigger("action_executed", {"caster": get_parent(), "targets": current_action.targets, "ability": current_action.ability})
 	action_executed.emit()
 

@@ -13,6 +13,12 @@ enum TARGET_RANGE{
 	SELF,			## 自己
 }
 
+## 技能名称
+@export var ability_name: StringName
+## 技能描述
+@export var ability_description: String
+## 技能图标
+@export var icon: Texture2D
 ## 目标范围
 @export var target_range: TARGET_RANGE = TARGET_RANGE.SELF
 ## 使用次数, 0代表不限次数
