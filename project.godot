@@ -26,6 +26,8 @@ CharacterSystem="*res://scripts/systems/character_system/character_system.gd"
 PartySystem="*res://scripts/systems/party_system/party_system.gd"
 CombatSystem="*res://scripts/systems/combat_system/combat_system.gd"
 GameSystem="*res://scripts/systems/game_system.gd"
+DataManager="*res://addons/GDDataForge/source/data_manager.gd"
+UIManager="*res://addons/GodotUIFramework/source/ui_manager.gd"
 
 [dialogic]
 
@@ -51,11 +53,28 @@ Player=""
 [godot_core_system]
 
 modules={}
+modules/event_bus/enabled=true
+modules/logger/enabled=true
+modules/input_manager/enabled=true
+modules/audio_manager/enabled=true
+modules/scene_manager/enabled=true
+modules/time_manager/enabled=true
+modules/resource_manager/enabled=true
+modules/async_io_manager/enabled=true
+modules/save_manager/enabled=true
+modules/config_manager/enabled=true
+modules/state_machine/enabled=true
+modules/entity_manager/enabled=true
 
 [godot_ui_framework]
 
 modules/={}
 modules={}
+modules/theme/enabled=true
+modules/transition/enabled=true
+modules/adaptation/enabled=true
+modules/localization/enabled=true
+debug/enable_ui_debugger=true
 
 [input]
 
