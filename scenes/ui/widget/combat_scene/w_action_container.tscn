@@ -1,0 +1,177 @@
+[gd_scene load_steps=11 format=3 uid="uid://3ewkyi3cdi2p"]
+
+[ext_resource type="Theme" uid="uid://cgagjcdl72v7d" path="res://resources/theme_main.tres" id="1_a20fh"]
+[ext_resource type="Script" uid="uid://cl5qgkyaq7aon" path="res://scenes/ui/widget/combat_scene/w_action_container.gd" id="1_pxlgw"]
+[ext_resource type="PackedScene" uid="uid://ks5bblbjbqe4" path="res://scenes/ui/widget/hero_action.tscn" id="2_pjors"]
+[ext_resource type="Script" uid="uid://1mpayve22prh" path="res://addons/GodotUIFramework/source/core/components/ui_widget_component.gd" id="4_2ltuq"]
+[ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="5_yjbt4"]
+[ext_resource type="Script" uid="uid://ccoyeqfqodquq" path="res://addons/GodotUIFramework/source/core/resource/ui_widget_type.gd" id="6_2ltuq"]
+[ext_resource type="Script" uid="uid://c6ba7chc4lqax" path="res://addons/GodotUIFramework/source/core/data/ui_data_model.gd" id="6_qaax2"]
+
+[sub_resource type="Resource" id="Resource_yjbt4"]
+script = ExtResource("6_2ltuq")
+ID = &"w_hero_action"
+scene_path = "uid://ks5bblbjbqe4"
+preload_mode = 2
+cache_mode = 1
+pool_capacity = 10
+metadata/_custom_type_script = "uid://ccoyeqfqodquq"
+
+[sub_resource type="Resource" id="Resource_2brqu"]
+script = ExtResource("5_yjbt4")
+ID = &""
+scene_path = ""
+preload_mode = 0
+cache_mode = 1
+pool_capacity = 10
+
+[sub_resource type="Resource" id="Resource_ixqjd"]
+script = ExtResource("6_qaax2")
+data_paths = Array[String]([])
+_data = {}
+_watchers = Dictionary[String, Array]({})
+
+[node name="W_ActionContainer" type="MarginContainer"]
+size_flags_horizontal = 3
+script = ExtResource("1_pxlgw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelAbilityName" type="Label" parent="VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
+text = "技能名称六字"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="LabelAbilityType" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_a20fh")
+theme_override_font_sizes/font_size = 12
+text = "远程"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="LabelValidPositions" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_a20fh")
+theme_override_font_sizes/font_size = 12
+text = "有效位置：[1, 2, 3, 4]"
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="LabelTargetPositions" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_a20fh")
+theme_override_font_sizes/font_size = 12
+text = "目标位置：[1, 2, 3, 4]"
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HeroActionContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="HeroAction" parent="VBoxContainer/MarginContainer3/HeroActionContainer" instance=ExtResource("2_pjors")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="HeroAction2" parent="VBoxContainer/MarginContainer3/HeroActionContainer" instance=ExtResource("2_pjors")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="HeroAction3" parent="VBoxContainer/MarginContainer3/HeroActionContainer" instance=ExtResource("2_pjors")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="HeroAction4" parent="VBoxContainer/MarginContainer3/HeroActionContainer" instance=ExtResource("2_pjors")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="HeroAction5" parent="VBoxContainer/MarginContainer3/HeroActionContainer" instance=ExtResource("2_pjors")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="HeroAction6" parent="VBoxContainer/MarginContainer3/HeroActionContainer" instance=ExtResource("2_pjors")]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer4"]
+layout_mode = 2
+
+[node name="LabelHitRate" type="Label" parent="VBoxContainer/MarginContainer4/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 18
+text = "命中 100%"
+
+[node name="LabelDamage" type="Label" parent="VBoxContainer/MarginContainer4/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 18
+text = "伤害 3-7"
+
+[node name="LabelCritRate" type="Label" parent="VBoxContainer/MarginContainer4/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 18
+text = "暴击 65%"
+
+[node name="LabelAbilityEffectInfo" type="MarginContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/LabelAbilityEffectInfo"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 14
+text = "目标[中毒]时+50%暴击率"
+horizontal_alignment = 1
+
+[node name="UIWidgetComponent" type="Node" parent="."]
+script = ExtResource("4_2ltuq")
+view_types = Array[ExtResource("5_yjbt4")]([SubResource("Resource_yjbt4")])
+config = SubResource("Resource_2brqu")
+data_model = SubResource("Resource_ixqjd")
+metadata/_custom_type_script = "uid://1mpayve22prh"

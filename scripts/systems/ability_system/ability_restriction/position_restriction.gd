@@ -1,21 +1,23 @@
 extends AbilityRestriction
-class_name PositionRestriction
+class_name CastPositionRestriction
 
-## 位置限制器
+## 可施法位置配置
+@export var valid_cast_positions: Array[int] = []  # 可以施法的位置
 
-## 有效位置
-@export var valid_positions : Array = [1, 2, 3, 4]
-## 目标位置
-@export var target_positions: Array = [1, 2, 3, 4]
+func _init(config : Dictionary = {}) -> void:
+	var poss : Array = config.get("valid_positions", [])
+	for pos in poss:
+		valid_cast_positions.append(pos)
 
-func _init(config: Dictionary = {}) -> void:
-	valid_positions = config.get("valid_positions", [1, 2, 3, 4])
-	target_positions = config.get("target_positions", [1, 2, 3, 4])
 
-func can_use(context: Dictionary) -> bool:
-	var position = context.get("position", -1)
-	return can_use_at_position(position)
+func can_execute(context: Dictionary) -> bool:
+	var caster = context.get("caster", null)
+	if not caster:
+		return false
 
-## 判断能否在指定位置使用
-func can_use_at_position(position: int) -> bool:
-	return valid_positions.is_empty() or position in valid_positions
+	var caster_position = caster.current_point
+	if caster_position < 0:
+		return false
+		
+	# 检查施法者位置是否合法
+	return caster_position in valid_cast_positions

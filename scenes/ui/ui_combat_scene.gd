@@ -3,7 +3,7 @@ class_name UICombatScene
 
 @onready var hero_info: PanelContainer = %HeroInfo
 @onready var enemy_info: PanelContainer = %EnemyInfo
-@onready var turn_status: TurnStatus = %TurnStatus
+@onready var turn_status:  = %TurnStatus
 @onready var ui_scene_component: UISceneComponent = $UISceneComponent
 
 var _combat_manager : CombatManager

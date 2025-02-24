@@ -1,27 +1,27 @@
-[gd_scene load_steps=11 format=3 uid="uid://cokqr3cv3dqo6"]
+[gd_scene load_steps=12 format=3 uid="uid://cokqr3cv3dqo6"]
 
 [ext_resource type="Script" uid="uid://by3lox7cm5iki" path="res://scripts/core/character.gd" id="1_qu267"]
 [ext_resource type="Texture2D" uid="uid://chw4fofu6gtjx" path="res://assets/sprites/characters/heros/water_priestess/death.png" id="2_bblvu"]
 [ext_resource type="AnimationLibrary" uid="uid://br30iodn51mob" path="res://scenes/character/resources/animation/hero/animation_library_water_priestess.res" id="4_q52vl"]
-[ext_resource type="Script" uid="uid://cchy5ydvupvgo" path="res://addons/godot_gameplay_ability_system/source/ability_attributes/ability_attribute_component.gd" id="6_bix7t"]
+[ext_resource type="Texture2D" uid="uid://cox7ufkibqkmg" path="res://assets/texture/target_selector.png" id="5_l884r"]
 [ext_resource type="PackedScene" uid="uid://pc61en05ero1" path="res://addons/godot_gameplay_ability_system/source/scene/widget/w_status.tscn" id="6_cj4oh"]
-[ext_resource type="Script" uid="uid://dqwgu51235tst" path="res://addons/godot_gameplay_ability_system/source/core/ability_component.gd" id="7_bblvu"]
+[ext_resource type="Script" uid="uid://cchy5ydvupvgo" path="res://addons/godot_gameplay_ability_system/source/ability_attributes/ability_attribute_component.gd" id="6_q52vl"]
+[ext_resource type="Script" uid="uid://dqwgu51235tst" path="res://addons/godot_gameplay_ability_system/source/core/ability_component.gd" id="7_l884r"]
 [ext_resource type="Script" uid="uid://y1mgjyqenlv7" path="res://scripts/systems/combat_system/combat_component.gd" id="8_0rlhq"]
-[ext_resource type="Script" uid="uid://dbahbya6g3qa0" path="res://addons/godot_gameplay_ability_system/source/ability_resources/ability_resource_component.gd" id="8_q52vl"]
+[ext_resource type="Script" uid="uid://dbahbya6g3qa0" path="res://addons/godot_gameplay_ability_system/source/ability_resources/ability_resource_component.gd" id="8_oe6dy"]
 [ext_resource type="Texture2D" uid="uid://uoekuryfvt5m" path="res://assets/texture/selector.png" id="9_q52vl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gnpp6"]
-size = Vector2(107.5, 125)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l884r"]
+size = Vector2(117, 137)
 
 [node name="Character" type="Node2D"]
-position = Vector2(-1, 0)
 script = ExtResource("1_qu267")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -188)
 scale = Vector2(3, 3)
 texture = ExtResource("2_bblvu")
-hframes = 14
+hframes = 16
 frame = 5
 
 [node name="cast_points" type="Node2D" parent="."]
@@ -42,14 +42,6 @@ position = Vector2(1, 0)
 [node name="hand" type="Marker2D" parent="cast_points"]
 unique_name_in_owner = true
 position = Vector2(5, -110)
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(0, -96)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
-position = Vector2(0, 32)
-shape = SubResource("RectangleShape2D_gnpp6")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 offset_left = -32.0
@@ -77,16 +69,6 @@ ability_resource_colors = Dictionary[StringName, Color]({
 &"rage": Color(0.545098, 0, 0, 1)
 })
 
-[node name="LabelSelector" type="Label" parent="."]
-visible = false
-offset_left = -16.0
-offset_top = -120.0
-offset_right = 24.0
-offset_bottom = -97.0
-text = "选中"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Selector" type="TextureRect" parent="."]
 self_modulate = Color(0.87451, 0.576471, 0.156863, 1)
 anchors_preset = 8
@@ -102,6 +84,13 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_q52vl")
 
+[node name="TargetSelector" type="TextureRect" parent="."]
+offset_left = -16.0
+offset_top = -157.0
+offset_right = 24.0
+offset_bottom = -117.0
+texture = ExtResource("5_l884r")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
@@ -110,24 +99,30 @@ libraries = {
 autoplay = "idle"
 
 [node name="AbilityAttributeComponent" type="Node" parent="."]
-script = ExtResource("6_bix7t")
-metadata/_custom_type_script = "uid://biv22xhanhpl6"
+script = ExtResource("6_q52vl")
+metadata/_custom_type_script = "uid://cchy5ydvupvgo"
 
 [node name="AbilityComponent" type="Node" parent="."]
-script = ExtResource("7_bblvu")
-metadata/_custom_type_script = "uid://bc5cfn0f8y3pk"
+script = ExtResource("7_l884r")
+metadata/_custom_type_script = "uid://dqwgu51235tst"
 
 [node name="AbilityResourceComponent" type="Node" parent="." node_paths=PackedStringArray("_ability_component", "_attribute_component")]
-script = ExtResource("8_q52vl")
+script = ExtResource("8_oe6dy")
 _ability_component = NodePath("../AbilityComponent")
 _attribute_component = NodePath("../AbilityAttributeComponent")
-metadata/_custom_type_script = "uid://sn8hrtwx8y1k"
+metadata/_custom_type_script = "uid://dbahbya6g3qa0"
 
-[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("ability_component", "ability_resource_component", "ability_attribute_component")]
+[node name="CombatComponent" type="Node" parent="."]
 script = ExtResource("8_0rlhq")
-ability_component = NodePath("../AbilityComponent")
-ability_resource_component = NodePath("../AbilityResourceComponent")
-ability_attribute_component = NodePath("../AbilityAttributeComponent")
 metadata/_custom_type_script = "uid://y1mgjyqenlv7"
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_l884r")
+debug_color = Color(0.790199, 0.394021, 0.457507, 0.42)
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

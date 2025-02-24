@@ -42,7 +42,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GDDataForge/plugin.cfg", "res://addons/GodotUIFramework/plugin.cfg", "res://addons/godot_core_system/plugin.cfg", "res://addons/godot_gameplay_ability_system/plugin.cfg", "res://addons/godot_item_system/plugin.cfg", "res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/GDDataForge/plugin.cfg", "res://addons/GodotUIFramework/plugin.cfg", "res://addons/godot_core_system/plugin.cfg", "res://addons/godot_gameplay_ability_system/plugin.cfg", "res://addons/godot_item_system/plugin.cfg")
 
 [global_group]
 

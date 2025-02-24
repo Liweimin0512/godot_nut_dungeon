@@ -48,25 +48,20 @@ func _initialize_combat(combat_id: StringName) -> void:
 		await ready
 
 	# 1. 创建并设置战斗单位
-	var player_units : Array[Character] = _setup_player_units()
-	var enemy_units : Array[Character] = _setup_enemy_units(combat_id)
-	
-	var player_combats : Array[CombatComponent] = []
-	var enemy_combats : Array[CombatComponent] = []
+	var player_units : Array = _setup_player_units()
+	var enemy_units : Array = _setup_enemy_units(combat_id)
 
-	for player_unit in player_units:
-		var combat_component : CombatComponent = player_unit.combat_component
-		player_combats.append(combat_component)
-
-	for enemy_unit in enemy_units:
-		# var entity_logic: CharacterLogic = enemy_unit.character_logic
-		var combat_component : CombatComponent = enemy_unit.combat_component
-		enemy_combats.append(combat_component)
+	var players : Array[Node]
+	for unit in player_units:
+		players.append(unit)
+	var enemies : Array[Node]
+	for unit in enemy_units:
+		enemies.append(unit)
 
 	# 2. 创建战斗管理器
-	combat_manager = CombatSystem.create_combat(combat_id, player_combats, enemy_combats)
+	combat_manager = CombatSystem.create_combat(combat_id, players, enemies)
 	# TODO 测试修改
-	#combat_manager._combat_config.is_auto = false
+	combat_manager._combat_config.is_auto = false
 	
 	_setup_scene()
 	_setup_camera()
@@ -76,7 +71,7 @@ func _initialize_combat(combat_id: StringName) -> void:
 	CombatSystem.start_combat()
 
 ## 创建玩家单位
-func _setup_player_units() -> Array[Character]:
+func _setup_player_units() -> Array:
 	# 获取当前队伍
 	var party = PartySystem.get_active_party()
 	
@@ -88,8 +83,8 @@ func _setup_player_units() -> Array[Character]:
 	return party
 
 ## 创建敌人单位
-func _setup_enemy_units(combat_id: StringName) -> Array[Character]:
-	var units: Array[Character] = []
+func _setup_enemy_units(combat_id: StringName) -> Array:
+	var units: Array = []
 
 	var combat_info : CombatModel = CombatSystem.get_combat_config(combat_id)
 	

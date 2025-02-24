@@ -1,9 +1,7 @@
 ﻿ID,character_name,camp,character_icon,ability_attributes,abilities,ability_resources,sprite_position,animation_library,Unnamed: 9
-ID,角色名,"角色阵营
-1玩家
-2敌人",角色头像,属性组,技能组*arrow_beam*arrow_entangle*arrow_poison*arrow_shower,技能资源组,,动画库,
+ID,角色名,角色阵营&#10;1玩家&#10;2敌人,角色头像,属性组,技能组*arrow_beam*arrow_entangle*arrow_poison*arrow_shower,技能资源组,,动画库,
 string,string,int,resource,string,string[],string[],vector2,resource,
-crystal_mauler,战士,1,res://assets/texture/icon/character_profile_picture/crystal_mauler.png,crystal_mauler,attack,health*rage,"0,-192",res://scenes/character/resources/animation/hero/animation_library_crystal_mauler.res,*battle_cry*heroic_strike*resolute*retaliate
+crystal_mauler,战士,1,res://assets/texture/icon/character_profile_picture/crystal_mauler.png,crystal_mauler,attack*battle_cry*heroic_strike*resolute*retaliate,health*rage,"0,-192",res://scenes/character/resources/animation/hero/animation_library_crystal_mauler.res,
 leaf_ranger,游侠,1,res://assets/texture/icon/character_profile_picture/leaf_ranger.png,leaf_ranger,arrow_attack,health*enery,"0,-192",res://scenes/character/resources/animation/hero/animation_library_leaf_ranger.res,
 water_priestess,水祭祀,1,res://assets/texture/icon/character_profile_picture/water_priestess.png,water_priestess,water_blade_slash,health*mana,"0,-192",res://scenes/character/resources/animation/hero/animation_library_water_priestess.res,*vortex_bind*tidal_fury*healing_spring*aqua_shield
 wizard,法师,1,res://assets/texture/icon/character_profile_picture/wizard.tres,wizard,,health*mana,"0,-192",res://scenes/character/resources/animation/hero/animation_library_wizard.res,attack*arcane_missiles*fireball*magic_shield*mana_surge

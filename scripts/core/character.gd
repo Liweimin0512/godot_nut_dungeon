@@ -14,13 +14,14 @@ class_name Character
 @onready var ability_resource_component: AbilityResourceComponent = $AbilityResourceComponent
 @onready var ability_component: AbilityComponent = $AbilityComponent
 @onready var combat_component: CombatComponent = $CombatComponent
+@onready var selector: TextureRect = $Selector
+@onready var target_selector: TextureRect = $TargetSelector
 @onready var _attachment_types: Dictionary[StringName, Marker2D] = {
 	"head" : %head,
 	"body" : %body,
 	"feet" : %feet,
 	"hand" : %hand,
 }
-
 ## 角色数据
 @export var _character_config: CharacterModel
 ## 角色阵营
@@ -46,15 +47,10 @@ var character_name: String:
 		return _character_config.character_name
 	set(value):
 		push_error("character_name is read-only")
-
-var _event_bus : CoreSystem.EventBus:
-	get:
-		return CoreSystem.event_bus
+var can_selected: bool = false
 
 ## 角色信号
 signal animation_finished(anim_name: StringName)
-# signal attribute_changed(name: String, old_value: float, new_value: float)
-# signal resource_changed(resource_name: String, old_value: float, new_value: float)
 
 
 func _ready() -> void:
@@ -66,6 +62,10 @@ func _ready() -> void:
 		func() -> void:
 			w_status.show()
 	)
+	CombatSystem.combat_action_selecting.subscribe(_on_combat_action_selecting)
+	CombatSystem.action_ability_selected.subscribe(_on_action_ability_selected)
+	selector.hide()
+	target_selector.hide()
 
 
 func initialize(config: CharacterModel) -> void:
@@ -101,6 +101,23 @@ func get_attachment_node(attachment_name : StringName) -> Marker2D:
 	if attachment_name.is_empty():
 		return null
 	return _attachment_types.get(attachment_name, null)
+
+
+## 设置预选状态
+func _set_preselect(is_preselect: bool) -> void:
+	if is_preselect:
+		selector.self_modulate = Color.DARK_RED if character_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY else Color.GREEN_YELLOW
+		selector.show()
+		can_selected = true
+	else:
+		selector.hide()
+		can_selected = false
+
+
+## 清除预选状态
+func clear_preselect() -> void:
+	selector.hide()
+
 
 # 内部方法
 
@@ -146,6 +163,37 @@ func _on_damage_completed(damage_context: Dictionary) -> void:
 		return
 	
 	play_animation(&"hit")
+
+
+func _on_combat_action_selecting(action_unit: Character) -> void:
+	if action_unit != self:
+		return
+	selector.show()
+
+
+func _on_action_ability_selected(action : CombatAction) -> void:
+	var actor : Character = action.actor
+	if actor == self:
+		return
+	var ability = action.ability
+	var targets := ability.get_available_targets({"caster": actor})
+	_set_preselect(self in targets)
+
+
+func _on_area_2d_mouse_exited() -> void:
+	target_selector.hide()
+
+
+func _on_area_2d_mouse_entered() -> void:
+	if can_selected:
+		target_selector.show()
+
+
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+			CombatSystem.action_target_selected.push([self])
+
 
 func _to_string() -> String:
 	return character_name if character_name else super.to_string()

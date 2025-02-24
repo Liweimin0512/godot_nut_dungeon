@@ -10,14 +10,20 @@ enum ActionType {
 	ALLY,       ## 友方技能
 }
 
-var actor: Node2D                  ## 行动者
-var targets: Array[Node2D] = []    ## 目标数组
-var ability: TurnBasedSkillAbility ## 技能
-var action_type: ActionType        ## 行动类型
+var actor: Node2D                  				## 行动者
+var ability: TurnBasedSkillAbility:
+	set(value):
+		ability = value
+		CombatSystem.action_ability_selected.push([self])
+		ability_changed.emit() 				## 技能
+var targets: Array[Node2D] = []    				## 目标数组
+var action_type: ActionType        				## 行动类型
 
 var start_duration: float = 0.1
 var execute_duration: float = 0.5
 var end_duration: float = 0.2
+
+signal ability_changed
 
 func _init(
 		p_actor: Node2D, 
@@ -43,16 +49,7 @@ func _determine_action_type(p_actor: Node2D,
 		_action_type = ActionType.MELEE
 		return _action_type
 		
-	match p_ability.target_range:
-		TurnBasedSkillAbility.TARGET_RANGE.SELF:
-			_action_type = ActionType.SELF
-		TurnBasedSkillAbility.TARGET_RANGE.SINGLE_ALLY, TurnBasedSkillAbility.TARGET_RANGE.ALL_ALLY:
-			if p_targets.size() == 1 and p_targets[0] == p_actor:
-				_action_type = ActionType.SELF
-			else:
-				_action_type = ActionType.ALLY
-		_:
-			_action_type = ActionType.MELEE if p_ability.is_melee else ActionType.RANGED
+	_action_type = ActionType.MELEE if p_ability.is_melee else ActionType.RANGED
 	return _action_type
 
 ## 获取字符串形式的行动类型

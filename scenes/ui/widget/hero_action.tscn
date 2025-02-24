@@ -1,33 +1,97 @@
-[gd_scene load_steps=2 format=3 uid="uid://ks5bblbjbqe4"]
+[gd_scene load_steps=20 format=3 uid="uid://ks5bblbjbqe4"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kipig"]
+[ext_resource type="Script" uid="uid://ch4oj6stxndg7" path="res://scenes/ui/widget/hero_action.gd" id="1_388wl"]
+[ext_resource type="Texture2D" uid="uid://dymtptr4legxc" path="res://assets/texture/icon/Buffs/attack_boost.png" id="1_x75a6"]
+[ext_resource type="Texture2D" uid="uid://bidry262vvekp" path="res://assets/texture/icon_selector.png" id="3_2yhy4"]
+[ext_resource type="Script" uid="uid://1mpayve22prh" path="res://addons/GodotUIFramework/source/core/components/ui_widget_component.gd" id="3_yf7mg"]
+[ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="4_2yhy4"]
+[ext_resource type="Script" uid="uid://c6ba7chc4lqax" path="res://addons/GodotUIFramework/source/core/data/ui_data_model.gd" id="5_3rdj8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yf7mg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2yhy4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3rdj8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ss2dn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8bf6e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y4y6q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cv1ef"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_43u7i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mdenw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hd0ms"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1xs5i"]
+
+[sub_resource type="Resource" id="Resource_ss2dn"]
+script = ExtResource("4_2yhy4")
+ID = &""
+scene_path = ""
+preload_mode = 0
+cache_mode = 1
+pool_capacity = 10
+
+[sub_resource type="Resource" id="Resource_8bf6e"]
+script = ExtResource("5_3rdj8")
+data_paths = Array[String]([])
+_data = {}
+_watchers = Dictionary[String, Array]({})
 
 [node name="HeroAction" type="MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
 offset_right = 20.0
 offset_bottom = 28.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
+script = ExtResource("1_388wl")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-texture_normal = SubResource("PlaceholderTexture2D_kipig")
-ignore_texture_size = true
-stretch_mode = 0
-
 [node name="Label" type="Label" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_x75a6")
+
+[node name="Selector" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("3_2yhy4")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yf7mg")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_2yhy4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3rdj8")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_ss2dn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_8bf6e")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_y4y6q")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_cv1ef")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_43u7i")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mdenw")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_hd0ms")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1xs5i")
+flat = true
+expand_icon = true
+
+[node name="UIWidgetComponent" type="Node" parent="."]
+script = ExtResource("3_yf7mg")
+config = SubResource("Resource_ss2dn")
+data_model = SubResource("Resource_8bf6e")
+metadata/_custom_type_script = "uid://1mpayve22prh"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -14,7 +14,7 @@ const ANIMATION_DURATION = 0.3  		## 动画持续时间
 
 ## 当前战斗管理器，由外部注入
 var _current_combat_manager: CombatManager
-var _current_units : Array[CombatComponent]
+var _current_units : Array[Node]
 
 func _ready() -> void:
 	CombatSystem.combat_turn_started.subscribe(_on_turn_started)
@@ -38,17 +38,18 @@ func _set_turn(turn_number: int) -> void:
 	tween.tween_property(label_turn_count, "modulate:a", 0.0, 0.0)
 	tween.tween_property(label_turn_count, "modulate:a", 1.0, ANIMATION_DURATION)
 
+
 ## 更新行动顺序显示
-func _update_order(units: Array[CombatComponent]) -> void:
+func _update_order(units: Array[Node]) -> void:
 	# 清除现有的单位图标
 	for child in order_container.get_children():
 		child.queue_free()
 	
-	_current_units = units
+	_current_units = units.duplicate()
 	
 	# 创建新的单位图标（最多显示MAX_DISPLAY_UNITS个）
 	for i in range(min(units.size(), MAX_DISPLAY_UNITS)):
-		var unit : CombatComponent = units[i]
+		var unit : CombatComponent = CombatSystem.get_combat_component(units[i])
 		var icon = ui_widget_component.create_widget("character_icon", order_container)
 		
 		# 设置图标属性

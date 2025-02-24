@@ -62,7 +62,6 @@ size_flags_horizontal = 3
 [node name="OrderContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-alignment = 2
 
 [node name="CharacterIcon" parent="MarginContainer/HBoxContainer/MarginContainer/OrderContainer" instance=ExtResource("2_4q6do")]
 layout_mode = 2
@@ -81,7 +80,7 @@ script = ExtResource("3_ld0po")
 view_types = Array[ExtResource("4_4q6do")]([SubResource("Resource_g5un5")])
 config = SubResource("Resource_44ulx")
 data_model = SubResource("Resource_0h4qt")
-metadata/_custom_type_script = ExtResource("3_ld0po")
+metadata/_custom_type_script = "uid://1mpayve22prh"
 
 [connection signal="initialized" from="UIWidgetComponent" to="." method="_on_ui_widget_component_initialized"]
 [connection signal="updated" from="UIWidgetComponent" to="." method="_on_ui_widget_component_updated"]

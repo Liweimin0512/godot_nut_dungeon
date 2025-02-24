@@ -20,19 +20,28 @@ var _state_machine_manager: CoreSystem.StateMachineManager:
 var _initialized : bool = false
 var _combat_model_type : ModelType
 
+## 所有战斗组件缓存
+var _combat_components : Dictionary[Node, CombatComponent]
+
 # 事件注册
 var combat_created : CombatEvent = CombatEvent.new(&"combat_created")						## 战斗创建事件
 var combat_started : CombatEvent = CombatEvent.new(&"combat_started")						## 战斗开始事件
+
 var combat_turn_started : CombatEvent = CombatEvent.new(&"combat_turn_started")				## 战斗回合开始事件
+
 var combat_action_started : CombatEvent = CombatEvent.new(&"combat_action_started")			## 战斗动作开始事件
+var combat_action_selecting : CombatEvent = CombatEvent.new(&"combat_action_selecting")		## 战斗动作选择事件
+
+var combat_action_selected : CombatEvent = CombatEvent.new(&"combat_action_selected")		## 战斗动作选择事件
 var combat_action_executing : CombatEvent = CombatEvent.new(&"combat_action_executing")		## 战斗动作执行开始事件
 var combat_action_executed : CombatEvent = CombatEvent.new(&"combat_action_executed")		## 战斗动作执行事件
 var combat_action_ended : CombatEvent = CombatEvent.new(&"combat_action_ended")				## 战斗动作结束事件
 var combat_turn_executed : CombatEvent = CombatEvent.new(&"combat_turn_executed")			## 战斗回合执行事件
 var combat_turn_ended : CombatEvent = CombatEvent.new(&"combat_turn_ended")					## 战斗回合结束事件
 var combat_ended : CombatEvent = CombatEvent.new(&"combat_ended")							## 战斗结束事件
+
 var action_ability_selected : CombatEvent = CombatEvent.new(&"action_ability_selected")		## 战斗动作技能选择事件
-var action_target_set : CombatEvent = CombatEvent.new(&"action_target_set")					## 战斗动作目标设置事件
+var action_target_selected : CombatEvent = CombatEvent.new(&"action_target_selected")		## 战斗动作目标设置事件
 
 ## 战斗相关信号
 signal initialized(success: bool)
@@ -60,11 +69,7 @@ func get_combat_config(combat_id : StringName) -> CombatModel:
 	return DataManager.get_data_model(_combat_model_type.model_name, combat_id)
 
 ## 创建新的战斗实例
-func create_combat(
-		combat_id : StringName,
-		player_combats: Array[CombatComponent], 
-		enemy_combats: Array[CombatComponent], 
-		) -> CombatManager:
+func create_combat(combat_id : StringName, players: Array[Node], enemies: Array[Node]) -> CombatManager:
 	# 如果已有活跃战斗，先结束它
 	if active_combat_manager:
 		end_combat()
@@ -72,8 +77,8 @@ func create_combat(
 	# 创建新的战斗管理器实例
 	active_combat_manager = CombatManager.new(
 		get_combat_config(combat_id),
-		player_combats,
-		enemy_combats
+		players,
+		enemies
 	)
 	_state_machine_manager.register_state_machine(COMBAT_STATE_MACHINE, CombatStateMachine.new(), active_combat_manager)
 	combat_created.push(active_combat_manager)
@@ -90,9 +95,24 @@ func end_combat() -> void:
 		active_combat_manager = null
 	_state_machine_manager.unregister_state_machine(COMBAT_STATE_MACHINE)	
 
+
 ## 获取当前战斗管理器实例
 func get_active_combat() -> CombatManager:
 	return active_combat_manager
+
+
+## 获取战斗组件
+func get_combat_component(unit: Node) -> CombatComponent:
+	var component : CombatComponent = _combat_components.get(unit, null)
+	if not component:
+		component = unit.get("combat_component")
+		if not component:
+			component = unit.get_node_or_null("CombatComponent")
+		if component:
+			_combat_components.set(unit, component)
+	return component
+
+
 
 ## 初始化子系统
 func _init_subsystems() -> void:

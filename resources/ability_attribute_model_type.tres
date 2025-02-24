@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bf3cohk1etxvp" path="res://addons/GDDataForge/source/resource/model_type.gd" id="1_8fiyt"]
 [ext_resource type="Script" uid="uid://c65rwndbbr15i" path="res://addons/GDDataForge/source/resource/table_type.gd" id="2_sikg6"]
-
-[sub_resource type="Resource" id="Resource_8fiyt"]
-metadata/__load_path__ = "res://addons/godot_gameplay_ability_system/source/core/ability_attribute/ability_attribute.gd"
+[ext_resource type="Script" uid="uid://3cf6a82y0m27" path="res://addons/godot_gameplay_ability_system/source/ability_attributes/ability_attribute.gd" id="2_yxm16"]
 
 [sub_resource type="Resource" id="Resource_yxm16"]
 script = ExtResource("2_sikg6")
@@ -21,7 +19,7 @@ metadata/_custom_type_script = ExtResource("2_sikg6")
 [resource]
 script = ExtResource("1_8fiyt")
 model_name = &"ability_attribute"
-model_script = SubResource("Resource_8fiyt")
+model_script = ExtResource("2_yxm16")
 table = SubResource("Resource_yxm16")
 description = ""
 field_mappings = Dictionary[String, String]({})

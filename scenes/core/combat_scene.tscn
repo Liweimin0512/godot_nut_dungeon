@@ -130,25 +130,25 @@ position = Vector2(0, -50)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="Marker2D" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(99, 420)
+[node name="Marker2D4" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(490, 420)
 
-[node name="PlayerCharacter" parent="PlayerMarkers/Marker2D" groups=["Character", "Player"] instance=ExtResource("10_w25t6")]
-
-[node name="Marker2D2" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(230, 420)
-
-[node name="Character" parent="PlayerMarkers/Marker2D2" instance=ExtResource("10_w25t6")]
+[node name="Character" parent="PlayerMarkers/Marker2D4" instance=ExtResource("10_w25t6")]
 
 [node name="Marker2D3" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(360, 420)
 
 [node name="Character" parent="PlayerMarkers/Marker2D3" instance=ExtResource("10_w25t6")]
 
-[node name="Marker2D4" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(490, 420)
+[node name="Marker2D2" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(230, 420)
 
-[node name="Character" parent="PlayerMarkers/Marker2D4" instance=ExtResource("10_w25t6")]
+[node name="Character" parent="PlayerMarkers/Marker2D2" instance=ExtResource("10_w25t6")]
+
+[node name="Marker2D" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(99, 420)
+
+[node name="PlayerCharacter" parent="PlayerMarkers/Marker2D" groups=["Character", "Player"] instance=ExtResource("10_w25t6")]
 
 [node name="EnemyMarkers" type="Node2D" parent="."]
 unique_name_in_owner = true

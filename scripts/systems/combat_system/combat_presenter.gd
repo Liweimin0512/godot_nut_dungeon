@@ -301,7 +301,7 @@ func _on_combat_action_executing(action: CombatAction) -> void:
 	_execute_combat_action(action, action.execute_duration)
 
 
-func _on_combat_action_executed(action: CombatAction) -> void:
+func _on_combat_action_executed(_action: CombatAction) -> void:
 	pass
 
 func _on_combat_action_ended(action: CombatAction) -> void:

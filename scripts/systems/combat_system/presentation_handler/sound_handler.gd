@@ -5,7 +5,7 @@ class_name SoundHandler
 
 var _audio_player : AudioStreamPlayer2D
 
-func handle_effect(config: Dictionary, context: Dictionary) -> void:
+func handle_effect(config: Dictionary, _context: Dictionary) -> void:
 	if not _audio_player:
 		GASLogger.error("SoundHandler: audio player is null")
 		return
@@ -37,11 +37,11 @@ class SoundConfig:
 	var pitch: float
 	var bus: String
 
-	func _init(sound: String, volume: float, pitch: float, bus: String) -> void:
-		self.sound = sound
-		self.volume = volume
-		self.pitch = pitch
-		self.bus = bus
+	func _init(p_sound: String, p_volume: float, p_pitch: float, p_bus: String) -> void:
+		sound 	= p_sound
+		volume = p_volume
+		pitch 	= p_pitch
+		bus 	= p_bus
 
 	func to_dict() -> Dictionary:
 		return {
