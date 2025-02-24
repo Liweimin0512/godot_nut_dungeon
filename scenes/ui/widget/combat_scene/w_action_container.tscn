@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://3ewkyi3cdi2p"]
+[gd_scene load_steps=14 format=3 uid="uid://3ewkyi3cdi2p"]
 
 [ext_resource type="Theme" uid="uid://cgagjcdl72v7d" path="res://resources/theme_main.tres" id="1_a20fh"]
 [ext_resource type="Script" uid="uid://cl5qgkyaq7aon" path="res://scenes/ui/widget/combat_scene/w_action_container.gd" id="1_pxlgw"]
 [ext_resource type="PackedScene" uid="uid://ks5bblbjbqe4" path="res://scenes/ui/widget/hero_action.tscn" id="2_pjors"]
+[ext_resource type="Texture2D" uid="uid://dbqdvd8hmyvl3" path="res://assets/texture/empty_positions.png" id="3_yjbt4"]
+[ext_resource type="Texture2D" uid="uid://bka1hqs5bpc62" path="res://assets/texture/valid_positions.png" id="4_2brqu"]
 [ext_resource type="Script" uid="uid://1mpayve22prh" path="res://addons/GodotUIFramework/source/core/components/ui_widget_component.gd" id="4_2ltuq"]
+[ext_resource type="Texture2D" uid="uid://bh3ia0na3q5ca" path="res://assets/texture/target_positions.png" id="5_ixqjd"]
 [ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="5_yjbt4"]
 [ext_resource type="Script" uid="uid://ccoyeqfqodquq" path="res://addons/GodotUIFramework/source/core/resource/ui_widget_type.gd" id="6_2ltuq"]
 [ext_resource type="Script" uid="uid://c6ba7chc4lqax" path="res://addons/GodotUIFramework/source/core/data/ui_data_model.gd" id="6_qaax2"]
@@ -57,6 +60,7 @@ size_flags_horizontal = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
 layout_mode = 2
@@ -68,27 +72,87 @@ theme = ExtResource("1_a20fh")
 theme_override_font_sizes/font_size = 12
 text = "远程"
 
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2"]
+[node name="ValidPositionsContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/ValidPositionsContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("3_yjbt4")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/ValidPositionsContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("3_yjbt4")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/ValidPositionsContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("4_2brqu")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2/ValidPositionsContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("4_2brqu")
+expand_mode = 1
 
 [node name="LabelValidPositions" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer2"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme = ExtResource("1_a20fh")
 theme_override_font_sizes/font_size = 12
 text = "有效位置：[1, 2, 3, 4]"
 
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3"]
+[node name="TargetPositionsContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/TargetPositionsContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("3_yjbt4")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/TargetPositionsContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("3_yjbt4")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/TargetPositionsContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("5_ixqjd")
+expand_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3/TargetPositionsContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("5_ixqjd")
+expand_mode = 1
 
 [node name="LabelTargetPositions" type="Label" parent="VBoxContainer/MarginContainer2/HBoxContainer/MarginContainer3"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme = ExtResource("1_a20fh")
 theme_override_font_sizes/font_size = 12

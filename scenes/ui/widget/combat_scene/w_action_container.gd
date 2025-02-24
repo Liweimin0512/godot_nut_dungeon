@@ -1,6 +1,10 @@
 extends MarginContainer
 class_name W_ActionContainer
 
+const EMPTY_POSITIONS = preload("res://assets/texture/empty_positions.png")
+const TARGET_POSITIONS = preload("res://assets/texture/target_positions.png")
+const VALID_POSITIONS = preload("res://assets/texture/valid_positions.png")
+
 @onready var label_ability_name: Label = %LabelAbilityName
 @onready var label_ability_type: Label = %LabelAbilityType
 @onready var label_valid_positions: Label = %LabelValidPositions
@@ -10,6 +14,9 @@ class_name W_ActionContainer
 @onready var label_damage: Label = %LabelDamage
 @onready var label_crit_rate: Label = %LabelCritRate
 @onready var label_ability_effect_info: MarginContainer = %LabelAbilityEffectInfo
+@onready var valid_positions_container: HBoxContainer = %ValidPositionsContainer
+@onready var target_positions_container: HBoxContainer = %TargetPositionsContainer
+
 
 var _selected_ability : HeroAction:
 	set(value):
@@ -39,8 +46,31 @@ func _selecte_ability(ability: TurnBasedSkillAbility) -> void:
 	_selected_ability = w_ability
 	label_ability_name.text = ability.ability_name
 	label_ability_type.text = "近战" if ability.is_melee else "远程"
-	label_valid_positions.text = "有效位置:%s" % str(ability.position_restriction.valid_cast_positions)
-	label_target_positions.text = "目标位置:%s" % str(ability.get_available_target_positions())
+	_update_valid_positions_display(ability)
+	_update_target_positions_display(ability)
+
+
+func _update_valid_positions_display(ability : TurnBasedSkillAbility) -> void:
+	var valid_cast_positions := ability.position_restriction.valid_cast_positions
+	label_valid_positions.text = "有效位置:%s" % str(valid_cast_positions)
+	for index in range(valid_positions_container.get_child_count(), 0, -1):
+		var child : TextureRect = valid_positions_container.get_child(index - 1)
+		if index in valid_cast_positions:
+			child.texture = VALID_POSITIONS
+		else:
+			child.texture = EMPTY_POSITIONS
+
+
+func _update_target_positions_display(ability : TurnBasedSkillAbility) -> void:
+	var target_positions := ability.get_available_target_positions()
+	label_target_positions.text = "目标位置:%s" % str(target_positions)
+	var index = 1
+	for child in target_positions_container.get_children():
+		if index in target_positions:
+			child.texture = TARGET_POSITIONS
+		else:
+			child.texture = EMPTY_POSITIONS
+		index += 1
 
 
 func _on_combat_action_selecting(action_unit: Character) -> void:

@@ -3,25 +3,26 @@ class_name TurnBasedSkillAbility
 
 ## 回合制技能
 
-@export var ability_name: StringName			## 技能名称
-@export var ability_description: String			## 技能描述
-@export var icon: Texture2D						## 技能图标
-@export var is_melee : bool = true				## 是否近战
+@export var ability_name: StringName							## 技能名称
+@export var ability_description: String							## 技能描述
+@export var icon: Texture2D										## 技能图标
+@export var is_melee : bool = true								## 是否近战
 
 # 伤害修正相关
-@export var base_damage: float = 0.0             ## 基础伤害
-@export var damage_multiplier: float = 1.0       ## 伤害倍率
-@export var damage_type: StringName = "physical" ## 伤害类型
-@export var crit_rate_bonus: float = 0.0        ## 额外暴击率
-@export var crit_damage_bonus: float = 0.0      ## 额外暴击伤害
+@export var damage_randomness: float = 0.0      				## 伤害浮动
+@export var damage_multiplier: float = 1.0      				## 伤害修正倍率
+@export var crit_rate_bonus: float = 0.0        				## 暴击修正倍数
+@export var hit_rate_bonus: float = 0.0         				## 命中修正倍数
 
-var position_restriction : CastPositionRestriction
-var usage_count_restriction : UsageCountRestriction
+var position_restriction : CastPositionRestriction				## 位置限制
+var usage_count_restriction : UsageCountRestriction				## 使用次数限制
 
-var _target_selector : TurnBasedTargetSelector
+var _target_selector : TurnBasedTargetSelector					## 目标选择器
+
 
 func _init() -> void:
 	add_tag("skill")
+
 
 ## 从数据字典初始化
 ## [param data] 数据字典
@@ -43,23 +44,6 @@ func _init_from_data(data : Dictionary) -> void:
 		"available_positions": data.get("available_positions", [1, 2, 3, 4]),	
 	})
 
-## 获取技能描述（包含伤害信息）
-func get_full_description() -> String:
-	var desc = []
-	desc.append(ability_description)
-	
-	# 添加伤害相关描述
-	if base_damage > 0:
-		desc.append("\n基础伤害：%.1f" % base_damage)
-		if damage_multiplier != 1.0:
-			desc.append("伤害倍率：%.1fx" % damage_multiplier)
-	
-	if crit_rate_bonus > 0:
-		desc.append("额外暴击率：+%.1f%%" % (crit_rate_bonus * 100))
-	if crit_damage_bonus > 0:
-		desc.append("额外暴击伤害：+%.1f%%" % (crit_damage_bonus * 100))
-	
-	return "\n".join(desc)
 
 func execute(context: Dictionary) -> void:
 	var selected_targets = _target_selector.get_selected_targets(self, context)
@@ -69,18 +53,72 @@ func execute(context: Dictionary) -> void:
 	# 添加技能伤害相关信息到上下文
 	context["targets"] = actual_targets
 	context["skill_damage_info"] = {
-		"base_damage": base_damage,
+		"damage_randomness": damage_randomness,
 		"damage_multiplier": damage_multiplier,
-		"damage_type": damage_type,
 		"crit_rate_bonus": crit_rate_bonus,
-		"crit_damage_bonus": crit_damage_bonus
+		"hit_rate_bonus": hit_rate_bonus
 	}
 
 	super(context)
 
+
+func get_full_description() -> String:
+	var desc = []
+	desc.append(ability_description)
+
+	# 获得行为树的效果描述
+	var action_tree_desc : String = AbilitySystem.action_tree_manager.get_tree_description(self)
+	if not action_tree_desc.is_empty():
+		desc.append("\n")
+		desc.append(action_tree_desc)
+
+	return "\n".join(desc)
+
+
+## 获取伤害最小值
+func get_min_damage(caster: Node) -> float:
+	if not caster:
+		GASLogger.error("caster is null")
+		return 1.0
+	
+	var attack = caster.ability_attribute_component.get_attribute_value("attack")
+	return attack * (damage_multiplier - damage_randomness)
+
+
+## 获取伤害最大值
+func get_max_damage(caster: Node) -> float:
+	if not caster:
+		GASLogger.error("caster is null")
+		return 1.0
+	
+	var attack = caster.ability_attribute_component.get_attribute_value("attack")
+	return attack * (damage_multiplier + damage_randomness)
+
+
+## 获取技能暴击倍数
+func get_crit_multiplier(caster: Node) -> float:
+	if not caster:
+		GASLogger.error("caster is null")
+		return 1.0
+	
+	var base_crit_rate = caster.ability_attribute_component.get_attribute_value("crit_rate")
+	return base_crit_rate * crit_rate_bonus
+
+
+## 获取技能命中倍数
+func get_hit_multiplier(caster: Node) -> float:
+	if not caster:
+		GASLogger.error("caster is null")
+		return 1.0
+	
+	var base_hit_rate = caster.ability_attribute_component.get_attribute_value("hit_rate")
+	return base_hit_rate * hit_rate_bonus
+
+
 ## 获取有效目标位置
 func get_available_target_positions() -> Array:
 	return _target_selector.available_positions
+
 
 ## 获取技能目标选择器
 func _get_target_selector() -> AbilityTargetSelector:

@@ -2,4 +2,4 @@
 
 [resource]
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/constants/outline_size = 0
+Label/constants/outline_size = 5
