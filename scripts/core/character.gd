@@ -173,6 +173,9 @@ func _on_combat_action_selecting(action_unit: Character) -> void:
 
 func _on_action_ability_selected(action : CombatAction) -> void:
 	var actor : Character = action.actor
+	if not actor:
+		push_error("actor is null")
+		return
 	if actor == self:
 		return
 	var ability = action.ability

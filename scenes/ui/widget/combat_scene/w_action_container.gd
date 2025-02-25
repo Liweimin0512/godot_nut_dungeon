@@ -18,14 +18,14 @@ const VALID_POSITIONS = preload("res://assets/texture/valid_positions.png")
 @onready var target_positions_container: HBoxContainer = %TargetPositionsContainer
 
 
-var _selected_ability : HeroAction:
+var _selected_ability : W_HeroAction:
 	set(value):
 		if _selected_ability:
 			_selected_ability.cancel_selecte()
 		_selected_ability = value
 		if _selected_ability:
 			_selected_ability.selecte()
-var _ability_types : Dictionary[Ability, HeroAction]
+var _ability_types : Dictionary[Ability, W_HeroAction]
 var _selecte_hero : Character
 var _combat_action : CombatAction : set = _combat_action_setter
 
@@ -35,12 +35,8 @@ func _ready() -> void:
 		child.pressed.connect(_on_hero_action_pressed.bind(child))
 
 
-func _update_display(action_unit: Character) -> void:
-	pass
-
-
 func _selecte_ability(ability: TurnBasedSkillAbility) -> void:
-	var w_ability : HeroAction = _ability_types.get(ability, null)
+	var w_ability : W_HeroAction = _ability_types.get(ability, null)
 	if not w_ability:
 		return
 	_selected_ability = w_ability
@@ -48,6 +44,12 @@ func _selecte_ability(ability: TurnBasedSkillAbility) -> void:
 	label_ability_type.text = "近战" if ability.is_melee else "远程"
 	_update_valid_positions_display(ability)
 	_update_target_positions_display(ability)
+	label_hit_rate.text = "命中率：{0}".format([ability.get_hit_rate(_selecte_hero)])
+	label_crit_rate.text = "暴击率：{0}".format([ability.get_crit_rate(_selecte_hero)])
+	label_damage.text = "伤害：{0}-{1}".format([
+		ability.get_min_damage(_selecte_hero),
+		ability.get_max_damage(_selecte_hero)
+	])
 
 
 func _update_valid_positions_display(ability : TurnBasedSkillAbility) -> void:
@@ -88,7 +90,7 @@ func _on_combat_action_selecting(action_unit: Character) -> void:
 	_selecte_ability(_combat_action.ability)
 
 
-func _on_hero_action_pressed(action: HeroAction) -> void:
+func _on_hero_action_pressed(action: W_HeroAction) -> void:
 	var combat_component: CombatComponent = CombatSystem.get_combat_component(_selecte_hero)
 	var combat_action : CombatAction = combat_component.current_action
 	combat_action.ability = action.ability
@@ -99,12 +101,12 @@ func _on_combat_action_ability_changed() -> void:
 	_selecte_ability(ability)
 
 
-func _connect_combat_action(_combat_action : CombatAction) -> void:
-	_combat_action.ability_changed.connect(_on_combat_action_ability_changed)
+func _connect_combat_action(combat_action : CombatAction) -> void:
+	combat_action.ability_changed.connect(_on_combat_action_ability_changed)
 
 
-func _disconnect_combat_action(_combat_action: CombatAction) -> void:
-	_combat_action.ability_changed.disconnect(_on_combat_action_ability_changed)
+func _disconnect_combat_action(combat_action: CombatAction) -> void:
+	combat_action.ability_changed.disconnect(_on_combat_action_ability_changed)
 
 
 func _combat_action_setter(value : CombatAction) -> void:

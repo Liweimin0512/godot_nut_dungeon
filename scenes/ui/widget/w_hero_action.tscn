@@ -1,11 +1,11 @@
 [gd_scene load_steps=20 format=3 uid="uid://ks5bblbjbqe4"]
 
-[ext_resource type="Script" uid="uid://ch4oj6stxndg7" path="res://scenes/ui/widget/hero_action.gd" id="1_388wl"]
-[ext_resource type="Texture2D" uid="uid://dymtptr4legxc" path="res://assets/texture/icon/Buffs/attack_boost.png" id="1_x75a6"]
-[ext_resource type="Texture2D" uid="uid://bidry262vvekp" path="res://assets/texture/icon_selector.png" id="3_2yhy4"]
-[ext_resource type="Script" uid="uid://1mpayve22prh" path="res://addons/GodotUIFramework/source/core/components/ui_widget_component.gd" id="3_yf7mg"]
-[ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="4_2yhy4"]
-[ext_resource type="Script" uid="uid://c6ba7chc4lqax" path="res://addons/GodotUIFramework/source/core/data/ui_data_model.gd" id="5_3rdj8"]
+[ext_resource type="Script" uid="uid://ch4oj6stxndg7" path="res://scenes/ui/widget/w_hero_action.gd" id="1_ghcw7"]
+[ext_resource type="Texture2D" uid="uid://dymtptr4legxc" path="res://assets/texture/icon/Buffs/attack_boost.png" id="2_jf5rm"]
+[ext_resource type="Texture2D" uid="uid://bidry262vvekp" path="res://assets/texture/icon_selector.png" id="3_ekgt2"]
+[ext_resource type="Script" uid="uid://1mpayve22prh" path="res://addons/GodotUIFramework/source/core/components/ui_widget_component.gd" id="4_dysle"]
+[ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="5_fvpxl"]
+[ext_resource type="Script" uid="uid://c6ba7chc4lqax" path="res://addons/GodotUIFramework/source/core/data/ui_data_model.gd" id="6_a2lif"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yf7mg"]
 
@@ -30,7 +30,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1xs5i"]
 
 [sub_resource type="Resource" id="Resource_ss2dn"]
-script = ExtResource("4_2yhy4")
+script = ExtResource("5_fvpxl")
 ID = &""
 scene_path = ""
 preload_mode = 0
@@ -38,18 +38,18 @@ cache_mode = 1
 pool_capacity = 10
 
 [sub_resource type="Resource" id="Resource_8bf6e"]
-script = ExtResource("5_3rdj8")
+script = ExtResource("6_a2lif")
 data_paths = Array[String]([])
 _data = {}
 _watchers = Dictionary[String, Array]({})
 
-[node name="HeroAction" type="MarginContainer"]
+[node name="W_HeroAction" type="MarginContainer"]
 custom_minimum_size = Vector2(32, 32)
 offset_right = 20.0
 offset_bottom = 28.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_388wl")
+script = ExtResource("1_ghcw7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -65,11 +65,11 @@ vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("1_x75a6")
+texture = ExtResource("2_jf5rm")
 
 [node name="Selector" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("3_2yhy4")
+texture = ExtResource("3_ekgt2")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
@@ -88,7 +88,7 @@ flat = true
 expand_icon = true
 
 [node name="UIWidgetComponent" type="Node" parent="."]
-script = ExtResource("3_yf7mg")
+script = ExtResource("4_dysle")
 config = SubResource("Resource_ss2dn")
 data_model = SubResource("Resource_8bf6e")
 metadata/_custom_type_script = "uid://1mpayve22prh"

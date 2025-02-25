@@ -91,6 +91,13 @@ offset_right = 24.0
 offset_bottom = -117.0
 texture = ExtResource("5_l884r")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -64)
+shape = SubResource("RectangleShape2D_l884r")
+debug_color = Color(0.790199, 0.394021, 0.457507, 0.42)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
@@ -115,13 +122,6 @@ metadata/_custom_type_script = "uid://dbahbya6g3qa0"
 [node name="CombatComponent" type="Node" parent="."]
 script = ExtResource("8_0rlhq")
 metadata/_custom_type_script = "uid://y1mgjyqenlv7"
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -64)
-shape = SubResource("RectangleShape2D_l884r")
-debug_color = Color(0.790199, 0.394021, 0.457507, 0.42)
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

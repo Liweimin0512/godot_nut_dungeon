@@ -46,10 +46,14 @@ var action_target_selected : CombatEvent = CombatEvent.new(&"action_target_selec
 ## 战斗相关信号
 signal initialized(success: bool)
 
+
 ## 初始化战斗系统
 func initialize(combat_model_type: ModelType) -> bool:
 	if _initialized:
 		return true
+
+	action_target_selected.subscribe(_on_action_target_selected)
+
 	# 初始化战斗相关的子系统
 	# 例如：技能系统、效果系统、AI系统等
 	_init_subsystems()
@@ -113,11 +117,17 @@ func get_combat_component(unit: Node) -> CombatComponent:
 	return component
 
 
+func _on_action_target_selected(target: Node) -> void:
+	if not active_combat_manager:
+		return
+	active_combat_manager.select_action_target(target)
+
 
 ## 初始化子系统
 func _init_subsystems() -> void:
 	# TODO: 初始化各个子系统
 	pass
+
 
 class CombatEvent:
 	extends RefCounted

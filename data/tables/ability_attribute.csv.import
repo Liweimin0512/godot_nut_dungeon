@@ -1,17 +1,3 @@
 [remap]
 
-importer="csv_translation"
-type="Translation"
-uid="uid://fayu61jogjen"
-
-[deps]
-
-files=["res://data/tables/ability_attribute.attribute.translation", "res://data/tables/ability_attribute.attribute.translation", "res://data/tables/ability_attribute.is.translation", "res://data/tables/ability_attribute.is.translation"]
-
-source_file="res://data/tables/ability_attribute.csv"
-dest_files=["res://data/tables/ability_attribute.attribute.translation", "res://data/tables/ability_attribute.attribute.translation", "res://data/tables/ability_attribute.is.translation", "res://data/tables/ability_attribute.is.translation"]
-
-[params]
-
-compress=true
-delimiter=0
+importer="keep"

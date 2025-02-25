@@ -1,5 +1,5 @@
 extends MarginContainer
-class_name HeroAction
+class_name W_HeroAction
 
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var selector: TextureRect = $Selector

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ctcmiyu7lmj7m"]
 
-[ext_resource type="PackedScene" uid="uid://ks5bblbjbqe4" path="res://scenes/ui/widget/hero_action.tscn" id="1_qt7mt"]
+[ext_resource type="PackedScene" uid="uid://ks5bblbjbqe4" path="res://scenes/ui/widget/w_hero_action.tscn" id="1_qt7mt"]
 [ext_resource type="PackedScene" uid="uid://nlvud16b6bsq" path="res://scenes/ui/widget/hero_ability_resource.tscn" id="2_ca77o"]
 [ext_resource type="PackedScene" uid="uid://bn8wnabps3umf" path="res://scenes/ui/widget/hero_attribute.tscn" id="3_oi37v"]
 [ext_resource type="PackedScene" uid="uid://d1xk7jf66rs0h" path="res://scenes/ui/widget/equip_slot.tscn" id="4_u43bt"]

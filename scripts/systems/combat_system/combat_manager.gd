@@ -34,7 +34,6 @@ var _combat_config : CombatModel
 var _current_action_unit : Node
 
 
-
 func _init(combat_info: CombatModel, p_players: Array[Node], p_enemies: Array[Node]) -> void:
 	_combat_config = combat_info
 	players = p_players
@@ -58,7 +57,7 @@ func start_combat() -> void:
 	# 通知所有单位开始战斗
 	for unit in players + enemies:
 		var component := _get_combat_component(unit)
-		await component.combat_start()
+		component.combat_start()
 
 	CombatSystem.combat_started.push(self)
 
@@ -70,7 +69,7 @@ func start_turn() -> void:
 	action_order = _sort_units_by_speed()
 	for unit in action_order:
 		var component := _get_combat_component(unit)
-		await component.turn_start()
+		component.turn_start()
 
 	CombatSystem.combat_turn_started.push(self)
 
@@ -107,16 +106,20 @@ func _is_auto_action() -> bool:
 func action_execute() -> void:
 	if not is_combat_active:
 		return
-	CombatSystem.combat_action_executing.push(_current_action_unit.current_action)
-	await _current_action_unit.action_execute()
-	CombatSystem.combat_action_executed.push(_current_action_unit.current_action)
+	var component : CombatComponent = CombatSystem.get_combat_component(_current_action_unit)
+	var current_action: CombatAction = component.current_action
+	CombatSystem.combat_action_executing.push(current_action)
+	await component.action_execute()
+	CombatSystem.combat_action_executed.push(current_action)
+
 
 ## 结束行动
 func action_end() -> void:
 	if not is_combat_active:
 		return
-	await _current_action_unit.action_end()
-	CombatSystem.combat_action_ended.push(_current_action_unit.current_action)
+	var component : CombatComponent = _get_combat_component(_current_action_unit)
+	component.action_end()
+	CombatSystem.combat_action_ended.push(component.current_action)
 
 
 ## 结束回合
@@ -137,7 +140,7 @@ func end_combat() -> void:
 	# 通知所有单位战斗结束
 	for unit in players + enemies:
 		var component = _get_combat_component(unit)
-		await component.combat_end()
+		component.combat_end()
 	CombatSystem.combat_end.push(self)
 
 
@@ -183,6 +186,11 @@ func combat_defeat() -> void:
 	print("combat_defeat")
 
 
+func select_action_target(target : Node) -> void:
+	var component: CombatComponent = _get_combat_component(_current_action_unit)
+	component.current_action.targets = [target]
+
+
 ## 获取所有敌方单位
 func get_enemy_units(caster : Node) -> Array[Node]:
 	var caster_component : CombatComponent = _get_combat_component(caster)
@@ -194,7 +202,7 @@ func get_enemy_units(caster : Node) -> Array[Node]:
 ## 获取所有友方单位
 func get_ally_units(caster : Node) -> Array[Node]:
 	var caster_component : CombatComponent = _get_combat_component(caster)
-	if caster_component.camp == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER:
+	if caster_component.get_camp() == CombatDefinition.COMBAT_CAMP_TYPE.PLAYER:
 		return players
 	return enemies
 

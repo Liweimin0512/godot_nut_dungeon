@@ -46,7 +46,8 @@ func _init_from_data(data : Dictionary) -> void:
 
 
 func execute(context: Dictionary) -> void:
-	var selected_targets = _target_selector.get_selected_targets(self, context)
+	var selected_targets = context.get("targets", [])
+	
 	# 获取实际执行时的目标
 	var actual_targets = _target_selector.get_actual_targets(self, selected_targets, context)
 	
@@ -75,6 +76,10 @@ func get_full_description() -> String:
 	return "\n".join(desc)
 
 
+func get_actual_targets(selected_targets: Array, context: Dictionary) -> Array:
+	return _target_selector.get_actual_targets(self, selected_targets, context)
+
+
 ## 获取伤害最小值
 func get_min_damage(caster: Node) -> float:
 	if not caster:
@@ -96,23 +101,23 @@ func get_max_damage(caster: Node) -> float:
 
 
 ## 获取技能暴击倍数
-func get_crit_multiplier(caster: Node) -> float:
+func get_crit_rate(caster: Node) -> float:
 	if not caster:
 		GASLogger.error("caster is null")
 		return 1.0
 	
 	var base_crit_rate = caster.ability_attribute_component.get_attribute_value("crit_rate")
-	return base_crit_rate * crit_rate_bonus
+	return base_crit_rate + crit_rate_bonus
 
 
 ## 获取技能命中倍数
-func get_hit_multiplier(caster: Node) -> float:
+func get_hit_rate(caster: Node) -> float:
 	if not caster:
 		GASLogger.error("caster is null")
 		return 1.0
 	
 	var base_hit_rate = caster.ability_attribute_component.get_attribute_value("hit_rate")
-	return base_hit_rate * hit_rate_bonus
+	return base_hit_rate + hit_rate_bonus
 
 
 ## 获取有效目标位置

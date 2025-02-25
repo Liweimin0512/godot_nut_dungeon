@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://cgagjcdl72v7d" path="res://resources/theme_main.tres" id="1_a20fh"]
 [ext_resource type="Script" uid="uid://cl5qgkyaq7aon" path="res://scenes/ui/widget/combat_scene/w_action_container.gd" id="1_pxlgw"]
-[ext_resource type="PackedScene" uid="uid://ks5bblbjbqe4" path="res://scenes/ui/widget/hero_action.tscn" id="2_pjors"]
+[ext_resource type="PackedScene" uid="uid://ks5bblbjbqe4" path="res://scenes/ui/widget/w_hero_action.tscn" id="2_pjors"]
 [ext_resource type="Texture2D" uid="uid://dbqdvd8hmyvl3" path="res://assets/texture/empty_positions.png" id="3_yjbt4"]
 [ext_resource type="Texture2D" uid="uid://bka1hqs5bpc62" path="res://assets/texture/valid_positions.png" id="4_2brqu"]
 [ext_resource type="Script" uid="uid://1mpayve22prh" path="res://addons/GodotUIFramework/source/core/components/ui_widget_component.gd" id="4_2ltuq"]
@@ -223,6 +223,7 @@ text = "暴击 65%"
 
 [node name="LabelAbilityEffectInfo" type="MarginContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/LabelAbilityEffectInfo"]

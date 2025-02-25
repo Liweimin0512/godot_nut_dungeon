@@ -80,11 +80,18 @@ func setup(
 
 #region 战斗流程处理
 
+
 ## 战斗开始
 func combat_start() -> void:
 	AbilitySystem.handle_game_event("combat_start", {"caster": get_parent()})
 	combat_started.emit()
-	current_action = CombatAction.new(get_parent(), [], ability_component.get_abilities(["skill"])[0])
+	current_action = _create_combat_action([], ability_component.get_abilities(["skill"])[0])
+	current_action.target_changed.connect(
+		func():
+			if current_action.ability and not current_action.targets.is_empty():
+				manual_action_start()
+	)
+
 
 ## 回合开始
 func turn_start() -> void:
@@ -115,20 +122,25 @@ func action_start() -> void:
 	if target.is_empty():
 		return
 
-	current_action = _create_combat_action(target, selected_ability)
+	current_action = _create_combat_action([target.get_parent()], selected_ability)
 	AbilitySystem.handle_game_event("action_start", {"caster": get_parent(), "targets": target, "ability": selected_ability})
 	action_started.emit()
 
 
 ## 手动选择技能和目标
 ## [param ability] 选择的技能
-## [param targets] 选择的目标
-func manual_action_start(ability: TurnBasedSkillAbility, targets: Array[CombatComponent]) -> void:
-	if not ability or targets.is_empty():
+## [param target] 选择的目标
+func manual_action_start() -> void:
+	var ability : TurnBasedSkillAbility = current_action.ability
+	var target : Node = current_action.targets[0]
+	
+	if not ability or not target:
 		return
+	
+	if current_action.targets != ability.get_actual_targets(current_action.targets, {"caster": get_parent()}):
+		current_action.targets = ability.get_actual_targets(current_action.targets, {"caster": get_parent()})
 		
-	current_action = _create_combat_action(null, ability)
-	AbilitySystem.handle_game_event("action_start", {"caster": get_parent(), "targets": targets, "ability": ability})
+	AbilitySystem.handle_game_event("action_start", {"caster": get_parent(), "target": target, "ability": ability})
 	action_started.emit()
 	CombatSystem.combat_action_started.push(current_action)
 
@@ -187,14 +199,10 @@ func get_camp() -> CombatDefinition.COMBAT_CAMP_TYPE:
 ## [param ability] 技能
 ## [param delay] 延时
 ## [return] 战斗行动
-func _create_combat_action(target: CombatComponent, ability: TurnBasedSkillAbility = null, delay: float = 0.2) -> CombatAction:
-	var target_nodes: Array[Node2D] = []
-	# for target in targets:
-	# 	target_nodes.append(target.get_parent())
-	
-	return CombatAction.new(
+func _create_combat_action(targets: Array[Node2D], ability: TurnBasedSkillAbility = null, delay: float = 0.2) -> CombatAction:
+	return CombatAction.new( 
 		get_parent(),  # 行动者节点
-		target_nodes,  # 目标节点数组
+		targets,      # 目标节点
 		ability,       # 技能
 		delay          # 延时
 	)
@@ -227,7 +235,7 @@ func _die() -> void:
 func _get_available_abilities( _current_point: int) -> Array[Ability]:
 	var available_abilities: Array[Ability] = []
 	for ability in ability_component.get_abilities(["skill"]):
-		if ability.is_auto or not ability.is_available:
+		if ability.is_auto or not ability.is_active:
 			continue
 		if not ability is TurnBasedSkillAbility:
 			continue

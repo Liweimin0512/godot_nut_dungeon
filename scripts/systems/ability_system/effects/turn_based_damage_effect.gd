@@ -33,7 +33,7 @@ func _calculate_damage(attacker: Node, defender: Node, context: Dictionary) -> v
 	# 计算暴击
 	var crit_rate_bonus = skill_damage_info.get("crit_rate_bonus", 0.0)
 	var base_crit_rate = _get_crit_rate(attacker)
-	_is_critical = randf() < (base_crit_rate * (1.0 + crit_rate_bonus))
+	_is_critical = randf() < (base_crit_rate + crit_rate_bonus)
 	
 	# 应用暴击伤害
 	if _is_critical:
@@ -53,11 +53,26 @@ func _roll_hit_with_bonus(attacker: Node, defender: Node, hit_rate_bonus: float)
 	var dodge_rate = _get_dodge_rate(defender)
 	
 	# 应用命中率加成
-	hit_rate *= (1.0 + hit_rate_bonus)
+	hit_rate += hit_rate_bonus
 	
 	# 计算最终命中率
 	var final_hit_rate = max(min_hit_rate, hit_rate - dodge_rate)
 	return randf() < final_hit_rate
+
+
+func _get_crit_rate(owenr : Node) -> float:
+	var crit_rate = _get_attribute_value(owenr, crit_rate_attribute)
+	return crit_rate
+
+
+func _get_hit_rate(owenr : Node) -> float:
+	var hit_rate = _get_attribute_value(owenr, hit_rate_attribute)
+	return hit_rate
+
+
+func _get_dodge_rate(owenr : Node) -> float:
+	var dodge_rate = _get_attribute_value(owenr, dodge_rate_attribute)
+	return dodge_rate
 
 
 ## 获取动作描述
