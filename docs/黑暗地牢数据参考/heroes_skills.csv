@@ -1,0 +1,466 @@
+# 英雄技能数据表
+# Hero(英雄), Skill Name(技能名称), Level(等级), Type(类型), Attack Mod(命中修正), Damage Mod(伤害修正), Crit Mod(暴击修正), Launch Pos(发动位置), Target Pos(目标位置), Effects(效果), Notes(说明)
+Hero,Skill Name,Level,Type,Attack Mod,Damage Mod,Crit Mod,Launch Pos,Target Pos,Effects,Notes
+Crusader,Smite,0,melee,85%,0%,0%,1-2,1-2,Unholy Killer 1,
+Crusader,Smite,1,melee,90%,0%,1%,1-2,1-2,Unholy Killer 2,
+Crusader,Smite,2,melee,95%,0%,2%,1-2,1-2,Unholy Killer 3,
+Crusader,Smite,3,melee,100%,0%,3%,1-2,1-2,Unholy Killer 4,
+Crusader,Smite,4,melee,105%,0%,4%,1-2,1-2,Unholy Killer 5,
+Crusader,Zealous Accusation,0,ranged,85%,-40%,-4%,1-2,1-2,None,
+Crusader,Zealous Accusation,1,ranged,90%,-40%,-3%,1-2,1-2,None,
+Crusader,Zealous Accusation,2,ranged,95%,-40%,-2%,1-2,1-2,None,
+Crusader,Zealous Accusation,3,ranged,100%,-40%,-1%,1-2,1-2,None,
+Crusader,Zealous Accusation,4,ranged,105%,-40%,0%,1-2,1-2,None,
+Crusader,Stunning Blow,0,melee,90%,-50%,0%,1-2,1-2,Stun 1,
+Crusader,Stunning Blow,1,melee,95%,-50%,1%,1-2,1-2,Stun 2,
+Crusader,Stunning Blow,2,melee,100%,-50%,2%,1-2,1-2,Stun 3,
+Crusader,Stunning Blow,3,melee,105%,-50%,3%,1-2,1-2,Stun 4,
+Crusader,Stunning Blow,4,melee,110%,-50%,4%,1-2,1-2,Stun 5,
+Crusader,Bulwark of Faith,0,melee,0%,0%,0%,1-2,self,Crusader Bulwark 1,
+Crusader,Bulwark of Faith,1,melee,0%,0%,0%,1-2,self,Crusader Bulwark 2,
+Crusader,Bulwark of Faith,2,melee,0%,0%,0%,1-2,self,Crusader Bulwark 3,
+Crusader,Bulwark of Faith,3,melee,0%,0%,0%,1-2,self,Crusader Bulwark 4,
+Crusader,Bulwark of Faith,4,melee,0%,0%,0%,1-2,self,Crusader Bulwark 5,
+Crusader,Battle Heal,0,heal,-,-,-,1-4,1-4,Heal 2-3,
+Crusader,Battle Heal,1,heal,-,-,-,1-4,1-4,Heal 3-3,
+Crusader,Battle Heal,2,heal,-,-,-,1-4,1-4,Heal 3-4,
+Crusader,Battle Heal,3,heal,-,-,-,1-4,1-4,Heal 4-5,
+Crusader,Battle Heal,4,heal,-,-,-,1-4,1-4,Heal 5-6,
+Crusader,Holy Lance,0,melee,85%,0%,6.5%,3-4,2-4,Unholy Killer 1,
+Crusader,Holy Lance,1,melee,90%,0%,7.5%,3-4,2-4,Unholy Killer 2,
+Crusader,Holy Lance,2,melee,95%,0%,8.5%,3-4,2-4,Unholy Killer 3,
+Crusader,Holy Lance,3,melee,100%,0%,9.5%,3-4,2-4,Unholy Killer 4,
+Crusader,Holy Lance,4,melee,105%,0%,10.5%,3-4,2-4,Unholy Killer 5,
+Crusader,Inspiring Cry,0,heal,-,-,-,1-4,1-4,Heal 1-1 Stress/Light,
+Crusader,Inspiring Cry,1,heal,-,-,-,1-4,1-4,Heal 1-1 Stress/Light,
+Crusader,Inspiring Cry,2,heal,-,-,-,1-4,1-4,Heal 1-2 Stress/Light,
+Crusader,Inspiring Cry,3,heal,-,-,-,1-4,1-4,Heal 1-2 Stress/Light,
+Crusader,Inspiring Cry,4,heal,-,-,-,1-4,1-4,Heal 2-2 Stress/Light,
+Hellion,Wicked Hack,0,melee,85%,0%,4%,2-1,1-2,None,
+Hellion,Wicked Hack,1,melee,90%,0%,5%,2-1,1-2,None,
+Hellion,Wicked Hack,2,melee,95%,0%,6%,2-1,1-2,None,
+Hellion,Wicked Hack,3,melee,100%,0%,7%,2-1,1-2,None,
+Hellion,Wicked Hack,4,melee,105%,0%,8%,2-1,1-2,None,
+Hellion,Iron Swan,0,melee,85%,0%,5%,1,4,None,
+Hellion,Iron Swan,1,melee,90%,0%,6%,1,4,None,
+Hellion,Iron Swan,2,melee,95%,0%,7%,1,4,None,
+Hellion,Iron Swan,3,melee,100%,0%,8%,1,4,None,
+Hellion,Iron Swan,4,melee,105%,0%,9%,1,4,None,
+Hellion,Barbaric YAWP!,0,melee,95%,-100%,0%,2-1,1-2,Hero Strong Stun 1/Hellion Exhaust,
+Hellion,Barbaric YAWP!,1,melee,100%,-100%,0%,2-1,1-2,Hero Strong Stun 2/Hellion Exhaust,
+Hellion,Barbaric YAWP!,2,melee,105%,-100%,0%,2-1,1-2,Hero Strong Stun 3/Hellion Exhaust,
+Hellion,Barbaric YAWP!,3,melee,110%,-100%,0%,2-1,1-2,Hero Strong Stun 4/Hellion Exhaust,
+Hellion,Barbaric YAWP!,4,melee,115%,-100%,0%,2-1,1-2,Hero Strong Stun 5/Hellion Exhaust,
+Hellion,If It Bleeds,0,melee,85%,-35%,0%,3-2-1,2-3,Bleed 1,
+Hellion,If It Bleeds,1,melee,90%,-35%,1%,3-2-1,2-3,Bleed 2,
+Hellion,If It Bleeds,2,melee,95%,-35%,2%,3-2-1,2-3,Bleed 3,
+Hellion,If It Bleeds,3,melee,100%,-35%,3%,3-2-1,2-3,Bleed 4,
+Hellion,If It Bleeds,4,melee,105%,-35%,4%,3-2-1,2-3,Bleed 5,
+Hellion,Breakthrough,0,melee,85%,-50%,-1%,4-3-2,1-2-3,Hellion Exhaust Sm,
+Hellion,Breakthrough,1,melee,90%,-50%,0%,4-3-2,1-2-3,Hellion Exhaust Sm,
+Hellion,Breakthrough,2,melee,95%,-50%,1%,4-3-2,1-2-3,Hellion Exhaust Sm,
+Hellion,Breakthrough,3,melee,100%,-50%,2%,4-3-2,1-2-3,Hellion Exhaust Sm,
+Hellion,Breakthrough,4,melee,105%,-50%,3%,4-3-2,1-2-3,Hellion Exhaust Sm,
+Hellion,Adrenaline Rush,0,melee,0%,0%,0%,4-3-2-1,self,Adrenaline 1/HellionHealSelf 1,
+Hellion,Adrenaline Rush,1,melee,0%,0%,0%,4-3-2-1,self,Adrenaline 2/HellionHealSelf 2,
+Hellion,Adrenaline Rush,2,melee,0%,0%,0%,4-3-2-1,self,Adrenaline 3/HellionHealSelf 3,
+Hellion,Adrenaline Rush,3,melee,0%,0%,0%,4-3-2-1,self,Adrenaline 4/HellionHealSelf 4,
+Hellion,Adrenaline Rush,4,melee,0%,0%,0%,4-3-2-1,self,Adrenaline 5/HellionHealSelf 5,
+Hellion,Bleed Out,0,melee,85%,20%,6%,1,1,Strong Bleed 1/Hellion Exhaust,
+Hellion,Bleed Out,1,melee,90%,20%,7%,1,1,Strong Bleed 2/Hellion Exhaust,
+Hellion,Bleed Out,2,melee,95%,20%,8%,1,1,Strong Bleed 3/Hellion Exhaust,
+Hellion,Bleed Out,3,melee,100%,20%,9%,1,1,Strong Bleed 4/Hellion Exhaust,
+Hellion,Bleed Out,4,melee,105%,20%,10%,1,1,Strong Bleed 5/Hellion Exhaust,
+Bounty Hunter,Collect Bounty,0,melee,85%,0%,7%,3-2-1,1-2,BH Dmg Marked/Man Killer 1,
+Bounty Hunter,Collect Bounty,1,melee,90%,0%,8%,3-2-1,1-2,BH Dmg Marked/Man Killer 2,
+Bounty Hunter,Collect Bounty,2,melee,95%,0%,9%,3-2-1,1-2,BH Dmg Marked/Man Killer 3,
+Bounty Hunter,Collect Bounty,3,melee,100%,0%,10%,3-2-1,1-2,BH Dmg Marked/Man Killer 4,
+Bounty Hunter,Collect Bounty,4,melee,105%,0%,11%,3-2-1,1-2,BH Dmg Marked/Man Killer 5,
+Bounty Hunter,Target Tag,0,ranged,100%,-100%,0%,4-3-2-1,1-2-3-4,BH Mark Target/BH Mark Debuff 1/BH Self Speed 1,
+Bounty Hunter,Target Tag,1,ranged,105%,-100%,0%,4-3-2-1,1-2-3-4,BH Mark Target/BH Mark Debuff 2/BH Self Speed 2,
+Bounty Hunter,Target Tag,2,ranged,110%,-100%,0%,4-3-2-1,1-2-3-4,BH Mark Target/BH Mark Debuff 3/BH Self Speed 3,
+Bounty Hunter,Target Tag,3,ranged,115%,-100%,0%,4-3-2-1,1-2-3-4,BH Mark Target/BH Mark Debuff 4/BH Self Speed 4,
+Bounty Hunter,Target Tag,4,ranged,120%,-100%,0%,4-3-2-1,1-2-3-4,BH Mark Target/BH Mark Debuff 5/BH Self Speed 5,
+Bounty Hunter,Come Hither,0,ranged,90%,-80%,0%,4-3-2-1,3-4,Pull 2A/BH Minor Mark,
+Bounty Hunter,Come Hither,1,ranged,95%,-80%,1%,4-3-2-1,3-4,Pull 2B/BH Minor Mark,
+Bounty Hunter,Come Hither,2,ranged,100%,-80%,2%,4-3-2-1,3-4,Pull 2C/BH Minor Mark,
+Bounty Hunter,Come Hither,3,ranged,105%,-80%,3%,4-3-2-1,3-4,Pull 2D/BH Minor Mark,
+Bounty Hunter,Come Hither,4,ranged,110%,-80%,4%,4-3-2-1,3-4,Pull 2E/BH Minor Mark,
+Bounty Hunter,Uppercut,0,melee,90%,-67%,0%,2-1,1-2,Push 2A/Stun 1,
+Bounty Hunter,Uppercut,1,melee,95%,-67%,1%,2-1,1-2,Push 2B/Stun 2,
+Bounty Hunter,Uppercut,2,melee,100%,-67%,2%,2-1,1-2,Push 2C/Stun 3,
+Bounty Hunter,Uppercut,3,melee,105%,-67%,3%,2-1,1-2,Push 2D/Stun 4,
+Bounty Hunter,Uppercut,4,melee,110%,-67%,4%,2-1,1-2,Push 2E/Stun 5,
+Bounty Hunter,Flashbang,0,ranged,95%,-100%,0%,4-3-2,2-3-4,Hero Strong Stun 1/Disorient 1,
+Bounty Hunter,Flashbang,1,ranged,100%,-100%,0%,4-3-2,2-3-4,Hero Strong Stun 2/Disorient 2,
+Bounty Hunter,Flashbang,2,ranged,105%,-100%,0%,4-3-2,2-3-4,Hero Strong Stun 3/Disorient 3,
+Bounty Hunter,Flashbang,3,ranged,110%,-100%,0%,4-3-2,2-3-4,Hero Strong Stun 4/Disorient 4,
+Bounty Hunter,Flashbang,4,ranged,115%,-100%,0%,4-3-2,2-3-4,Hero Strong Stun 5/Disorient 5,
+Bounty Hunter,Finish Him,0,melee,85%,0%,5%,3-2-1,1-2-3,Stun Killer 1,
+Bounty Hunter,Finish Him,1,melee,90%,0%,6%,3-2-1,1-2-3,Stun Killer 2,
+Bounty Hunter,Finish Him,2,melee,95%,0%,7%,3-2-1,1-2-3,Stun Killer 3,
+Bounty Hunter,Finish Him,3,melee,100%,0%,8%,3-2-1,1-2-3,Stun Killer 4,
+Bounty Hunter,Finish Him,4,melee,105%,0%,9%,3-2-1,1-2-3,Stun Killer 5,
+Bounty Hunter,Hook and Slice,0,ranged,90%,-95%,5%,2-3-4,3-4,Bleed 1/Caltrops SPD Debuff 1/Caltrops Prey Debuff 1,
+Bounty Hunter,Hook and Slice,1,ranged,95%,-95%,6%,2-3-4,3-4,Bleed 2/Caltrops SPD Debuff 2/Caltrops Prey Debuff 2,
+Bounty Hunter,Hook and Slice,2,ranged,100%,-95%,7%,2-3-4,3-4,Bleed 3/Caltrops SPD Debuff 3/Caltrops Prey Debuff 3,
+Bounty Hunter,Hook and Slice,3,ranged,105%,-95%,8%,2-3-4,3-4,Bleed 4/Caltrops SPD Debuff 4/Caltrops Prey Debuff 4,
+Bounty Hunter,Hook and Slice,4,ranged,110%,-95%,9%,2-3-4,3-4,Bleed 5/Caltrops SPD Debuff 5/Caltrops Prey Debuff 5,
+Grave Robber,Pick,0,melee,90%,-15%,1%,3-2-1,1-2,ignore_protection true,无视护甲的近战攻击,
+Grave Robber,Pick,1,melee,95%,-15%,2%,3-2-1,1-2,ignore_protection true,无视护甲的近战攻击,
+Grave Robber,Pick,2,melee,100%,-15%,3%,3-2-1,1-2,ignore_protection true,无视护甲的近战攻击,
+Grave Robber,Pick,3,melee,105%,-15%,4%,3-2-1,1-2,ignore_protection true,无视护甲的近战攻击,
+Grave Robber,Pick,4,melee,110%,-15%,5%,3-2-1,1-2,ignore_protection true,无视护甲的近战攻击,
+Grave Robber,Lunge,0,melee,95%,40%,8%,4-3,1-2-3,Poison Killer 1/Move 0 2,突进攻击，对中毒目标伤害提升,
+Grave Robber,Lunge,1,melee,100%,40%,9%,4-3,1-2-3,Poison Killer 2/Move 0 2,突进攻击，对中毒目标伤害提升,
+Grave Robber,Lunge,2,melee,105%,40%,10%,4-3,1-2-3,Poison Killer 3/Move 0 2,突进攻击，对中毒目标伤害提升,
+Grave Robber,Lunge,3,melee,110%,40%,11%,4-3,1-2-3,Poison Killer 4/Move 0 2,突进攻击，对中毒目标伤害提升,
+Grave Robber,Lunge,4,melee,115%,40%,12%,4-3,1-2-3,Poison Killer 5/Move 0 2,突进攻击，对中毒目标伤害提升,
+Grave Robber,Flashing Daggers,0,ranged,90%,-33%,-5%,4-3-2,2-3,GR Bleed Debuff 1,群体远程攻击，降低目标流血抗性,
+Grave Robber,Flashing Daggers,1,ranged,95%,-33%,-4%,4-3-2,2-3,GR Bleed Debuff 2,群体远程攻击，降低目标流血抗性,
+Grave Robber,Flashing Daggers,2,ranged,100%,-33%,-3%,4-3-2,2-3,GR Bleed Debuff 3,群体远程攻击，降低目标流血抗性,
+Grave Robber,Flashing Daggers,3,ranged,105%,-33%,-2%,4-3-2,2-3,GR Bleed Debuff 4,群体远程攻击，降低目标流血抗性,
+Grave Robber,Flashing Daggers,4,ranged,110%,-33%,-1%,4-3-2,2-3,GR Bleed Debuff 5,群体远程攻击，降低目标流血抗性,
+Grave Robber,Shadow Fade,0,melee,95%,-100%,0%,2-1,-,stealth_self/GR Fade Attack 1/GR Dodge 1,进入隐身状态，提升闪避和下次攻击伤害,
+Grave Robber,Shadow Fade,1,melee,100%,-100%,0%,2-1,-,stealth_self/GR Fade Attack 2/GR Dodge 2,进入隐身状态，提升闪避和下次攻击伤害,
+Grave Robber,Shadow Fade,2,melee,105%,-100%,0%,2-1,-,stealth_self/GR Fade Attack 3/GR Dodge 3,进入隐身状态，提升闪避和下次攻击伤害,
+Grave Robber,Shadow Fade,3,melee,110%,-100%,0%,2-1,-,stealth_self/GR Fade Attack 4/GR Dodge 4,进入隐身状态，提升闪避和下次攻击伤害,
+Grave Robber,Shadow Fade,4,melee,115%,-100%,0%,2-1,-,stealth_self/GR Fade Attack 5/GR Dodge 5,进入隐身状态，提升闪避和下次攻击伤害,
+Grave Robber,Thrown Dagger,0,ranged,90%,-10%,8%,4-3-2,2-3-4,GR Acc Buff 1/GR Dagger Dmg Marked 1/Poison Killer 1,远程投掷，命中提升，对标记和中毒目标伤害提升,
+Grave Robber,Thrown Dagger,1,ranged,95%,-10%,9%,4-3-2,2-3-4,GR Acc Buff 2/GR Dagger Dmg Marked 2/Poison Killer 2,远程投掷，命中提升，对标记和中毒目标伤害提升,
+Grave Robber,Thrown Dagger,2,ranged,100%,-10%,10%,4-3-2,2-3-4,GR Acc Buff 3/GR Dagger Dmg Marked 3/Poison Killer 3,远程投掷，命中提升，对标记和中毒目标伤害提升,
+Grave Robber,Thrown Dagger,3,ranged,105%,-10%,11%,4-3-2,2-3-4,GR Acc Buff 4/GR Dagger Dmg Marked 4/Poison Killer 4,远程投掷，命中提升，对标记和中毒目标伤害提升,
+Grave Robber,Thrown Dagger,4,ranged,110%,-10%,12%,4-3-2,2-3-4,GR Acc Buff 5/GR Dagger Dmg Marked 5/Poison Killer 5,远程投掷，命中提升，对标记和中毒目标伤害提升,
+Grave Robber,Poison Dart,0,ranged,95%,-60%,7.5%,4-3-2,1-2-3-4,GR Blight 1/GR Blight Debuff 1,毒镖攻击，造成中毒效果并降低目标毒抗,
+Grave Robber,Poison Dart,1,ranged,100%,-60%,8.5%,4-3-2,1-2-3-4,GR Blight 2/GR Blight Debuff 2,毒镖攻击，造成中毒效果并降低目标毒抗,
+Grave Robber,Poison Dart,2,ranged,105%,-60%,9.5%,4-3-2,1-2-3-4,GR Blight 3/GR Blight Debuff 3,毒镖攻击，造成中毒效果并降低目标毒抗,
+Grave Robber,Poison Dart,3,ranged,110%,-60%,10.5%,4-3-2,1-2-3-4,GR Blight 4/GR Blight Debuff 4,毒镖攻击，造成中毒效果并降低目标毒抗,
+Grave Robber,Poison Dart,4,ranged,115%,-60%,11.5%,4-3-2,1-2-3-4,GR Blight 5/GR Blight Debuff 5,毒镖攻击，造成中毒效果并降低目标毒抗,
+Grave Robber,Toxin Trickery,0,melee,0%,0%,0%,4-3-2-1,-,Shadow Blood 1/GR Self Speed 1,使用毒素提升速度和闪避,
+Grave Robber,Toxin Trickery,1,melee,0%,0%,0%,4-3-2-1,-,Shadow Blood 2/GR Self Speed 2,使用毒素提升速度和闪避,
+Grave Robber,Toxin Trickery,2,melee,0%,0%,0%,4-3-2-1,-,Shadow Blood 3/GR Self Speed 3,使用毒素提升速度和闪避,
+Grave Robber,Toxin Trickery,3,melee,0%,0%,0%,4-3-2-1,-,Shadow Blood 4/GR Self Speed 4,使用毒素提升速度和闪避,
+Grave Robber,Toxin Trickery,4,melee,0%,0%,0%,4-3-2-1,-,Shadow Blood 5/GR Self Speed 5,使用毒素提升速度和闪避,
+Jester,Dirk Stab,0,melee,85%,0%,5%,4-3-2-1,1-2-3,Build to Finale/Move 0 1,匕首突刺，向前移动一格
+Jester,Dirk Stab,1,melee,90%,0%,6%,4-3-2-1,1-2-3,Build to Finale/Move 0 1,匕首突刺，向前移动一格
+Jester,Dirk Stab,2,melee,95%,0%,7%,4-3-2-1,1-2-3,Build to Finale/Move 0 1,匕首突刺，向前移动一格
+Jester,Dirk Stab,3,melee,100%,0%,8%,4-3-2-1,1-2-3,Build to Finale/Move 0 1,匕首突刺，向前移动一格
+Jester,Dirk Stab,4,melee,105%,0%,9%,4-3-2-1,1-2-3,Build to Finale/Move 0 1,匕首突刺，向前移动一格
+Jester,Harvest,0,melee,90%,-50%,0%,3-2,2-3,Bleed 1/Build to Finale,收割技能，造成群体流血
+Jester,Harvest,1,melee,95%,-50%,1%,3-2,2-3,Bleed 2/Build to Finale,收割技能，造成群体流血
+Jester,Harvest,2,melee,100%,-50%,2%,3-2,2-3,Bleed 3/Build to Finale,收割技能，造成群体流血
+Jester,Harvest,3,melee,105%,-50%,3%,3-2,2-3,Bleed 4/Build to Finale,收割技能，造成群体流血
+Jester,Harvest,4,melee,110%,-50%,4%,3-2,2-3,Bleed 5/Build to Finale,收割技能，造成群体流血
+Jester,Heroic End,0,melee,140%,50%,5%,1-2,1-2-3-4,Mortal Weakness/Mortal Weakness Stress,终幕表演，造成巨额伤害
+Jester,Heroic End,1,melee,145%,50%,6%,1-2,1-2-3-4,Mortal Weakness/Mortal Weakness Stress,终幕表演，造成巨额伤害
+Jester,Heroic End,2,melee,150%,50%,7%,1-2,1-2-3-4,Mortal Weakness/Mortal Weakness Stress,终幕表演，造成巨额伤害
+Jester,Heroic End,3,melee,155%,50%,8%,1-2,1-2-3-4,Mortal Weakness/Mortal Weakness Stress,终幕表演，造成巨额伤害
+Jester,Heroic End,4,melee,160%,50%,9%,1-2,1-2-3-4,Mortal Weakness/Mortal Weakness Stress,终幕表演，造成巨额伤害
+Jester,Solo,0,ranged,125%,-100%,0%,4-3,1-2-3-4,Solo Mark Self/Jester Spotlight 1/Build to Finale 2,独奏表演，吸引敌人注意
+Jester,Solo,1,ranged,130%,-100%,0%,4-3,1-2-3-4,Solo Mark Self/Jester Spotlight 2/Build to Finale 2,独奏表演，吸引敌人注意
+Jester,Solo,2,ranged,135%,-100%,0%,4-3,1-2-3-4,Solo Mark Self/Jester Spotlight 3/Build to Finale 2,独奏表演，吸引敌人注意
+Jester,Solo,3,ranged,140%,-100%,0%,4-3,1-2-3-4,Solo Mark Self/Jester Spotlight 4/Build to Finale 2,独奏表演，吸引敌人注意
+Jester,Solo,4,ranged,145%,-100%,0%,4-3,1-2-3-4,Solo Mark Self/Jester Spotlight 5/Build to Finale 2,独奏表演，吸引敌人注意
+Jester,Slice Off,0,melee,95%,-33%,8%,3-2,2-3,Strong Bleed 1/Build to Finale,精准切割，造成强力流血
+Jester,Slice Off,1,melee,100%,-33%,9%,3-2,2-3,Strong Bleed 2/Build to Finale,精准切割，造成强力流血
+Jester,Slice Off,2,melee,105%,-33%,10%,3-2,2-3,Strong Bleed 3/Build to Finale,精准切割，造成强力流血
+Jester,Slice Off,3,melee,110%,-33%,11%,3-2,2-3,Strong Bleed 4/Build to Finale,精准切割，造成强力流血
+Jester,Slice Off,4,melee,115%,-33%,12%,3-2,2-3,Strong Bleed 5/Build to Finale,精准切割，造成强力流血
+Jester,Battle Ballad,0,ranged,0%,0%,0%,3-4,1-2-3-4,Embolden Team 1/Build to Finale Song,战斗颂歌，提升全队属性
+Jester,Battle Ballad,1,ranged,0%,0%,0%,3-4,1-2-3-4,Embolden Team 2/Build to Finale Song,战斗颂歌，提升全队属性
+Jester,Battle Ballad,2,ranged,0%,0%,0%,3-4,1-2-3-4,Embolden Team 3/Build to Finale Song,战斗颂歌，提升全队属性
+Jester,Battle Ballad,3,ranged,0%,0%,0%,3-4,1-2-3-4,Embolden Team 4/Build to Finale Song,战斗颂歌，提升全队属性
+Jester,Battle Ballad,4,ranged,0%,0%,0%,3-4,1-2-3-4,Embolden Team 5/Build to Finale Song,战斗颂歌，提升全队属性
+Jester,Inspiring Tune,0,ranged,0%,0%,0%,4-3,1-2-3-4,InspiringTune 1/Jester Tune Buff 1/Build to Finale Song,鼓舞之音，减少压力和增益
+Jester,Inspiring Tune,1,ranged,0%,0%,0%,4-3,1-2-3-4,InspiringTune 2/Jester Tune Buff 2/Build to Finale Song,鼓舞之音，减少压力和增益
+Jester,Inspiring Tune,2,ranged,0%,0%,0%,4-3,1-2-3-4,InspiringTune 3/Jester Tune Buff 3/Build to Finale Song,鼓舞之音，减少压力和增益
+Jester,Inspiring Tune,3,ranged,0%,0%,0%,4-3,1-2-3-4,InspiringTune 4/Jester Tune Buff 4/Build to Finale Song,鼓舞之音，减少压力和增益
+Jester,Inspiring Tune,4,ranged,0%,0%,0%,4-3,1-2-3-4,InspiringTune 5/Jester Tune Buff 5/Build to Finale Song,鼓舞之音，减少压力和增益
+Abomination,Manacles,0,ranged,90%,-75%,0%,2-3-4,1-2-3,Stun 1/Stress 1,锁链束缚，造成眩晕和压力
+Abomination,Manacles,1,ranged,95%,-75%,0%,2-3-4,1-2-3,Stun 2/Stress 1,锁链束缚，造成眩晕和压力
+Abomination,Manacles,2,ranged,100%,-75%,0%,2-3-4,1-2-3,Stun 3/Stress 1,锁链束缚，造成眩晕和压力
+Abomination,Manacles,3,ranged,105%,-75%,0%,2-3-4,1-2-3,Stun 4/Stress 1,锁链束缚，造成眩晕和压力
+Abomination,Manacles,4,ranged,110%,-75%,0%,2-3-4,1-2-3,Stun 5/Stress 1,锁链束缚，造成眩晕和压力
+Abomination,Beast Form,0,transform,100%,0%,0%,1-2-3-4,-,Transform/Stress All 2,变身为野兽形态
+Abomination,Beast Form,1,transform,100%,0%,0%,1-2-3-4,-,Transform/Stress All 2,变身为野兽形态
+Abomination,Beast Form,2,transform,100%,0%,0%,1-2-3-4,-,Transform/Stress All 2,变身为野兽形态
+Abomination,Beast Form,3,transform,100%,0%,0%,1-2-3-4,-,Transform/Stress All 2,变身为野兽形态
+Abomination,Beast Form,4,transform,100%,0%,0%,1-2-3-4,-,Transform/Stress All 2,变身为野兽形态
+Abomination,Transform,0,support,0%,0%,0%,4-3-2-1,self,switch_mode_beast_self/beast_stress_party/beast_buff_1/beast_buff2_1/xform_damage_1/Transform_HealSelf_1,变身，转换为野兽形态
+Abomination,Transform,1,support,0%,0%,0%,4-3-2-1,self,switch_mode_beast_self/beast_stress_party/beast_buff_2/beast_buff2_2/xform_damage_2/Transform_HealSelf_2,变身，转换为野兽形态
+Abomination,Transform,2,support,0%,0%,0%,4-3-2-1,self,switch_mode_beast_self/beast_stress_party/beast_buff_3/beast_buff2_3/xform_damage_3/Transform_HealSelf_3,变身，转换为野兽形态
+Abomination,Transform,3,support,0%,0%,0%,4-3-2-1,self,switch_mode_beast_self/beast_stress_party/beast_buff_4/beast_buff2_4/xform_damage_4/Transform_HealSelf_4,变身，转换为野兽形态
+Abomination,Transform,4,support,0%,0%,0%,4-3-2-1,self,switch_mode_beast_self/beast_stress_party/beast_buff_5/beast_buff2_5/xform_damage_5/Transform_HealSelf_5,变身，转换为野兽形态
+Abomination,Manacles,0,ranged,95%,-60%,1%,3-2,1-2-3,Manacles Stun 1,枷锁，造成眩晕
+Abomination,Manacles,1,ranged,100%,-60%,2%,3-2,1-2-3,Manacles Stun 2,枷锁，造成眩晕
+Abomination,Manacles,2,ranged,105%,-60%,3%,3-2,1-2-3,Manacles Stun 3,枷锁，造成眩晕
+Abomination,Manacles,3,ranged,110%,-60%,4%,3-2,1-2-3,Manacles Stun 4,枷锁，造成眩晕
+Abomination,Manacles,4,ranged,115%,-60%,5%,3-2,1-2-3,Manacles Stun 5,枷锁，造成眩晕
+Abomination,Vomit,0,ranged,95%,-90%,2%,3-2,2-3,Abom Vomit 1/Vomit Debuff 1,呕吐，造成中毒和减速
+Abomination,Vomit,1,ranged,100%,-90%,3%,3-2,2-3,Abom Vomit 2/Vomit Debuff 2,呕吐，造成中毒和减速
+Abomination,Vomit,2,ranged,105%,-90%,4%,3-2,2-3,Abom Vomit 3/Vomit Debuff 3,呕吐，造成中毒和减速
+Abomination,Vomit,3,ranged,110%,-90%,5%,3-2,2-3,Abom Vomit 4/Vomit Debuff 4,呕吐，造成中毒和减速
+Abomination,Vomit,4,ranged,115%,-90%,6%,3-2,2-3,Abom Vomit 5/Vomit Debuff 5,呕吐，造成中毒和减速
+Abomination,Absolution,0,support,0%,0%,0%,4-3-2-1,self,Absolution HealStress 1/Absolution Heal 1,赎罪，恢复生命值和压力
+Abomination,Absolution,1,support,0%,0%,0%,4-3-2-1,self,Absolution HealStress 2/Absolution Heal 2,赎罪，恢复生命值和压力
+Abomination,Absolution,2,support,0%,0%,0%,4-3-2-1,self,Absolution HealStress 3/Absolution Heal 3,赎罪，恢复生命值和压力
+Abomination,Absolution,3,support,0%,0%,0%,4-3-2-1,self,Absolution HealStress 4/Absolution Heal 4,赎罪，恢复生命值和压力
+Abomination,Absolution,4,support,0%,0%,0%,4-3-2-1,self,Absolution HealStress 5/Absolution Heal 5,赎罪，恢复生命值和压力
+Abomination,Rake,0,melee,90%,-50%,-3%,2-1,1-2,rakebuff_1,撕裂，群体伤害并提升伤害
+Abomination,Rake,1,melee,95%,-50%,-2%,2-1,1-2,rakebuff_2,撕裂，群体伤害并提升伤害
+Abomination,Rake,2,melee,100%,-50%,-1%,2-1,1-2,rakebuff_3,撕裂，群体伤害并提升伤害
+Abomination,Rake,3,melee,105%,-50%,0%,2-1,1-2,rakebuff_4,撕裂，群体伤害并提升伤害
+Abomination,Rake,4,melee,110%,-50%,1%,2-1,1-2,rakebuff_5,撕裂，群体伤害并提升伤害
+Abomination,Rage,0,melee,85%,0%,7.5%,2-1,1-2-3,None,狂暴，高伤害近战攻击
+Abomination,Rage,1,melee,90%,0%,8.5%,2-1,1-2-3,None,狂暴，高伤害近战攻击
+Abomination,Rage,2,melee,95%,0%,9.5%,2-1,1-2-3,None,狂暴，高伤害近战攻击
+Abomination,Rage,3,melee,100%,0%,10.5%,2-1,1-2-3,None,狂暴，高伤害近战攻击
+Abomination,Rage,4,melee,105%,0%,11.5%,2-1,1-2-3,None,狂暴，高伤害近战攻击
+Abomination,Slam,0,melee,80%,-25%,1%,3-2-1,1-2,Push 2A/Slam Debuff 1,猛击，击退并降低保护
+Abomination,Slam,1,melee,85%,-25%,2%,3-2-1,1-2,Push 2B/Slam Debuff 2,猛击，击退并降低保护
+Abomination,Slam,2,melee,90%,-25%,3%,3-2-1,1-2,Push 2C/Slam Debuff 3,猛击，击退并降低保护
+Abomination,Slam,3,melee,95%,-25%,4%,3-2-1,1-2,Push 2D/Slam Debuff 4,猛击，击退并降低保护
+Abomination,Slam,4,melee,100%,-25%,5%,3-2-1,1-2,Push 2E/Slam Debuff 5,猛击，击退并降低保护
+Antiquarian,Festering Vapours,0,ranged,95%,-80%,0%,3-4,2-3-4,Blight 1/Debuff Blight Resist,毒雾攻击，造成中毒和降低抗性
+Antiquarian,Festering Vapours,1,ranged,100%,-80%,0%,3-4,2-3-4,Blight 2/Debuff Blight Resist,毒雾攻击，造成中毒和降低抗性
+Antiquarian,Festering Vapours,2,ranged,105%,-80%,0%,3-4,2-3-4,Blight 3/Debuff Blight Resist,毒雾攻击，造成中毒和降低抗性
+Antiquarian,Festering Vapours,3,ranged,110%,-80%,0%,3-4,2-3-4,Blight 4/Debuff Blight Resist,毒雾攻击，造成中毒和降低抗性
+Antiquarian,Festering Vapours,4,ranged,115%,-80%,0%,3-4,2-3-4,Blight 5/Debuff Blight Resist,毒雾攻击，造成中毒和降低抗性
+Antiquarian,Protect Me,0,support,100%,0%,0%,1-2-3-4,1-2-3-4,Guard Me/Buff PROT,请求队友保护，增加护甲值
+Antiquarian,Protect Me,1,support,100%,0%,0%,1-2-3-4,1-2-3-4,Guard Me/Buff PROT,请求队友保护，增加护甲值
+Antiquarian,Protect Me,2,support,100%,0%,0%,1-2-3-4,1-2-3-4,Guard Me/Buff PROT,请求队友保护，增加护甲值
+Antiquarian,Protect Me,3,support,100%,0%,0%,1-2-3-4,1-2-3-4,Guard Me/Buff PROT,请求队友保护，增加护甲值
+Antiquarian,Protect Me,4,support,100%,0%,0%,1-2-3-4,1-2-3-4,Guard Me/Buff PROT,请求队友保护，增加护甲值
+
+Arbalest,Sniper Shot,0,ranged,95%,0%,5%,3-4,2-3-4,None,精准射击，高命中和暴击
+Arbalest,Sniper Shot,1,ranged,100%,0%,6%,3-4,2-3-4,None,精准射击，高命中和暴击
+Arbalest,Sniper Shot,2,ranged,105%,0%,7%,3-4,2-3-4,None,精准射击，高命中和暴击
+Arbalest,Sniper Shot,3,ranged,110%,0%,8%,3-4,2-3-4,None,精准射击，高命中和暴击
+Arbalest,Sniper Shot,4,ranged,115%,0%,9%,3-4,2-3-4,None,精准射击，高命中和暴击
+Arbalest,Battlefield Bandage,0,heal,100%,0%,0%,3-4,1-2-3-4,Heal 3/Heal Buff 1,战地包扎，治疗并提升后续治疗效果
+Arbalest,Battlefield Bandage,1,heal,100%,0%,0%,3-4,1-2-3-4,Heal 4/Heal Buff 2,战地包扎，治疗并提升后续治疗效果
+Arbalest,Battlefield Bandage,2,heal,100%,0%,0%,3-4,1-2-3-4,Heal 5/Heal Buff 3,战地包扎，治疗并提升后续治疗效果
+Arbalest,Battlefield Bandage,3,heal,100%,0%,0%,3-4,1-2-3-4,Heal 6/Heal Buff 4,战地包扎，治疗并提升后续治疗效果
+Arbalest,Battlefield Bandage,4,heal,100%,0%,0%,3-4,1-2-3-4,Heal 7/Heal Buff 5,战地包扎，治疗并提升后续治疗效果
+
+Houndmaster,Hound Rush,0,melee,85%,0%,5%,2-3-4,1-2-3-4,Beast Killer 1/Bleed 1,猎犬突袭，对野兽额外伤害
+Houndmaster,Hound Rush,1,melee,90%,0%,6%,2-3-4,1-2-3-4,Beast Killer 2/Bleed 2,猎犬突袭，对野兽额外伤害
+Houndmaster,Hound Rush,2,melee,95%,0%,7%,2-3-4,1-2-3-4,Beast Killer 3/Bleed 3,猎犬突袭，对野兽额外伤害
+Houndmaster,Hound Rush,3,melee,100%,0%,8%,2-3-4,1-2-3-4,Beast Killer 4/Bleed 4,猎犬突袭，对野兽额外伤害
+Houndmaster,Hound Rush,4,melee,105%,0%,9%,2-3-4,1-2-3-4,Beast Killer 5/Bleed 5,猎犬突袭，对野兽额外伤害
+Houndmaster,Guard Dog,0,guard,100%,0%,0%,1-2-3-4,-,Guard/Self Mark/Dodge Buff,让猎犬保护自己，提升闪避
+Houndmaster,Guard Dog,1,guard,100%,0%,0%,1-2-3-4,-,Guard/Self Mark/Dodge Buff,让猎犬保护自己，提升闪避
+Houndmaster,Guard Dog,2,guard,100%,0%,0%,1-2-3-4,-,Guard/Self Mark/Dodge Buff,让猎犬保护自己，提升闪避
+Houndmaster,Guard Dog,3,guard,100%,0%,0%,1-2-3-4,-,Guard/Self Mark/Dodge Buff,让猎犬保护自己，提升闪避
+Houndmaster,Guard Dog,4,guard,100%,0%,0%,1-2-3-4,-,Guard/Self Mark/Dodge Buff,让猎犬保护自己，提升闪避
+Leper,Chop,0,melee,75%,0%,5%,1-2,1-2,None,重击，高伤害但低命中
+Leper,Chop,1,melee,80%,0%,6%,1-2,1-2,None,重击，高伤害但低命中
+Leper,Chop,2,melee,85%,0%,7%,1-2,1-2,None,重击，高伤害但低命中
+Leper,Chop,3,melee,90%,0%,8%,1-2,1-2,None,重击，高伤害但低命中
+Leper,Chop,4,melee,95%,0%,9%,1-2,1-2,None,重击，高伤害但低命中
+Leper,Solemnity,0,self,100%,0%,0%,1-2-3-4,-,Self Heal 5/Stress Heal 5,冥想，恢复生命和减少压力
+Leper,Solemnity,1,self,100%,0%,0%,1-2-3-4,-,Self Heal 6/Stress Heal 6,冥想，恢复生命和减少压力
+Leper,Solemnity,2,self,100%,0%,0%,1-2-3-4,-,Self Heal 7/Stress Heal 7,冥想，恢复生命和减少压力
+Leper,Solemnity,3,self,100%,0%,0%,1-2-3-4,-,Self Heal 8/Stress Heal 8,冥想，恢复生命和减少压力
+Leper,Solemnity,4,self,100%,0%,0%,1-2-3-4,-,Self Heal 9/Stress Heal 9,冥想，恢复生命和减少压力
+Man-at-Arms,Crush,0,melee,85%,0%,5%,1-2,1-2,Stun 1,重锤打击，可能造成眩晕
+Man-at-Arms,Crush,1,melee,90%,0%,6%,1-2,1-2,Stun 2,重锤打击，可能造成眩晕
+Man-at-Arms,Crush,2,melee,95%,0%,7%,1-2,1-2,Stun 3,重锤打击，可能造成眩晕
+Man-at-Arms,Crush,3,melee,100%,0%,8%,1-2,1-2,Stun 4,重锤打击，可能造成眩晕
+Man-at-Arms,Crush,4,melee,105%,0%,9%,1-2,1-2,Stun 5,重锤打击，可能造成眩晕
+Man-at-Arms,Command,0,buff,100%,0%,0%,1-2-3-4,1-2-3-4,Team ACC Buff/Team CRIT Buff,指挥，提升队伍命中和暴击
+Man-at-Arms,Command,1,buff,100%,0%,0%,1-2-3-4,1-2-3-4,Team ACC Buff/Team CRIT Buff,指挥，提升队伍命中和暴击
+Man-at-Arms,Command,2,buff,100%,0%,0%,1-2-3-4,1-2-3-4,Team ACC Buff/Team CRIT Buff,指挥，提升队伍命中和暴击
+Man-at-Arms,Command,3,buff,100%,0%,0%,1-2-3-4,1-2-3-4,Team ACC Buff/Team CRIT Buff,指挥，提升队伍命中和暴击
+Man-at-Arms,Command,4,buff,100%,0%,0%,1-2-3-4,1-2-3-4,Team ACC Buff/Team CRIT Buff,指挥，提升队伍命中和暴击
+Occultist,Sacrificial Stab,0,melee,85%,0%,5%,2-3-4,1-2,Eldritch Killer 1,献祭匕首，对邪术生物额外伤害
+Occultist,Sacrificial Stab,1,melee,90%,0%,6%,2-3-4,1-2,Eldritch Killer 2,献祭匕首，对邪术生物额外伤害
+Occultist,Sacrificial Stab,2,melee,95%,0%,7%,2-3-4,1-2,Eldritch Killer 3,献祭匕首，对邪术生物额外伤害
+Occultist,Sacrificial Stab,3,melee,100%,0%,8%,2-3-4,1-2,Eldritch Killer 4,献祭匕首，对邪术生物额外伤害
+Occultist,Sacrificial Stab,4,melee,105%,0%,9%,2-3-4,1-2,Eldritch Killer 5,献祭匕首，对邪术生物额外伤害
+Occultist,Wyrd Reconstruction,0,heal,100%,0%,0%,3-4,1-2-3-4,Heal 0-13/Bleed 1,诡异重构，大幅治疗但可能造成流血
+Occultist,Wyrd Reconstruction,1,heal,100%,0%,0%,3-4,1-2-3-4,Heal 0-15/Bleed 1,诡异重构，大幅治疗但可能造成流血
+Occultist,Wyrd Reconstruction,2,heal,100%,0%,0%,3-4,1-2-3-4,Heal 0-17/Bleed 1,诡异重构，大幅治疗但可能造成流血
+Occultist,Wyrd Reconstruction,3,heal,100%,0%,0%,3-4,1-2-3-4,Heal 0-19/Bleed 1,诡异重构，大幅治疗但可能造成流血
+Occultist,Wyrd Reconstruction,4,heal,100%,0%,0%,3-4,1-2-3-4,Heal 0-22/Bleed 1,诡异重构，大幅治疗但可能造成流血
+Vestal,Mace Bash,0,melee,85%,0%,2.5%,1-2,1-2,None,圣锤打击，基础近战攻击
+Vestal,Mace Bash,1,melee,90%,0%,3.5%,1-2,1-2,None,圣锤打击，基础近战攻击
+Vestal,Mace Bash,2,melee,95%,0%,4.5%,1-2,1-2,None,圣锤打击，基础近战攻击
+Vestal,Mace Bash,3,melee,100%,0%,5.5%,1-2,1-2,None,圣锤打击，基础近战攻击
+Vestal,Mace Bash,4,melee,105%,0%,6.5%,1-2,1-2,None,圣锤打击，基础近战攻击
+Vestal,Divine Grace,0,heal,100%,0%,0%,3-4,1-2-3-4,Heal 4,神圣恩典，单体治疗
+Vestal,Divine Grace,1,heal,100%,0%,0%,3-4,1-2-3-4,Heal 5,神圣恩典，单体治疗
+Vestal,Divine Grace,2,helee,100%,0%,0%,3-4,1-2-3-4,Heal 6,神圣恩典，单体治疗
+Vestal,Divine Grace,3,heal,100%,0%,0%,3-4,1-2-3-4,Heal 7,神圣恩典，单体治疗
+Vestal,Divine Grace,4,heal,100%,0%,0%,3-4,1-2-3-4,Heal 8,神圣恩典，单体治疗
+Vestal,Divine Comfort,0,heal,100%,0%,0%,3-4,1-2-3-4,Team Heal 2,神圣慰藉，全队治疗
+Vestal,Divine Comfort,1,heal,100%,0%,0%,3-4,1-2-3-4,Team Heal 2,神圣慰藉，全队治疗
+Vestal,Divine Comfort,2,heal,100%,0%,0%,3-4,1-2-3-4,Team Heal 3,神圣慰藉，全队治疗
+Vestal,Divine Comfort,3,heal,100%,0%,0%,3-4,1-2-3-4,Team Heal 3,神圣慰藉，全队治疗
+Vestal,Divine Comfort,4,heal,100%,0%,0%,3-4,1-2-3-4,Team Heal 4,神圣慰藉，全队治疗
+
+# 瘟疫医生技能 | Plague Doctor Skills
+Plague Doctor,Noxious Blast,0,ranged,95%,-80%,5%,4-3-2,1-2,PD Single Blight 1/Noxious Debuff 1,毒气喷射，造成中毒和减速
+Plague Doctor,Noxious Blast,1,ranged,100%,-80%,6%,4-3-2,1-2,PD Single Blight 2/Noxious Debuff 2,毒气喷射，造成中毒和减速
+Plague Doctor,Noxious Blast,2,ranged,105%,-80%,7%,4-3-2,1-2,PD Single Blight 3/Noxious Debuff 3,毒气喷射，造成中毒和减速
+Plague Doctor,Noxious Blast,3,ranged,110%,-80%,8%,4-3-2,1-2,PD Single Blight 4/Noxious Debuff 4,毒气喷射，造成中毒和减速
+Plague Doctor,Noxious Blast,4,ranged,115%,-80%,9%,4-3-2,1-2,PD Single Blight 5/Noxious Debuff 5,毒气喷射，造成中毒和减速
+Plague Doctor,Plague Grenade,0,ranged,95%,-90%,0%,4-3,3-4,PD Blight 1,瘟疫手雷，群体中毒
+Plague Doctor,Plague Grenade,1,ranged,100%,-90%,1%,4-3,3-4,PD Blight 2,瘟疫手雷，群体中毒
+Plague Doctor,Plague Grenade,2,ranged,105%,-90%,2%,4-3,3-4,PD Blight 3,瘟疫手雷，群体中毒
+Plague Doctor,Plague Grenade,3,ranged,110%,-90%,3%,4-3,3-4,PD Blight 4,瘟疫手雷，群体中毒
+Plague Doctor,Plague Grenade,4,ranged,115%,-90%,4%,4-3,3-4,PD Blight 5,瘟疫手雷，群体中毒
+Plague Doctor,Blinding Gas,0,ranged,95%,-100%,0%,4-3,3-4,Stun 1,致盲毒气，群体眩晕
+Plague Doctor,Blinding Gas,1,ranged,100%,-100%,0%,4-3,3-4,Stun 2,致盲毒气，群体眩晕
+Plague Doctor,Blinding Gas,2,ranged,105%,-100%,0%,4-3,3-4,Stun 3,致盲毒气，群体眩晕
+Plague Doctor,Blinding Gas,3,ranged,110%,-100%,0%,4-3,3-4,Stun 4,致盲毒气，群体眩晕
+Plague Doctor,Blinding Gas,4,ranged,115%,-100%,0%,4-3,3-4,Stun 5,致盲毒气，群体眩晕
+Plague Doctor,Incision,0,melee,85%,0%,5%,3-2-1,1-2,Bleed 1,手术切割，造成流血
+Plague Doctor,Incision,1,melee,90%,0%,6%,3-2-1,1-2,Bleed 2,手术切割，造成流血
+Plague Doctor,Incision,2,melee,95%,0%,7%,3-2-1,1-2,Bleed 3,手术切割，造成流血
+Plague Doctor,Incision,3,melee,100%,0%,8%,3-2-1,1-2,Bleed 4,手术切割，造成流血
+Plague Doctor,Incision,4,melee,105%,0%,9%,3-2-1,1-2,Bleed 5,手术切割，造成流血
+Plague Doctor,Battlefield Medicine,0,support,0%,0%,0%,4-3,1-2-3-4,Cure/Cureself,战地医疗，治疗和解除异常状态
+Plague Doctor,Battlefield Medicine,1,support,0%,0%,0%,4-3,1-2-3-4,Cure/Cureself,战地医疗，治疗和解除异常状态
+Plague Doctor,Battlefield Medicine,2,support,0%,0%,0%,4-3,1-2-3-4,Cure/Cureself,战地医疗，治疗和解除异常状态
+Plague Doctor,Battlefield Medicine,3,support,0%,0%,0%,4-3,1-2-3-4,Cure/Cureself,战地医疗，治疗和解除异常状态
+Plague Doctor,Battlefield Medicine,4,support,0%,0%,0%,4-3,1-2-3-4,Cure/Cureself,战地医疗，治疗和解除异常状态
+Plague Doctor,Emboldening Vapours,0,support,0%,0%,0%,4-3-2-1,1-2-3-4,PD Vapours Buff 1,鼓舞之雾，提升伤害和暴击
+Plague Doctor,Emboldening Vapours,1,support,0%,0%,0%,4-3-2-1,1-2-3-4,PD Vapours Buff 2,鼓舞之雾，提升伤害和暴击
+Plague Doctor,Emboldening Vapours,2,support,0%,0%,0%,4-3-2-1,1-2-3-4,PD Vapours Buff 3,鼓舞之雾，提升伤害和暴击
+Plague Doctor,Emboldening Vapours,3,support,0%,0%,0%,4-3-2-1,1-2-3-4,PD Vapours Buff 4,鼓舞之雾，提升伤害和暴击
+Plague Doctor,Emboldening Vapours,4,support,0%,0%,0%,4-3-2-1,1-2-3-4,PD Vapours Buff 5,鼓舞之雾，提升伤害和暴击
+Plague Doctor,Disorienting Blast,0,ranged,95%,-100%,0%,4-3-2,2-3-4,Disorient 1/clear_corpses/PD Disorienting Stun 1,迷惑爆破，眩晕并清除尸体
+Plague Doctor,Disorienting Blast,1,ranged,100%,-100%,0%,4-3-2,2-3-4,Disorient 2/clear_corpses/PD Disorienting Stun 2,迷惑爆破，眩晕并清除尸体
+Plague Doctor,Disorienting Blast,2,ranged,105%,-100%,0%,4-3-2,2-3-4,Disorient 3/clear_corpses/PD Disorienting Stun 3,迷惑爆破，眩晕并清除尸体
+Plague Doctor,Disorienting Blast,3,ranged,110%,-100%,0%,4-3-2,2-3-4,Disorient 4/clear_corpses/PD Disorienting Stun 4,迷惑爆破，眩晕并清除尸体
+Plague Doctor,Disorienting Blast,4,ranged,115%,-100%,0%,4-3-2,2-3-4,Disorient 5/clear_corpses/PD Disorienting Stun 5,迷惑爆破，眩晕并清除尸体
+
+# 地狱使者技能 | Hellion Skills
+Hellion,Wicked Hack,0,melee,85%,0%,4%,2-1,1-2,None,邪恶砍击，基础近战攻击
+Hellion,Wicked Hack,1,melee,90%,0%,5%,2-1,1-2,None,邪恶砍击，基础近战攻击
+Hellion,Wicked Hack,2,melee,95%,0%,6%,2-1,1-2,None,邪恶砍击，基础近战攻击
+Hellion,Wicked Hack,3,melee,100%,0%,7%,2-1,1-2,None,邪恶砍击，基础近战攻击
+Hellion,Wicked Hack,4,melee,105%,0%,8%,2-1,1-2,None,邪恶砍击，基础近战攻击
+
+Hellion,Iron Swan,0,melee,85%,0%,5%,1,4,None,铁天鹅，攻击最后排敌人
+Hellion,Iron Swan,1,melee,90%,0%,6%,1,4,None,铁天鹅，攻击最后排敌人
+Hellion,Iron Swan,2,melee,95%,0%,7%,1,4,None,铁天鹅，攻击最后排敌人
+Hellion,Iron Swan,3,melee,100%,0%,8%,1,4,None,铁天鹅，攻击最后排敌人
+Hellion,Iron Swan,4,melee,105%,0%,9%,1,4,None,铁天鹅，攻击最后排敌人
+
+Hellion,Barbaric Yawp,0,melee,95%,-100%,0%,2-1,1-2,Hero Strong Stun 1/Hellion Exhaust,野蛮咆哮，眩晕前排敌人
+Hellion,Barbaric Yawp,1,melee,100%,-100%,0%,2-1,1-2,Hero Strong Stun 2/Hellion Exhaust,野蛮咆哮，眩晕前排敌人
+Hellion,Barbaric Yawp,2,melee,105%,-100%,0%,2-1,1-2,Hero Strong Stun 3/Hellion Exhaust,野蛮咆哮，眩晕前排敌人
+Hellion,Barbaric Yawp,3,melee,110%,-100%,0%,2-1,1-2,Hero Strong Stun 4/Hellion Exhaust,野蛮咆哮，眩晕前排敌人
+Hellion,Barbaric Yawp,4,melee,115%,-100%,0%,2-1,1-2,Hero Strong Stun 5/Hellion Exhaust,野蛮咆哮，眩晕前排敌人
+
+Hellion,If It Bleeds,0,melee,85%,-35%,0%,3-2-1,2-3,Bleed 1,血流成河，造成流血效果
+Hellion,If It Bleeds,1,melee,90%,-35%,1%,3-2-1,2-3,Bleed 2,血流成河，造成流血效果
+Hellion,If It Bleeds,2,melee,95%,-35%,2%,3-2-1,2-3,Bleed 3,血流成河，造成流血效果
+Hellion,If It Bleeds,3,melee,100%,-35%,3%,3-2-1,2-3,Bleed 4,血流成河，造成流血效果
+Hellion,If It Bleeds,4,melee,105%,-35%,4%,3-2-1,2-3,Bleed 5,血流成河，造成流血效果
+
+Hellion,Breakthrough,0,melee,85%,-50%,-1%,4-3-2,1-2-3,Hellion Exhaust Sm,突破，向前移动并群体攻击
+Hellion,Breakthrough,1,melee,90%,-50%,0%,4-3-2,1-2-3,Hellion Exhaust Sm,突破，向前移动并群体攻击
+Hellion,Breakthrough,2,melee,95%,-50%,1%,4-3-2,1-2-3,Hellion Exhaust Sm,突破，向前移动并群体攻击
+Hellion,Breakthrough,3,melee,100%,-50%,2%,4-3-2,1-2-3,Hellion Exhaust Sm,突破，向前移动并群体攻击
+Hellion,Breakthrough,4,melee,105%,-50%,3%,4-3-2,1-2-3,Hellion Exhaust Sm,突破，向前移动并群体攻击
+
+Hellion,Adrenaline Rush,0,melee,0%,0%,0%,4-3-2-1,self,Adrenaline 1/HellionHealSelf 1,肾上腺素，自我治疗和增益
+Hellion,Adrenaline Rush,1,melee,0%,0%,0%,4-3-2-1,self,Adrenaline 2/HellionHealSelf 2,肾上腺素，自我治疗和增益
+Hellion,Adrenaline Rush,2,melee,0%,0%,0%,4-3-2-1,self,Adrenaline 3/HellionHealSelf 3,肾上腺素，自我治疗和增益
+Hellion,Adrenaline Rush,3,melee,0%,0%,0%,4-3-2-1,self,Adrenaline 4/HellionHealSelf 4,肾上腺素，自我治疗和增益
+Hellion,Adrenaline Rush,4,melee,0%,0%,0%,4-3-2-1,self,Adrenaline 5/HellionHealSelf 5,肾上腺素，自我治疗和增益
+
+Hellion,Bleed Out,0,melee,85%,20%,6%,1,1,Strong Bleed 1/Hellion Exhaust,放血，高伤害和强力流血
+Hellion,Bleed Out,1,melee,90%,20%,7%,1,1,Strong Bleed 2/Hellion Exhaust,放血，高伤害和强力流血
+Hellion,Bleed Out,2,melee,95%,20%,8%,1,1,Strong Bleed 3/Hellion Exhaust,放血，高伤害和强力流血
+Hellion,Bleed Out,3,melee,100%,20%,9%,1,1,Strong Bleed 4/Hellion Exhaust,放血，高伤害和强力流血
+Hellion,Bleed Out,4,melee,105%,20%,10%,1,1,Strong Bleed 5/Hellion Exhaust,放血，高伤害和强力流血
+
+# 公路强盗技能 | Highwayman Skills
+Highwayman,Wicked Slice,0,melee,85%,15%,5%,3-2-1,1-2,None,恶意挥砍，基础近战攻击
+Highwayman,Wicked Slice,1,melee,90%,15%,6%,3-2-1,1-2,None,恶意挥砍，基础近战攻击
+Highwayman,Wicked Slice,2,melee,95%,15%,7%,3-2-1,1-2,None,恶意挥砍，基础近战攻击
+Highwayman,Wicked Slice,3,melee,100%,15%,8%,3-2-1,1-2,None,恶意挥砍，基础近战攻击
+Highwayman,Wicked Slice,4,melee,105%,15%,9%,3-2-1,1-2,None,恶意挥砍，基础近战攻击
+
+Highwayman,Pistol Shot,0,ranged,85%,-15%,7.5%,4-3-2,2-3-4,HW Pistol Dmg Marked 1,手枪射击，对标记目标额外伤害
+Highwayman,Pistol Shot,1,ranged,90%,-15%,8.5%,4-3-2,2-3-4,HW Pistol Dmg Marked 2,手枪射击，对标记目标额外伤害
+Highwayman,Pistol Shot,2,ranged,95%,-15%,9.5%,4-3-2,2-3-4,HW Pistol Dmg Marked 3,手枪射击，对标记目标额外伤害
+Highwayman,Pistol Shot,3,ranged,100%,-15%,10.5%,4-3-2,2-3-4,HW Pistol Dmg Marked 4,手枪射击，对标记目标额外伤害
+Highwayman,Pistol Shot,4,ranged,105%,-15%,11.5%,4-3-2,2-3-4,HW Pistol Dmg Marked 5,手枪射击，对标记目标额外伤害
+
+Highwayman,Point Blank Shot,0,ranged,95%,50%,5%,1,1,Push 1A,近距离射击，高伤害并击退敌人
+Highwayman,Point Blank Shot,1,ranged,100%,50%,6%,1,1,Push 1B,近距离射击，高伤害并击退敌人
+Highwayman,Point Blank Shot,2,ranged,105%,50%,7%,1,1,Push 1C,近距离射击，高伤害并击退敌人
+Highwayman,Point Blank Shot,3,ranged,110%,50%,8%,1,1,Push 1D,近距离射击，高伤害并击退敌人
+Highwayman,Point Blank Shot,4,ranged,115%,50%,9%,1,1,Push 1E,近距离射击，高伤害并击退敌人
+
+Highwayman,Grape Shot Blast,0,ranged,75%,-50%,-9%,2-3,1-2-3,Grapeshot Vulnerability 1,霰弹射击，群体伤害
+Highwayman,Grape Shot Blast,1,ranged,80%,-50%,-8%,2-3,1-2-3,Grapeshot Vulnerability 2,霰弹射击，群体伤害
+Highwayman,Grape Shot Blast,2,ranged,85%,-50%,-7%,2-3,1-2-3,Grapeshot Vulnerability 3,霰弹射击，群体伤害
+Highwayman,Grape Shot Blast,3,ranged,90%,-50%,-6%,2-3,1-2-3,Grapeshot Vulnerability 4,霰弹射击，群体伤害
+Highwayman,Grape Shot Blast,4,ranged,95%,-50%,-5%,2-3,1-2-3,Grapeshot Vulnerability 5,霰弹射击，群体伤害
+
+Highwayman,Take Aim,0,ranged,95%,-80%,0%,4-3-2-1,2-3-4,Tracking Buff 1/Destealth,瞄准，提升命中和暴击
+Highwayman,Take Aim,1,ranged,100%,-80%,0%,4-3-2-1,2-3-4,Tracking Buff 2/Destealth,瞄准，提升命中和暴击
+Highwayman,Take Aim,2,ranged,105%,-80%,0.5%,4-3-2-1,2-3-4,Tracking Buff 3/Destealth,瞄准，提升命中和暴击
+Highwayman,Take Aim,3,ranged,110%,-80%,0.5%,4-3-2-1,2-3-4,Tracking Buff 4/Destealth,瞄准，提升命中和暴击
+Highwayman,Take Aim,4,ranged,115%,-80%,1%,4-3-2-1,2-3-4,Tracking Buff 5/Destealth,瞄准，提升命中和暴击
+
+Highwayman,Duelist Advance,0,melee,90%,-20%,5%,4-3-2,1-2-3,Hwy Riposte 1,决斗进攻，获得反击能力
+Highwayman,Duelist Advance,1,melee,95%,-20%,6%,4-3-2,1-2-3,Hwy Riposte 2,决斗进攻，获得反击能力
+Highwayman,Duelist Advance,2,melee,100%,-20%,7%,4-3-2,1-2-3,Hwy Riposte 3,决斗进攻，获得反击能力
+Highwayman,Duelist Advance,3,melee,105%,-20%,8%,4-3-2,1-2-3,Hwy Riposte 4,决斗进攻，获得反击能力
+Highwayman,Duelist Advance,4,melee,110%,-20%,9%,4-3-2,1-2-3,Hwy Riposte 5,决斗进攻，获得反击能力
+
+Highwayman,Opened Vein,0,melee,95%,-15%,0%,3-2-1,1-2,Bleed 1/HW Open Vein Bleed Debuff 1/HW Open Vein SPD Debuff 1,开膛，造成流血和减速
+Highwayman,Opened Vein,1,melee,100%,-15%,1%,3-2-1,1-2,Bleed 2/HW Open Vein Bleed Debuff 2/HW Open Vein SPD Debuff 2,开膛，造成流血和减速
+Highwayman,Opened Vein,2,melee,105%,-15%,2%,3-2-1,1-2,Bleed 3/HW Open Vein Bleed Debuff 3/HW Open Vein SPD Debuff 3,开膛，造成流血和减速
+Highwayman,Opened Vein,3,melee,110%,-15%,3%,3-2-1,1-2,Bleed 4/HW Open Vein Bleed Debuff 4/HW Open Vein SPD Debuff 4,开膛，造成流血和减速
+Highwayman,Opened Vein,4,melee,115%,-15%,4%,3-2-1,1-2,Bleed 5/HW Open Vein Bleed Debuff 5/HW Open Vein SPD Debuff 5,开膛，造成流血和减速
+
+# 十字军技能 | Crusader Skills
+Crusader,Smite,0,melee,85%,0%,0%,2-1,1-2,Unholy Killer 1,神圣打击，对不洁生物高伤害
+Crusader,Smite,1,melee,90%,0%,1%,2-1,1-2,Unholy Killer 2,神圣打击，对不洁生物高伤害
+Crusader,Smite,2,melee,95%,0%,2%,2-1,1-2,Unholy Killer 3,神圣打击，对不洁生物高伤害
+Crusader,Smite,3,melee,100%,0%,3%,2-1,1-2,Unholy Killer 4,神圣打击，对不洁生物高伤害
+Crusader,Smite,4,melee,105%,0%,4%,2-1,1-2,Unholy Killer 5,神圣打击，对不洁生物高伤害
+
+Crusader,Zealous Accusation,0,ranged,85%,-40%,-4%,2-1,1-2,None,热诚指控，群体伤害
+Crusader,Zealous Accusation,1,ranged,90%,-40%,-3%,2-1,1-2,None,热诚指控，群体伤害
+Crusader,Zealous Accusation,2,ranged,95%,-40%,-2%,2-1,1-2,None,热诚指控，群体伤害
+Crusader,Zealous Accusation,3,ranged,100%,-40%,-1%,2-1,1-2,None,热诚指控，群体伤害
+Crusader,Zealous Accusation,4,ranged,105%,-40%,0%,2-1,1-2,None,热诚指控，群体伤害
+
+Crusader,Stunning Blow,0,melee,90%,-50%,0%,2-1,1-2,Stun 1,重击，造成眩晕
+Crusader,Stunning Blow,1,melee,95%,-50%,1%,2-1,1-2,Stun 2,重击，造成眩晕
+Crusader,Stunning Blow,2,melee,100%,-50%,2%,2-1,1-2,Stun 3,重击，造成眩晕
+Crusader,Stunning Blow,3,melee,105%,-50%,3%,2-1,1-2,Stun 4,重击，造成眩晕
+Crusader,Stunning Blow,4,melee,110%,-50%,4%,2-1,1-2,Stun 5,重击，造成眩晕
+
+Crusader,Bulwark of Faith,0,support,0%,0%,0%,2-1,self,Crusader Bulwark 1/Crusader Bulwark Mark/Crusader Bulwark Light,信仰壁垒，提升保护和抗性
+Crusader,Bulwark of Faith,1,support,0%,0%,0%,2-1,self,Crusader Bulwark 2/Crusader Bulwark Mark/Crusader Bulwark Light,信仰壁垒，提升保护和抗性
+Crusader,Bulwark of Faith,2,support,0%,0%,0%,2-1,self,Crusader Bulwark 3/Crusader Bulwark Mark/Crusader Bulwark Light,信仰壁垒，提升保护和抗性
+Crusader,Bulwark of Faith,3,support,0%,0%,0%,2-1,self,Crusader Bulwark 4/Crusader Bulwark Mark/Crusader Bulwark Light,信仰壁垒，提升保护和抗性
+Crusader,Bulwark of Faith,4,support,0%,0%,0%,2-1,self,Crusader Bulwark 5/Crusader Bulwark Mark/Crusader Bulwark Light,信仰壁垒，提升保护和抗性
+
+Crusader,Battle Heal,0,support,0%,0%,0%,1-2-3-4,1-2-3-4,None,战斗治疗，恢复生命值
+Crusader,Battle Heal,1,support,0%,0%,0%,1-2-3-4,1-2-3-4,None,战斗治疗，恢复生命值
+Crusader,Battle Heal,2,support,0%,0%,0%,1-2-3-4,1-2-3-4,None,战斗治疗，恢复生命值
+Crusader,Battle Heal,3,support,0%,0%,0%,1-2-3-4,1-2-3-4,None,战斗治疗，恢复生命值
+Crusader,Battle Heal,4,support,0%,0%,0%,1-2-3-4,1-2-3-4,None,战斗治疗，恢复生命值
+
+Crusader,Holy Lance,0,melee,85%,0%,6.5%,3-4,2-3-4,Unholy Killer 1,圣枪突刺，向前突进并造成伤害
+Crusader,Holy Lance,1,melee,90%,0%,7.5%,3-4,2-3-4,Unholy Killer 2,圣枪突刺，向前突进并造成伤害
+Crusader,Holy Lance,2,melee,95%,0%,8.5%,3-4,2-3-4,Unholy Killer 3,圣枪突刺，向前突进并造成伤害
+Crusader,Holy Lance,3,melee,100%,0%,9.5%,3-4,2-3-4,Unholy Killer 4,圣枪突刺，向前突进并造成伤害
+Crusader,Holy Lance,4,melee,105%,0%,10.5%,3-4,2-3-4,Unholy Killer 5,圣枪突刺，向前突进并造成伤害
+
+Crusader,Inspiring Cry,0,support,0%,0%,0%,1-2-3-4,1-2-3-4,Crusader HealStress 1/Crusader Light 1,鼓舞呐喊，恢复压力和生命值
+Crusader,Inspiring Cry,1,support,0%,0%,0%,1-2-3-4,1-2-3-4,Crusader HealStress 2/Crusader Light 2,鼓舞呐喊，恢复压力和生命值
+Crusader,Inspiring Cry,2,support,0%,0%,0%,1-2-3-4,1-2-3-4,Crusader HealStress 3/Crusader Light 3,鼓舞呐喊，恢复压力和生命值
+Crusader,Inspiring Cry,3,support,0%,0%,0%,1-2-3-4,1-2-3-4,Crusader HealStress 4/Crusader Light 4,鼓舞呐喊，恢复压力和生命值
+Crusader,Inspiring Cry,4,support,0%,0%,0%,1-2-3-4,1-2-3-4,Crusader HealStress 5/Crusader Light 5,鼓舞呐喊，恢复压力和生命值

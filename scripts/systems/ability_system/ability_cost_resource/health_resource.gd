@@ -16,9 +16,5 @@ func consume(amount: int) -> bool:
 		current_value = 0
 	return ok
 
-## 应用伤害
-func apply_damage(damage: AbilityDamage) -> void:
-	consume(round(damage.damage_value))
-
 func _get_resource_name() -> StringName:
 	return "生命值"

@@ -16,7 +16,7 @@ signal quantity_changed(new_quantity: int)
 signal enhancement_level_changed(new_level: int)
 
 ## 内部变量
-var _ability: ItemAbility
+var _ability: Ability
 
 ## 获取总效果（基础效果 + 强化效果 + 额外效果）
 func get_total_effects() -> Dictionary:
@@ -98,5 +98,5 @@ func use(target: Node) -> bool:
 	return false
 
 ## 获取技能
-func get_ability() -> ItemAbility:
+func get_ability() -> Ability:
 	return _ability

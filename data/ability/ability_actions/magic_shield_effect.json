@@ -1,0 +1,14 @@
+{
+  "type": "sequence",
+  "children": [
+    {
+      "type": "play_animation",
+      "animation_name": "cast"
+    },
+    {
+      "type": "apply_ability",
+      "ability": "magic_shield",
+      "pre_delay": 0.2
+    }
+  ]
+}

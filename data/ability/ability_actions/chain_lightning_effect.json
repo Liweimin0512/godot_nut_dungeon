@@ -1,0 +1,49 @@
+{
+  "type": "sequence",
+  "children": [
+    {
+      "type": "find_targets",
+      "target_type": "enemy",
+      "max_targets": 3,
+      "range": 300,
+      "chain_type": "nearest"
+    },
+    {
+      "type": "for_each_target",
+      "variable": "current_target",
+      "children": [
+        {
+          "type": "sequence",
+          "children": [
+            {
+              "type": "get_source_position",
+              "position_type": "previous_target_or_caster",
+              "attach_point": "body_center",
+              "variable": "source_position"
+            },
+            {
+              "type": "get_target_position",
+              "target_variable": "current_target",
+              "attach_point": "body_center",
+              "variable": "target_position"
+            },
+            {
+              "type": "projectile",
+              "from": "@var:source_position",
+              "to": "@var:target_position",
+              "speed": 500,
+              "wait_for_hit": true
+            },
+            {
+              "type": "apply_damage",
+              "target": "@var:current_target",
+              "damage_type": "lightning",
+              "base_damage": 50,
+              "multiplier": "@formula:0.8^(@var:index - 1)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

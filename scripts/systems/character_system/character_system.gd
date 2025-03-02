@@ -22,6 +22,7 @@ var _entity_manager: CoreSystem.EntityManager:
 var _logger: CoreSystem.Logger:
 	get:
 		return CoreSystem.logger
+var _character_data_model : ModelType
 
 func _ready() -> void:
 	_entity_manager.entity_loaded.connect(
@@ -52,6 +53,7 @@ func initialize(character_model_type: ModelType) -> bool:
 			_initialized = true
 			initialized.emit(_initialized)
 	)
+	_character_data_model = character_model_type
 	return true
 
 ## 创建角色
@@ -59,7 +61,7 @@ func initialize(character_model_type: ModelType) -> bool:
 ## [param parent] 父节点
 ## [return] 创建的角色实例
 func create_character(character_id: StringName, parent: Node = null) -> Node:
-	var character_config : CharacterModel = DataManager.get_data_model(CHARACTER, character_id)
+	var character_config : Resource = DataManager.get_data_model(_character_data_model.model_name, character_id)
 	var character = _entity_manager.create_entity(CHARACTER, character_config, parent)
 	if not character:
 		_logger.error("can not create character: {0}".format([character_id]))

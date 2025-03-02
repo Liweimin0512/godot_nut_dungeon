@@ -21,12 +21,23 @@ _data = {}
 _watchers = Dictionary[String, Array]({})
 
 [node name="CharacterIcon" type="MarginContainer"]
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(64, 64)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_l2ohn")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("1_sehmb")
 expand_mode = 1
@@ -35,4 +46,4 @@ expand_mode = 1
 script = ExtResource("3_fmmp5")
 config = SubResource("Resource_iidib")
 data_model = SubResource("Resource_g3uyf")
-metadata/_custom_type_script = ExtResource("3_fmmp5")
+metadata/_custom_type_script = "uid://1mpayve22prh"

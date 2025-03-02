@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://nk3qqok7ctfq"]
+[gd_scene load_steps=12 format=3 uid="uid://nk3qqok7ctfq"]
 
 [ext_resource type="Texture2D" uid="uid://b58n5a36qrbtt" path="res://assets/sprites/characters/heros/leaf_ranger/projectiles_and_effects/arrow_.png" id="1_16qm4"]
+[ext_resource type="Script" uid="uid://c2uj6mjw3153q" path="res://scenes/projectile/arrow.gd" id="1_jre8l"]
 [ext_resource type="Texture2D" uid="uid://7n66wkpeem36" path="res://assets/sprites/characters/heros/leaf_ranger/projectiles_and_effects/arrow_hit.png" id="2_16qm4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_btfbg"]
@@ -60,14 +61,18 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5t17e")
 }],
-"loop": true,
+"loop": false,
 "name": &"on_hit",
 "speed": 5.0
 }]
 
-[node name="arrow_poison" type="Node2D"]
+[node name="arrow" type="Node2D"]
+script = ExtResource("1_jre8l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_55j4t")
 animation = &"on_hit"
-frame_progress = 0.951743
+autoplay = "idle"
+frame = 5
+frame_progress = 1.0

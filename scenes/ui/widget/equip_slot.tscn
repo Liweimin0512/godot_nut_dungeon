@@ -3,6 +3,9 @@
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_f41en"]
 
 [node name="EquipSlot" type="MarginContainer"]
+custom_minimum_size = Vector2(32, 64)
+offset_right = 32.0
+offset_bottom = 64.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(32, 0)

@@ -1,0 +1,91 @@
+# 基础效果数据表
+# Effect Name(效果名称), Target(目标), Type(类型), Chance(触发几率), Duration(持续回合), Stats(属性修改), Special Effects(特殊效果), Notes(说明)
+Effect Name,Target,Type,Chance,Duration,Stats,Special Effects,Notes
+
+# 移动效果 Movement Effects
+Push 1A,target,negative,100%,1,None,push 1,向后推动1格
+Push 1B,target,negative,110%,1,None,push 1,向后推动1格
+Push 1C,target,negative,120%,1,None,push 1,向后推动1格
+Push 1D,target,negative,130%,1,None,push 1,向后推动1格
+Push 1E,target,negative,140%,1,None,push 1,向后推动1格
+Pull 2A,target,negative,100%,1,None,pull 2,向前拉动2格
+Pull 2B,target,negative,110%,1,None,pull 2,向前拉动2格
+Pull 2C,target,negative,120%,1,None,pull 2,向前拉动2格
+Pull 2D,target,negative,130%,1,None,pull 2,向前拉动2格
+Pull 2E,target,negative,140%,1,None,pull 2,向前拉动2格
+
+# 中毒效果 Blight Effects
+Weak Blight 1,target,negative,100%,3,None,dotPoison 1,弱效中毒
+Weak Blight 2,target,negative,110%,3,None,dotPoison 2,弱效中毒
+Weak Blight 3,target,negative,120%,3,None,dotPoison 2,弱效中毒
+Weak Blight 4,target,negative,130%,3,None,dotPoison 3,弱效中毒
+Weak Blight 5,target,negative,140%,3,None,dotPoison 3,弱效中毒
+Strong Blight 1,target,negative,100%,3,None,dotPoison 3,强效中毒
+Strong Blight 2,target,negative,110%,3,None,dotPoison 4,强效中毒
+Strong Blight 3,target,negative,120%,3,None,dotPoison 4,强效中毒
+Strong Blight 4,target,negative,130%,3,None,dotPoison 5,强效中毒
+Strong Blight 5,target,negative,140%,3,None,dotPoison 5,强效中毒
+
+# 眩晕效果 Stun Effects
+Weak Stun 1,target,negative,50%,1,None,stun 1,弱效眩晕
+Weak Stun 2,target,negative,60%,1,None,stun 1,弱效眩晕
+Weak Stun 3,target,negative,70%,1,None,stun 1,弱效眩晕
+Weak Stun 4,target,negative,90%,1,None,stun 1,弱效眩晕
+Weak Stun 5,target,negative,100%,1,None,stun 1,弱效眩晕
+Strong Stun 1,target,negative,100%,1,None,stun 1,强效眩晕
+Strong Stun 2,target,negative,110%,1,None,stun 1,强效眩晕
+Strong Stun 3,target,negative,120%,1,None,stun 1,强效眩晕
+Strong Stun 4,target,negative,130%,1,None,stun 1,强效眩晕
+Strong Stun 5,target,negative,140%,1,None,stun 1,强效眩晕
+
+# 闪避效果 Dodge Effects
+Dodge 1,performer,positive,100%,1,defense_rating_add 20%,None,提升闪避
+Dodge 2,performer,positive,100%,1,defense_rating_add 22%,None,提升闪避
+Dodge 3,performer,positive,100%,1,defense_rating_add 25%,None,提升闪避
+Dodge 4,performer,positive,100%,1,defense_rating_add 27%,None,提升闪避
+Dodge 5,performer,positive,100%,1,defense_rating_add 30%,None,提升闪避
+
+# 特定敌人克制 Type Killer Effects
+Beast Killer 1,performer,positive,100%,1,damage_multiply 15%,monsterType beast,对野兽伤害提升
+Beast Killer 2,performer,positive,100%,1,damage_multiply 20%,monsterType beast,对野兽伤害提升
+Beast Killer 3,performer,positive,100%,1,damage_multiply 25%,monsterType beast,对野兽伤害提升
+Beast Killer 4,performer,positive,100%,1,damage_multiply 30%,monsterType beast,对野兽伤害提升
+Beast Killer 5,performer,positive,100%,1,damage_multiply 35%,monsterType beast,对野兽伤害提升
+Eldritch Killer 1,performer,positive,100%,1,damage_multiply 15%,monsterType eldritch,对邪术生物伤害提升
+Eldritch Killer 2,performer,positive,100%,1,damage_multiply 20%,monsterType eldritch,对邪术生物伤害提升
+Eldritch Killer 3,performer,positive,100%,1,damage_multiply 25%,monsterType eldritch,对邪术生物伤害提升
+Eldritch Killer 4,performer,positive,100%,1,damage_multiply 30%,monsterType eldritch,对邪术生物伤害提升
+Eldritch Killer 5,performer,positive,100%,1,damage_multiply 35%,monsterType eldritch,对邪术生物伤害提升
+
+# 火把效果 Torch Effects
+Light 1,global,positive,100%,1,None,torch_increase 6,火把亮度提升
+Light 2,global,positive,100%,1,None,torch_increase 10,火把亮度提升
+
+# 队伍效果 Party Effects
+Shuffle Party 1,target,negative,80%,1,None,shuffleparty,打乱队伍站位
+Shuffle Party 2,target,negative,90%,1,None,shuffleparty,打乱队伍站位
+Shuffle Party 3,target,negative,100%,1,None,shuffleparty,打乱队伍站位
+Shuffle Party 4,target,negative,110%,1,None,shuffleparty,打乱队伍站位
+Shuffle Party 5,target,negative,120%,1,None,shuffleparty,打乱队伍站位
+
+# 变身效果 Transform Effects
+Beast Form,performer,transform,100%,1,None,Transform/Stress All 2,变身为野兽形态并造成全队压力
+xform_damage_1,performer,positive,100%,3,damage_multiply 10%,None,变身后伤害提升
+xform_damage_2,performer,positive,100%,3,damage_multiply 14%,None,变身后伤害提升
+xform_damage_3,performer,positive,100%,3,damage_multiply 17%,None,变身后伤害提升
+xform_damage_4,performer,positive,100%,3,damage_multiply 21%,None,变身后伤害提升
+xform_damage_5,performer,positive,100%,3,damage_multiply 25%,None,变身后伤害提升
+
+# 治疗效果 Healing Effects
+Crusader HealStress 1,target,positive,100%,1,None,healstress 4,减少压力
+Crusader HealStress 2,target,positive,100%,1,None,healstress 5,减少压力
+Crusader HealStress 3,target,positive,100%,1,None,healstress 6,减少压力
+Crusader HealStress 4,target,positive,100%,1,None,healstress 7,减少压力
+Crusader HealStress 5,target,positive,100%,1,None,healstress 8,减少压力
+
+# 速度效果 Speed Effects
+GR Self Speed 1,performer,positive,100%,1,speed_rating_add 2,None,提升速度
+GR Self Speed 2,performer,positive,100%,1,speed_rating_add 2,None,提升速度
+GR Self Speed 3,performer,positive,100%,1,speed_rating_add 3,None,提升速度
+GR Self Speed 4,performer,positive,100%,1,speed_rating_add 4,None,提升速度
+GR Self Speed 5,performer,positive,100%,1,speed_rating_add 5,None,提升速度

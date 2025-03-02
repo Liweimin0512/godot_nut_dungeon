@@ -1,11 +1,13 @@
 extends BaseStateMachine
 
 func _ready() -> void:
+	is_debug = true
 	add_state("launch", LaunchState.new())
 	add_state("init", InitState.new())
 	add_state("change_scene", ChangeSceneState.new())
 	add_state("menu", MenuState.new())
 	add_state("game", GameState.new())
+
 
 ## 启动流程
 class LaunchState:

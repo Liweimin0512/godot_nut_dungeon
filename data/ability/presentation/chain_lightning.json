@@ -1,0 +1,79 @@
+{
+    "events": {
+      "ABILITY_START": {
+        "animations": [
+          {
+            "target": "actor",
+            "animation": "cast",
+            "wait": true
+          }
+        ],
+        "effects": [
+          {
+            "type": "cast_charge",
+            "target": "actor",
+            "attach_point": "hand_r",
+            "params": {
+              "color": {"r": 0.2, "g": 0.6, "b": 1.0, "a": 1.0},
+              "scale": 1.0,
+              "duration": 0.5
+            }
+          }
+        ]
+      },
+      "PROJECTILE_START": {
+        "effects": [
+          {
+            "type": "lightning_projectile",
+            "params": {
+              "from": "@context:from",
+              "to": "@context:to",
+              "speed": "@context:speed",
+              "width": "@formula:8 - @context:chain_index",
+              "color": {"r": 0.2, "g": 0.6, "b": 1.0, "a": 1.0}
+            }
+          }
+        ],
+        "sound_effects": [
+          {
+            "sound": "lightning_cast",
+            "volume": "@formula:1.0 - (@context:chain_index * 0.2)"
+          }
+        ]
+      },
+      "PROJECTILE_HIT": {
+        "effects": [
+          {
+            "type": "lightning_impact",
+            "target": "@context:target",
+            "attach_point": "body_center",
+            "params": {
+              "scale": "@formula:2.0 - (@context:chain_index * 0.3)",
+              "duration": 0.3
+            }
+          }
+        ],
+        "camera_effects": [
+          {
+            "type": "shake",
+            "trauma": "@formula:0.4 - (@context:chain_index * 0.1)"
+          }
+        ],
+        "sound_effects": [
+          {
+            "sound": "lightning_impact",
+            "volume": "@formula:1.0 - (@context:chain_index * 0.2)"
+          }
+        ]
+      },
+      "DAMAGE_START": {
+        "animations": [
+          {
+            "target": "@context:target",
+            "animation": "hit",
+            "wait": false
+          }
+        ]
+      }
+    }
+  }

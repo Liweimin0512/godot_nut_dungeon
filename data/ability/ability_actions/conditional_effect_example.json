@@ -1,0 +1,57 @@
+{
+    "type": "sequence",
+    "children": [
+        {
+            "type": "check_conditions",
+            "conditions": {
+                "type": "AND",
+                "sub_conditions": [
+                    {
+                        "type": "stat",
+                        "params": {
+                            "stat": "health",
+                            "value": 0.3,
+                            "compare": "LESS_EQUAL"
+                        }
+                    },
+                    {
+                        "type": "OR",
+                        "sub_conditions": [
+                            {
+                                "type": "tag",
+                                "params": {
+                                    "tag": "burning"
+                                }
+                            },
+                            {
+                                "type": "tag",
+                                "params": {
+                                    "tag": "poisoned"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "type": "distance",
+                        "params": {
+                            "max_distance": 500
+                        }
+                    }
+                ]
+            },
+            "child": {
+                "type": "sequence",
+                "children": [
+                    {
+                        "type": "apply_heal",
+                        "heal_amount": 50
+                    },
+                    {
+                        "type": "remove_tag",
+                        "tags": ["burning", "poisoned"]
+                    }
+                ]
+            }
+        }
+    ]
+}

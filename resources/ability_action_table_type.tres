@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TableType" load_steps=2 format=3 uid="uid://70rx42jc4o88"]
+
+[ext_resource type="Script" uid="uid://c65rwndbbr15i" path="res://addons/GDDataForge/source/resource/table_type.gd" id="1_dskrw"]
+
+[resource]
+script = ExtResource("1_dskrw")
+table_name = &"ability_action"
+table_paths = Array[String](["res://data/ability/ability_action.json"])
+description = ""
+primary_key = "ID"
+enable_cache = true
+validation_rules = {}
+cache = {}
+is_loaded = false
+metadata/_custom_type_script = ExtResource("1_dskrw")

@@ -2,6 +2,7 @@ extends BaseStateMachine
 class_name GameplayStateMachine
 
 func _ready() -> void:
+	is_debug = true
 	add_state("explore", ExploreState.new())
 	add_state("battle", BattleState.new())
 	add_state("dialogue", DialogueState.new())

@@ -1,0 +1,16 @@
+[remap]
+
+importer="aseprite_wizard.plugin.static-texture"
+type="PortableCompressedTexture2D"
+uid="uid://8ftiq60ps6k1"
+path="res://.godot/imported/arbalest.skills.icon.aseprite-67ab790cf466e6928dc85e808dc0de95.res"
+
+[deps]
+
+source_file="res://assets/texture/icon/arbalest.skills.icon.aseprite"
+dest_files=["res://.godot/imported/arbalest.skills.icon.aseprite-67ab790cf466e6928dc85e808dc0de95.res"]
+
+[params]
+
+layer/exclude_layers_pattern=""
+layer/only_visible_layers=false

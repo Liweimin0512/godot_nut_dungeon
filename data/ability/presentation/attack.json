@@ -1,0 +1,13 @@
+{
+    "events": {
+      "ability_executing": {
+        "animations": [
+          {
+            "target": "actor",
+            "animation": "attack",
+            "wait": true
+          }
+        ]
+      }
+    }
+}

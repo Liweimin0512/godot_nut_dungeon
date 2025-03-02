@@ -1,0 +1,77 @@
+{
+    "type": "sequence",
+    "children": [
+        {
+            "type": "decorator_trigger",
+            "trigger_type": "on_toggle",
+            "persistent": true,
+            "child": {
+                "type": "sequence",
+                "children": [
+                    {
+                        "type": "get_toggle_state",
+                        "variable": "is_active"
+                    },
+                    {
+                        "type": "branch",
+                        "condition": "@var:is_active",
+                        "success_child": {
+                            "type": "sequence",
+                            "children": [
+                                {
+                                    "type": "spawn_vfx",
+                                    "vfx_scene": "@scene://scenes/vfx/strength_aura_vfx.tscn",
+                                    "attach_to_target": true,
+                                    "mount_target_type": "caster",
+                                    "mount_point_type": "body",
+                                    "auto_free": false,
+                                    "variable": "aura_vfx"
+                                },
+                                {
+                                    "type": "decorator_trigger",
+                                    "trigger_type": "on_tick",
+                                    "persistent": true,
+                                    "child": {
+                                        "type": "sequence",
+                                        "children": [
+                                            {
+                                                "type": "find_targets_in_range",
+                                                "range": 300,
+                                                "target_type": "ally",
+                                                "include_self": true,
+                                                "variable": "affected_targets"
+                                            },
+                                            {
+                                                "type": "for_each_target",
+                                                "targets": "@var:affected_targets",
+                                                "child": {
+                                                    "type": "apply_tag",
+                                                    "tag_name": "strength_aura",
+                                                    "persistent": false,
+                                                    "duration": 1.5
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        "failure_child": {
+                            "type": "sequence",
+                            "children": [
+                                {
+                                    "type": "destroy_vfx",
+                                    "vfx": "@var:aura_vfx"
+                                },
+                                {
+                                    "type": "remove_tag",
+                                    "tag_name": "strength_aura"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
