@@ -5,9 +5,9 @@ const MAX_PARTY_SIZE = 4
 const CHARACTER_SCENE = preload("res://scenes/character/character.tscn")
 const TEST_HEROES = [
 	"crystal_mauler",
-	#"leaf_ranger",
+	"leaf_ranger",
 	null,
-	#"water_priestess",
+	"water_priestess",
 ]
 
 ## 英雄单位字典，key为英雄ID，value为英雄实例

@@ -1,25 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgj5fmjvlf8j"]
+[gd_scene load_steps=5 format=3 uid="uid://bgj5fmjvlf8j"]
 
 [ext_resource type="Script" uid="uid://cmx7unvv6cxui" path="res://scenes/ui/ui_combat_scene.gd" id="1_td8j5"]
 [ext_resource type="PackedScene" uid="uid://ds8sko3goeli8" path="res://scenes/ui/widget/turn_status.tscn" id="3_btpwd"]
 [ext_resource type="PackedScene" uid="uid://3ewkyi3cdi2p" path="res://scenes/ui/widget/combat_scene/w_action_container.tscn" id="3_qu55d"]
 [ext_resource type="Script" uid="uid://dod05jn2u0pey" path="res://addons/GodotUIFramework/source/core/components/ui_scene_component.gd" id="3_uvyqa"]
-[ext_resource type="Script" uid="uid://cwol0omsjqlwy" path="res://addons/GodotUIFramework/source/core/resource/ui_view_type.gd" id="4_btpwd"]
-[ext_resource type="Script" uid="uid://c6ba7chc4lqax" path="res://addons/GodotUIFramework/source/core/data/ui_data_model.gd" id="5_qu55d"]
-
-[sub_resource type="Resource" id="Resource_kipig"]
-script = ExtResource("4_btpwd")
-ID = &""
-scene_path = ""
-preload_mode = 0
-cache_mode = 1
-pool_capacity = 10
-
-[sub_resource type="Resource" id="Resource_uioob"]
-script = ExtResource("5_qu55d")
-data_paths = Array[String]([])
-_data = {}
-_watchers = Dictionary[String, Array]({})
 
 [node name="UICombatScene" type="Control"]
 layout_mode = 3
@@ -66,6 +50,4 @@ layout_mode = 2
 
 [node name="UISceneComponent" type="Node" parent="."]
 script = ExtResource("3_uvyqa")
-config = SubResource("Resource_kipig")
-data_model = SubResource("Resource_uioob")
 metadata/_custom_type_script = "uid://dod05jn2u0pey"

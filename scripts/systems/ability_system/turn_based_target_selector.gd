@@ -71,19 +71,15 @@ func get_actual_targets(ability: Ability, selected_targets: Array, context: Dict
 
 ## 根据阵营获取目标
 func _get_targets_by_camp(_ability: Ability, context: Dictionary) -> Array:
-	var combat_manager = CombatSystem.active_combat_manager
-	if not combat_manager:
-		return []
-	
 	var caster : Node = context.get("caster", null)
 	if not caster:
 		push_error("caster not found!")
 		return []
 
 	if target_type == TARGET_TYPE.SINGLE_ENEMY or target_type == TARGET_TYPE.MULTIPLE_ENEMY:
-		return combat_manager.get_enemy_units(caster)
+		return CombatSystem.get_enemy_units(caster)
 	elif target_type == TARGET_TYPE.SINGLE_ALLY or target_type == TARGET_TYPE.MULTIPLE_ALLY:
-		return combat_manager.get_ally_units(caster)
+		return CombatSystem.get_ally_units(caster)
 	return []
 
 
@@ -94,6 +90,7 @@ func _filter_targets_by_position(targets: Array) -> Array:
 		available_targets = targets
 	else:
 		for target in targets:
-			if target.combat_point in available_positions:
+			var component = CombatSystem.get_combat_component(target)
+			if component.combat_point in available_positions:
 				available_targets.append(target)
 	return available_targets

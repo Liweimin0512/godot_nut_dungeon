@@ -46,4 +46,4 @@ expand_mode = 1
 script = ExtResource("3_fmmp5")
 config = SubResource("Resource_iidib")
 data_model = SubResource("Resource_g3uyf")
-metadata/_custom_type_script = ExtResource("3_fmmp5")
+metadata/_custom_type_script = "uid://1mpayve22prh"

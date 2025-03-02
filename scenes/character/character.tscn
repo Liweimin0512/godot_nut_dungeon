@@ -119,8 +119,11 @@ _ability_component = NodePath("../AbilityComponent")
 _attribute_component = NodePath("../AbilityAttributeComponent")
 metadata/_custom_type_script = "uid://dbahbya6g3qa0"
 
-[node name="CombatComponent" type="Node" parent="."]
+[node name="CombatComponent" type="Node" parent="." node_paths=PackedStringArray("ability_component", "ability_resource_component", "ability_attribute_component")]
 script = ExtResource("8_0rlhq")
+ability_component = NodePath("../AbilityComponent")
+ability_resource_component = NodePath("../AbilityResourceComponent")
+ability_attribute_component = NodePath("../AbilityAttributeComponent")
 metadata/_custom_type_script = "uid://y1mgjyqenlv7"
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

@@ -29,10 +29,12 @@ func _init() -> void:
 func _init_from_data(data : Dictionary) -> void:
 	super(data)
 
-	# 添加使用次数限制
-	usage_count_restriction = add_restriction(UsageCountRestriction.new({
-		"max_count": data.get("use_count", 0),
-	}))
+	var use_count = data.get("use_count", 0)
+	if use_count > 0:
+		# 添加使用次数限制
+		usage_count_restriction = add_restriction(UsageCountRestriction.new({
+			"max_count": use_count,
+		}))
 
 	# 添加位置限制
 	position_restriction = add_restriction(CastPositionRestriction.new({
@@ -41,7 +43,7 @@ func _init_from_data(data : Dictionary) -> void:
 
 	_target_selector = TurnBasedTargetSelector.new({
 		"target_type": data.get("target_type", TurnBasedTargetSelector.TARGET_TYPE.SINGLE_ENEMY),
-		"available_positions": data.get("available_positions", [1, 2, 3, 4]),	
+		"available_positions": data.get("target_positions", [1, 2, 3, 4]),
 	})
 
 
@@ -59,8 +61,7 @@ func execute(context: Dictionary) -> void:
 		"crit_rate_bonus": crit_rate_bonus,
 		"hit_rate_bonus": hit_rate_bonus
 	}
-
-	super(context)
+	await super(context)
 
 
 func get_full_description() -> String:

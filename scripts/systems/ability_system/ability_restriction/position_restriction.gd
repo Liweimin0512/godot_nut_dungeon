@@ -9,13 +9,13 @@ func _init(config : Dictionary = {}) -> void:
 	for pos in poss:
 		valid_cast_positions.append(pos)
 
-
 func can_execute(context: Dictionary) -> bool:
 	var caster = context.get("caster", null)
 	if not caster:
 		return false
 
-	var caster_position = caster.current_point
+	var component := CombatSystem.get_combat_component(caster)
+	var caster_position = component.combat_point
 	if caster_position < 0:
 		return false
 		

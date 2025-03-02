@@ -8,7 +8,7 @@ const CHARACTER = preload("res://scenes/character/character.tscn")
 # 测试用角色
 @onready var enemy_markers: Node2D = %EnemyMarkers
 @onready var player_markers: Node2D = %PlayerMarkers
-@onready var ui_combat_scene: UICombatScene = $UILayer/UICombatScene
+#@onready var ui_combat_scene: UICombatScene = $UILayer/UICombatScene
 @onready var action_layer: CanvasLayer = $ActionLayer
 @onready var camera_2d: Camera2D = $Camera2D
 
@@ -17,10 +17,10 @@ const CHARACTER = preload("res://scenes/character/character.tscn")
 
 var _logger: CoreSystem.Logger = CoreSystem.logger
 
-## 战斗管理器实例
-var combat_manager: CombatManager
-
 func _ready() -> void:
+	CombatSystem.action_ability_selected.subscribe(_on_action_ability_selected)
+	CombatSystem.combat_action_started.subscribe(_on_combat_action_started)
+
 	# 移除测试数据
 	_remove_test_characters()
 
@@ -47,21 +47,8 @@ func _initialize_combat(combat_id: StringName) -> void:
 		# 等待节点准备好
 		await ready
 
-	# 1. 创建并设置战斗单位
-	var player_units : Array = _setup_player_units()
-	var enemy_units : Array = _setup_enemy_units(combat_id)
-
-	var players : Array[Node]
-	for unit in player_units:
-		players.append(unit)
-	var enemies : Array[Node]
-	for unit in enemy_units:
-		enemies.append(unit)
-
 	# 2. 创建战斗管理器
-	combat_manager = CombatSystem.create_combat(combat_id, players, enemies)
-	# TODO 测试修改
-	combat_manager._combat_config.is_auto = false
+	CombatSystem.create_combat(combat_id)
 	
 	_setup_scene()
 	_setup_camera()
@@ -70,47 +57,10 @@ func _initialize_combat(combat_id: StringName) -> void:
 	# 3. 开始战斗
 	CombatSystem.start_combat()
 
-## 创建玩家单位
-func _setup_player_units() -> Array:
-	# 获取当前队伍
-	var party = PartySystem.get_active_party()
-	
-	for i in range(party.size()):
-		var character = party[i]
-		if not character:
-			continue
-		_setup_character(character, i, CombatDefinition.COMBAT_CAMP_TYPE.PLAYER)
-	return party
-
-## 创建敌人单位
-func _setup_enemy_units(combat_id: StringName) -> Array:
-	var units: Array = []
-
-	var combat_info : CombatModel = CombatSystem.get_combat_config(combat_id)
-	
-	for i in range(combat_info.enemy_data.size()):
-		var entityID : StringName = combat_info.enemy_data[i]
-		if entityID.is_empty():
-			continue
-		
-		var character: Character = CharacterSystem.create_character(entityID)
-		_setup_character(character, i, CombatDefinition.COMBAT_CAMP_TYPE.ENEMY)
-		units.append(character)
-	return units
-
-func _setup_character(character : Character, index : int, character_camp : CombatDefinition.COMBAT_CAMP_TYPE) -> void:
-	# 战斗点位设置
-	character.combat_point = index + 1
-	# 显示位置设置
-	var markers : Node2D = enemy_markers if character_camp == CombatDefinition.COMBAT_CAMP_TYPE.ENEMY else player_markers
-	if markers and markers.get_child_count() > index:
-		var marker : Marker2D = markers.get_child(index)
-		marker.add_child(character)
-
 ## 设置场景
 func _setup_scene() -> void:
 	# 创建并布置战斗单位
-	# _setup_battle_units()
+	_setup_combat_units(CombatSystem.players, CombatSystem.enemies)
 	
 	# 设置战斗相机
 	# _setup_camera()
@@ -125,8 +75,7 @@ func _setup_camera() -> void:
 
 ## 设置UI
 func _setup_ui() -> void:
-	if ui_combat_scene:
-		ui_combat_scene.setup(combat_manager)
+	pass
 
 ## 移除测试角色
 func _remove_test_characters() -> void:
@@ -138,4 +87,52 @@ func _remove_test_characters() -> void:
 		action_layer.remove_child(child)
 		child.queue_free()
 
+## 设置战斗单位位置
+func _setup_combat_units(players: Array[Node], enemies: Array[Node]) -> void:
+	# 设置玩家单位位置
+	for i in range(players.size()):
+		var character = players[i]
+		if not character:
+			continue
+		if player_markers and player_markers.get_child_count() > i:
+			var marker : Marker2D = player_markers.get_child(i)
+			marker.add_child(character)
+		if not character.pressed.is_connected(_on_character_pressed):
+			character.pressed.connect(_on_character_pressed.bind(character))
+			
+	# 设置敌人单位位置
+	for i in range(enemies.size()):
+		var character = enemies[i]
+		if not character:
+			continue
+		if enemy_markers and enemy_markers.get_child_count() > i:
+			var marker : Marker2D = enemy_markers.get_child(i)
+			marker.add_child(character)
+		if not character.pressed.is_connected(_on_character_pressed):
+			character.pressed.connect(_on_character_pressed.bind(character))
+
 #endregion
+
+
+func _on_action_ability_selected() -> void:
+	var actor : Character = CombatSystem.current_actor
+	var current_action : CombatAction = CombatSystem.current_action
+	if not actor:
+		push_error("actor is null")
+		return
+	var ability = current_action.ability
+	var targets := ability.get_available_targets({"caster": actor})
+	for target in targets:
+		target.can_select = true
+
+
+func _on_combat_action_started() -> void:
+	var action := CombatSystem.current_action
+	for unit in action.targets:
+		unit.can_select = false
+
+
+func _on_character_pressed(character : Character) -> void:
+	if character.can_select:
+		CombatSystem.select_target(character)
+		CombatSystem.action_target_selected.push()

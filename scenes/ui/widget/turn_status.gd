@@ -12,23 +12,21 @@ const ANIMATION_DURATION = 0.3  		## 动画持续时间
 @onready var tween: Tween
 @onready var ui_widget_component: UIWidgetComponent = $UIWidgetComponent
 
-## 当前战斗管理器，由外部注入
-var _current_combat_manager: CombatManager
-var _current_units : Array[Node]
+var _current_units : Array
 
 func _ready() -> void:
 	CombatSystem.combat_turn_started.subscribe(_on_turn_started)
+	CombatSystem.combat_action_ended.subscribe(_on_action_ended)
 
 ## 私有方法
 
 func _update_display() -> void:
-	if not _current_combat_manager:
-		return
-	_set_turn(_current_combat_manager.current_turn)
-	_update_order(_current_combat_manager.action_order)
+	_set_turn()
+	_update_order()
 
 ## 设置当前回合数
-func _set_turn(turn_number: int) -> void:
+func _set_turn() -> void:
+	var turn_number := CombatSystem.current_turn
 	if not is_node_ready():
 		await ready
 	label_turn_count.text = "第%d回合" % turn_number
@@ -40,7 +38,9 @@ func _set_turn(turn_number: int) -> void:
 
 
 ## 更新行动顺序显示
-func _update_order(units: Array[Node]) -> void:
+func _update_order() -> void:
+	var units := CombatSystem.action_order
+
 	# 清除现有的单位图标
 	for child in order_container.get_children():
 		child.queue_free()
@@ -49,8 +49,8 @@ func _update_order(units: Array[Node]) -> void:
 	
 	# 创建新的单位图标（最多显示MAX_DISPLAY_UNITS个）
 	for i in range(min(units.size(), MAX_DISPLAY_UNITS)):
-		var unit : CombatComponent = CombatSystem.get_combat_component(units[i])
-		var icon = ui_widget_component.create_widget("character_icon", order_container)
+		var unit : Character = units[i]
+		var icon : CharacterIcon = ui_widget_component.create_widget("character_icon", order_container)
 		
 		# 设置图标属性
 		icon.setup(unit)
@@ -109,13 +109,15 @@ func _highlight_current_unit(icon: Node) -> void:
 	tween.tween_property(icon, "modulate:v", 1.0, 0.5)
 
 ## 当回合准备好时调用
-func _on_turn_started(_combat: CombatManager) -> void:
+func _on_turn_started() -> void:
+	_update_display()
+	
+## 当行动结束后
+func _on_action_ended() -> void:
 	_update_display()
 
-func _on_ui_widget_component_initialized(data: Dictionary) -> void:
-	_current_combat_manager = data.get("combat_manager", null)
+func _on_ui_widget_component_initialized(_data: Dictionary) -> void:
 	_update_display()
 
-func _on_ui_widget_component_updated(data: Dictionary) -> void:
-	_current_combat_manager = data.get("combat_manager", null)
+func _on_ui_widget_component_updated(_data: Dictionary) -> void:
 	_update_display()

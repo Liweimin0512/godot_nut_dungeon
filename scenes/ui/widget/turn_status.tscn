@@ -53,7 +53,7 @@ layout_mode = 2
 [node name="LabelTurnCount" type="Label" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "第 1 回合"
+text = "第 0 回合"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2

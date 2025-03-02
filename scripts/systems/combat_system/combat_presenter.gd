@@ -49,6 +49,8 @@ var _screen_center : Vector2 = Vector2.ZERO				## 屏幕中心位置
 ## 效果处理器映射
 var _action_handlers: Dictionary
 
+var _logger : CoreSystem.Logger = CoreSystem.logger
+
 # 系统引用
 @onready var _time_manager : CoreSystem.TimeManager:
 	get:
@@ -56,10 +58,8 @@ var _action_handlers: Dictionary
 
 func _ready() -> void:
 	# 订阅战斗系统事件
-	CombatSystem.combat_action_started.subscribe(_on_combat_action_started)
 	CombatSystem.combat_action_executing.subscribe(_on_combat_action_executing)
 	CombatSystem.combat_action_executed.subscribe(_on_combat_action_executed)
-	CombatSystem.combat_action_ended.subscribe(_on_combat_action_ended)
 	
 	## 订阅技能系统事件
 	AbilitySystem.presentation_manager.presentation_requested.connect(_on_presentation_requested)
@@ -277,34 +277,32 @@ func _apply_post_process_effect(enable: bool, duration: float) -> void:
 		tween.tween_property(post_process.material, "shader_parameter/vignette_intensity", 0.0, duration)
 		tween.tween_property(post_process.material, "shader_parameter/brightness", 1.0, duration)
 
+func _on_combat_action_executing() -> void:
+	_logger.debug("开始执行行动:%s" % _current_action)
 
-func _on_combat_action_started(action: CombatAction) -> void:
-	_current_action = action
+	_current_action = CombatSystem.current_action
 	
 	# 1. 移动单位到战斗层
-	_move_units_to_action_layer(action)
+	_move_units_to_action_layer(_current_action)
 	
 	# 2. 调整时间速度
 	_time_manager.set_time_scale(0.5)  # 减速效果
 	
 	# 3. 移动单位到战斗位置
-	_move_units_to_combat_position(action, action.start_duration)
+	_move_units_to_combat_position(_current_action, 0.5)
 	
 	# 4. 设置摄像机
-	_setup_camera_for_combat(action, action.start_duration)
+	_setup_camera_for_combat(_current_action, 0.5)
 	
 	# 5. 应用后处理效果
-	_apply_post_process_effect(true, action.start_duration)
+	_apply_post_process_effect(true, 0.5)
 
-func _on_combat_action_executing(action: CombatAction) -> void:
-	# 先执行战斗动作
-	_execute_combat_action(action, action.execute_duration)
+	# 6.执行战斗动作
+	_execute_combat_action(_current_action, 0.5)
 
 
-func _on_combat_action_executed(_action: CombatAction) -> void:
-	pass
-
-func _on_combat_action_ended(action: CombatAction) -> void:
+func _on_combat_action_executed() -> void:
+	_logger.debug("执行行动完成:%s" % _current_action)
 	# 1. 恢复单位位置
 	await _restore_units_state()
 	
@@ -312,7 +310,8 @@ func _on_combat_action_ended(action: CombatAction) -> void:
 	_reset_camera()
 	
 	# 3. 移除后处理效果
-	_apply_post_process_effect(false, action.end_duration)
+	#var action := CombatSystem.current_action
+	_apply_post_process_effect(false, 0.5)
 	
 	# 4. 恢复时间速度
 	_time_manager.set_time_scale(1.0)

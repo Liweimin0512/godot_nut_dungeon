@@ -17,7 +17,6 @@ const VALID_POSITIONS = preload("res://assets/texture/valid_positions.png")
 @onready var valid_positions_container: HBoxContainer = %ValidPositionsContainer
 @onready var target_positions_container: HBoxContainer = %TargetPositionsContainer
 
-
 var _selected_ability : W_HeroAction:
 	set(value):
 		if _selected_ability:
@@ -25,43 +24,27 @@ var _selected_ability : W_HeroAction:
 		_selected_ability = value
 		if _selected_ability:
 			_selected_ability.selecte()
-var _ability_types : Dictionary[Ability, W_HeroAction]
-var _selecte_hero : Character
-var _combat_action : CombatAction : set = _combat_action_setter
+# var _ability_types : Dictionary[Ability, W_HeroAction]
+# var _selecte_hero : Character
+# var _combat_action : CombatAction : set = _combat_action_setter
 
 func _ready() -> void:
+	hide()
 	CombatSystem.combat_action_selecting.subscribe(_on_combat_action_selecting)
 	for child in hero_action_container.get_children():
-		child.pressed.connect(_on_hero_action_pressed.bind(child))
-
-
-func _selecte_ability(ability: TurnBasedSkillAbility) -> void:
-	var w_ability : W_HeroAction = _ability_types.get(ability, null)
-	if not w_ability:
-		return
-	_selected_ability = w_ability
-	label_ability_name.text = ability.ability_name
-	label_ability_type.text = "近战" if ability.is_melee else "远程"
-	_update_valid_positions_display(ability)
-	_update_target_positions_display(ability)
-	label_hit_rate.text = "命中率：{0}".format([ability.get_hit_rate(_selecte_hero)])
-	label_crit_rate.text = "暴击率：{0}".format([ability.get_crit_rate(_selecte_hero)])
-	label_damage.text = "伤害：{0}-{1}".format([
-		ability.get_min_damage(_selecte_hero),
-		ability.get_max_damage(_selecte_hero)
-	])
+		child.pressed.connect(_on_w_hero_action_pressed.bind(child))
 
 
 func _update_valid_positions_display(ability : TurnBasedSkillAbility) -> void:
 	var valid_cast_positions := ability.position_restriction.valid_cast_positions
 	label_valid_positions.text = "有效位置:%s" % str(valid_cast_positions)
-	for index in range(valid_positions_container.get_child_count(), 0, -1):
-		var child : TextureRect = valid_positions_container.get_child(index - 1)
+	var index := 4
+	for child in valid_positions_container.get_children():
 		if index in valid_cast_positions:
 			child.texture = VALID_POSITIONS
 		else:
 			child.texture = EMPTY_POSITIONS
-
+		index -= 1
 
 func _update_target_positions_display(ability : TurnBasedSkillAbility) -> void:
 	var target_positions := ability.get_available_target_positions()
@@ -75,43 +58,35 @@ func _update_target_positions_display(ability : TurnBasedSkillAbility) -> void:
 		index += 1
 
 
-func _on_combat_action_selecting(action_unit: Character) -> void:
-	_selecte_hero = action_unit
-	var ability_component : AbilityComponent = AbilitySystem.get_ability_component(action_unit)
+## 玩家控制角色等待行动
+func _on_combat_action_selecting() -> void:
+	var ability_component : AbilityComponent = AbilitySystem.get_ability_component(CombatSystem.current_actor)
 	var abilities := ability_component.get_abilities(["skill"])
 	var index : int = 0
 	for child in hero_action_container.get_children():
 		var ability = abilities[index] if abilities.size() > index else null
 		child.ability = ability
-		_ability_types[ability] = child
+		if index ==0:
+			# 默认选中第一个
+			child.pressed.emit()
 		index += 1
-	var combat_component: CombatComponent = CombatSystem.get_combat_component(action_unit)
-	_combat_action = combat_component.current_action
-	_selecte_ability(_combat_action.ability)
+	show()
 
 
-func _on_hero_action_pressed(action: W_HeroAction) -> void:
-	var combat_component: CombatComponent = CombatSystem.get_combat_component(_selecte_hero)
-	var combat_action : CombatAction = combat_component.current_action
-	combat_action.ability = action.ability
-
-
-func _on_combat_action_ability_changed() -> void:
-	var ability := _combat_action.ability
-	_selecte_ability(ability)
-
-
-func _connect_combat_action(combat_action : CombatAction) -> void:
-	combat_action.ability_changed.connect(_on_combat_action_ability_changed)
-
-
-func _disconnect_combat_action(combat_action: CombatAction) -> void:
-	combat_action.ability_changed.disconnect(_on_combat_action_ability_changed)
-
-
-func _combat_action_setter(value : CombatAction) -> void:
-	if _combat_action:
-		_disconnect_combat_action(_combat_action)
-	_combat_action = value
-	if _combat_action:
-		_connect_combat_action(_combat_action)
+func _on_w_hero_action_pressed(w_action: W_HeroAction) -> void:
+	_selected_ability = w_action
+	var ability : = w_action.ability
+	if not ability:
+		return
+	label_ability_name.text = ability.ability_name
+	label_ability_type.text = "近战" if ability.is_melee else "远程"
+	_update_valid_positions_display(ability)
+	_update_target_positions_display(ability)
+	label_hit_rate.text = "命中率：{0}".format([ability.get_hit_rate(CombatSystem.current_actor)])
+	label_crit_rate.text = "暴击率：{0}".format([ability.get_crit_rate(CombatSystem.current_actor)])
+	label_damage.text = "伤害：{0}-{1}".format([
+		ability.get_min_damage(CombatSystem.current_actor),
+		ability.get_max_damage(CombatSystem.current_actor)
+	])
+	CombatSystem.select_ability(ability)
+	CombatSystem.action_ability_selected.push()
