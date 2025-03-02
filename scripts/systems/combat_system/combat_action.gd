@@ -24,7 +24,6 @@ func _init(
 	ability = p_ability
 	action_type = _determine_action_type()
 
-
 ## 确定行动类型
 func _determine_action_type() -> ActionType:
 	if not ability:

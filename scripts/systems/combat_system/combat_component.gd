@@ -78,18 +78,6 @@ func execute_ability(ability: TurnBasedSkillAbility, targets: Array[Node]) -> bo
 	await ability_component.try_execute_ability(ability, ability_context)
 	return true
 
-## 自动选择并执行技能
-## 返回是否成功选择并执行了技能
-func auto_execute_ability() -> bool:
-	var ability = auto_select_ability()
-	if not ability:
-		return false
-		
-	var targets = auto_select_targets(ability)
-	if targets.is_empty():
-		return false
-		
-	return await execute_ability(ability, targets)
 
 ## AI自动选择技能
 ## 返回选择的技能，如果没有可用技能返回null
@@ -101,7 +89,7 @@ func auto_select_ability() -> TurnBasedSkillAbility:
 
 ## AI自动选择技能目标
 ## 返回选择的目标列表
-func auto_select_targets(ability: TurnBasedSkillAbility) -> Array[Node2D]:
+func auto_select_targets(ability: TurnBasedSkillAbility) -> Array[Node]:
 	if not ability:
 		return []
 	var possible_targets = get_possible_targets(ability)

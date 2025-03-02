@@ -231,6 +231,7 @@ Antiquarian,Protect Me,1,support,100%,0%,0%,1-2-3-4,1-2-3-4,Guard Me/Buff PROT,�
 Antiquarian,Protect Me,2,support,100%,0%,0%,1-2-3-4,1-2-3-4,Guard Me/Buff PROT,请求队友保护，增加护甲值
 Antiquarian,Protect Me,3,support,100%,0%,0%,1-2-3-4,1-2-3-4,Guard Me/Buff PROT,请求队友保护，增加护甲值
 Antiquarian,Protect Me,4,support,100%,0%,0%,1-2-3-4,1-2-3-4,Guard Me/Buff PROT,请求队友保护，增加护甲值
+
 Arbalest,Sniper Shot,0,ranged,95%,0%,5%,3-4,2-3-4,None,精准射击，高命中和暴击
 Arbalest,Sniper Shot,1,ranged,100%,0%,6%,3-4,2-3-4,None,精准射击，高命中和暴击
 Arbalest,Sniper Shot,2,ranged,105%,0%,7%,3-4,2-3-4,None,精准射击，高命中和暴击
@@ -241,6 +242,7 @@ Arbalest,Battlefield Bandage,1,heal,100%,0%,0%,3-4,1-2-3-4,Heal 4/Heal Buff 2,�
 Arbalest,Battlefield Bandage,2,heal,100%,0%,0%,3-4,1-2-3-4,Heal 5/Heal Buff 3,战地包扎，治疗并提升后续治疗效果
 Arbalest,Battlefield Bandage,3,heal,100%,0%,0%,3-4,1-2-3-4,Heal 6/Heal Buff 4,战地包扎，治疗并提升后续治疗效果
 Arbalest,Battlefield Bandage,4,heal,100%,0%,0%,3-4,1-2-3-4,Heal 7/Heal Buff 5,战地包扎，治疗并提升后续治疗效果
+
 Houndmaster,Hound Rush,0,melee,85%,0%,5%,2-3-4,1-2-3-4,Beast Killer 1/Bleed 1,猎犬突袭，对野兽额外伤害
 Houndmaster,Hound Rush,1,melee,90%,0%,6%,2-3-4,1-2-3-4,Beast Killer 2/Bleed 2,猎犬突袭，对野兽额外伤害
 Houndmaster,Hound Rush,2,melee,95%,0%,7%,2-3-4,1-2-3-4,Beast Killer 3/Bleed 3,猎犬突袭，对野兽额外伤害

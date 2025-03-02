@@ -20,7 +20,7 @@ var _logger: CoreSystem.Logger = CoreSystem.logger
 func _ready() -> void:
 	CombatSystem.action_ability_selected.subscribe(_on_action_ability_selected)
 	CombatSystem.combat_action_started.subscribe(_on_combat_action_started)
-
+	CombatSystem.combat_created.subscribe(_on_combat_created)
 	# 移除测试数据
 	_remove_test_characters()
 
@@ -49,24 +49,6 @@ func _initialize_combat(combat_id: StringName) -> void:
 
 	# 2. 创建战斗管理器
 	CombatSystem.create_combat(combat_id)
-	
-	_setup_scene()
-	_setup_camera()
-	_setup_ui()
-
-	# 3. 开始战斗
-	CombatSystem.start_combat()
-
-## 设置场景
-func _setup_scene() -> void:
-	# 创建并布置战斗单位
-	_setup_combat_units(CombatSystem.players, CombatSystem.enemies)
-	
-	# 设置战斗相机
-	# _setup_camera()
-	
-	# 其他场景设置...
-	pass
 
 ## 设置相机
 func _setup_camera() -> void:
@@ -88,7 +70,7 @@ func _remove_test_characters() -> void:
 		child.queue_free()
 
 ## 设置战斗单位位置
-func _setup_combat_units(players: Array[Node], enemies: Array[Node]) -> void:
+func _setup_combat_units(players : Array[Node], enemies : Array[Node]) -> void:
 	# 设置玩家单位位置
 	for i in range(players.size()):
 		var character = players[i]
@@ -126,8 +108,7 @@ func _on_action_ability_selected() -> void:
 		target.can_select = true
 
 
-func _on_combat_action_started() -> void:
-	var action := CombatSystem.current_action
+func _on_combat_action_started(action : CombatAction) -> void:
 	for unit in action.targets:
 		unit.can_select = false
 
@@ -135,4 +116,8 @@ func _on_combat_action_started() -> void:
 func _on_character_pressed(character : Character) -> void:
 	if character.can_select:
 		CombatSystem.select_target(character)
-		CombatSystem.action_target_selected.push()
+
+func _on_combat_created(players : Array[Node], enemies : Array[Node]) -> void:
+	_setup_combat_units(players, enemies)
+	_setup_camera()
+	_setup_ui()

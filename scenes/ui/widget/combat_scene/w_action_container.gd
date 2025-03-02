@@ -59,19 +59,19 @@ func _update_target_positions_display(ability : TurnBasedSkillAbility) -> void:
 
 
 ## 玩家控制角色等待行动
-func _on_combat_action_selecting() -> void:
-	var ability_component : AbilityComponent = AbilitySystem.get_ability_component(CombatSystem.current_actor)
+func _on_combat_action_selecting(action : CombatAction) -> void:
+	var _current_actor := action.actor
+	var ability_component : AbilityComponent = AbilitySystem.get_ability_component(_current_actor)
 	var abilities := ability_component.get_abilities(["skill"])
-	var index : int = 0
+
+	var index := 0
 	for child in hero_action_container.get_children():
 		var ability = abilities[index] if abilities.size() > index else null
 		child.ability = ability
-		if index ==0:
-			# 默认选中第一个
-			child.pressed.emit()
+		if ability == action.ability:
+			child.selected.emit()
 		index += 1
 	show()
-
 
 func _on_w_hero_action_pressed(w_action: W_HeroAction) -> void:
 	_selected_ability = w_action
@@ -89,4 +89,3 @@ func _on_w_hero_action_pressed(w_action: W_HeroAction) -> void:
 		ability.get_max_damage(CombatSystem.current_actor)
 	])
 	CombatSystem.select_ability(ability)
-	CombatSystem.action_ability_selected.push()

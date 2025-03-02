@@ -16,6 +16,8 @@ var combat_system: Node:
 
 func _ready() -> void:
 	is_debug = true
+	## 战斗启动
+	add_state("combat_startup", CombatStartupState.new())
 	## 战斗开始
 	add_state("combat_start", CombatStartState.new())
 	## 回合开始
@@ -29,13 +31,21 @@ func _ready() -> void:
 	## 战斗结束
 	add_state("combat_end", CombatEndState.new())
 
+
+class CombatStartupState:
+	extends BaseState
+
+	func _enter(_msg: Dictionary = {}) -> void:
+		switch_to("combat_start")
+
 ## 战斗开始状态
 class CombatStartState:
 	extends BaseState
 
 	func _enter(_msg: Dictionary = {}) -> void:
 		CombatSystem.combat_started.subscribe(_on_combat_started)
-
+		CombatSystem.start_combat()
+	
 	func _exit() -> void:
 		CombatSystem.combat_started.unsubscribe(_on_combat_started)
 
@@ -71,6 +81,7 @@ class ActionPrepareState:
 		CombatSystem.start_action()
 		if CombatSystem.is_auto_action():
 			CombatSystem.start_auto_action()
+			await CombatSystem.get_tree().create_timer(0.5).timeout
 			switch_to("action_execute")
 		else:
 			CombatSystem.action_target_selected.subscribe(_on_action_target_selected)

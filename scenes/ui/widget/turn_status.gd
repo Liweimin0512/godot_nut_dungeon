@@ -39,7 +39,7 @@ func _set_turn() -> void:
 
 ## 更新行动顺序显示
 func _update_order() -> void:
-	var units := CombatSystem.action_order
+	var units := CombatSystem.get_action_order()
 
 	# 清除现有的单位图标
 	for child in order_container.get_children():
@@ -115,9 +115,9 @@ func _on_turn_started() -> void:
 ## 当行动结束后
 func _on_action_ended() -> void:
 	_update_display()
-
-func _on_ui_widget_component_initialized(_data: Dictionary) -> void:
-	_update_display()
-
-func _on_ui_widget_component_updated(_data: Dictionary) -> void:
-	_update_display()
+#
+#func _on_ui_widget_component_initialized(_data: Dictionary) -> void:
+	#_update_display()
+#
+#func _on_ui_widget_component_updated(_data: Dictionary) -> void:
+	#_update_display()

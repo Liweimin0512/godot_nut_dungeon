@@ -141,8 +141,7 @@ func _on_damage_completed(damage_context: Dictionary) -> void:
 	play_animation(&"hit")
 
 
-func _on_combat_action_selecting() -> void:
-	var action_unit := CombatSystem.current_actor
+func _on_combat_action_selecting(action_unit: Character) -> void:
 	if action_unit != self:
 		return
 	selector.show()
