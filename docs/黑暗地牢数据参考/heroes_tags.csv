@@ -1,0 +1,17 @@
+# 英雄标签和生成规则表
+# Hero(英雄), Tags(标签), Generation Rules(生成规则), Notes(说明)
+Hero,Tags,Generation Rules,Notes
+Crusader,"heavy,religious,altar_of_light","Positive Quirks: 1-2, Negative Quirks: 1-2, Class Camping Skills: 2, Shared Camping Skills: 1, Random Combat Skills: 4, Cards in Deck: 6",重装宗教战士，信仰光明祭坛
+Plague Doctor,"light,non-religious,library","Positive Quirks: 1-2, Negative Quirks: 1-2, Class Camping Skills: 2, Shared Camping Skills: 1, Random Combat Skills: 4, Cards in Deck: 6",轻装非宗教，常驻图书馆研究
+Hellion,"non-religious,heavy,outsiders_bonfire","Positive Quirks: 1-2, Negative Quirks: 1-2, Class Camping Skills: 2, Shared Camping Skills: 1, Random Combat Skills: 4, Cards in Deck: 6",野蛮战士，在外族人篝火处修整
+Bounty Hunter,"heavy,non-religious,house_of_the_yellow_hand","Positive Quirks: 1-2, Negative Quirks: 1-2, Class Camping Skills: 2, Shared Camping Skills: 1, Random Combat Skills: 4, Cards in Deck: 6",赏金猎人，黄手会成员
+Grave Robber,"light,non-religious,house_of_the_yellow_hand","Positive Quirks: 1-2, Negative Quirks: 1-2, Class Camping Skills: 2, Shared Camping Skills: 1, Random Combat Skills: 4, Cards in Deck: 6",轻装盗贼，黄手会成员
+Jester,performer.agile.bleeder,Always: performer/Pick 1: agile bleeder,小丑英雄，表演者和流血伤害专家
+Abomination,cursed.transformation.beast,Always: cursed/Pick 1: transformation beast,诅咒战士，可在人形和野兽形态间转换
+Antiquarian,collector.support.fragile,Always: collector/Pick 1: support fragile,古董收藏家，脆弱但能找到额外财宝
+Arbalest,ranged.healer.mark,Always: ranged/Pick 1: healer mark,弩手，远程输出和治疗专家
+Houndmaster,beast.guard.tracker,Always: beast/Pick 1: guard tracker,驯犬者，与猎犬配合进行追踪和战斗
+Leper,heavy.religious.diseased,Always: diseased/Pick 1: heavy religious,麻风病人，重装但命中受限的战士
+Man-at-Arms,heavy.guard.defender,Always: heavy/Pick 1: guard defender,重装战士，擅长防御和团队增益
+Occultist,eldritch.healer.curse,Always: eldritch/Pick 1: healer curse,神秘学者，精通诅咒和黑暗力量
+Vestal,religious.healer.holy,Always: religious/Pick 1: healer holy,圣女，主要治疗者和神圣战士

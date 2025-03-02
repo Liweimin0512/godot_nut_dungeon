@@ -1,0 +1,73 @@
+# 英雄护甲数据表
+# Hero(英雄), Armor(护甲), Level(等级), HP(生命值), Dodge(闪避), PROT(护甲), SPD(速度), Notes(说明)
+Hero,Armor,Level,HP,Dodge,PROT,SPD,Notes
+Crusader,Plate Armor,0,33,5,0%,0,基础板甲
+Crusader,Plate Armor,1,40,10,0%,0,精良板甲
+Crusader,Plate Armor,2,47,15,0%,0,稀有板甲
+Crusader,Plate Armor,3,54,20,0%,0,史诗板甲
+Crusader,Plate Armor,4,61,25,0%,0,传说板甲
+Plague Doctor,Robe,0,22,0,0%,0,基础长袍
+Plague Doctor,Robe,1,26,5,0%,0,精良长袍
+Plague Doctor,Robe,2,30,10,0%,0,稀有长袍
+Plague Doctor,Robe,3,34,15,0%,0,史诗长袍
+Plague Doctor,Robe,4,38,20,0%,0,传说长袍
+Hellion,Leather Armor,0,26,10,0%,0,基础皮甲
+Hellion,Leather Armor,1,31,15,0%,0,精良皮甲
+Hellion,Leather Armor,2,36,20,0%,0,稀有皮甲
+Hellion,Leather Armor,3,41,25,0%,0,史诗皮甲
+Hellion,Leather Armor,4,46,30,0%,0,传说皮甲
+Bounty Hunter,Chain Mail,0,25,5,0%,0,基础链甲
+Bounty Hunter,Chain Mail,1,30,10,0%,0,精良链甲
+Bounty Hunter,Chain Mail,2,35,15,0%,0,稀有链甲
+Bounty Hunter,Chain Mail,3,40,20,0%,0,史诗链甲
+Bounty Hunter,Chain Mail,4,45,25,0%,0,传说链甲
+Grave Robber,Hide Armor,0,20,10,0%,0,基础皮衣
+Grave Robber,Hide Armor,1,24,15,0%,0,精良皮衣
+Grave Robber,Hide Armor,2,28,20,0%,0,稀有皮衣
+Grave Robber,Hide Armor,3,32,25,0%,0,史诗皮衣
+Grave Robber,Hide Armor,4,36,30,0%,0,传说皮衣
+Jester,Motley Garb,0,19,15,0%,7,小丑的表演服装
+Jester,Jester's Attire,1,22,16,0%,7,小丑的表演服装
+Jester,Performer's Garb,2,26,17,0%,7,小丑的表演服装
+Jester,Entertainer's Suit,3,30,18,0%,7,小丑的表演服装
+Jester,Finale Costume,4,34,20,0%,7,小丑的表演服装
+Abomination,Tattered Rags,0,26,15,0%,0,基础破布
+Abomination,Padded Rags,1,31,16,0%,0,精良破布
+Abomination,Reinforced Rags,2,36,17,0%,0,稀有破布
+Abomination,Hardened Rags,3,41,18,0%,0,史诗破布
+Abomination,Cursed Rags,4,46,20,0%,0,传说破布
+Antiquarian,Common Robes,0,17,15,0%,0,基础长袍
+Antiquarian,Fine Robes,1,20,16,0%,0,精良长袍
+Antiquarian,Rare Robes,2,23,17,0%,0,稀有长袍
+Antiquarian,Exceptional Robes,3,26,18,0%,0,史诗长袍
+Antiquarian,Ancestral Robes,4,29,20,0%,0,传说长袍
+Arbalest,Leather Armor,0,27,10,0%,0,基础皮甲
+Arbalest,Reinforced Armor,1,32,11,0%,0,精良皮甲
+Arbalest,Plated Armor,2,37,12,0%,0,稀有皮甲
+Arbalest,Masterwork Armor,3,42,13,0%,0,史诗皮甲
+Arbalest,Ancestral Armor,4,47,15,0%,0,传说皮甲
+Houndmaster,Leather Coat,0,25,15,0%,0,基础皮衣
+Houndmaster,Padded Coat,1,29,16,0%,0,精良皮衣
+Houndmaster,Reinforced Coat,2,33,17,0%,0,稀有皮衣
+Houndmaster,Masterwork Coat,3,37,18,0%,0,史诗皮衣
+Houndmaster,Champion Coat,4,41,20,0%,0,传说皮衣
+Leper,Tattered Armor,0,35,5,10%,0,基础重甲
+Leper,Reinforced Armor,1,42,6,12%,0,精良重甲
+Leper,Plated Armor,2,49,7,15%,0,稀有重甲
+Leper,Masterwork Armor,3,56,8,17%,0,史诗重甲
+Leper,Champion Armor,4,63,10,20%,0,传说重甲
+Man-at-Arms,Worn Plate,0,31,10,10%,0,基础板甲
+Man-at-Arms,Improved Plate,1,37,11,12%,0,精良板甲
+Man-at-Arms,Rare Plate,2,43,12,15%,0,稀有板甲
+Man-at-Arms,Exceptional Plate,3,49,13,17%,0,史诗板甲
+Man-at-Arms,Ancestral Plate,4,55,15,20%,0,传说板甲
+Occultist,Dark Robes,0,23,15,0%,0,基础法袍
+Occultist,Corrupted Robes,1,27,16,0%,0,精良法袍
+Occultist,Forbidden Robes,2,31,17,0%,0,稀有法袍
+Occultist,Eldritch Robes,3,35,18,0%,0,史诗法袍
+Occultist,Abyssal Robes,4,39,20,0%,0,传说法袍
+Vestal,Sacred Vestments,0,24,0,0%,0,基础圣袍
+Vestal,Blessed Vestments,1,29,1,0%,0,精良圣袍
+Vestal,Holy Vestments,2,34,2,0%,0,稀有圣袍
+Vestal,Divine Vestments,3,39,3,0%,0,史诗圣袍
+Vestal,Heavenly Vestments,4,44,5,0%,0,传说圣袍

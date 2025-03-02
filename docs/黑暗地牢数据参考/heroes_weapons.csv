@@ -1,0 +1,73 @@
+# 英雄武器数据表
+# Hero(英雄), Weapon(武器), Level(等级), DMG Min(最小伤害), DMG Max(最大伤害), ACC(命中), CRIT(暴击), SPD(速度), Notes(说明)
+Hero,Weapon,Level,DMG Min,DMG Max,ACC,CRIT,SPD,Notes
+Crusader,Longsword,0,6,12,0,3%,1,基础长剑
+Crusader,Longsword,1,7,14,0,4%,1,精良长剑
+Crusader,Longsword,2,8,16,0,5%,2,稀有长剑
+Crusader,Longsword,3,9,17,0,6%,2,史诗长剑
+Crusader,Longsword,4,10,19,0,7%,3,传说长剑
+Plague Doctor,Dagger,0,4,7,0,2%,7,基础匕首
+Plague Doctor,Dagger,1,5,8,0,3%,7,精良匕首
+Plague Doctor,Dagger,2,6,10,0,4%,8,稀有匕首
+Plague Doctor,Dagger,3,6,11,0,5%,8,史诗匕首
+Plague Doctor,Dagger,4,7,13,0,6%,9,传说匕首
+Hellion,Spear,0,6,12,0,5%,4,基础长矛
+Hellion,Spear,1,7,14,0,6%,4,精良长矛
+Hellion,Spear,2,8,16,0,7%,5,稀有长矛
+Hellion,Spear,3,9,17,0,8%,5,史诗长矛
+Hellion,Spear,4,10,19,0,9%,6,传说长矛
+Bounty Hunter,Axe,0,5,10,0,4%,5,基础战斧
+Bounty Hunter,Axe,1,6,12,0,5%,5,精良战斧
+Bounty Hunter,Axe,2,7,13,0,6%,6,稀有战斧
+Bounty Hunter,Axe,3,7,15,0,7%,6,史诗战斧
+Bounty Hunter,Axe,4,8,16,0,8%,7,传说战斧
+Grave Robber,Dagger,0,4,8,0,6%,8,基础匕首
+Grave Robber,Dagger,1,5,10,0,7%,8,精良匕首
+Grave Robber,Dagger,2,6,11,0,8%,9,稀有匕首
+Grave Robber,Dagger,3,6,13,0,9%,9,史诗匕首
+Grave Robber,Dagger,4,7,14,0,10%,10,传说匕首
+Jester,Deadly Dirk,0,4,7,0,5%,7,小丑的匕首
+Jester,Sharp Dirk,1,5,8,0,6%,7,小丑的匕首
+Jester,Keen Dirk,2,5,9,0,7%,8,小丑的匕首
+Jester,Lethal Dirk,3,6,10,0,8%,8,小丑的匕首
+Jester,Fatal Dirk,4,6,11,0,9%,9,小丑的匕首
+Abomination,Rusty Chains,0,5,8,0,4%,8,基础锁链
+Abomination,Iron Chains,1,6,9,0,5%,8,精良锁链
+Abomination,Steel Chains,2,7,11,0,6%,9,稀有锁链
+Abomination,Tempered Chains,3,8,12,0,7%,9,史诗锁链
+Abomination,Cursed Chains,4,9,14,0,8%,10,传说锁链
+Antiquarian,Miserable Dagger,0,3,5,0,2%,7,基础匕首
+Antiquarian,Common Dagger,1,4,6,0,3%,7,精良匕首
+Antiquarian,Rare Dagger,2,4,7,0,4%,8,稀有匕首
+Antiquarian,Exceptional Dagger,3,5,8,0,5%,8,史诗匕首
+Antiquarian,Ancestral Dagger,4,5,9,0,6%,9,传说匕首
+Arbalest,Crossbow,0,4,8,0,6%,6,基础弩
+Arbalest,Long Crossbow,1,5,9,0,7%,6,精良弩
+Arbalest,Heavy Crossbow,2,6,11,0,8%,7,稀有弩
+Arbalest,Masterwork Crossbow,3,7,12,0,9%,7,史诗弩
+Arbalest,Ancestral Crossbow,4,8,14,0,10%,8,传说弩
+Houndmaster,Spiked Collar,0,4,7,0,5%,7,基础项圈
+Houndmaster,Sharpened Collar,1,5,8,0,6%,7,精良项圈
+Houndmaster,Reinforced Collar,2,6,10,0,7%,8,稀有项圈
+Houndmaster,Masterwork Collar,3,7,11,0,8%,8,史诗项圈
+Houndmaster,Champion Collar,4,8,13,0,9%,9,传说项圈
+Leper,Rusty Sword,0,8,16,0,5%,4,基础大剑
+Leper,Sharpened Sword,1,9,18,0,6%,4,精良大剑
+Leper,Reinforced Sword,2,10,20,0,7%,5,稀有大剑
+Leper,Masterwork Sword,3,11,22,0,8%,5,史诗大剑
+Leper,Champion Sword,4,12,24,0,9%,6,传说大剑
+Man-at-Arms,Common Mace,0,5,10,0,5%,5,基础重锤
+Man-at-Arms,Improved Mace,1,6,11,0,6%,5,精良重锤
+Man-at-Arms,Rare Mace,2,7,13,0,7%,6,稀有重锤
+Man-at-Arms,Exceptional Mace,3,8,14,0,8%,6,史诗重锤
+Man-at-Arms,Ancestral Mace,4,9,16,0,9%,7,传说重锤
+Occultist,Cursed Incense,0,4,7,0,5%,7,基础香炉
+Occultist,Corrupted Incense,1,5,8,0,6%,7,精良香炉
+Occultist,Forbidden Incense,2,6,10,0,7%,8,稀有香炉
+Occultist,Eldritch Incense,3,7,11,0,8%,8,史诗香炉
+Occultist,Abyssal Incense,4,8,13,0,9%,9,传说香炉
+Vestal,Sacred Mace,0,4,8,0,2%,5,基础圣锤
+Vestal,Blessed Mace,1,5,9,0,3%,5,精良圣锤
+Vestal,Holy Mace,2,6,11,0,4%,6,稀有圣锤
+Vestal,Divine Mace,3,7,12,0,5%,6,史诗圣锤
+Vestal,Heavenly Mace,4,8,14,0,6%,7,传说圣锤
