@@ -69,7 +69,7 @@ func _on_combat_action_selecting(action : CombatAction) -> void:
 		var ability = abilities[index] if abilities.size() > index else null
 		child.ability = ability
 		if ability == action.ability:
-			child.selected.emit()
+			child.pressed.emit()
 		index += 1
 	show()
 
